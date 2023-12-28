@@ -4,14 +4,11 @@
 
 
 資料夾說明
-views - 畫面放置處
-controllers
-modules
-…
-使用技術
-Vue Cli
-Axios
-…
-第三方服務
-Algolia
-…
+com.exemple.controller - 放置controller
+com.exemple.service - 放置service
+
+ecpay開頭為綠界的東西
+
+resource/
+          static-靜態網頁
+          templates-動態網頁
