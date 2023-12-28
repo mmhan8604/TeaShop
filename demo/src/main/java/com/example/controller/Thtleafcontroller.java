@@ -17,7 +17,7 @@ public class Thtleafcontroller {
 		// 設定傳遞資料
 	  model.addAttribute("message", "Hello thymeleaf. (using Model)");
 
-		// 返回值指定頁面路徑
+		// 返回值指定頁面路徑a
 	  return "model";
 	}
 	@PostMapping("/clientReturn")									//付款後client端接綠界跳轉		//由表單直接跳轉post所以可以收到
