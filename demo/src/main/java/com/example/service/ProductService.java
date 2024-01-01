@@ -11,7 +11,7 @@ public class ProductService {
 	@Autowired
 	ProductsResposity productsRes;
 	public void AddProduct(Products products) {
-		products.setID("123");
+		
 		productsRes.save(products);
 		
 		

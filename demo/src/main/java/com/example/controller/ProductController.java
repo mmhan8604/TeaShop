@@ -15,10 +15,11 @@ public class ProductController {
 	ProductService productService;
 	
 	@PostMapping("/addProduct")
-	public String AddProduct(@RequestBody ProductObj products) {
+	public String AddProduct(@RequestBody Products products) {
 		
-		System.out.println(products.getId()); ;
-		//productService.AddProduct(products);
+		System.out.println(products.getID()); 
+		//System.out.println(products.getActivity().getID());
+		productService.AddProduct(products);
 		return "";
 	}
 	

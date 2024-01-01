@@ -11,14 +11,14 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Products {
 	@Id
-	private String ID;
+	private String id;
 	
 	private String Name;
 	
 	
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "ActivitysID")
-//	private Activitys activity;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ActivitysID")
+	private Activitys activity;
 	
 	private int Price;
 	
@@ -33,11 +33,11 @@ public class Products {
 	private boolean Discontinued;
 
 	public String getID() {
-		return ID;
+		return id;
 	}
 
 	public void setID(String iD) {
-		ID = iD;
+		id = iD;
 	}
 
 	public String getName() {
@@ -48,13 +48,13 @@ public class Products {
 		Name = name;
 	}
 
-//	public Activitys getActivity() {
-//		return activity;
-//	}
-//
-//	public void setActivity(Activitys activity) {
-//		this.activity = activity;
-//	}
+	public Activitys getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activitys activity) {
+		this.activity = activity;
+	}
 
 	public int getPrice() {
 		return Price;
