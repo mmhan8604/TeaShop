@@ -2,6 +2,8 @@ package com.example.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,13 +16,13 @@ public class Products {
 	private String Name;
 	
 	
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ActivitysID")
-	private Activitys activity;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "ActivitysID")
+//	private Activitys activity;
 	
 	private int Price;
 	
-	private int Count;
+	private int Cost;
 
 	private String Discription;
 	
@@ -46,13 +48,13 @@ public class Products {
 		Name = name;
 	}
 
-	public Activitys getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activitys activity) {
-		this.activity = activity;
-	}
+//	public Activitys getActivity() {
+//		return activity;
+//	}
+//
+//	public void setActivity(Activitys activity) {
+//		this.activity = activity;
+//	}
 
 	public int getPrice() {
 		return Price;
@@ -62,12 +64,14 @@ public class Products {
 		Price = price;
 	}
 
-	public int getCount() {
-		return Count;
+	
+
+	public int getCost() {
+		return Cost;
 	}
 
-	public void setCount(int count) {
-		Count = count;
+	public void setCost(int cost) {
+		Cost = cost;
 	}
 
 	public String getDiscription() {

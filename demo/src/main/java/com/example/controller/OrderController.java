@@ -23,6 +23,7 @@ public class OrderController {
 
 	@PostMapping("/ecpayCheckout")									//建立訂單
 	public String ecpayCheckout(@RequestBody OrderObject OOB) {
+		System.out.println(OOB.getItemName());
 		String aioCheckOutALLForm = orderService.ecpayCheckout(OOB);
 		
 		return aioCheckOutALLForm;
