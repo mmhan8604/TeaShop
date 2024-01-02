@@ -418,7 +418,7 @@
       // 发送Ajax请求
       $.ajax({
         type: 'POST',
-        url: '/addProduct',
+        url: '/editProduct',
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(formData),
         success: function (response) {
@@ -427,7 +427,7 @@
         },
         error: function (error) {
           // 处理错误响应
-          alert("id重複")
+          alert("id錯誤，請重新輸入")
           
         }
       });

@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,13 +16,36 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	@PostMapping("/addProduct")
+	@PostMapping("/addProduct")					
 	public String AddProduct(@RequestBody Products products) {
 		
-		System.out.println(products.getID()); 
+		System.out.println("新增"+products.toString()); 
 		//System.out.println(products.getActivity().getID());
-		productService.AddProduct(products);
-		return "";
+		productService.addProduct(products);
+		return products.toString();
 	}
-	
+	@PostMapping("/delProduct")
+	public String delProduct(@RequestBody Products products) {
+		
+		System.out.println("刪除id"+products.getId()); 
+		productService.delProduct(products);
+		return products.toString();
+	}
+	@PostMapping("/editProduct")
+	public String editProduct(@RequestBody Products products) {
+		
+		System.out.println("修改id"+products.getId()); 
+		productService.editProduct(products);
+		return products.toString();
+	}
+	@PostMapping("/queryProduct")
+	public List<Products> queryProduct() {
+		System.out.println("查詢全部");
+		return productService.queryProduct();
+	}
+	@PostMapping("/queryProductByname")
+	public List<Products> queryProduct(String name) {
+		System.out.println("查詢部分");
+		return productService.queryProduct(name);
+	}
 }

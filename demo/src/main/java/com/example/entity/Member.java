@@ -8,73 +8,73 @@ import jakarta.persistence.Id;
 public class Member {
 	
 	@Id
-	private String ID;
-	private String Mail;
-	private String Password;
-	private String Name;
-	private String Phone;
-	private String City;
-	private String Address;
+	private String id;
+	private String mail;
+	private String password;
+	private String name;
+	private String phone;
+	private String city;
+	private String address;
 	private long count;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getMail() {
-		return Mail;
+		return mail;
 	}
 
 	public void setMail(String mail) {
-		Mail = mail;
+		this.mail = mail;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 
 	public String getCity() {
-		return City;
+		return city;
 	}
 
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
 	public long getCount() {
@@ -84,4 +84,6 @@ public class Member {
 	public void setCount(long count) {
 		this.count = count;
 	}
+
+	
 }

@@ -21,29 +21,29 @@ public class Orders {
 	@JoinColumn(name = "ProductsID")
 	private Products product;
 	
-	private String OrderState;
+	private String orderState;
 	
-	private String EcPayReturn;
+	private String ecPayReturn;
 	
-	private String PaymentMethod;
+	private String paymentMethod;
 	
-	private int Amount;
+	private int amount;
 
-	private String ShipMethod;
+	private String shipMethod;
 	
-	private String ShipState;
+	private String shipState;
 	
-	private LocalDateTime ShipDate;
+	private LocalDateTime shipDate;
 	
-	private String 	ReceiverName;
+	private String 	receiverName;
 
-	private String 	ReceiverPhone;
+	private String 	receiverPhone;
 	
-	private String 	ReceiverMail;
+	private String 	receiverMail;
 
-	private String 	ReceiverCity;
+	private String 	receiverCity;
 	
-	private String 	ReceiverAddress;
+	private String 	receiverAddress;
 
 	public String getID() {
 		return ID;
@@ -70,100 +70,102 @@ public class Orders {
 	}
 
 	public String getOrderState() {
-		return OrderState;
+		return orderState;
 	}
 
 	public void setOrderState(String orderState) {
-		OrderState = orderState;
+		this.orderState = orderState;
 	}
 
 	public String getEcPayReturn() {
-		return EcPayReturn;
+		return ecPayReturn;
 	}
 
 	public void setEcPayReturn(String ecPayReturn) {
-		EcPayReturn = ecPayReturn;
+		this.ecPayReturn = ecPayReturn;
 	}
 
 	public String getPaymentMethod() {
-		return PaymentMethod;
+		return paymentMethod;
 	}
 
 	public void setPaymentMethod(String paymentMethod) {
-		PaymentMethod = paymentMethod;
+		this.paymentMethod = paymentMethod;
 	}
 
 	public int getAmount() {
-		return Amount;
+		return amount;
 	}
 
 	public void setAmount(int amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
 
 	public String getShipMethod() {
-		return ShipMethod;
+		return shipMethod;
 	}
 
 	public void setShipMethod(String shipMethod) {
-		ShipMethod = shipMethod;
+		this.shipMethod = shipMethod;
 	}
 
 	public String getShipState() {
-		return ShipState;
+		return shipState;
 	}
 
 	public void setShipState(String shipState) {
-		ShipState = shipState;
+		this.shipState = shipState;
 	}
 
 	public LocalDateTime getShipDate() {
-		return ShipDate;
+		return shipDate;
 	}
 
 	public void setShipDate(LocalDateTime shipDate) {
-		ShipDate = shipDate;
+		this.shipDate = shipDate;
 	}
 
 	public String getReceiverName() {
-		return ReceiverName;
+		return receiverName;
 	}
 
 	public void setReceiverName(String receiverName) {
-		ReceiverName = receiverName;
+		this.receiverName = receiverName;
 	}
 
 	public String getReceiverPhone() {
-		return ReceiverPhone;
+		return receiverPhone;
 	}
 
 	public void setReceiverPhone(String receiverPhone) {
-		ReceiverPhone = receiverPhone;
+		this.receiverPhone = receiverPhone;
 	}
 
 	public String getReceiverMail() {
-		return ReceiverMail;
+		return receiverMail;
 	}
 
 	public void setReceiverMail(String receiverMail) {
-		ReceiverMail = receiverMail;
+		this.receiverMail = receiverMail;
 	}
 
 	public String getReceiverCity() {
-		return ReceiverCity;
+		return receiverCity;
 	}
 
 	public void setReceiverCity(String receiverCity) {
-		ReceiverCity = receiverCity;
+		this.receiverCity = receiverCity;
 	}
 
 	public String getReceiverAddress() {
-		return ReceiverAddress;
+		return receiverAddress;
 	}
 
 	public void setReceiverAddress(String receiverAddress) {
-		ReceiverAddress = receiverAddress;
+		this.receiverAddress = receiverAddress;
 	}
+
+	
 
 
 }

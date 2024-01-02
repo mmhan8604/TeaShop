@@ -24,51 +24,63 @@ public class Orderdetails {
     @JoinColumn(name = "ProductsID")
     private Products product;
     
-	private int Amount;
+	private int amount;
 	
-	private int Price;
+	private int price;
 	
-	private int Quantity;
+	private int quantity;
 
+	
 	public Orders getOrder() {
 		return order;
 	}
+
 
 	public void setOrder(Orders order) {
 		this.order = order;
 	}
 
+
 	public Products getProduct() {
 		return product;
 	}
+
 
 	public void setProduct(Products product) {
 		this.product = product;
 	}
 
+
 	public int getAmount() {
-		return Amount;
+		return amount;
 	}
+
 
 	public void setAmount(int amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
+
 
 	public int getPrice() {
-		return Price;
+		return price;
 	}
+
 
 	public void setPrice(int price) {
-		Price = price;
+		this.price = price;
 	}
+
 
 	public int getQuantity() {
-		return Quantity;
+		return quantity;
 	}
 
+
 	public void setQuantity(int quantity) {
-		Quantity = quantity;
+		this.quantity = quantity;
 	}
+
+
 	public class OrderdetailsId implements Serializable {
 	    private String order;
 	    private String product;

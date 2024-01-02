@@ -8,72 +8,74 @@ import jakarta.persistence.Id;
 @Entity
 public class Activitys {
 	@Id
-	private String ID;
-	private String Name;
-	private LocalDateTime StartDate;
-	private LocalDateTime EndDate;
-	private String Discription;
-	private String Method;
-	private int FreeShipping;
+	private String id;
+	private String name;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private String discription;
+	private String method;
+	private int freeShipping;
 	
 	public Activitys() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public LocalDateTime getStartDate() {
-		return StartDate;
+		return startDate;
 	}
 
 	public void setStartDate(LocalDateTime startDate) {
-		StartDate = startDate;
+		this.startDate = startDate;
 	}
 
 	public LocalDateTime getEndDate() {
-		return EndDate;
+		return endDate;
 	}
 
 	public void setEndDate(LocalDateTime endDate) {
-		EndDate = endDate;
+		this.endDate = endDate;
 	}
 
 	public String getDiscription() {
-		return Discription;
+		return discription;
 	}
 
 	public void setDiscription(String discription) {
-		Discription = discription;
+		this.discription = discription;
 	}
 
 	public String getMethod() {
-		return Method;
+		return method;
 	}
 
 	public void setMethod(String method) {
-		Method = method;
+		this.method = method;
 	}
 
 	public int getFreeShipping() {
-		return FreeShipping;
+		return freeShipping;
 	}
 
 	public void setFreeShipping(int freeShipping) {
-		FreeShipping = freeShipping;
+		this.freeShipping = freeShipping;
 	}
+
+	
 	
 }

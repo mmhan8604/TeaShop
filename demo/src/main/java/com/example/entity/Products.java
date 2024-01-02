@@ -13,39 +13,39 @@ public class Products {
 	@Id
 	private String id;
 	
-	private String Name;
+	private String name;
 	
 	
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ActivitysID")
 	private Activitys activity;
 	
-	private int Price;
+	private int price;
 	
-	private int Cost;
+	private int cost;
 
-	private String Discription;
+	private String discription;
 	
-	private int Shelves;
+	private int shelves;
 
-	private int Stock;
+	private int stock;
 	
-	private boolean Discontinued;
+	private boolean discontinued;
 
-	public String getID() {
+	public String getId() {
 		return id;
 	}
 
-	public void setID(String iD) {
-		id = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public Activitys getActivity() {
@@ -57,53 +57,59 @@ public class Products {
 	}
 
 	public int getPrice() {
-		return Price;
+		return price;
 	}
 
 	public void setPrice(int price) {
-		Price = price;
+		this.price = price;
 	}
 
-	
-
 	public int getCost() {
-		return Cost;
+		return cost;
 	}
 
 	public void setCost(int cost) {
-		Cost = cost;
+		this.cost = cost;
 	}
 
 	public String getDiscription() {
-		return Discription;
+		return discription;
 	}
 
 	public void setDiscription(String discription) {
-		Discription = discription;
+		this.discription = discription;
 	}
 
 	public int getShelves() {
-		return Shelves;
+		return shelves;
 	}
 
 	public void setShelves(int shelves) {
-		Shelves = shelves;
+		this.shelves = shelves;
 	}
 
 	public int getStock() {
-		return Stock;
+		return stock;
 	}
 
 	public void setStock(int stock) {
-		Stock = stock;
+		this.stock = stock;
 	}
 
 	public boolean isDiscontinued() {
-		return Discontinued;
+		return discontinued;
 	}
 
 	public void setDiscontinued(boolean discontinued) {
-		Discontinued = discontinued;
+		this.discontinued = discontinued;
 	}
+
+	@Override
+	public String toString() {
+		return "Products [id=" + id + ", name=" + name + ", activity=" + activity + ", price=" + price + ", cost="
+				+ cost + ", discription=" + discription + ", shelves=" + shelves + ", stock=" + stock
+				+ ", discontinued=" + discontinued + "]";
+	}
+	
 	
 }

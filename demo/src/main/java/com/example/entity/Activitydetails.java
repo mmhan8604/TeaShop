@@ -24,35 +24,44 @@ public class Activitydetails implements Serializable {
     @JoinColumn(name = "ActivitysID")
     private Activitys activitys;
 
-    private double Discount;
+    private double discount;
 	
-	public Activitydetails() {
-		// TODO Auto-generated constructor stub
-	}
-
+    
 	public Products getProducts() {
 		return products;
 	}
+
 
 	public void setProducts(Products products) {
 		this.products = products;
 	}
 
+
 	public Activitys getActivitys() {
 		return activitys;
 	}
+
 
 	public void setActivitys(Activitys activitys) {
 		this.activitys = activitys;
 	}
 
+
 	public double getDiscount() {
-		return Discount;
+		return discount;
 	}
 
+
 	public void setDiscount(double discount) {
-		Discount = discount;
+		this.discount = discount;
 	}
+
+
+	public Activitydetails() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 	public static class ActivityDetailsId implements Serializable {
 	    private String products;
 	    private String activitys;

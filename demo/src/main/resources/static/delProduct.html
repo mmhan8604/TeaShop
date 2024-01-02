@@ -214,7 +214,7 @@
 
           <button id="upload" class="btn btn-sm btn-secondary ms-auto" onclick="postForm()"><img src="./icon/update.png"
               style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
-            <p id="upTxt">儲存資訊</p>
+            <p id="upTxt">刪除資訊</p>
           </button>
 
         </div>
@@ -389,12 +389,12 @@
     })
 
     $("#upload").on("click", function () {
-      $("#upTxt").html("儲存成功")//sucess function
+      $("#upTxt").html("刪除成功")//sucess function
 
     })
 
     $("#formSpace").on("click", function () {
-      $("#upTxt").html("儲存資訊")//點表單時
+      $("#upTxt").html("刪除資訊")//點表單時
     })
 
     function postForm() {
@@ -418,7 +418,7 @@
       // 发送Ajax请求
       $.ajax({
         type: 'POST',
-        url: '/addProduct',
+        url: '/delProduct',
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(formData),
         success: function (response) {
@@ -427,8 +427,8 @@
         },
         error: function (error) {
           // 处理错误响应
-          alert("id重複")
-          
+
+          console.error(error);
         }
       });
     }
