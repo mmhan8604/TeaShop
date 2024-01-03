@@ -1,0 +1,5 @@
+1.與原本整合頁面差別在 多了一個主要框架頁面mainIndex來做操控
+2.各分頁使用的js除了backstage外都變成有function名稱
+3.新增 formspace.js 專門控制畫面變換
+4.目前缺少addProduct.js
+5.編輯活動以及編輯產品的功能尚未完整 要與資料庫連結
