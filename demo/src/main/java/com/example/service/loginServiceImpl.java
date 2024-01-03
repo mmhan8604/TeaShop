@@ -6,6 +6,7 @@ package com.example.service;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -56,7 +57,7 @@ public class loginServiceImpl implements loginService{
 		
 		if(fba.isEmpty()) {
 			return 1;
-		} else if(fba.get(0).getPassword().equals(clientPassword)){
+		} else if(BCrypt.checkpw(clientPassword, fba.get(0).getPassword())){
 			return 0;
 		}else {
 			return 2;

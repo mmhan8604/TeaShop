@@ -15,12 +15,12 @@ public class config {
 	
 	
 	@Bean
-	public loginService loginService() {
+	public loginService loginServicei() {
 		return new loginServiceImpl();
 	}
 	
 	@Bean
-	public signUpService signUpService() {
+	public signUpService signUpServicei() {
 		return new signUpServiceImpl();
 	}
 	
