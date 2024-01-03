@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,16 @@ public class ProductController {
 		return productService.queryProduct();
 	}
 	@PostMapping("/queryProductByname")
-	public List<Products> queryProduct(String name) {
-		System.out.println("查詢部分");
-		return productService.queryProduct(name);
+	public List<Products> queryProductByName(@RequestBody String name) {
+		System.out.println("查詢部分:"+name);
+		return productService.queryProductByName(name);
+	}
+	
+	@PostMapping("/queryProductById")
+	public List<Products> queryProductById(@RequestBody String id) {
+		System.out.println("查詢部分:"+id);
+		List<Products> list= new ArrayList<>();
+		list.add(productService.queryProductById(id));
+		return list;
 	}
 }

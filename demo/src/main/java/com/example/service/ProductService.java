@@ -47,7 +47,16 @@ public class ProductService {
 		return productsRes.findAll();
 		
 	}
-	public List<Products> queryProduct(String name){
-		return productsRes.findByName(name);
+	public List<Products> queryProductByName(String name){
+		return productsRes.findByNameContaining(name);
+	}
+	
+	public Products queryProductById(String id){
+		if(productsRes.existsById(id)) {
+			System.out.println("exist");
+		return productsRes.findById(id).get();}
+		else {
+			throw new ValidationException("id不存在");
+		}
 	}
 }
