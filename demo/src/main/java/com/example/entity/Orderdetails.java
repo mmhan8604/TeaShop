@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -81,11 +82,18 @@ public class Orderdetails {
 	}
 
 
-	public class OrderdetailsId implements Serializable {
-	    private String order;
-	    private String product;
-		
-	    // constructors, getters, setters, equals, and hashCode methods
+	public static class OrderdetailsId implements Serializable {
+	    private Orders order;
+	    private Products product;
+	    public OrderdetailsId() {
+	    	
+	    }
+	    
+	    public OrderdetailsId(Orders order, Products product) {
+	        this.order = order;
+	        this.product = product;
+	    }
+	    
 	}
 
 }

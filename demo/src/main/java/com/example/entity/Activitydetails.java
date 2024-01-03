@@ -63,8 +63,19 @@ public class Activitydetails implements Serializable {
 
 	
 	public static class ActivityDetailsId implements Serializable {
-	    private String products;
-	    private String activitys;
+	    private Products products;
+	    private Activitys activitys;
+	    
+	    public ActivityDetailsId() {
+			// TODO Auto-generated constructor stub
+		}
+	    
+	    public ActivityDetailsId(Products products,Activitys activitys) {
+			// TODO Auto-generated constructor stub
+	    	this.products=products;
+	    	this.activitys=activitys;
+		}
 	    }
+	
 	
 }

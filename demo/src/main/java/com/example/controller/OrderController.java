@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.service.OrderService;
 import com.example.utils.EcpayReturnConverter;
+import com.expamlpe.classes.OrderItem;
 import com.expamlpe.classes.OrderObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -42,13 +50,32 @@ public class OrderController {
 		
 		return "1|OK";
 	}
-//	@PostMapping("/clientReturn")									//付款後client端接綠界跳轉		//由表單直接跳轉post所以可以收到
-//	public String clientReturn(@RequestBody String returnMsg,Model model) {
-//		String MSgJSON = EcpayReturnConverter.convertToJSON(returnMsg);
-//		System.out.println("clientReturn:"+MSgJSON);
-//		model.addAttribute("jsonData", MSgJSON);
-//
-//		return "redirect:/payresult";
-//	}
+	
+	
+	@PostMapping("/orderdetail")
+	public void orderdetail(@RequestBody String data) {
+		System.out.println(data);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+            // 將JSON字串轉換為Map<String, OrderItem>
+            Map<String, OrderItem> orderItemMap = objectMapper.readValue(data, new TypeReference<Map<String, OrderItem>>() {});
+
+            // 遍歷Map，獲取每個訂單項目
+            for (Map.Entry<String, OrderItem> entry : orderItemMap.entrySet()) {
+                String key = entry.getKey();
+                OrderItem orderItem = entry.getValue();
+                orderService.postOrderDetail(orderItem);
+                // 輸出每個訂單項目的信息
+                System.out.println("Key: " + key);
+                System.out.println("ProductId: " + orderItem.getProductId());
+                System.out.println("Quantity: " + orderItem.getQuantity());
+                System.out.println("Amount: " + orderItem.getAmount());
+                System.out.println("OrderId: " + orderItem.getOrderId());
+                System.out.println();}
+            } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	
 }

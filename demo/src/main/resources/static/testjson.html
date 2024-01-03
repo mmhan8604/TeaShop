@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="addproduct()">新增商品</button>
+    <div id="productDiv"></div>
+    <button onclick="postOrder()">送出商品</button>
+</body>
+<script>
+    var productId = 0
+    function addproduct(){
+        $('[id="productDiv"]').append(`商品編號<input name="product${productId}" type="text"> x <input name="quantity${productId}" type="number">總價:<input name="amount${productId}" type="number"><br>`)
+        productId+=1;
+    }
+    function postOrder(){
+        var detail = {}
+        for(i=0;i<productId;i++){
+            detail[`${i}`] = {productId: $(`input[name="product${i}"]`).val(),
+                            quantity: $(`input[name="quantity${i}"]`).val(),
+                            amount: $(`input[name="amount${i}"]`).val(),
+                            orderId: 1
+                        }
+        }
+        console.log(JSON.stringify(detail));
+        $.ajax({
+                type: 'POST',
+                url: '/orderdetail',
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify(detail),
+                success: function (response) {
+                    // 处理成功的响应
+                    // var newWindow = window.open("", "_self");
+                    // newWindow.document.write(response);
+                    // newWindow.document.close();
+                    // console.log(response);
+                },
+                error: function (error) {
+                    // 处理错误响应
+
+                    console.error(error);
+                }
+            });
+    }
+    
+</script>
+</html>
