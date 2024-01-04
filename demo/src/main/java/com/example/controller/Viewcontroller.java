@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.utils.EcpayReturnConverter;
 
 @Controller
-public class Thtleafcontroller {
+public class Viewcontroller {
 	@GetMapping(value = "/model")
 	// 將Model 作為Controller 的引數，由Spring 框架自動創建並作為參數傳入
 	public String model(Model model) {

@@ -1,19 +1,37 @@
 package com.example.service;
 
 
+import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.entity.Orderdetails;
+import com.example.entity.Orders;
+import com.example.entity.Products;
+import com.example.repository.OrderDetailReposity;
+import com.example.repository.OrdersRepository;
+import com.example.repository.ProductsResposity;
+import com.expamlpe.classes.OrderItem;
 import com.expamlpe.classes.OrderObject;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 import ecpay.payment.integration.domain.QueryTradeInfoObj;
+import net.sf.jsqlparser.util.validation.ValidationException;
 
 @Service
 public class OrderService {
-
+	@Autowired
+	OrderDetailReposity orderDetailRes;
+	
+	@Autowired
+	OrdersRepository ordersRes;
+	
+	@Autowired
+	ProductsResposity productsRes;
+	
 	public String ecpayCheckout() {
 		
 		String uuId = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);
@@ -59,4 +77,26 @@ public class OrderService {
 			return all.queryTradeInfo(obj);
 				
 			}
+		public void postOrderDetail(OrderItem orderItem) {
+			Orderdetails orderdetails = new Orderdetails();
+			String orderId = orderItem.getOrderId();
+			String productId = orderItem.getProductId();
+			if (ordersRes.existsById(orderId)&&productsRes.existsById(productId)) {
+				Optional<Orders> orderOptional = ordersRes.findById(orderId);
+				Orders order = orderOptional.get();
+				orderdetails.setOrder(order);
+				
+				Optional<Products> productsOptional = productsRes.findById(productId);
+				Products product = productsOptional.get();
+				orderdetails.setProduct(product);
+				orderdetails.setAmount(Integer.parseInt(orderItem.getAmount()));
+				orderdetails.setPrice(Integer.parseInt(orderItem.getAmount())/Integer.parseInt(orderItem.getQuantity()));
+				orderdetails.setQuantity(Integer.parseInt(orderItem.getQuantity()));
+				orderDetailRes.save(orderdetails);
+				System.out.println("ok");
+			} else {
+				throw new ValidationException("新增錯誤");
+			}
+			
+		}
 }
