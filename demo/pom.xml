@@ -67,6 +67,7 @@
             <artifactId>mysql</artifactId>
             <scope>test</scope>
         </dependency>
+
 		<dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
@@ -76,6 +77,15 @@
    			<artifactId>jbcrypt</artifactId>
     		<version>0.4</version>
 		</dependency>
+
+        
+          <dependency>
+    		<groupId>org.mindrot</groupId>
+   			<artifactId>jbcrypt</artifactId>
+    		<version>0.4</version>
+		</dependency>
+
+
 
 	</dependencies>
 
