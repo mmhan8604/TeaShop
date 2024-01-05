@@ -4,12 +4,19 @@ package com.example.service;
 
 
 
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 
-import com.interf.loginDao;
+import com.example.entity.shopInfo;
+import com.example.repository.loginDao;
+
+import com.example.entity.shopInfo;
+
 import com.interf.loginService;
 
 @Component
@@ -50,18 +57,17 @@ public class loginServiceImpl implements loginService{
 
 	@Override
 	public int checkAccount() {
-		String r= dao.getPassword(clientAccount);
+		List<shopInfo> fba= dao.findByAccount(clientAccount);
 		
-		if(r==null) {
+		if(fba.isEmpty()) {
 			return 1;
-		} else {
-			Boolean check= checkPassword(r);
-			if (check==false) {
-				return 2;
-			} else {
-				return 0;
-			}
+		} else if(BCrypt.checkpw(clientPassword, fba.get(0).getPassword())){
+			return 0;
+		}else {
+			return 2;
 		}
+		
+		
 	}
 
 	@Override
