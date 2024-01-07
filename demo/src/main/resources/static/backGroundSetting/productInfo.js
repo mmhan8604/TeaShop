@@ -47,10 +47,11 @@ function ProductInfo() {
     `);
 	}
 }
-queryAll(0);
+
 
 
 //-------------------------------------------------------------後端抓資料
+queryAll(0);
 function queryAll(choosepage) {
 	var trlist = 1;
 	var page = choosepage;
