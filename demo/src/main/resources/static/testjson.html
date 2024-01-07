@@ -10,43 +10,77 @@
 <body>
     <button onclick="addproduct()">新增商品</button>
     <div id="productDiv"></div>
-    <button onclick="postOrder()">送出商品</button>
+    訂單id:<input type="text" name="orderId"><br>
+    會員id:<input type="text" name="memberId"><br>
+    運送方式: <input type="text" name="shipMethod"><br>
+    收件者姓名: <input type="text" name="receiverName"><br>
+    收件者電話: <input type="text" name="receiverPhone"><br>
+    收件者信箱: <input type="text" name="receiverMail"><br>
+    收件者地址: <input type="text" name="receiverAddress"><br>
+    
+    <button onclick="postOrder()">送出訂單</button>
 </body>
 <script>
     var productId = 0
     function addproduct(){
-        $('[id="productDiv"]').append(`商品編號<input name="product${productId}" type="text"> x <input name="quantity${productId}" type="number">總價:<input name="amount${productId}" type="number"><br>`)
+        $('[id="productDiv"]').append(`商品編號<input name="product${productId}" type="text">: 單價<input name="price${productId}" type="text"> x <input name="quantity${productId}" type="number">總價:<input name="amount${productId}" type="number"><br>`)
         productId+=1;
     }
     function postOrder(){
         var detail = {}
+        
+        var totalAmount;
+        var bigtaltalAmount
         for(i=0;i<productId;i++){
+            totalAmount=parseInt($(`input[name="price${i}"]`).val())*parseInt( $(`input[name="quantity${i}"]`).val())
             detail[`${i}`] = {productId: $(`input[name="product${i}"]`).val(),
                             quantity: $(`input[name="quantity${i}"]`).val(),
-                            amount: $(`input[name="amount${i}"]`).val(),
-                            orderId: 1
+                            price: $(`input[name="price${i}"]`).val(),
+                            amount: totalAmount,
+                            orderId: $(`input[name="orderId"]`).val()
                         }
+            
+                bigtaltalAmount+=totalAmount;
+            
         }
-        console.log(JSON.stringify(detail));
+        var order = {
+            id: $(`input[name="orderId"]`).val(),
+            memberId: $(`input[name="memberId"]`).val(),
+            shipMethod: $(`input[name="shipMethod"]`).val(),
+            receiverName: $(`input[name="receiverName"]`).val(),
+            receiverPhone: $(`input[name="receiverPhone"]`).val(),
+            receiverMail: $(`input[name="receiverMail"]`).val(),
+            receiverAddress: $(`input[name="receiverAddress"]`).val(),
+            amount: bigtaltalAmount 
+        }
+        console.log(order.memberId);
+        ajax("/getMember",order.memberId)
+        
+        //ajax("/postOrder",order);
+        
+        //ajax("/orderdetail",detail);
+        
+        
+    }
+
+
+    function ajax(url,formData,funcSuccess,funcErr){
         $.ajax({
                 type: 'POST',
-                url: '/orderdetail',
+                url: url,
                 contentType: 'application/json; charset=UTF-8',
-                data: JSON.stringify(detail),
+                data: JSON.stringify(formData),
                 success: function (response) {
-                    // 处理成功的响应
-                    // var newWindow = window.open("", "_self");
-                    // newWindow.document.write(response);
-                    // newWindow.document.close();
-                    // console.log(response);
+                    console.log(response)
+                    
                 },
                 error: function (error) {
                     // 处理错误响应
 
-                    console.error(error);
+                    console.log(error)
                 }
             });
-    }
+            console.log(formData);}
     
 </script>
 </html>

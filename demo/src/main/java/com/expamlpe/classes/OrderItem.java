@@ -6,6 +6,7 @@ public class OrderItem {
 
 	 private String productId;
 	    private String quantity;
+	    private String price;
 	    private String amount;
 	    private String orderId;
 
@@ -29,5 +30,10 @@ public class OrderItem {
 	    @JsonProperty("orderId")
 	    public String getOrderId() {
 	        return orderId;
+	    }
+	    
+	    @JsonProperty("price")
+	    public String getPrice() {
+	        return price;
 	    }
 	}

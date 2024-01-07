@@ -6,10 +6,13 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.entity.Member;
 import com.example.entity.Orderdetails;
 import com.example.entity.Orders;
 import com.example.entity.Products;
+import com.example.repository.MemberRepository;
 import com.example.repository.OrderDetailReposity;
 import com.example.repository.OrdersRepository;
 import com.example.repository.ProductsResposity;
@@ -31,6 +34,9 @@ public class OrderService {
 	
 	@Autowired
 	ProductsResposity productsRes;
+	
+	@Autowired
+	MemberRepository memberRes;
 	
 	public String ecpayCheckout() {
 		
@@ -90,7 +96,7 @@ public class OrderService {
 				Products product = productsOptional.get();
 				orderdetails.setProduct(product);
 				orderdetails.setAmount(Integer.parseInt(orderItem.getAmount()));
-				orderdetails.setPrice(Integer.parseInt(orderItem.getAmount())/Integer.parseInt(orderItem.getQuantity()));
+				orderdetails.setPrice(Integer.parseInt(orderItem.getPrice()));
 				orderdetails.setQuantity(Integer.parseInt(orderItem.getQuantity()));
 				orderDetailRes.save(orderdetails);
 				System.out.println("ok");
@@ -98,5 +104,13 @@ public class OrderService {
 				throw new ValidationException("新增錯誤");
 			}
 			
+		}
+		
+		public Member getMember(String memberId) {
+			Optional<Member> memberOptional = memberRes.findById(memberId);
+			return memberOptional.get();
+	}
+		public void postOrder(Orders order) {
+			ordersRes.save(order);
 		}
 }

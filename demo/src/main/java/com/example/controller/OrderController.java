@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.entity.Member;
+import com.example.entity.Orders;
 import com.example.service.OrderService;
 import com.example.utils.EcpayReturnConverter;
 import com.expamlpe.classes.OrderItem;
@@ -25,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class OrderController {
+	Member member;
 	
 	@Autowired
 	OrderService orderService;
@@ -51,6 +55,18 @@ public class OrderController {
 		return "1|OK";
 	}
 	
+	@PostMapping("/getMember")
+	public void getMember(@RequestBody String memberId) {
+			member = orderService.getMember(memberId);
+			
+	}
+	
+	@PostMapping("/postOrder")
+	public void postOreder(@RequestBody Orders order) {
+		order.setMember(member);
+		orderService.postOrder(order);
+		
+	}
 	
 	@PostMapping("/orderdetail")
 	public void orderdetail(@RequestBody String data) {
@@ -66,15 +82,18 @@ public class OrderController {
                 OrderItem orderItem = entry.getValue();
                 orderService.postOrderDetail(orderItem);
                 // 輸出每個訂單項目的信息
-                System.out.println("Key: " + key);
-                System.out.println("ProductId: " + orderItem.getProductId());
-                System.out.println("Quantity: " + orderItem.getQuantity());
-                System.out.println("Amount: " + orderItem.getAmount());
-                System.out.println("OrderId: " + orderItem.getOrderId());
-                System.out.println();}
+                //System.out.println("Key: " + key);
+                //System.out.println("ProductId: " + orderItem.getProductId());
+                //System.out.println("Quantity: " + orderItem.getQuantity());
+                //System.out.println("Amount: " + orderItem.getAmount());
+                //System.out.println("OrderId: " + orderItem.getOrderId());
+                //System.out.println();
+                }
+            	
             } catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		} 
 	}
 	

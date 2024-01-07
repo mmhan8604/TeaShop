@@ -11,15 +11,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Orders {
 	@Id
-	private String ID;
+	private String id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "MemberID")
-	private Member member;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ProductsID")
-	private Products product;
 	
 	private String orderState;
 	
@@ -45,12 +39,16 @@ public class Orders {
 	
 	private String 	receiverAddress;
 
-	public String getID() {
-		return ID;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "MemberID")
+	private Member member;
+	
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Member getMember() {
@@ -61,13 +59,6 @@ public class Orders {
 		this.member = member;
 	}
 
-	public Products getProduct() {
-		return product;
-	}
-
-	public void setProduct(Products product) {
-		this.product = product;
-	}
 
 	public String getOrderState() {
 		return orderState;
