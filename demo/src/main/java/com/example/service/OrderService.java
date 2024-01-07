@@ -1,6 +1,7 @@
 package com.example.service;
 
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -76,7 +77,7 @@ public class OrderService {
 		
 		return form;
 	}
-		public String queryOrder(String orderId) {
+		public String queryEcOrder(String orderId) {
 			AllInOne all = new AllInOne("");
 			QueryTradeInfoObj obj = new QueryTradeInfoObj();
 			obj.setMerchantTradeNo(orderId);
@@ -112,5 +113,9 @@ public class OrderService {
 	}
 		public void postOrder(Orders order) {
 			ordersRes.save(order);
+		}
+		
+		public List<Orders> findAllOrder(){
+			return ordersRes.findAll();
 		}
 }

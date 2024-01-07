@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class OrderController {
 		return aioCheckOutALLForm;
 	}
 	@PostMapping("/queryOrder")										//查詢訂單
-	public String queryOrder(@RequestBody String orderId) {
-		String PaymentInfo = orderService.queryOrder(orderId);
+	public String queryEcOrder(@RequestBody String orderId) {
+		String PaymentInfo = orderService.queryEcOrder(orderId);
 		String queryJSON = EcpayReturnConverter.convertToJSON(PaymentInfo);
 		return queryJSON;
 	}
@@ -55,20 +56,20 @@ public class OrderController {
 		return "1|OK";
 	}
 	
-	@PostMapping("/getMember")
+	@PostMapping("/getMember")								//1.加入訂單前取得member
 	public void getMember(@RequestBody String memberId) {
 			member = orderService.getMember(memberId);
 			
 	}
 	
-	@PostMapping("/postOrder")
+	@PostMapping("/postOrder")								//2.資料庫建立訂單
 	public void postOreder(@RequestBody Orders order) {
 		order.setMember(member);
 		orderService.postOrder(order);
 		
 	}
 	
-	@PostMapping("/orderdetail")
+	@PostMapping("/orderdetail")							//3.加入訂單明細
 	public void orderdetail(@RequestBody String data) {
 		System.out.println(data);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -81,13 +82,7 @@ public class OrderController {
                 String key = entry.getKey();
                 OrderItem orderItem = entry.getValue();
                 orderService.postOrderDetail(orderItem);
-                // 輸出每個訂單項目的信息
-                //System.out.println("Key: " + key);
-                //System.out.println("ProductId: " + orderItem.getProductId());
-                //System.out.println("Quantity: " + orderItem.getQuantity());
-                //System.out.println("Amount: " + orderItem.getAmount());
-                //System.out.println("OrderId: " + orderItem.getOrderId());
-                //System.out.println();
+                
                 }
             	
             } catch (Exception e) {
@@ -95,6 +90,11 @@ public class OrderController {
 			e.printStackTrace();
 			
 		} 
+	}
+	
+	@PostMapping("/findAllOrder")
+	public List<Orders> findAllOrder () {
+		return orderService.findAllOrder();
 	}
 	
 }

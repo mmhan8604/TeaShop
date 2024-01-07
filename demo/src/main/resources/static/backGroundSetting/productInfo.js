@@ -53,7 +53,7 @@ function ProductInfo() {
 //-------------------------------------------------------------後端抓資料
 queryAll(0);
 function queryAll(choosepage) {
-	var trlist = 1;
+	var trlist ;
 	var page = choosepage;
 	//移除多次事件綁定
 	$("#prepage").off("click");
@@ -70,7 +70,7 @@ function queryAll(choosepage) {
 		.then(response => response.json())
 		.then(products => {
 			trlist = products;
-			if (page + 1 > Math.floor(trlist.length / 5)) {			//判斷是否超出頁數
+			if (page + 1 > (trlist.length%5==0? Math.floor(trlist.length / 5):Math.floor(trlist.length / 5)+1)) {			//判斷是否超出頁數
 				queryAll(page - 1);
 			} else if (page + 1 < 1) {
 				queryAll(page + 1);
@@ -82,7 +82,9 @@ function queryAll(choosepage) {
 	function firstquery() {
 		console.log(trlist)
 		$("#bodyContext").empty();
-		$("#page").html(`${page + 1}/${Math.floor(trlist.length / 5)}`)
+		if(trlist.length%5==0){
+		$("#page").html(`${page + 1}/${Math.floor(trlist.length / 5)}`)}
+		else{$("#page").html(`${page + 1}/${Math.floor(trlist.length / 5)+1}`)}
 
 		for (i = page * 5; i < (page + 1) * 5; i++) {
 			var porder = i + 1;
