@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class Products {
 	@Id
 	private String id;
-	
+
 	private String name;
 	
 	

@@ -12,6 +12,8 @@
     <input type="text" name="name1"><button onclick="queryByName()">用名稱查詢</button>
    <br>
     <input type="text" name="id"><button onclick="queryById()">用id查詢</button>
+    <br>
+    <input type="text" name="id"><button onclick="queryAll()">顯示全部</button>
     <h1>Product List</h1>
 
     <ul id="productList"></ul>
@@ -25,6 +27,7 @@
                 .then(response => response.json())
                 .then(products => {
                     // 將產品資料展示在前端
+                    console.log(JSON.stringify(products))
                     const productListElement = document.getElementById('productList');
                     products.forEach(product => {
                         const listItem = document.createElement('li');
@@ -74,6 +77,7 @@
                 .then(response => response.json())
                 .then(products => {
                     // 將產品資料展示在前端
+                    
                     const productListElement = document.getElementById('productList');
                     products.forEach(product => {
                         const listItem = document.createElement('li');
