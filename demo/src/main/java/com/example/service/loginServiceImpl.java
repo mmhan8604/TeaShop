@@ -13,11 +13,10 @@ import org.springframework.stereotype.Component;
 
 
 import com.example.entity.shopInfo;
+import com.example.interf.loginService;
 import com.example.repository.loginDao;
 
 import com.example.entity.shopInfo;
-
-import com.interf.loginService;
 
 @Component
 @Primary

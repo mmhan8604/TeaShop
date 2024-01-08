@@ -1,4 +1,4 @@
-package com.interf;
+package com.example.interf;
 
 import java.util.HashMap;
 

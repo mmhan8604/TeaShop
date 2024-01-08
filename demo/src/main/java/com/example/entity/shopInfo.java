@@ -3,6 +3,7 @@ package com.example.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +27,22 @@ public class shopInfo {
 
 	@Column 
 	private String email;
+	
+	@Column(columnDefinition = "BLOB")
+	@Lob
+	private byte[] frontStage;
+
+	public byte[] getFrontStage() {
+		return frontStage;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setFrontStage(byte[] bs) {
+		this.frontStage = bs;
+	}
 
 	public String getAccount() {
 		return account;
