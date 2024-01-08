@@ -19,6 +19,6 @@ public interface signUpDao extends JpaRepository<shopInfo, Integer>{
 	
 	@Modifying
 	@Transactional
-	@Query(value = "insert into shop_info(account, password,name,phone,email) values(:account,:password,:name,:phone,:email)",nativeQuery = true)
-	int create(@Param("account") String account, @Param("password") String password, @Param("name") String name, @Param("phone") String phone, @Param("email") String email);
+	@Query(value = "insert into shop_info( password,name,phone,email) values(:password,:name,:phone,:email)",nativeQuery = true)
+	int create(@Param("password") String password, @Param("name") String name, @Param("phone") String phone, @Param("email") String email);
 }

@@ -53,7 +53,7 @@ public class loginServiceImpl implements loginService{
 
 	@Override
 	public int checkAccount() {
-		List<shopInfo> fba= dao.findByAccount(clientAccount);
+		List<shopInfo> fba= dao.findByEmail(clientAccount);
 		
 		if(fba.isEmpty()) {
 			return 1;

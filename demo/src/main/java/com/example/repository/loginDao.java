@@ -12,6 +12,6 @@ public interface loginDao extends JpaRepository<shopInfo, Integer>{
 	
 	
 	
-	List<shopInfo> findByAccount(String account);
+	List<shopInfo> findByEmail(String account);
 
 }

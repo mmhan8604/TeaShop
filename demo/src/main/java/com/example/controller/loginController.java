@@ -25,7 +25,7 @@ public class loginController {
 		JSONObject jo=new JSONObject(data);
 		
 		
-		ls.setClientAccount(jo.get("account").toString());
+		ls.setClientAccount(jo.get("email").toString());
 		ls.setClientPassword(jo.get("password").toString());
 		
 				
