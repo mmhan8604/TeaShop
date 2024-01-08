@@ -31,6 +31,16 @@ public class Products {
 	private int stock;
 	
 	private boolean discontinued;
+	
+	private String shopId;
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
 
 	public String getId() {
 		return id;

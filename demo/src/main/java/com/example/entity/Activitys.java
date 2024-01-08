@@ -15,7 +15,16 @@ public class Activitys {
 	private String discription;
 	private String method;
 	private int freeShipping;
+	private String shopId;
 	
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
 	public Activitys() {
 		// TODO Auto-generated constructor stub
 	}

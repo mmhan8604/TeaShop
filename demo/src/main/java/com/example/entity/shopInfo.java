@@ -12,12 +12,7 @@ public class shopInfo {
 	@Id
 	private Integer id;
 	
-	@Column 
-	private String account;
 	
-	@Column 
-	private String password;
-
 	@Column 
 	private String name;
 
@@ -25,14 +20,44 @@ public class shopInfo {
 	private String phone;
 
 	@Column 
-	private String email;
-
-	public String getAccount() {
-		return account;
+	private String email; 
+	
+	@Column
+	private String address;
+	
+	@Column 
+	private String password;
+	
+	private String bankAccount;
+	
+	private String ShopLogoUrl;
+	
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public String getShopLogoUrl() {
+		return ShopLogoUrl;
+	}
+
+	public void setShopLogoUrl(String shopLogoUrl) {
+		ShopLogoUrl = shopLogoUrl;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getPassword() {

@@ -13,9 +13,9 @@ public class Member {
 	private String password;
 	private String name;
 	private String phone;
-	private String city;
 	private String address;
 	private long count;
+	private String shopId;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -61,12 +61,13 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public String getCity() {
-		return city;
+	
+	public String getShopId() {
+		return shopId;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
 	}
 
 	public String getAddress() {

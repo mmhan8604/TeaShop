@@ -14,7 +14,6 @@ public class Orders {
 	private String id;
 	
 	
-	
 	private String orderState;
 	
 	private String ecPayReturn;
@@ -27,7 +26,7 @@ public class Orders {
 	
 	private String shipState;
 	
-	private LocalDateTime shipDate;
+	private LocalDateTime OrderDate;
 	
 	private String 	receiverName;
 
@@ -43,6 +42,8 @@ public class Orders {
 	@JoinColumn(name = "MemberID")
 	private Member member;
 	
+	private String shopId;
+
 	public String getId() {
 		return id;
 	}
@@ -50,15 +51,6 @@ public class Orders {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
 
 	public String getOrderState() {
 		return orderState;
@@ -108,12 +100,12 @@ public class Orders {
 		this.shipState = shipState;
 	}
 
-	public LocalDateTime getShipDate() {
-		return shipDate;
+	public LocalDateTime getOrderDate() {
+		return OrderDate;
 	}
 
-	public void setShipDate(LocalDateTime shipDate) {
-		this.shipDate = shipDate;
+	public void setOrderDate(LocalDateTime orderDate) {
+		OrderDate = orderDate;
 	}
 
 	public String getReceiverName() {
@@ -156,6 +148,22 @@ public class Orders {
 		this.receiverAddress = receiverAddress;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+	
 	
 
 
