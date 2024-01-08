@@ -71,18 +71,18 @@ function queryAll(choosepage) {
 		.then(products => {
 			trlist = products;
 			var allpage = trlist.length==0? 1:trlist.length;
-			console.log(allpage)
+			
 			if (page + 1 > (allpage%5==0? Math.floor(allpage / 5):Math.floor(allpage / 5)+1)) {			//判斷是否超出頁數
 				queryAll(page - 1);
 			} else if (page + 1 < 1) {
 				queryAll(page + 1);
-			}else{firstquery()}
+			}else{firstquery(allpage)}
 			
 		})
 		.catch(error => console.error('Error fetching product data:', error))
 
-	function firstquery() {
-		console.log(trlist)
+	function firstquery(allpage) {
+		
 		$("#bodyContext").empty();
 		if(allpage%5==0){
 		$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)}

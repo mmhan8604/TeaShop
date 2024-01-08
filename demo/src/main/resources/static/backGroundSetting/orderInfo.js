@@ -60,13 +60,13 @@ function queryAll(choosepage) {
 				queryAll(page - 1);
 			} else if (page + 1 < 1) {
 				queryAll(page + 1);
-			} else { query() }
+			} else { query(allpage) }
 
 		})
 		.catch(error => console.error('Error fetching order data:', error))
 
-	function query() {
-		console.log(trlist)
+	function query(allpage) {
+		
 		$("#bodyContext").empty();
 		if (allpage % 5 == 0) {
 			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)

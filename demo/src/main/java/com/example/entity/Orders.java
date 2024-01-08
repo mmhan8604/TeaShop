@@ -33,8 +33,6 @@ public class Orders {
 	private String 	receiverPhone;
 	
 	private String 	receiverMail;
-
-	private String 	receiverCity;
 	
 	private String 	receiverAddress;
 
@@ -132,13 +130,6 @@ public class Orders {
 		this.receiverMail = receiverMail;
 	}
 
-	public String getReceiverCity() {
-		return receiverCity;
-	}
-
-	public void setReceiverCity(String receiverCity) {
-		this.receiverCity = receiverCity;
-	}
 
 	public String getReceiverAddress() {
 		return receiverAddress;
