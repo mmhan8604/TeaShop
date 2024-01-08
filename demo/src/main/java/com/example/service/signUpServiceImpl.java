@@ -44,7 +44,7 @@ public class signUpServiceImpl implements signUpService{
 	}
 	
 	public boolean check() {
-		if(dao.findByAccount(sData.get("account")).isEmpty()) {
+		if(dao.findByEmail(sData.get("account")).isEmpty()) {
 			return true;
 		} else {
 			return false;

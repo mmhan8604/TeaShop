@@ -55,7 +55,8 @@ function queryAll(choosepage) {
 		.then(response => response.json())
 		.then(orders => {
 			trlist = orders;
-			if (page + 1 > (trlist.length % 5 == 0 ? Math.floor(trlist.length / 5) : Math.floor(trlist.length / 5) + 1)) {			//判斷是否超出頁數
+			var allpage = trlist.length==0? 1:trlist.length;
+			if (page + 1 > (allpage % 5 == 0 ? Math.floor(allpage / 5) : Math.floor(allpage / 5) + 1)) {			//判斷是否超出頁數
 				queryAll(page - 1);
 			} else if (page + 1 < 1) {
 				queryAll(page + 1);
@@ -67,10 +68,10 @@ function queryAll(choosepage) {
 	function query() {
 		console.log(trlist)
 		$("#bodyContext").empty();
-		if (trlist.length % 5 == 0) {
-			$("#page").html(`${page + 1}/${Math.floor(trlist.length / 5)}`)
+		if (allpage % 5 == 0) {
+			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
 		}
-		else { $("#page").html(`${page + 1}/${Math.floor(trlist.length / 5) + 1}`) }
+		else { $("#page").html(`${page + 1}/${Math.floor(allpage / 5) + 1}`) }
 
 
 		for (i = page * 5; i < (page + 1) * 5; i++) {

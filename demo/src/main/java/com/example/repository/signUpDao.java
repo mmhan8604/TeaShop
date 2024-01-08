@@ -15,7 +15,7 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface signUpDao extends JpaRepository<shopInfo, Integer>{
 
-	List<shopInfo> findByAccount(String account);
+	List<shopInfo> findByEmail(String account);
 	
 	@Modifying
 	@Transactional
