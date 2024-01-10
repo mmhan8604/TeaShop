@@ -1,4 +1,4 @@
-package com.expamlpe.classes;
+package com.example.classes;
 
 import com.example.entity.Products;
 

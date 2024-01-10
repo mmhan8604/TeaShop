@@ -17,7 +17,10 @@ function ProductInfoqueryAll(choosepage) {
 		ProductInfoqueryAll(page + 1);
 	});
 	// 使用JavaScript發送HTTP POST請求獲取產品資料
-	fetch('/queryProduct', { method: 'POST' })
+	fetch('/queryProduct', { 
+		method: 'POST' ,
+		body: "shop01"	
+	})
 		.then(response => response.json())
 		.then(products => {
 			trlist = products;

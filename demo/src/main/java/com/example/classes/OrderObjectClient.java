@@ -1,4 +1,4 @@
-package com.expamlpe.classes;
+package com.example.classes;
 
 import java.sql.Date;
 import java.time.LocalDateTime;

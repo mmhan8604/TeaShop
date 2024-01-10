@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.classes.ProductObj;
 import com.example.entity.Products;
 import com.example.service.ProductService;
-import com.expamlpe.classes.ProductObj;
 
 @RestController
 public class ProductController {
@@ -40,9 +40,9 @@ public class ProductController {
 		return products.toString();
 	}
 	@PostMapping("/queryProduct")
-	public List<Products> queryProduct() {
-		System.out.println("查詢全部");
-		return productService.queryProduct();
+	public List<Products> queryProduct(@RequestBody String shopId) {
+		System.out.println("查詢全部"+shopId);
+		return productService.queryProduct(shopId);
 	}
 	@PostMapping("/queryProductByname")
 	public List<Products> queryProductByName(@RequestBody String name) {

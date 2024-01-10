@@ -43,8 +43,8 @@ public class ProductService {
 		
 		
 	}
-	public List<Products> queryProduct() {
-		return productsRes.findAllByOrderByNameAsc();
+	public List<Products> queryProduct(String shopId) {
+		return productsRes.findByShopIdOrderByNameAsc(shopId);
 		
 	}
 	public List<Products> queryProductByName(String name){

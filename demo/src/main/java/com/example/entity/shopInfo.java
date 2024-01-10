@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class shopInfo {
 	
 	@Id
-	private Integer id;
+	private String id;
 	
 	
 	@Column 
@@ -56,7 +56,7 @@ public class shopInfo {
 		ShopLogoUrl = shopLogoUrl;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -92,7 +92,7 @@ public class shopInfo {
 		this.email = email;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 

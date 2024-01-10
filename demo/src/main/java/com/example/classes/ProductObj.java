@@ -1,4 +1,4 @@
-package com.expamlpe.classes;
+package com.example.classes;
 
 import com.example.entity.Activitys;
 
@@ -6,7 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-@Entity
+
 public class ProductObj {
 	private String discription;
 	private int id;
