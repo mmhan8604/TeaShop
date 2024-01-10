@@ -108,7 +108,9 @@ public class OrderService {
 		}
 		
 		public Member getMember(String memberId) {
+			
 			Optional<Member> memberOptional = memberRes.findById(memberId);
+			System.out.println(memberOptional.get().getAddress());
 			return memberOptional.get();
 	}
 		public void postOrder(Orders order) {

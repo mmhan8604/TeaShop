@@ -29,14 +29,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class OrderController {
-	Member member;
+	Member member ;
 	
 	@Autowired
 	OrderService orderService;
 
 	@PostMapping("/ecpayCheckout")									//建立訂單
 	public String ecpayCheckout(@RequestBody OrderObject OOB) {
-		System.out.println(OOB.getItemName());
+		
 		String aioCheckOutALLForm = orderService.ecpayCheckout(OOB);
 		
 		return aioCheckOutALLForm;
@@ -58,12 +58,15 @@ public class OrderController {
 	
 	@PostMapping("/getMember")								//1.加入訂單前取得member
 	public void getMember(@RequestBody String memberId) {
+			System.out.println("memberId"+memberId);
 			member = orderService.getMember(memberId);
+			System.out.println(member.getId());
 			
 	}
 	
 	@PostMapping("/postOrder")								//2.資料庫建立訂單
 	public void postOreder(@RequestBody Orders order) {
+		System.out.println(member.getId());
 		order.setMember(member);
 		orderService.postOrder(order);
 		
@@ -71,7 +74,7 @@ public class OrderController {
 	
 	@PostMapping("/orderdetail")							//3.加入訂單明細
 	public void orderdetail(@RequestBody String data) {
-		System.out.println(data);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
             // 將JSON字串轉換為Map<String, OrderItem>
