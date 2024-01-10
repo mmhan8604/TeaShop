@@ -23,9 +23,9 @@ let whichTd;
         let count= $("#beWrite tr").length
         let a=data[0]==1?"賣家宅配":"超商店到店"
         let tr=
-        `<tr id="tr_${count+1}"><th scope="row">${count+1}</th><td>${a}</td><td>一般宅配</td><td>${data[1]}元</td><td><button  onclick="set(${count+1})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td></tr>`
+        `<tr id="tr_${count+1}"><th scope="row">${count+1}</th><td>${a}</td><td>一般宅配</td><td>${data[1]}元</td><td><button  onclick="set(${count+1})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+1})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
         let tr_f=
-        `<tr id="tr_${count+2}"><th scope="row">${count+2}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td></tr>`
+        `<tr id="tr_${count+2}"><th scope="row">${count+2}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
 
         if (data[2]==""){
           document.getElementById("beWrite").innerHTML=(
@@ -141,4 +141,11 @@ let whichTd;
           }
           cancel()
         }
+      }
+
+      function deleteTD(info){
+        //info==第幾個tr
+        console.log(info);
+       let a= document.getElementById(`tr_${info}`);
+       a.remove();
       }

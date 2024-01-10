@@ -17,13 +17,16 @@
 			align-items: center;
 			min-height: 100vh;
 		}
+
 		.form-area {
 			width: 600px;
 			height: 700px;
 			background-color: #ffffff;
 			padding: 3%;
+			padding-left: 5%;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		}
+
 		.background-image {
 			background-image: url('./banner/p_banner-2.png');
 			width: 100vh;
@@ -48,8 +51,10 @@
 			align-items: center;
 			width: 90px;
 			height: 50px;
-			background-color: #C20000;
+			background-color: #C00000;
 			margin: 3%;
+			z-index: 99;
+			position: relative;
 		}
 
 		.exitIcon {
@@ -58,32 +63,45 @@
 			height: auto;
 			position: relative;
 		}
-		a{color: #C1C1C1;}
 
-		.form-label{font-size: 24px;}
-		.form-control{width: 450px; height: 55px;}
+		a {
+			color: #C1C1C1;
+		}
+
+		.form-label {
+			font-size: 24px;
+		}
+
+		.form-control {
+			width: 450px;
+			height: 55px;
+		}
+
 		/* RWD */
-		@media (max-width: 1200px) {
-		}
-		@media (max-width: 768px) {
-		}
-		@media (max-width: 480px) {
-		}
+		@media (max-width: 1200px) {}
+
+		@media (max-width: 768px) {}
+
+		@media (max-width: 480px) {}
 	</style>
+
+	<script defer src="./mainLogin.js"></script>
+
 </head>
 
 <body>
 	<!-- 背景 -->
 	<div class="background-image">
-		<div class="exitImg rounded">
-			<a href="logout.html ">
-				<img src="./icon/leave.png" class="exitIcon" />
-			</a>
-		</div>
+
 	</div>
-	<div class="container-fluid login-container "  >
-		<div class="form-area rounded">
-			<div style="margin-bottom: 5%;">			
+	<div class="container-fluid login-container d-flex justify-content-between">
+		<a href="logout.html" class="exitImg rounded btn  mb-auto" style="background-color: #C00000">
+
+			<img src="./icon/leave_white.png" class="exitIcon" />
+
+		</a>
+		<div class="form-area rounded  ">
+			<div style="margin-bottom: 5%;">
 				<img src="./icon/pLogo.png" class="pLogo" style="margin-bottom: 3%; width: 40px; height: 40px;">
 				<span style="color: #366CF1; font-size: 40px; margin-left: 3%;">Project</span>
 			</div>
@@ -92,7 +110,7 @@
 			<!-- 登入表單 -->
 			<form action="#">
 				<div class="mb-3">
-					<label for="username" class="form-label" >帳號</label>
+					<label for="username" class="form-label">帳號</label>
 					<input type="text" class="form-control" id="account" placeholder="請輸入帳號">
 				</div>
 				<div class="mb-3">
@@ -103,10 +121,18 @@
 					<a href="" class="text-decoration-none">還未註冊</a>
 					<a href="" class="text-decoration-none" style="margin-left: 280px;">忘記密碼?</a>
 				</div>
-				<button type="submit" class="btn btn-primary mt-3 mb-2" style="margin-left: 25%; width: 200px; height: 70px; font-size: 32px;">登入</button>
+				<button type="submit" class="btn btn-primary mt-3 mb-2"
+					style="margin-left: 25%; width: 200px; height: 70px; font-size: 32px;">登入</button>
 			</form>
+
+
+		</div>
+		<div style="width: 10px; height: 10px;">
+
 		</div>
 	</div>
+
+	
 
 </body>
 

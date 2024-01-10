@@ -28,4 +28,9 @@ public class Viewcontroller {
 
 		return "/payresult";
 	}
+	
+	@GetMapping("/backstage")
+	public String backstageView() {
+		return "/mainIndex";
+	}
 }
