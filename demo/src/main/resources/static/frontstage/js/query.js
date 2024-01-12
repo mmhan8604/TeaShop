@@ -8,11 +8,11 @@ var cardHTML = `<div class="col-md-3 rounded">
     <div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
         <div class="product-image">
 
-            <img src="./product/新增資料夾/greentea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
+            <img src="/frontstage/product/新增資料夾/greentea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
             <a>
                 <button href="#" type="button" class="shopping-cart-icon m-0 "
                     data-bs-toggle="modal" data-bs-target="#product${id}Modal">
-                    <img src="../icon/white/cart.png" alt="" class="shoppingProducticon">
+                    <img src="/frontstage/icon/white/cart.png" alt="" class="shoppingProducticon">
                 </button>
                 <!-- modal-header標題：${productName} -->
                 <div class="modal fade" id="product${id}Modal" tabindex="-1"
@@ -50,7 +50,7 @@ var cardHTML = `<div class="col-md-3 rounded">
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-secondary add-to-cart"
                                     data-name="${id}" data-price="${price}"
-                                    data-image="./product/新增資料夾/greentea-3.png"
+                                    data-image="/frontstage/product/新增資料夾/greentea-3.png"
                                     data-bs-dismiss="modal">加入購物車</button>
                                 <button type="button" class="btn btn-primary">立即購買</button>
                             </div>

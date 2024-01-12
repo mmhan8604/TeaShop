@@ -29,7 +29,7 @@ public class Viewcontroller {
 		return "/payresult";
 	}
 	
-	@GetMapping("/backstage")
+	@GetMapping("/backstage")				//後台畫面
 	public String backstageView() {
 		return "/mainIndex";
 	}
@@ -50,5 +50,16 @@ public class Viewcontroller {
 	public String shoppingPage() {
 		return "/shopPage/shoppingPage.html";		//前台畫面
 		
+	}
+	
+	@GetMapping("/contactUs")
+	public String contactUs() {
+		return "/shopPage/connection.html";		//前台畫面
+		
+	}
+	
+	@GetMapping("/shoppingCart")
+	public String shoppingCart() {
+		return "/shopPage/cart01.html";		//購物車		
 	}
 }
