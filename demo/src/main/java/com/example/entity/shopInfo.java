@@ -28,6 +28,28 @@ public class shopInfo {
 	@Column 
 	private String email;
 	
+	@Column
+	private String bankAccount;
+	
+	@Column
+	private String ShopLogoUrl;
+	
+	public String getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public String getShopLogoUrl() {
+		return ShopLogoUrl;
+	}
+
+	public void setShopLogoUrl(String shopLogoUrl) {
+		ShopLogoUrl = shopLogoUrl;
+	}
+
 	@Column(columnDefinition = "BLOB")
 	@Lob
 	private byte[] frontStage;

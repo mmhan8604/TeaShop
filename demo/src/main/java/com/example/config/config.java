@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import com.example.interf.frontStageService;
 import com.example.interf.loginService;
 import com.example.interf.signUpService;
-import com.example.service.frontStageServiceTest;
+import com.example.service.frontStageServiceImpl_test;
+
 import com.example.service.loginServiceImpl;
 import com.example.service.signUpServiceImpl;
 
@@ -26,7 +27,7 @@ public class config {
 	
 	@Bean
 	public frontStageService fss() {
-		return new frontStageServiceTest();
+		return new frontStageServiceImpl_test();
 	}
 	
 	
