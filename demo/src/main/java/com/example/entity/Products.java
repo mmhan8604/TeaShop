@@ -33,6 +33,16 @@ public class Products {
 	private boolean discontinued;
 	
 	private String shopId;
+	
+	private String picJSON;
+
+	public String getPicJSON() {
+		return picJSON;
+	}
+
+	public void setPicJSON(String picJSON) {
+		this.picJSON = picJSON;
+	}
 
 	public String getShopId() {
 		return shopId;
