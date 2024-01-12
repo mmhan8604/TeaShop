@@ -42,7 +42,7 @@ public class signUpServiceImpl implements signUpService{
 			return 1;
 		}
 	}
-	
+	//棄用
 	public boolean check() {
 		if(dao.findByAccount(sData.get("account")).isEmpty()) {
 			return true;

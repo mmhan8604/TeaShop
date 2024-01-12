@@ -14,7 +14,7 @@ public class shopInfo {
 	private Integer id;
 	
 	@Column 
-	private String account;
+	private String shopName;
 	
 	@Column 
 	private String password;
@@ -34,6 +34,10 @@ public class shopInfo {
 	@Column
 	private String ShopLogoUrl;
 	
+	@Column(columnDefinition = "BLOB")
+	@Lob
+	private byte[] frontStage;
+	
 	public String getBankAccount() {
 		return bankAccount;
 	}
@@ -50,9 +54,7 @@ public class shopInfo {
 		ShopLogoUrl = shopLogoUrl;
 	}
 
-	@Column(columnDefinition = "BLOB")
-	@Lob
-	private byte[] frontStage;
+	
 
 	public byte[] getFrontStage() {
 		return frontStage;
@@ -66,12 +68,16 @@ public class shopInfo {
 		this.frontStage = bs;
 	}
 
-	public String getAccount() {
-		return account;
+	
+
+	
+
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	public String getPassword() {
