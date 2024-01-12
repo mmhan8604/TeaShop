@@ -45,4 +45,10 @@ public class Viewcontroller {
 		return "/shopPage/about.html";		//前台畫面
 		
 	}
+	
+	@GetMapping("/shoppingPage")
+	public String shoppingPage() {
+		return "/shopPage/shoppingPage.html";		//前台畫面
+		
+	}
 }
