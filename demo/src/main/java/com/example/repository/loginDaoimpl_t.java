@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.interf.loginDao;
+import com.example.interf.loginDao;
 
 @Component
 @Repository

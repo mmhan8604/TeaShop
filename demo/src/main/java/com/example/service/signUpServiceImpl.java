@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import com.example.interf.signUpService;
 import com.example.repository.signUpDao;
-import com.interf.signUpService;
 
 @Component
 @Primary

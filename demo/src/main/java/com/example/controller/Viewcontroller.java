@@ -33,4 +33,16 @@ public class Viewcontroller {
 	public String backstageView() {
 		return "/mainIndex";
 	}
+	
+	@GetMapping("/shopindex")
+	public String shopindex() {
+		return "/shopPage/index.html";		//前台畫面
+		
+	}
+	
+	@GetMapping("/aboutUs")
+	public String shopAbout() {
+		return "/shopPage/about.html";		//前台畫面
+		
+	}
 }
