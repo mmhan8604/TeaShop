@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+
 import com.example.entity.shopInfo;
 import com.example.interf.loginService;
 import com.example.repository.loginDao;
+
 
 @Component
 @Primary
