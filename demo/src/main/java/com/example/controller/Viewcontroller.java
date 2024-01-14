@@ -1,16 +1,24 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.Products;
+import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
 @Controller
 public class Viewcontroller {
+	@Autowired
+	ProductService productService;
+	
+	
 	@GetMapping(value = "/model")
 	// 將Model 作為Controller 的引數，由Spring 框架自動創建並作為參數傳入
 	public String model(Model model) {
@@ -62,4 +70,17 @@ public class Viewcontroller {
 	public String shoppingCart() {
 		return "/shopPage/cart01.html";		//購物車		
 	}
+	
+	@GetMapping("/productPage")
+	public String productPage(@RequestParam String productId,Model model) {
+		System.out.println(productId);
+		Products product = productService.queryProductById(productId);
+		model.addAttribute("productId", product.getId());
+		model.addAttribute("productName", product.getName());
+		model.addAttribute("productPrice", product.getPrice());
+//		model.addAttribute("productDiscription", product.getDiscription());
+		model.addAttribute("productDiscription", "資料庫尚無打上敘述，僅測試用");
+		return "/shopPage/product";		//商品頁	
+	}
+	
 }
