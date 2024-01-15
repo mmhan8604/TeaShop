@@ -26,7 +26,7 @@ public class Orders {
 	
 	private String shipState;
 	
-	private LocalDateTime OrderDate;
+	private LocalDateTime orderDate;
 	
 	private String 	receiverName;
 
@@ -98,12 +98,14 @@ public class Orders {
 		this.shipState = shipState;
 	}
 
+	
+
 	public LocalDateTime getOrderDate() {
-		return OrderDate;
+		return orderDate;
 	}
 
 	public void setOrderDate(LocalDateTime orderDate) {
-		OrderDate = orderDate;
+		this.orderDate = orderDate;
 	}
 
 	public String getReceiverName() {

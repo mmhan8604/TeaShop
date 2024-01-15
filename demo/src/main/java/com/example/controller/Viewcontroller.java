@@ -85,8 +85,16 @@ public class Viewcontroller {
 	
 	@GetMapping("/orderPayment")
 	public String orderPayment() {
-		return "/shopPage/cart03.html";		//購物車		
+		return "/shopPage/cart03.html";		//付款、運送方式等等		
 	}
 	
+	@GetMapping("/orderInfo")
+	public String orderInfo() {
+		return "/shopPage/cart04.html";		//訂購人等等		
+	}
 	
+	@GetMapping("/confirmOrder")
+	public String confirmOrder() {
+		return "/shopPage/cart05.html";		//確認訂單等等		
+	}
 }

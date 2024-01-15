@@ -211,7 +211,7 @@
 
 						<li class="checkout-btn">
 							<input type="submit" name="delete"  class="btn clear01 me-3 text-center" value="取消" />
-							<a href="/frontstage/cart04.html" type="submit" class="btn text-center cartCheckout py-1" onclick="savepayment()">確定</a>
+							<a href="/orderInfo" type="submit" class="btn text-center cartCheckout py-1" onclick="savepayment()">確定</a>
 						</li>
 
 					</ul>
@@ -222,12 +222,12 @@
 
 	</div>
 	<script>
-		var payment = $('#inputShoppingmethod').val();
-		var shippingMethod = $('#inputTransportmethod').val();
-		var discount = $('#inputDiscount').val();
+		
 		
 		function savepayment(){
-			
+			var payment = $('#inputShoppingmethod').val();
+			var shippingMethod = $('#inputTransportmethod').val();
+			var discount = $('#inputDiscount').val();
 			var data = {payment:payment, shippingMethod: shippingMethod, discount: discount };
 			localStorage.setItem('payStorage', JSON.stringify(data));
 
