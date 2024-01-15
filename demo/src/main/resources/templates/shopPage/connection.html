@@ -87,27 +87,27 @@
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="text" class="form-control" placeholder="姓名">
+					<input id="connecterName" type="text" class="form-control" placeholder="姓名">
 				</div>
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="text" class="form-control" placeholder="手機號碼">
+					<input id="connecterPhone" type="text" class="form-control" placeholder="手機號碼">
 				</div>
 
 				<div class="col-md-6">
 					<label for="inputEmail" class="form-label">　　</label>
-					<input type="text" class="form-control" placeholder="電子郵件">
+					<input id="connecterMail" type="text" class="form-control" placeholder="電子郵件">
 				</div>
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="text" class="form-control" placeholder="聯絡主旨">
+					<input id="connecterTitle" type="text" class="form-control" placeholder="聯絡主旨">
 				</div>
 
 				<div class="col-12 ">
 					<label for="inputOpinion" class="form-label">　　</label>
-					<textarea class="form-control input-lg" rows="4" placeholder="聯絡內容"></textarea>
+					<textarea id="connecterContent" class="form-control input-lg" rows="4" placeholder="聯絡內容"></textarea>
 				</div>
 
 				<div class="col-12 ms-auto">
@@ -143,7 +143,36 @@
 			// 綁定點擊事件到按鈕上
 			$('.send-out-btn').click(function () {
 				// 使用 jQuery 顯示模態窗口
-				$('#contactUsSendOut').modal('show');
+				//$('#contactUsSendOut').modal('show');
+				var contactData = `以下為聯絡內容-------------------------------\n`+
+				`\n${$('#connecterContent').val()}\n`+`\n`+`\n`+
+				`\n聯絡人姓名:${$('#connecterName').val()||'未提供'}`+
+				`\n聯絡人電話:${$('#connecterPhone').val()||'未提供'}`+
+				`\n聯絡人信箱:${$('#connecterMail').val()||'未提供'}`
+				console.log(contactData)
+				var data = {
+					shopId:'shop01',
+					content:contactData,
+					title:$('#connecterTitle').val()
+				}
+				
+				
+				$.ajax({
+                type: 'POST',
+                url: '/sendmail',
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify(data),
+                success: function (response) {
+                   	console.log("success")
+                   	$('#contactUsSendOut').modal('show');
+                },
+                error: function (error) {
+                    // 处理错误响应
+
+                    console.error(error);
+                }
+            	});
+				
 			});
 		});
 	</script>

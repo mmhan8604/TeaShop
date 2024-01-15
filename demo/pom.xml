@@ -53,9 +53,9 @@
 			<version>3.1.3</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.json</groupId>
-   			 <artifactId>json</artifactId>
-    		<version>20231013</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20231013</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -63,35 +63,38 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>mysql</artifactId>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-    	</dependency>
-    	<dependency>
-    		<groupId>org.mindrot</groupId>
-   			<artifactId>jbcrypt</artifactId>
-    		<version>0.4</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
-
-        
-          <dependency>
-    		<groupId>org.mindrot</groupId>
-   			<artifactId>jbcrypt</artifactId>
-    		<version>0.4</version>
-		</dependency>
-		
 		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-aop</artifactId>
-    		<version>3.2.1</version>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
 		</dependency>
 
 
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>			<!-- mail -->			
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 
 
 	</dependencies>
