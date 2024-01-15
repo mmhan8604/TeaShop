@@ -153,12 +153,17 @@ $(document).ready(function () {
         }
     });
 
-    
+    $('.add-to-cart').click(function (e) {
+				e.preventDefault();
+				$('#successAddToCartModal').modal('show');
+			});
+			
+	
 
 });
 
 
-
+	
 // $(document).ready(function () {
 //     // 刪除按鈕的事件處理器
 //     $(document).on('click', '.delete-box', function () {

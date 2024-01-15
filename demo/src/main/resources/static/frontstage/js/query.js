@@ -85,7 +85,8 @@ function queryProduct() {
                                     data-name="${name}" data-price="${price}" data-id="${id}"
                                     data-image="/frontstage/product/新增資料夾/greentea-3.png"
                                     data-bs-dismiss="modal">加入購物車</button>
-                                <button type="button" class="btn btn-primary">立即購買</button>
+                                <button type="button" class="btn btn-secondary buy-it-now" data-name="${name}" data-price="${price}" data-id="${id}"
+                                    data-image="/frontstage/product/新增資料夾/greentea-3.png">立即購買</button>
                             </div>
                         </div>
                     </div>
@@ -104,79 +105,127 @@ function queryProduct() {
 
 			$("#cardSpace").append(cardHTML);
 
-			
+
 
 		}
-		
-		
+
+
 		//綁定購物車事件
 		$('.add-to-cart').off("click");
 		$('.add-to-cart').click(function(event) {
-				console.log("click")
-				event.preventDefault();
-				var id = $(this).data('id');
-				var name = $(this).data('name');
-				var price = $(this).data('price');
-				var image = $(this).data('image');
+			console.log("click")
+			event.preventDefault();
+			var id = $(this).data('id');
+			var name = $(this).data('name');
+			var price = $(this).data('price');
+			var image = $(this).data('image');
 
-				var quantitySelector, quantity;
+			var quantitySelector, quantity;
 
-				// 检查是否在模态窗口中
-				if ($(this).closest('.modal').length) {
-					// 如果是模态窗口，通过模态窗口的 ID 获取数量
-					var modalId = $(this).closest('.modal').attr('id');
-					quantitySelector = $('#' + modalId + ' .qty');
-				} else {
-					// 如果不是模态窗口，从较近的上级元素获取数量
-					quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
-				}
+			// 检查是否在模态窗口中
+			if ($(this).closest('.modal').length) {
+				// 如果是模态窗口，通过模态窗口的 ID 获取数量
+				var modalId = $(this).closest('.modal').attr('id');
+				quantitySelector = $('#' + modalId + ' .qty');
+			} else {
+				// 如果不是模态窗口，从较近的上级元素获取数量
+				quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
+			}
 
-				quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
+			quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
 
-				var product = {id: id, name: name, price: price, image: image, quantity: quantity };
+			var product = { id: id, name: name, price: price, image: image, quantity: quantity };
 
-				var cart = JSON.parse(localStorage.getItem('cart')) || [];
-				var existingProductIndex = cart.findIndex(p => p.name === name);
-				if (existingProductIndex !== -1) {
-					cart[existingProductIndex].quantity += quantity;
-				} else {
-					cart.push(product);
-				}
+			var cart = JSON.parse(localStorage.getItem('cart')) || [];
+			var existingProductIndex = cart.findIndex(p => p.name === name);
+			if (existingProductIndex !== -1) {
+				cart[existingProductIndex].quantity += quantity;
+			} else {
+				cart.push(product);
+			}
 
-				localStorage.setItem('cart', JSON.stringify(cart));
-			});
-				productPage()
+			localStorage.setItem('cart', JSON.stringify(cart));
+		});
+
+		//提示視窗顯示
+		$('.add-to-cart').click(function(e) {
+			e.preventDefault();
+			$('#successAddToCartModal').modal('show');
+		});
+
+
+		//商品業跳轉
+		productPage()
+
+		//立即購買
+		$('.buy-it-now').click(function(event) {
+			event.preventDefault();
+			
+			var productId = $(this).data('id');
+			var name = $(this).data('name');
+			var price = $(this).data('price');
+			var image = $(this).data('image');
+
+			var quantitySelector, quantity;
+
+			// 检查是否在模态窗口中
+			if ($(this).closest('.modal').length) {
+				// 如果是模态窗口，通过模态窗口的 ID 获取数量
+				var modalId = $(this).closest('.modal').attr('id');
+				quantitySelector = $('#' + modalId + ' .qty');
+			} else {
+				// 如果不是模态窗口，从较近的上级元素获取数量
+				quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
+			}
+
+			quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
+
+			var product = {id:productId, name: name, price: price, image: image, quantity: quantity };
+
+			var cart = JSON.parse(localStorage.getItem('cart')) || [];
+			var existingProductIndex = cart.findIndex(p => p.name === name);
+			if (existingProductIndex !== -1) {
+				cart[existingProductIndex].quantity += quantity;
+			} else {
+				cart.push(product);
+			}
+
+			localStorage.setItem('cart', JSON.stringify(cart));
+
+			// 跳轉到 cart01 頁面
+			window.location.href = `/productPage?productId=${productId}`;
+		});
 	}
 }
 
 
-function productPage(){
-	$('.productPage').click(function(){
+function productPage() {
+	$('.productPage').click(function() {
 		var productId = $(this).data('id');
 		console.log(productId)
-		location.href=`/productPage?productId=${productId}`
-/*		$.ajax({
-                type: 'GET',
-                url: '/productPage',
-                contentType: 'application/json; charset=UTF-8',
-                data: productId,
-                success: function (response) {
-                    // 处理成功的响应
-                    var newWindow = window.open("/productPage", "_self");
-                    newWindow.document.write(response);
-                    newWindow.document.close();
-                    console.log(response);
-                },
-                error: function (error) {
-                    // 处理错误响应
-
-                    console.error(error);
-                }
-            });*/
-	}
+		location.href = `/productPage?productId=${productId}`
+		/*		$.ajax({
+						type: 'GET',
+						url: '/productPage',
+						contentType: 'application/json; charset=UTF-8',
+						data: productId,
+						success: function (response) {
+							// 处理成功的响应
+							var newWindow = window.open("/productPage", "_self");
+							newWindow.document.write(response);
+							newWindow.document.close();
+							console.log(response);
+						},
+						error: function (error) {
+							// 处理错误响应
 		
+							console.error(error);
+						}
+					});*/
+	}
+
 	)
-	
+
 }
 
 

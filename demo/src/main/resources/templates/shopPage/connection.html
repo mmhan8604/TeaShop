@@ -12,7 +12,7 @@
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<script src="/frontstage/_js/popper.min.js"></script>
-	<script src="/frontstage/main.js"></script>
+	<script src="/frontstage/js/main.js"></script>
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
@@ -24,59 +24,58 @@
 
 	<!--nav導覽列頭----------------------------------------------------------------------------------------------------------------------------------------- -->
 	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
-			<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
-				<!-- Logo、官網名，連結首頁 -->
-				<a href="shopindex" class="navbar-brand ms-3 py-0">
-					<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
-				</a>
+		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
+			<!-- Logo、官網名，連結首頁 -->
+			<a href="shopindex" class="navbar-brand ms-3 py-0">
+				<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
+			</a>
 
-				<!-- 響應式的導航欄 -->
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<!-- 響應式的導航欄 -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-				<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
-				<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
-					<div class="navbar-nav mx-auto text-center  ">
-						<a class="nav-link" href="shopindex">Home</a>
-						<a class="nav-link" href="aboutUs">About</a>
-						<a class="nav-link" href="shoppingPage">Shopping</a>
-						<a class="nav-link" href="contactUs">Connection</a>
-					</div>
-					<!-- 登入Login、購物車按鈕icon -->
+			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
+			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
+				<div class="navbar-nav mx-auto text-center  ">
+					<a class="nav-link" href="shopindex">Home</a>
+					<a class="nav-link" href="aboutUs">About</a>
+					<a class="nav-link" href="shoppingPage">Shopping</a>
+					<a class="nav-link" href="contactUs">Connection</a>
+				</div>
+				<!-- 登入Login、購物車按鈕icon -->
 
 
-					<div class="dropdown me-1 row">
-						<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false" style="color: #ffffff;">
-							<img src="/DingCha_v7_0109/icon/white/member.png" class="me-2" style="height: 30px;" alt="">
-							Login
-						</button>
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu">
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-									href="/frontstage/member01.html"><img src="/frontstage/icon/white/login.png " alt=""
-										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
-									href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">登出</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">訂單</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">設定</a></li>
-						</ul>
+				<div class="dropdown me-1 row">
+					<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false" style="color: #ffffff;">
+						<img src="/frontstage/icon/white/member.png" class="me-2" style="height: 30px;" alt="">
+						Login
+					</button>
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu">
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
+								href="/frontstage/member01.html"><img src="/frontstage/icon/white/login.png " alt=""
+									class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
+								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">登出</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
+								href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">訂單</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+								href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">設定</a></li>
+					</ul>
 
-						<button class="btn my-2 my-sm-0 col navCarticon" type="button">
-							<a href="/shoppingCart"><img src="/frontstage/icon/white/cart.png"
-									style="width:30px; height: 30px;" alt="購物車"></a>
-						</button>
-					</div>
+					<button class="btn my-2 my-sm-0 col navCarticon" type="button">
+						<a href="/shoppingCart"><img src="/frontstage/icon/white/cart.png"
+								style="width:30px; height: 30px;" alt="購物車"></a>
+					</button>
 				</div>
 			</div>
-		</nav>
+		</div>
+	</nav>
 	<!--nav導覽列尾---------------------------------------------------------------------------------------------------------------------------------------------->
 
 	<!-- 主要畫面 --> <!--修改左右margin-->
@@ -88,22 +87,22 @@
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="name" class="form-control" placeholder="姓名">
+					<input type="text" class="form-control" placeholder="姓名">
 				</div>
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="phone" class="form-control" placeholder="手機號碼">
+					<input type="text" class="form-control" placeholder="手機號碼">
 				</div>
 
 				<div class="col-md-6">
 					<label for="inputEmail" class="form-label">　　</label>
-					<input type="email" class="form-control" placeholder="電子郵件">
+					<input type="text" class="form-control" placeholder="電子郵件">
 				</div>
 
 				<div class="col-md-6">
 					<label for="input" class="form-label">　　</label>
-					<input type="purpose" class="form-control" placeholder="聯絡主旨">
+					<input type="text" class="form-control" placeholder="聯絡主旨">
 				</div>
 
 				<div class="col-12 ">
@@ -112,13 +111,43 @@
 				</div>
 
 				<div class="col-12 ms-auto">
-					<a href="" type="submit" class="btn mb-3">送出</a>
+					<!-- ***新增按鈕顏色 -->
+					<button type="button" class="btn mb-3 send-out-btn"
+						style="background-color: #829465; color:white;">送出</button>
+				</div>
+
+				<!-- ***新增彈出視窗 -->
+				<div class="modal fade" id="contactUsSendOut" tabindex="-1" aria-labelledby="successContactUs"
+					aria-hidden="true">
+					<div class="modal-dialog" style="display: flex;justify-content: center;">
+						<div class="modal-content w-75">
+							<div class="modal-header">
+								<h5 class="modal-title" id="successContactUs">感謝您的寶貴意見，小幫手將盡快回覆您的詢問。</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確定</button>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</form>
-
 		</div>
-
 	</div>
+
+	<script>
+		$(document).ready(function () {
+			// 綁定點擊事件到按鈕上
+			$('.send-out-btn').click(function () {
+				// 使用 jQuery 顯示模態窗口
+				$('#contactUsSendOut').modal('show');
+			});
+		});
+	</script>
+
 </body>
 
 <!--footer-->

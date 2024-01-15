@@ -16,7 +16,7 @@
 	<script src="./_js/bootstrap.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
-	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
+	<!-- <link rel="shortcut icon" href="./code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
 	<!--======================================================================================================================= -->
 </head>
 
@@ -37,8 +37,8 @@
 			</button>
 
 			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
-			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
-				<div class="navbar-nav mx-auto text-center  ">
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav mx-auto text-center  " >
 					<a class="nav-link" href="">Home</a>
 					<a class="nav-link" href="about01.html">About</a>
 					<a class="nav-link" href="shopping01.html">Shopping</a>
@@ -50,26 +50,18 @@
 				<div class="dropdown me-1 row">
 					<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
 						aria-expanded="false" style="color: #ffffff;">
-						<img src="../icon/white/member.png" class="me-2" style="height: 30px;" alt="">
+						<img src="./icon/white/member.png" class="me-2" style="height: 30px;" alt="">
 						Login
 					</button>
-					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu">
-						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-								href="./member01.html"><img src="./icon/white/login.png " alt="" class="me-2 mb-1"
-									style="height: 20px;width: auto;">登入</a></li>
-						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
-								href="#"><img src="./icon/white/leave.png " alt="" class="me-2 mb-1"
-									style="height: 20px;width: auto;">登出</a></li>
-						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-								href="#"><img src="./icon/white/order.png " alt="" class="me-2 mb-1"
-									style="height: 20px;width: auto;">訂單</a></li>
-						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								href="#"><img src="./icon/white/set.png " alt="" class="me-2 mb-1"
-									style="height: 20px;width: auto;">設定</a></li>
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" >
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button" href="#"><img src="./icon/white/login.png " alt="" class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button" href="#"><img src="./icon/white/leave.png " alt="" class="me-2 mb-1" style="height: 20px;width: auto;">登出</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button" href="./member01.html"><img src="./icon/white/order.png " alt="" class="me-2 mb-1" style="height: 20px;width: auto;">訂單</a></li>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button" href="#"><img src="./icon/white/set.png " alt="" class="me-2 mb-1" style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
 					<button class="btn my-2 my-sm-0 col navCarticon" type="button">
-						<a href="./cart01.html"><img src="../icon/white/cart.png" style="width:30px; height: 30px;"
+						<a href="./cart01.html"><img src="./icon/white/cart.png" style="width:30px; height: 30px;"
 								alt="購物車"></a>
 					</button>
 				</div>
@@ -173,8 +165,8 @@
 						<ul id="shopping-cart-actions" class="flex-container">
 
 							<li class="checkout-btn">
-								<input type="submit" name="delete" id="cancel" class="btn" value="取消" />
-								<a href="./cart05.html" type="submit" class="btn">確定</a>
+								<input type="submit" name="delete"  class="clear01 btn me-3 text-center" value="取消" />
+								<a href="./cart05.html" type="submit" class="btn text-center cartCheckout py-1">確定</a>
 							</li>
 
 						</ul>
@@ -194,7 +186,7 @@
 <footer class="text-center py-2 sticky-top" style="background-color: #95A58E;">
 	<div class="container">
 
-		<img src="../logo/white/logo_01.png" alt="版權商標" class="footer-icon-img">
+		<img src="./logo/white/logo_01.png" alt="版權商標" class="footer-icon-img">
 
 		<p class="mb-0">版權所有 &copy; 頂茶TopTea.</p>
 	</div>

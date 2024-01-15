@@ -83,4 +83,10 @@ public class Viewcontroller {
 		return "/shopPage/product";		//商品頁	
 	}
 	
+	@GetMapping("/orderPayment")
+	public String orderPayment() {
+		return "/shopPage/cart03.html";		//購物車		
+	}
+	
+	
 }

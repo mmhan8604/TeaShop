@@ -34,32 +34,25 @@ h1 {
 
 /*-----product-top css-------*/
 
-#clear01 {
+input.clear01 {
 	display: inline-block;
-	background: #95A58E;
-	color: #fff;
-	font: 1em 'PT Serif', serif;
-	padding: 0.3em 1em;
-	text-align: center;
+	background: #f3bbcd;
+	color: #c21d1d;
 	border: none;
-	margin-right: 1em;
+	padding: 4px 12px;
 }
 
-#clear02 {
-	display: inline-block;
-	background: #95A58E;
-	color: #fff;
-	font: 1em 'PT Serif', serif;
-	padding: 0.3em 1em;
-	text-align: center;
-	border: none;
-	margin-right: 1em;
+.cartCheckout{
+	background: #95A58E !important;
+	color: #fff !important;
+	
+	border: none !important;
 }
 
-a.btn {
+.add-to-cart {
 	display: inline-block;
-	background: #95A58E;
-	color: #fff;
+	background: #95A58E !important;
+	color: #fff !important;
 	font: 1em 'PT Serif', serif;
 	padding: 0.3em 1em;
 	text-align: center;
@@ -249,17 +242,6 @@ input.inputCart03 {
 
 .payment {
 	margin-bottom: 15px;
-}
-
-#cancel {
-	display: inline-block;
-	background: #f3bbcd;
-	color: #c21d1d;
-	font: 1em 'PT Serif', serif;
-	padding: 0.3em 1em;
-	text-align: center;
-	border: none;
-	margin-right: 1em;
 }
 
 span.spanCart03 {
