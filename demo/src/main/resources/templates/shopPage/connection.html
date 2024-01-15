@@ -128,7 +128,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確定</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="returnPage()">確定</button>
 							</div>
 
 						</div>
@@ -174,7 +174,11 @@
             	});
 				
 			});
+			
 		});
+		function returnPage(){
+				window.location.href="/shopindex"
+			}
 	</script>
 
 </body>
