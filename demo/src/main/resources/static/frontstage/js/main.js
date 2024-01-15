@@ -104,7 +104,7 @@ $(document).ready(function () {
             }, 0);
 
             // 創建總計行
-            var totalRow = $('<div class="row cart-box rounded"></div>');
+            var totalRow = $('<div class="row cart-box rounded total-price"></div>');
             // 添加五個空白列
             for (var i = 0; i < 5; i++) {
                 totalRow.append($('<div class="col-2"></div>'));
@@ -119,7 +119,7 @@ $(document).ready(function () {
             // 購物車為空時顯示空購物車訊息
             var emptyCartHtml = `
                 <div class="cart-body text-center rounded">
-                    <img src="../icon/grey/cart.png" alt="空購物車icon" class="product-cart">
+                    <img src="/frontstage/icon/grey/cart.png" alt="空購物車icon" class="product-cart">
                     <p class="mb-0" style="height: 8em; font-size: 1.5rem;">空購物車</p>
                 </div>`;
             $('.cart-body').html(emptyCartHtml);
@@ -145,11 +145,18 @@ $(document).ready(function () {
         var totalSum = newCart.reduce(function (sum, item) {
         return sum + (item.price * item.quantity);
         }, 0);
-         $('.total-price').text(totalSum); // 假設您有一個顯示總計的元素
+         $('.total-price').empty(); // 假設您有一個顯示總計的元素
+         for (var i = 0; i < 5; i++) {
+                $('.total-price').append($('<div class="col-2"></div>'));
+            }
+            // 添加包含總計價格的列
+           $('.total-price').append($('<div class="col-2"></div>').text(totalSum));
+
+         // 假設您有一個顯示總計的元素
         
         // 如果購物車為空，跳轉到空購物車頁面
         if (newCart.length === 0) {
-            window.location.href = 'cart01.html';
+            window.location.href = '/shoppingCart';
         }
     });
 
@@ -162,7 +169,10 @@ $(document).ready(function () {
 
 });
 
-
+function clearLocalStorage(){
+	localStorage.clear();
+	 location.reload();
+}
 	
 // $(document).ready(function () {
 //     // 刪除按鈕的事件處理器

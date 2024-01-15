@@ -34,12 +34,13 @@ h1 {
 
 /*-----product-top css-------*/
 
-input.clear01 {
+a.clear01 {
 	display: inline-block;
 	background: #f3bbcd;
 	color: #c21d1d;
 	border: none;
 	padding: 4px 12px;
+	margin-right: 10px;
 }
 
 .cartCheckout{

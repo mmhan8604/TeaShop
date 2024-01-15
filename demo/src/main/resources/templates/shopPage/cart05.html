@@ -12,7 +12,8 @@
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<script src="/frontstage/_js/popper.min.js"></script>
-	<script src="/frontstage/js/main.js"></script> 
+	<script src="/frontstage/js/orderMethod.js"></script> 
+	<script src="/frontstage/js/sendOrder.js"></script> 
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
@@ -166,16 +167,16 @@
 					<div class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">付款方式：</div>
 
 					<div class=" col-md-4  d-flex align-items-center">
-						<span class="form-control spanCart03">
-							Paypal
+						<span id="payment" class="form-control spanCart03">
+							
 						</span>
 					</div>
 
-					<div class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">運送方式：</div>
+					<div  class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">運送方式：</div>
 
 					<div class=" col-md-4  d-flex align-items-center">
-						<span class="form-control spanCart03">
-							賣家宅配
+						<span id="shipMethod" class="form-control spanCart03">
+							
 						</span>
 					</div>
 
@@ -187,28 +188,28 @@
 
 					<div class=" col-md-2 my-2  d-flex align-items-center ms-auto shoppingMethodbody01">訂購姓名：
 					</div>
-					<div class=" col-md-4 my-2 "><span class="form-control spanCart03">Brad_chao</div>
+					<div class=" col-md-4 my-2 "><span id="orderName" class="form-control spanCart03">Brad_chao</div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">電子郵件：
 					</div>
-					<div class=" col-md-4 my-2 "><span class="form-control spanCart03">Brad@gmail.com</div>
+					<div class=" col-md-4 my-2 "><span id="orderEmail" class="form-control spanCart03">Brad@gmail.com</div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">手機號碼：
 					</div>
-					<div class=" col-md-4 my-2 "><span class="form-control spanCart03">0912-345678</div>
+					<div class=" col-md-4 my-2 "><span id="orderPhone" class="form-control spanCart03">0912-345678</div>
 
 					<div class=" col-md-6 "></div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">收件地址：
 					</div>
-					<div class=" col-md-10 my-2 "><span class="form-control spanCart03">台中市南屯區公益路二段51號18樓</div>
+					<div class=" col-md-10 my-2 "><span id="orderAddress" class="form-control spanCart03">台中市南屯區公益路二段51號18樓</div>
 
 				</div>
 
 				<!-- 右下方清除結帳按鈕 -->
 				<ul id="shopping-cart-actions" class="flex-container">
 					<li class="checkout-btn">
-						<a href="" class="btn text-center cartCheckout py-1">結帳</a>
+						<p class="btn text-center cartCheckout py-1" onclick="sendOrder()">結帳</p>
 					</li>
 				</ul>
 

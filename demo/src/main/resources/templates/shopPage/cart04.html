@@ -12,7 +12,7 @@
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<script src="/frontstage/_js/popper.min.js"></script>
-	<!--<script src="/frontstage/js/main.js"></script> -->
+	<script src="/frontstage/js/memberinfo.js"></script> 
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
@@ -99,26 +99,26 @@
 
 
 								<div class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">
-									訂購姓名：
+									會員姓名：
 								</div>
-								<div class=" col-md-4 my-2 "><input class="form-control oints inputCart03"
-										placeholder="請填訂購人姓名(必填)"></div>
+								<div class=" col-md-4 my-2 "><input id="memberName" class="form-control oints inputCart03"
+										placeholder="請填訂購人姓名(必填) "disabled></div>
 
 								<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">電子郵件：
 								</div>
-								<div class=" col-md-4 my-2 "><input class="form-control oints inputCart03 "
-										placeholder="請填訂購人電子郵件(必填)"></div>
+								<div class=" col-md-4 my-2 "><input id="memberEmail" class="form-control oints inputCart03 "
+										placeholder="請填訂購人電子郵件(必填) "disabled></div>
 
 								<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">手機號碼：
 								</div>
-								<div class=" col-md-4 my-2 "><input class="form-control oints inputCart03"
-										placeholder="請填訂購人手機號碼(必填)"></div>
+								<div class=" col-md-4 my-2 "><input id="memberPhone" class="form-control oints inputCart03"
+										placeholder="請填訂購人手機號碼(必填) "disabled></div>
 								<div class=" col-md-6 "></div>
 
-								<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">訂購地址：
+								<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">會員地址：
 								</div>
-								<div class=" col-md-10 my-2 "><input class="form-control oints inputCart03"
-										placeholder="請填訂購人地址(必填)"></div>
+								<div class=" col-md-10 my-2 "><input id="memberAddress" class="form-control oints inputCart03"
+										placeholder="請填訂購人地址(必填)" disabled></div>
 
 
 							</div>
@@ -189,18 +189,7 @@
 	</div>
 
 	<script>
-		
-		function saveinfo(){
-			var orderName = $('#orderName').val();
-			var orderEmail = $('#orderEmail').val();
-			var orderPhone = $('#orderPhone').val();
-			var orderAddress = $('#orderAddress').val();
-		
-			console.log($('#orderName').val())
-			var data = {orderName:orderName, orderEmail: orderEmail, orderPhone: orderPhone, orderAddress: orderAddress };
-			localStorage.setItem('orderinfo', JSON.stringify(data));
-
-		}
+	
 	</script>
 </body>
 

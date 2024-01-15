@@ -85,7 +85,7 @@
 		<div id="content" class="mx-4 w-100 ">
 
 			<h1 class="h1exceptMember" >購物車</h1>
-			<form id="shopping-cart" action="cart.html" method="post">
+			<form id="shopping-cart">
 				<div class="shopping-cart text-center">
 
 					<div class="row cart-head text-center rounded">
@@ -106,7 +106,8 @@
 
 				<ul id="shopping-cart-actions" class="flex-container">
 					<li class="checkout-btn">
-						<input type="submit" name="delete"  class="clear01 btn me-3 text-center " value="清除" />
+						<a class="clear01 btn text-center py-1" onclick="clearLocalStorage()">清除</a>
+						
 						<a href="/orderPayment" class="btn text-center cartCheckout py-1">結帳</a>
 					</li>
 				</ul>
