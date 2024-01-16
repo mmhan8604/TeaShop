@@ -17,7 +17,7 @@ public class signUpServiceImpl implements signUpService{
 	@Autowired
 	signUpDao dao;
 	
-	HashMap<String,String > sData;
+	HashMap<String,String> sData;
 
 	@Override
 	public void setsData(HashMap<String, String> sData) {
@@ -31,7 +31,7 @@ public class signUpServiceImpl implements signUpService{
 			
 			String beBrc=BCrypt.hashpw(sData.get("password"), BCrypt.gensalt());
 			
-			int a= dao.create( beBrc, sData.get("name"), sData.get("phone"), sData.get("email"), beBrc);
+			int a= dao.create( sData.get("shopName"),beBrc, sData.get("name"), sData.get("phone"), sData.get("email") );
 			if (a>0) {
 					return 0;
 				}else {
@@ -42,9 +42,9 @@ public class signUpServiceImpl implements signUpService{
 			return 1;
 		}
 	}
-	//棄用
-	public boolean check() {
-		if(dao.findByEmail(sData.get("account")).isEmpty()) {
+	
+	private boolean check() {
+		if(dao.findByEmail(sData.get("email")).isEmpty()) {
 			return true;
 		} else {
 			return false;

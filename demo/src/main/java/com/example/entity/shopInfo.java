@@ -36,7 +36,13 @@ public class shopInfo {
 	
 	private String bankAccount;
 	
-	private String ShopLogoUrl;
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String shopLogoUrl;
+	
+	private String shopCoverURL;
+	
+	private String shopIntro;
+	
 	
 	
 
@@ -143,13 +149,13 @@ public class shopInfo {
 
 
 	public String getShopLogoUrl() {
-		return ShopLogoUrl;
+		return shopLogoUrl;
 	}
 
 
 
 	public void setShopLogoUrl(String shopLogoUrl) {
-		ShopLogoUrl = shopLogoUrl;
+		this.shopLogoUrl = shopLogoUrl;
 	}
 
 
@@ -162,6 +168,30 @@ public class shopInfo {
 
 	public void setFrontStage(byte[] frontStage) {
 		this.frontStage = frontStage;
+	}
+
+
+
+	public String getShopCoverURL() {
+		return shopCoverURL;
+	}
+
+
+
+	public void setShopCoverURL(String shopCoverURL) {
+		this.shopCoverURL = shopCoverURL;
+	}
+
+
+
+	public String getShopIntro() {
+		return shopIntro;
+	}
+
+
+
+	public void setShopIntro(String shopIntro) {
+		this.shopIntro = shopIntro;
 	}
 	
 	

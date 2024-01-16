@@ -15,7 +15,7 @@ public class backstageLogin {
 	
 	@GetMapping("/signup")
 	public String signup(Model model) {
-		return"";
+		return"backstage/mainRegist";
 	}
 
 }
