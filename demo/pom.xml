@@ -91,11 +91,15 @@
 			<version>3.2.1</version>
 		</dependency>
 
-		<dependency>			<!-- mail -->			
+		<dependency>			<!-- mail -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+		<dependency>			<!-- spring security-->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 	</dependencies>
 
