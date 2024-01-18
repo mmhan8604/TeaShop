@@ -76,7 +76,7 @@
 
       <!-- 灰色區塊內容 -->
       <div id="formSpace" class=" mx-5 rounded" style="margin-left:30px ;margin-right: 30px;">
-        <form class="" style="height: 780px; width: 1200px; margin-left: 35px ;margin-right: 35px; margin-top: 30px;">
+        <form class="" style="height: 1300px; width: 1200px; margin-left: 35px ;margin-right: 35px; margin-top: 30px;">
           <!-- 灰色區塊內容-1商店資訊 -->
           <div style="width: 100%; ">
             <div class="container fw-bold" style="color: aliceblue; margin-left: 0; min-width: 1200px;">
@@ -100,8 +100,8 @@
                 </span>
 
                 <span style="margin-right: 56px;">
-                  <label for="emailInput" style="font-size: 24px;  color: #565656; font-weight: bold;">電子郵件：</label>
-                  <input id="emailInput" class="form-control form-control-sm  bg-light"
+                  <label for="nameInput" style="font-size: 24px;  color: #565656; font-weight: bold;">負責人　：</label>
+                  <input id="nameInput" class="form-control form-control-sm  bg-light"
                     style="width:  400px; display: inline;" type="text">
                 </span>
               </div>
@@ -140,7 +140,9 @@
 
                 <div class="ms-3">
                   <p style="font-size: 20px; margin-bottom: 0px; color: #686868;">預覽圖</p>
-                  <div class="border" style="height: 97px; width: 200px; display: inline-block;"></div>
+                  <div class="border" style="height: 97px; width: 200px; display: inline-block;">
+                    <img id="logoPreview" style= "max-height: 100%;max-width: 100%; object-fit: contain;" src="" alt="">
+                  </div>
                 </div>
 
                 <div class="ms-3" style="display: inline-block; height:91px ;">
@@ -166,7 +168,179 @@
 
           </div>
 
+          <!-- 灰色區塊內容-2商店服務 -->
+          <div style="width: 100%; margin-top: 30px; display: none;">
+            <div class="container fw-bold" style="color: aliceblue; margin-left: 0; min-width: 1200px;">
+              <div class="row bg-secondary rounded">
+                <div class="bg-dark rounded" style="text-align: center;max-width: 4%; margin-bottom: 0;font-size: 24px">
+                  2
+                </div>
+                <div class="col" style="margin-left: 15px; font-size: 24px">
+                  商店服務
+                </div>
+              </div>
+            </div>
 
+            <div class="shopSetSpace "
+              style="height: 400px; padding-top:20px; padding-left: 56px; padding-right: 56px;">
+
+              <p style="font-size: 24px; font-weight: bold; color: #565656;">商店營業時間：</p>
+
+              <div>
+                <div class="openTimeSelect">
+                  <div style="margin-top: 0;">
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="monOpen">星期一</label><input id="monOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="monOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="monClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div style="margin-left: 20px;">
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="tueOpen">星期二</label><input id="tueOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded  " style="width: 410px;">
+
+                      <input id="tueOpT" class="form-control "
+                        style="display: inline-block;margin-left: 30px;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="tueClT" class="form-control "
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="wenOpen">星期三</label><input id="wenOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="wenOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="wenClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div style="margin-left: 20px;">
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="thrOpen">星期四</label><input id="thrOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="thrOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="thrClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="friOpen">星期五</label><input id="friOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="friOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="friClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div style="margin-left: 20px;">
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="satOpen">星期六</label><input id="satOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="satOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="satClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="rounded"><label class="form-check-label mx-2 align-baseline"
+                        style="font-size: 20px;  line-height:50px" for="sunOpen">星期日</label><input id="sunOpen"
+                        class="form-check-input align-baseline ms-2" type="checkbox"></div>
+                    <div class="ms-2 rounded " style="width: 410px;">
+
+                      <input id="sunOpT" class="form-control "
+                        style="display: inline-block; margin-left: 30px; margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                      <p class="ms-3" style="width: 25px; display: inline-block; font-size: 20px;">-</p>
+
+
+                      <input id="sunClT" class="form-control"
+                        style="display: inline-block;  margin-top: 5px;margin-bottom: 5px; height: 40px;  background-color:#AEAEAE; width: 150px;"
+                        type="time">
+
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div>
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
 
           <!-- 灰色區塊內容-3商店介紹 -->
           <div style="width: 100%; margin-top: 30px;">
@@ -212,6 +386,7 @@
                     <p style="font-size: 16px; color: #606060; margin-bottom: 0px;">預覽圖</p>
                     <div
                       style="height: 84px; width: 190px;border-style: solid ; border-width: 1px; border-color: #ABABAB;">
+                      <img style= "max-height: 100%;max-width: 100%; object-fit: contain;" id="coverPreview" src="" alt="">
                     </div>
                   </div>
                 </div>
@@ -249,6 +424,8 @@
 
     </div>
   </div>
+
+  
 </body>
 
 </html>
