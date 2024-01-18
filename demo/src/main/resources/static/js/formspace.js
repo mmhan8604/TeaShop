@@ -3,6 +3,8 @@
         // 統一處理點擊事件
         $("li a")
         .click(function () {
+		  
+		  
           var buttonId = this.id;
           console.log(buttonId);
           var filename = "/html/" + buttonId + ".html #formSpace>*";
@@ -15,6 +17,7 @@
             else if(buttonId == "activityInfo"){ActivityInfo();}
             else if(buttonId == "memberInfo"){MemberInfo();}
             else if(buttonId == "orderInfo"){queryAllOrderInfo(0);}
+            else if(buttonId == "shopInfo"){shopInfoEvent();}
             ActionSetting();
           });
         });

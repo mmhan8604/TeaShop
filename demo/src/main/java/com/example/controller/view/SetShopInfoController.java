@@ -2,6 +2,7 @@ package com.example.controller.view;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +21,13 @@ public class SetShopInfoController {
 	
 	@PostMapping("/setShopInfo")
 	public String set(HttpServletRequest request, @RequestBody shopInfo data) {
-		System.out.println(data.getLogo());
+		
 		
 		HttpSession session=request.getSession();
 //		data.setEmail((String) session.getAttribute("email"));
 		data.setEmail("a@mail.com");
 		ssis.setSi(data);
+		
 		int state= ssis.updateInfo();
 		
 		if(state==0) {
@@ -37,5 +39,7 @@ public class SetShopInfoController {
 		}
 		
 	}
+	
+	
 
 }

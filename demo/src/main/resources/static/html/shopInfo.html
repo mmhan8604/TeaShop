@@ -100,8 +100,8 @@
                 </span>
 
                 <span style="margin-right: 56px;">
-                  <label for="emailInput" style="font-size: 24px;  color: #565656; font-weight: bold;">電子郵件：</label>
-                  <input id="emailInput" class="form-control form-control-sm  bg-light"
+                  <label for="nameInput" style="font-size: 24px;  color: #565656; font-weight: bold;">負責人　：</label>
+                  <input id="nameInput" class="form-control form-control-sm  bg-light"
                     style="width:  400px; display: inline;" type="text">
                 </span>
               </div>
@@ -140,7 +140,9 @@
 
                 <div class="ms-3">
                   <p style="font-size: 20px; margin-bottom: 0px; color: #686868;">預覽圖</p>
-                  <div class="border" style="height: 97px; width: 200px; display: inline-block;"></div>
+                  <div class="border" style="height: 97px; width: 200px; display: inline-block;">
+                    <img id="logoPreview" style= "max-height: 100%;max-width: 100%; object-fit: contain;" src="" alt="">
+                  </div>
                 </div>
 
                 <div class="ms-3" style="display: inline-block; height:91px ;">
@@ -167,7 +169,7 @@
           </div>
 
           <!-- 灰色區塊內容-2商店服務 -->
-          <div style="width: 100%; margin-top: 30px;">
+          <div style="width: 100%; margin-top: 30px; display: none;">
             <div class="container fw-bold" style="color: aliceblue; margin-left: 0; min-width: 1200px;">
               <div class="row bg-secondary rounded">
                 <div class="bg-dark rounded" style="text-align: center;max-width: 4%; margin-bottom: 0;font-size: 24px">
@@ -345,7 +347,7 @@
             <div class="container fw-bold" style="color: aliceblue; margin-left: 0; min-width: 1200px;">
               <div class="row bg-secondary rounded">
                 <div class="bg-dark rounded" style="text-align: center;max-width: 4%; margin-bottom: 0;font-size: 24px">
-                  3
+                  2
                 </div>
                 <div class="col" style="margin-left: 15px; font-size: 24px">
                   商店介紹
@@ -384,6 +386,7 @@
                     <p style="font-size: 16px; color: #606060; margin-bottom: 0px;">預覽圖</p>
                     <div
                       style="height: 84px; width: 190px;border-style: solid ; border-width: 1px; border-color: #ABABAB;">
+                      <img style= "max-height: 100%;max-width: 100%; object-fit: contain;" id="coverPreview" src="" alt="">
                     </div>
                   </div>
                 </div>
@@ -421,6 +424,8 @@
 
     </div>
   </div>
+
+  
 </body>
 
 </html>

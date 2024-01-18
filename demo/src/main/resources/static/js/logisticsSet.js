@@ -1,4 +1,66 @@
 let whichTd;
+
+      async function getLogisticsData(){
+        try {
+          let res= await $.ajax({
+            type:"GET",
+            url:"/logisticsSet/Table",
+            
+          })
+
+          let data=JSON.parse(res);
+          
+          // let data={
+          //   "isp_cod":"60",
+          //   "isp_ref":"120",
+          //   "del_cod":"",
+          //   "del_ref":"150"
+
+          // }
+
+          if((data.del_cod||data.del_ref)!=""){
+            let delData=[1];
+            if(data.del_cod===""){
+              delData[1]=""
+            }else{
+              delData[1]=parseInt(data.del_cod)
+            }
+
+            if(data.del_ref===""){
+              delData[2]=""
+            }else{
+              delData[2]=parseInt(data.del_ref)
+            }
+
+            writeTable(delData)
+          }
+
+          if((data.isp_cod||data.isp_ref)!=""){
+            let ispData=[2];
+            if(data.isp_cod===""){
+              ispData[1]=""
+            }else{
+              ispData[1]=parseInt(data.isp_cod)
+            }
+
+            if(data.isp_ref===""){
+              ispData[2]=""
+            }else{
+              ispData[2]=parseInt(data.isp_ref)
+            }
+            console.log(ispData)
+            writeTable(ispData);
+
+          }
+
+          
+
+
+
+        } catch (error) {
+          
+        }
+      }
       
       function selected(){
         if (document.getElementById("logisticsPlatform").value!=0){
@@ -17,24 +79,35 @@ let whichTd;
       }
 
       function writeTable(data){
-
+        //data=[平台,貨到價格,冷藏價格]
         
         
         let count= $("#beWrite tr").length
+        
         let a=data[0]==1?"賣家宅配":"超商店到店"
         let tr=
         `<tr id="tr_${count+1}"><th scope="row">${count+1}</th><td>${a}</td><td>一般宅配</td><td>${data[1]}元</td><td><button  onclick="set(${count+1})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+1})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
         let tr_f=
-        `<tr id="tr_${count+2}"><th scope="row">${count+2}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
+        `<tr id="tr_${count+1}"><th scope="row">${count+1}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
 
         if (data[2]==""){
           document.getElementById("beWrite").innerHTML=(
           document.getElementById("beWrite").innerHTML+tr
         )
-        }else{
+        }else if(data[1]==""){
+          
+          document.getElementById("beWrite").innerHTML=(
+            document.getElementById("beWrite").innerHTML+tr_f
+          )
+        }
+        else{
           document.getElementById("beWrite").innerHTML=(
           document.getElementById("beWrite").innerHTML+tr
           )
+          count=count+2;
+          tr_f=
+          `<tr id="tr_${count}"><th scope="row">${count}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
+
           
           document.getElementById("beWrite").innerHTML=(
           document.getElementById("beWrite").innerHTML+tr_f
@@ -44,6 +117,7 @@ let whichTd;
       }
 
       function add(){
+        //data=[平台,貨到價格,冷藏價格]
         let data=[]
         if (document.getElementById("logisticsPlatform").value==0){
           
@@ -88,8 +162,8 @@ let whichTd;
         document.getElementById("logisticsReset").style.display="inline-block"
         
         
-        a= document.getElementById(`tr_${info}`)
-        td= a.getElementsByTagName("td")
+        let a= document.getElementById(`tr_${info}`)
+        let td= a.getElementsByTagName("td")
         // console.log(td[0].innerHTML)
         if(td[0].innerHTML=="賣家宅配"){
           document.getElementById("logisticsPlatformReset").value=1
@@ -146,6 +220,8 @@ let whichTd;
       function deleteTD(info){
         //info==第幾個tr
         console.log(info);
-       let a= document.getElementById(`tr_${info}`);
-       a.remove();
+       let tr= document.getElementById(`tr_${info}`);
+       tr.remove();
       }
+
+      getLogisticsData()

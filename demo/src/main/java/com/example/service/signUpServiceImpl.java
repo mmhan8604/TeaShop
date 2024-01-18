@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+
 import org.springframework.stereotype.Component;
 
 import com.example.interf.signUpService;
 import com.example.repository.signUpDao;
 
-@Component
-@Primary
+
+
 public class signUpServiceImpl implements signUpService{
 	
 	@Autowired
@@ -31,13 +31,13 @@ public class signUpServiceImpl implements signUpService{
 			
 			String beBrc=BCrypt.hashpw(sData.get("password"), BCrypt.gensalt());
 			
-			int a= dao.create( sData.get("shopName"),beBrc, sData.get("name"), sData.get("phone"), sData.get("email") );
-			if (a>0) {
+			int changeCol= dao.create( sData.get("shopName"),beBrc, sData.get("name"), sData.get("phone"), sData.get("email") );
+			if (changeCol>0) {
 					return 0;
 				}else {
 					return 2;
 			}
-//			create(String account,String password,String name, String phone, String email )
+
 		}else {
 			return 1;
 		}

@@ -6,4 +6,6 @@ public interface SetShopInfoSerivice {
 	public void setSi(shopInfo si);
 	public int updateInfo();
 	
+	
+	
 }
