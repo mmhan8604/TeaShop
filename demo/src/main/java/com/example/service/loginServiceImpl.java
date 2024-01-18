@@ -1,14 +1,10 @@
 package com.example.service;
 
-
-
-
-
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+
 import org.springframework.stereotype.Component;
 
 
@@ -17,8 +13,7 @@ import com.example.interf.loginService;
 import com.example.repository.loginDao;
 
 
-@Component
-@Primary
+
 public class loginServiceImpl implements loginService{
 
 	@Autowired 
@@ -26,13 +21,6 @@ public class loginServiceImpl implements loginService{
 	
 	private String clientAccount;
 	private String clientPassword;
-	
-	public loginServiceImpl( ) {
-		
-	}
-	
-	
-	
 	
 
 

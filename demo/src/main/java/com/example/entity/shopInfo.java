@@ -36,9 +36,21 @@ public class shopInfo {
 	
 	private String bankAccount;
 	
-	private String ShopLogoUrl;
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String shopLogoUrl;
+	
+	private String shopCoverURL;
+	
+	private String shopIntro;
+	
+	private String isp_cod;
+	private String isp_refri;
+	private String deli_cod;
+	private String deli_refri;
 	
 	
+
+
 
 	@Column(columnDefinition = "BLOB")
 	@Lob
@@ -147,13 +159,13 @@ public class shopInfo {
 
 
 	public String getShopLogoUrl() {
-		return ShopLogoUrl;
+		return shopLogoUrl;
 	}
 
 
 
 	public void setShopLogoUrl(String shopLogoUrl) {
-		ShopLogoUrl = shopLogoUrl;
+		this.shopLogoUrl = shopLogoUrl;
 	}
 
 
@@ -167,7 +179,76 @@ public class shopInfo {
 	public void setFrontStage(byte[] frontStage) {
 		this.frontStage = frontStage;
 	}
+
+
+
+	public String getShopCoverURL() {
+		return shopCoverURL;
+	}
+
+
+
+	public void setShopCoverURL(String shopCoverURL) {
+		this.shopCoverURL = shopCoverURL;
+	}
+
+
+
+	public String getShopIntro() {
+		return shopIntro;
+	}
+
+
+
+	public void setShopIntro(String shopIntro) {
+		this.shopIntro = shopIntro;
+	}
 	
+	public String getIsp_cod() {
+		return isp_cod;
+	}
+
+
+
+	public void setIsp_cod(String isp_cod) {
+		this.isp_cod = isp_cod;
+	}
+
+
+
+	public String getIsp_refri() {
+		return isp_refri;
+	}
+
+
+
+	public void setIsp_refri(String isp_refri) {
+		this.isp_refri = isp_refri;
+	}
+
+
+
+	public String getDeli_cod() {
+		return deli_cod;
+	}
+
+
+
+	public void setDeli_cod(String deli_cod) {
+		this.deli_cod = deli_cod;
+	}
+
+
+
+	public String getDeli_refri() {
+		return deli_refri;
+	}
+
+
+
+	public void setDeli_refri(String deli_refri) {
+		this.deli_refri = deli_refri;
+	}
 	
 
 
