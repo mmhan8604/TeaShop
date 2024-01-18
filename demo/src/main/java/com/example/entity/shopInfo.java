@@ -46,6 +46,10 @@ public class shopInfo {
 
 
 
+	
+
+
+
 	public Integer getId() {
 		return id;
 	}
