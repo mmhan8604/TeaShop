@@ -88,14 +88,14 @@
 
           <div style="margin-left: 55px; margin-top: 20px; padding-bottom: 20px;">
             <div style="display: inline-block;">
-              <label style="font-size: 20px;">活動名稱 :</label>
-              <input style=" display: inline-block;width: 400px;" class="form-control form-control-sm bg-light"
+              <label  style="font-size: 20px;">活動名稱 :</label>
+              <input id="activityName" style=" display: inline-block;width: 400px;" class="form-control form-control-sm bg-light"
                 placeholder="請填寫活動名稱(必須)" />
             </div>
 
             <div style="padding-left: 80px; display: inline-block;">
               <label style="display: inline-block; font-size: 20px;">活動說明 :</label>
-              <input class="form-control form-control-sm bg-light" type="text"
+              <input id="activityDiscription" class="form-control form-control-sm bg-light" type="text"
                 style="display: inline-block;width:400px; margin-bottom: 20px;">
               </input><br />
             </div>
@@ -105,11 +105,11 @@
               <div style="margin-left: 45px; margin-bottom: 12px;">
                 <span style="font-size: 16px;">開始日期</span>
                 <span style="font-size: 16px;margin-left: 176px;">結束日期</span><br />
-                <input class="form-control form-control-sm bg-light" type="date"
+                <input id="activityStartDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; display: inline-block;" />
                 <span style="margin-left: 8px;">-</span>
 
-                <input class="form-control form-control-sm bg-light" type="date"
+                <input id="activityEndDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; margin-left: 8px; display: inline-block;" />
               </div>
             </div>
@@ -132,11 +132,11 @@
 
           <div style="margin-left: 56px;">
             <label style="margin-top: 20px; margin-bottom: 12px; font-size: 20px;">優惠主軸:</label><br />
-            <input class="form-check-input" type="radio" name="discount" style="font-size: 16px;" />免運活動
-            <input class="form-check-input" type="radio" name="discount" style="margin-left: 120px;"
+            <input class="form-check-input" type="radio" name="discount" style="font-size: 16px;" value="免運活動" />免運活動
+            <input class="form-check-input" type="radio" name="discount" style="margin-left: 120px;" value="商品折扣"
               style="font-size: 16px;" />商品折扣<br />
             <span style="font-size: 14px;display: inline-block;">滿</span> <input
-              class="form-control form-control-sm bg-light" type="text"
+              id="activityFreeShipping" class="form-control form-control-sm bg-light" type="text"
               style="display: inline-block; width: 120px;height: 36px; " />
             <span style="font-size: 14px;display: inline-block;">則免運費</span>
             <span style="font-size: 14px; display: inline-block; margin-left: 46px;">折扣</span><br>
