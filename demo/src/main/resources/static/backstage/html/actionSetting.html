@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,7 @@
             </li>           
           </ul>
 
-          <button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="./icon/update.png"
+          <button id="upload" class="btn btn-sm btn-secondary ms-auto" ><img src="./icon/update.png"
               style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
             <p id="upTxt">儲存資訊</p>
           </button>
@@ -89,13 +89,13 @@
           <div style="margin-left: 55px; margin-top: 20px; padding-bottom: 20px;">
             <div style="display: inline-block;">
               <label style="font-size: 20px;">活動名稱 :</label>
-              <input style=" display: inline-block;width: 400px;" class="form-control form-control-sm bg-light"
-                placeholder="請填寫活動名稱(必須)" />
+              <input id="activityName" style=" display: inline-block;width: 400px;" class="form-control form-control-sm bg-light"
+                placeholder="請填寫活動名稱(必須)"  />
             </div>
 
             <div style="padding-left: 80px; display: inline-block;">
               <label style="display: inline-block; font-size: 20px;">活動說明 :</label>
-              <input class="form-control form-control-sm bg-light" type="text"
+              <input id="activitydiscription" class="form-control form-control-sm bg-light" type="text"
                 style="display: inline-block;width:400px; margin-bottom: 20px;">
               </input><br />
             </div>
@@ -105,12 +105,13 @@
               <div style="margin-left: 45px; margin-bottom: 12px;">
                 <span style="font-size: 16px;">開始日期</span>
                 <span style="font-size: 16px;margin-left: 176px;">結束日期</span><br />
-                <input class="form-control form-control-sm bg-light" type="date"
+                <input id="activitystartDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; display: inline-block;" />
                 <span style="margin-left: 8px;">-</span>
 
-                <input class="form-control form-control-sm bg-light" type="date"
+                <input id="activityendDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; margin-left: 8px; display: inline-block;" />
+                 <button onclick="getActivity(2)">送出</button>
               </div>
             </div>
           </div>
@@ -136,7 +137,8 @@
             <input class="form-check-input" type="radio" name="discount" style="margin-left: 120px;"
               style="font-size: 16px;" />商品折扣<br />
             <span style="font-size: 14px;display: inline-block;">滿</span> <input
-              class="form-control form-control-sm bg-light" type="text"
+              
+              id="activityfreeShipping" class="form-control form-control-sm bg-light" type="text"
               style="display: inline-block; width: 120px;height: 36px; " />
             <span style="font-size: 14px;display: inline-block;">則免運費</span>
             <span style="font-size: 14px; display: inline-block; margin-left: 46px;">折扣</span><br>

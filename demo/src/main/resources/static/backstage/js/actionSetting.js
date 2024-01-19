@@ -1,4 +1,3 @@
-//活動設定->選擇折扣商品左右切換功能
 function ActionSetting(){
 $(document).ready(function () {
     $('#sourceTable').on('click', '.moveItem', function () {
@@ -24,3 +23,83 @@ $(document).ready(function () {
 
 });
 }
+
+function getActivity(id) {
+
+
+	fetch('/queryActivitys/' + id, {
+		method: "GET"
+	})
+		.then(response => response.json())
+		.then(data => {
+			
+			console.log('Data from server:', data);
+			document.getElementById('activityName').value= data.name;
+			document.getElementById('activitydiscription').value= data.discription;
+			document.getElementById('activitystartDate').value= data.startDate;
+			document.getElementById('activityendDate').value= data.endDate;
+			document.getElementById('activityfreeShipping').value= data.freeShipping;
+		})
+
+		.catch(error => {
+			console.error('Error adding activity:', error);
+		})
+
+
+}
+
+//儲存
+document.getElementById('upload').addEventListener('click', function() {
+	var activityName = document.getElementById('activityName').value;
+	var activityDiscription = document.getElementById('activityDiscription').value;
+	var activityStartDate = document.getElementById('activityStartDate').value;
+	var startDate = moment(activityStartDate).format('YYYY-MM-DD');
+	var activityEndDate = document.getElementById('activityEndDate').value;
+	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
+	var activityFreeShipping = document.getElementById('activityFreeShipping').value;
+
+	var radioButtons = document.getElementsByName('discount');
+	function getSelectedValue() {
+		for (var i = 0; i < radioButtons.length; i++) {
+			if (radioButtons[i].checked) {
+				return radioButtons[i].value;
+			}
+		}
+		// 如果沒有任何單選按鈕被選擇，返回空字符串或其他適當的默認值
+		return '';
+	}
+	var activityMethod = getSelectedValue();
+
+	var Activity = {
+		shopId: "shop01",
+		name: activityName,
+		discription: activityDiscription,
+		startDate: startDate,
+		endDate: endDate,
+		method: activityMethod,
+		freeShipping: activityFreeShipping
+
+	};
+
+	fetch('/updateActivity', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(Activity),
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`Network response was not ok: ${response.status}`);
+			}
+			return response.text();
+		})
+		.then(message => {
+			console.log(message);
+			
+		})
+		.catch(error => {
+			console.error('Error adding activity:', error);
+		})
+})
+
