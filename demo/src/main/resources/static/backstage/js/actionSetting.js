@@ -23,11 +23,22 @@ $(document).ready(function () {
 
 });
 }
+/*
+window.addEventListener('storage', function(event) {
+    if (event.key === 'id') {
+        storedId = event.newValue;
+    }
+});
 
-function getActivity(id) {
+*/
 
+function showActivity() {
+	var storedId = sessionStorage.getItem('id');
 
-	fetch('/queryActivitys/' + id, {
+	if (storedId) {
+            console.log('Stored Id:', storedId);
+            // 在这里执行你的操作，可以将 storedId 传递给其他函数或进行其他处理
+            fetch('/queryActivitys/' + storedId, {
 		method: "GET"
 	})
 		.then(response => response.json())
@@ -35,10 +46,10 @@ function getActivity(id) {
 			
 			console.log('Data from server:', data);
 			document.getElementById('activityName').value= data.name;
-			document.getElementById('activitydiscription').value= data.discription;
-			document.getElementById('activitystartDate').value= data.startDate;
-			document.getElementById('activityendDate').value= data.endDate;
-			document.getElementById('activityfreeShipping').value= data.freeShipping;
+			document.getElementById('activityDiscription').value= data.discription;
+			document.getElementById('activityStartDate').value= data.startDate;
+			document.getElementById('activityEndDate').value= data.endDate;
+			document.getElementById('activityFreeShipping').value= data.freeShipping;
 		})
 
 		.catch(error => {
@@ -46,10 +57,16 @@ function getActivity(id) {
 		})
 
 
+            
+        } else {
+            console.log('No data found in sessionStorage.');
+        }
+
+	
 }
 
 //儲存
-document.getElementById('upload').addEventListener('click', function() {
+function saveActivity() {
 	var activityName = document.getElementById('activityName').value;
 	var activityDiscription = document.getElementById('activityDiscription').value;
 	var activityStartDate = document.getElementById('activityStartDate').value;
@@ -69,9 +86,10 @@ document.getElementById('upload').addEventListener('click', function() {
 		return '';
 	}
 	var activityMethod = getSelectedValue();
-
+	var storedId = sessionStorage.getItem('id');
 	var Activity = {
 		shopId: "shop01",
+		id:storedId,
 		name: activityName,
 		discription: activityDiscription,
 		startDate: startDate,
@@ -101,5 +119,5 @@ document.getElementById('upload').addEventListener('click', function() {
 		.catch(error => {
 			console.error('Error adding activity:', error);
 		})
-})
+}
 

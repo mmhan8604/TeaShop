@@ -60,7 +60,7 @@ function ActivityInfoqueryAll(choosepage) {
             <td>${astartdate} ~ ${aenddate}</td>
             <td>${amethod}</td>
             <td>
-        		<a href="#" class="btn btn-light" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
+        		<a href="#"  class="btn btn-light" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
         		<a href="#" class="btn btn-light" onclick="deleteActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
       		</td>
 			</tr>
@@ -97,34 +97,19 @@ function deleteActivity(id) {
 				});
 		
     }
-/*  
+
 function getActivity(id) {
-
-
-	fetch('/queryActivitys/' + id, {
-		method: "GET"
-	})
-		.then(response => response.json())
-		.then(data => {
+			sessionStorage.setItem('id', id);
+			
 			var filename = '/backstage/html/actionSetting.html #formSpace'; 
         			$("#formSpace").load(filename, function(){
 						ActionSetting();
 					}); 
-			console.log('Data from server:', data);
-			document.getElementById('activityName').value= data.name;
-			document.getElementById('activitydiscription').value= data.discription;
-			document.getElementById('activitystartDate').value= data.startDate;
-			document.getElementById('activityendDate').value= data.endDate;
-			document.getElementById('activityfreeShipping').value= data.freeShipping;
-		})
-
-		.catch(error => {
-			console.error('Error adding activity:', error);
-		})
-
+			var retrievedValue = sessionStorage.getItem('id');
+			console.log(retrievedValue); 
 
 }
-    */
+
 
 /*
  var trlist = [

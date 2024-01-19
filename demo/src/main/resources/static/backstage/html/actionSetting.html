@@ -95,7 +95,7 @@
 
             <div style="padding-left: 80px; display: inline-block;">
               <label style="display: inline-block; font-size: 20px;">活動說明 :</label>
-              <input id="activitydiscription" class="form-control form-control-sm bg-light" type="text"
+              <input id="activityDiscription" class="form-control form-control-sm bg-light" type="text"
                 style="display: inline-block;width:400px; margin-bottom: 20px;">
               </input><br />
             </div>
@@ -105,13 +105,15 @@
               <div style="margin-left: 45px; margin-bottom: 12px;">
                 <span style="font-size: 16px;">開始日期</span>
                 <span style="font-size: 16px;margin-left: 176px;">結束日期</span><br />
-                <input id="activitystartDate" class="form-control form-control-sm bg-light" type="date"
+                <input id="activityStartDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; display: inline-block;" />
                 <span style="margin-left: 8px;">-</span>
 
-                <input id="activityendDate" class="form-control form-control-sm bg-light" type="date"
+                <input id="activityEndDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; margin-left: 8px; display: inline-block;" />
-                 <button onclick="getActivity(2)">送出</button>
+                 <button onclick="showActivity()">取得</button>
+                 <button onclick="saveActivity()">儲存</button>
+                 
               </div>
             </div>
           </div>
@@ -138,7 +140,7 @@
               style="font-size: 16px;" />商品折扣<br />
             <span style="font-size: 14px;display: inline-block;">滿</span> <input
               
-              id="activityfreeShipping" class="form-control form-control-sm bg-light" type="text"
+              id="activityFreeShipping" class="form-control form-control-sm bg-light" type="text"
               style="display: inline-block; width: 120px;height: 36px; " />
             <span style="font-size: 14px;display: inline-block;">則免運費</span>
             <span style="font-size: 14px; display: inline-block; margin-left: 46px;">折扣</span><br>
