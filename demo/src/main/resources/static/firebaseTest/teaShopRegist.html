@@ -204,12 +204,7 @@
 						.auth()
 						.signInWithRedirect(provider)
 						.then((result) => {
-							window.location.href = '/shopindex'
-							//取得對方user資訊
-							var user = result.user;
-							console.log("登入成功");
-							console.log(user);
-							document.getElementById("userName").innerText = user.displayName
+							
 						})
 						.catch((error) => {
 							console.error("登入失敗");
@@ -250,10 +245,16 @@
 					});
 			})
 		});
+		
+		
+		
+		
+		
+		// 導回後處理
 		firebase.auth()
 			.getRedirectResult()
 			.then((result) => {
-				console.log(result.user)
+				
 				if (result.credential) {
 					/** @type {firebase.auth.OAuthCredential} */
 					var credential = result.credential;
@@ -262,10 +263,17 @@
 					var token = credential.accessToken;
 					// ...
 					
-					console.log(token)
 				}
 				// The signed-in user info.
 				var user = result.user;
+				var displayName = user._delegate.displayName
+				var email = user._delegate.email
+				var emailVerified = user._delegate.emailVerified
+				var PrivateId = user._delegate.PrivateId
+				var loginMethod = user._delegate.loginMethod
+				
+				
+				console.log(user)
 				// IdP data available in result.additionalUserInfo.profile.
 				// ...
 			}).catch((error) => {
@@ -279,6 +287,22 @@
 				var credential = error.credential;
 				// ...
 			});
+
+	
+	
+
+
+
+	function getAuth(displayName,email,emailVerified,PrivateId,loginMethod){
+		
+	}
+
+
+
+
+
+
+
 
 	</script>
 </body>

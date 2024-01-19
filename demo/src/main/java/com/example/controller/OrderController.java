@@ -34,14 +34,14 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
-	@PostMapping("/ecpayCheckout")									//建立訂單
+	@PostMapping("/ecpayCheckout")									//ecpay建立訂單
 	public String ecpayCheckout(@RequestBody OrderObject OOB) {
 		
 		String aioCheckOutALLForm = orderService.ecpayCheckout(OOB);
 		
 		return aioCheckOutALLForm;
 	}
-	@PostMapping("/queryOrder")										//查詢訂單
+	@PostMapping("/queryOrder")										//ecpay查詢訂單
 	public String queryEcOrder(@RequestBody String orderId) {
 		String PaymentInfo = orderService.queryEcOrder(orderId);
 		String queryJSON = EcpayReturnConverter.convertToJSON(PaymentInfo);
@@ -55,6 +55,8 @@ public class OrderController {
 		
 		return "1|OK";
 	}
+	
+	//---------------------------------------------------------------------以上為ecpay
 	
 	@PostMapping("/getMember")								//1.加入訂單前取得member
 	public void getMember(@RequestBody String memberId) {
