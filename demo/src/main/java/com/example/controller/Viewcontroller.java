@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,5 +97,15 @@ public class Viewcontroller {
 	@GetMapping("/confirmOrder")
 	public String confirmOrder() {
 		return "/shopPage/cart05.html";		//確認訂單等等		
+	}
+	
+	@GetMapping("/regist")
+	public String registPage() {
+		return "/shopPage/teaShopRegist.html";		//確認訂單等等		
+	}
+	
+	@GetMapping("/{shopId}/login")
+	public String loginPage(@PathVariable int shopId) {
+		return "/shopPage/teaShopLogin.html";		//確認訂單等等		
 	}
 }

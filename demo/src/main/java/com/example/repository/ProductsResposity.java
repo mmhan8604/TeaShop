@@ -10,7 +10,7 @@ public interface ProductsResposity extends JpaRepository<Products, String>{
 	List<Products> findByNameContaining(String name);
 	List<Products> findByName(String name);
 	// 按照 id 升序排序
-    List<Products> findAllOrderByNameAsc();
+    List<Products> findAllByOrderByNameAsc();
     List<Products> findByShopIdOrderByNameAsc(String shopId);
     
 }
