@@ -199,6 +199,7 @@
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {
+			returnMsg();
 			document
 				.getElementById("google")
 				.addEventListener("click", function (event) {
@@ -222,21 +223,25 @@
 				
 				firebase
 					.auth().
-				signInWithEmailAndPassword(email, password)
+					signInWithEmailAndPassword(email, password)
 					.then((userCredential) => {
 						// Signed in
 						var user = userCredential.user;
+						
 						// ...
-						if(user._delegate.emailVerified==true){
-							window.location.href="/shopindex"
+						if (user._delegate.emailVerified == true) {
+							emailUserInfo(user);
+							
+						} else {
+							alert("請完成信箱驗證")
 						}
-						
-						
+
+
 					})
 					.catch((error) => {
 						var errorCode = error.code;
 						var errorMessage = error.message;
-						console.log("登入失敗")
+						alert("帳號或密碼錯誤，請重新輸入")
 					});
 
 
@@ -260,6 +265,91 @@
 					});
 			})
 		});
+
+		// google導回後處理
+		function returnMsg() {
+			firebase.auth()
+				.getRedirectResult()
+				.then((result) => {
+
+					if (result.credential) {
+						/** @type {firebase.auth.OAuthCredential} */
+						var credential = result.credential;
+
+						// This gives you a Google Access Token. You can use it to access the Google API.
+						var token = credential.accessToken;
+						// ...
+
+					}
+					// The signed-in user info.
+					var user = result.user;
+
+					var displayName = user._delegate.displayName
+					var email = user._delegate.email
+					var emailVerified = user._delegate.emailVerified
+					var providerId = user._delegate.providerId
+					var loginMethod = user._delegate.providerData[0].providerId
+
+
+					console.log(user)
+					getAuth(displayName, email, emailVerified, providerId, loginMethod);
+
+				}).catch((error) => {
+
+				});
+		}
+
+
+
+
+		//email送出處理
+
+		function emailUserInfo(user) {
+			var displayName = user._delegate.displayName
+			var email = user._delegate.email
+			var emailVerified = user._delegate.emailVerified
+			var providerId = user._delegate.providerId
+			var loginMethod = user._delegate.providerData[0].providerId
+
+			getAuth(displayName, email, emailVerified, providerId, loginMethod);
+		}
+
+
+
+
+		//到後端取得身分憑證
+
+		function getAuth(displayName, email, emailVerified, providerId, loginMethod) {
+			var authData = {
+				displayName: displayName,
+				email: email,
+				emailVerified: emailVerified,
+				providerId: providerId,
+				loginMethod: loginMethod
+
+			}
+			console.log(authData)
+			$.ajax({
+				url: '/getauth',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify(authData),
+				success: function (response) {
+					if (response == 1) {
+						window.location.href = "/shopindex"
+					} else if (response == 2) {
+						alert("請先通過信箱驗證")
+					}
+				},
+				error: function () {
+					console.log(JSON.stringify(authData))
+				}
+
+			})
+		}
+
+
+
 	</script>
 </body>
 

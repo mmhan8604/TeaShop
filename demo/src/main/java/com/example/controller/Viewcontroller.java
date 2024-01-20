@@ -14,6 +14,8 @@ import com.example.entity.Products;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class Viewcontroller {
 	@Autowired
@@ -39,7 +41,8 @@ public class Viewcontroller {
 	}
 	
 	@GetMapping("/backstage")				//後台畫面
-	public String backstageView() {
+	public String backstageView(HttpSession session) {
+		
 		return "/mainIndex";
 	}
 	
