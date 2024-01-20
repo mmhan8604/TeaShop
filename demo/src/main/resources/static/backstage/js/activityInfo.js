@@ -43,10 +43,10 @@ function ActivityInfoqueryAll(choosepage) {
 			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
 		}
 		else { $("#page").html(`${page + 1}/${Math.floor(allpage / 5) + 1}`) }
-
-		for (i = page * 5; i < (page + 1) * 5; i++) {
+		
+		for (let i = page * 5; i < (page + 1) * 5; i++) {
 			var aid = trlist[i].id;
-			//var aorder = i + 1;
+			var aorder = i + 1;
 			var aname = trlist[i].name;
 			var astartdate = moment(trlist[i].startDate).format('YYYY-MM-DD');
 			var aenddate = moment(trlist[i].endDate).format('YYYY-MM-DD');
@@ -55,7 +55,7 @@ function ActivityInfoqueryAll(choosepage) {
 
 			$("#bodyContext").append(`
         <tr style="height:80px;">
-            <td scope="row">#${aid}</td>
+            <td scope="row">#${aorder}</td>
             <td>${aname}</td>
             <td>${astartdate} ~ ${aenddate}</td>
             <td>${amethod}</td>
@@ -66,6 +66,7 @@ function ActivityInfoqueryAll(choosepage) {
 			</tr>
     		`);
 
+		
 		}
 
 	}
