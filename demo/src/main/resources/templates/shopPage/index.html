@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -86,17 +86,28 @@
 
 					<div class="dropdown me-1 row">
 						<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false" style="color: #ffffff;">
-							<img src="/DingCha_v7_0109/icon/white/member.png" class="me-2" style="height: 30px;" alt="">
-							Login
+							aria-expanded="false" style="color: #ffffff; display: flex; flex-direction: row; align-items: center;" >
+							<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;" alt="">
+							<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
 						</button>
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu">
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-									href="/frontstage/member01.html"><img src="/frontstage/icon/white/login.png " alt=""
-										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
+							
 							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 									href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 										style="height: 20px;width: auto;">登出</a></li>
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
+									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
+										style="height: 20px;width: auto;">訂單</a></li>
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+										style="height: 20px;width: auto;">設定</a></li>
+						</ul>
+						
+						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
+									href="/regist"><img src="/frontstage/icon/white/login.png " alt=""
+										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+							
 							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
 									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
 										style="height: 20px;width: auto;">訂單</a></li>

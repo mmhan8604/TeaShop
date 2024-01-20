@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.classes.FrontLoginClasses;
 import com.example.entity.Products;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
@@ -47,7 +48,11 @@ public class Viewcontroller {
 	}
 	
 	@GetMapping("/shopindex")
-	public String shopindex() {
+	public String shopindex(HttpSession session,Model model) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		
+		setLoginInfo(loginInfo, model);
+		
 		return "/shopPage/index.html";		//前台畫面
 		
 	}
@@ -111,4 +116,28 @@ public class Viewcontroller {
 	public String loginPage(@PathVariable int shopId) {
 		return "/shopPage/teaShopLogin.html";		//確認訂單等等		
 	}
+	
+	
+	
+	
+	
+	//內部方法 用於給動態網頁用戶資訊
+	private void setLoginInfo(FrontLoginClasses loginInfo, Model model) {
+		if(loginInfo!=null) {
+			String user = loginInfo.getDisplayName();
+			String email = loginInfo.getEmail();
+			
+			if (loginInfo.getEmailVerified()&&email!=null) {
+				if(user!=null) {
+					model.addAttribute("userName", user);
+				}else {
+					model.addAttribute("userName", email);
+				}
+			} else {
+				model.addAttribute("userName", null);
+			}
+		}
+	}
+	
+	
 }
