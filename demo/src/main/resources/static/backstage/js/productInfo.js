@@ -1,6 +1,3 @@
-
-
-
 //-------------------------------------------------------------後端抓資料
 
 function ProductInfoqueryAll(choosepage) {
@@ -16,6 +13,7 @@ function ProductInfoqueryAll(choosepage) {
 	$("#nextpage").on("click", function() {
 		ProductInfoqueryAll(page + 1);
 	});
+	
 	// 使用JavaScript發送HTTP POST請求獲取產品資料
 	fetch('/queryProduct', { 
 		method: 'POST' ,
@@ -58,7 +56,7 @@ function ProductInfoqueryAll(choosepage) {
             <td id="product${i}">${pcode}</td>
             <td><img src="${pimg}" style="width: 70px; height: 50px;"></td>
             <td>${pname}</td>
-            <td>${pspec}</td>
+            
             <td>${pprice}</td>
             <td>${pstock}</td>
             <td>

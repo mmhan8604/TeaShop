@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <!--web icon-->
+  <link rel="shortcut icon" href="./icon/DLogo.png" type="image/x-icon" />
+  <title>Dreb 商品設定</title>
 
   <!-- Bootstrap宣告 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,8 +17,9 @@
 
   <!-- 後台基本CSS、JS -->
   <link rel="stylesheet" href="backstage.css" />
-  <script src="backstage.js"></script>
-
+  <script src="backstage.js" defer></script>
+  <!-- 上傳多張圖片 -->
+  <script src="multipleImg.js" defer></script>
 </head>
 
 <body class="d-flex "
@@ -26,15 +29,14 @@
     <!-- NAV導覽列 -->
     <nav class="navbar navbar-expand-sm navbar-light " style="margin-left: 30px;">
       <div class="container-fluid  ">
-        <div class="navbar-brand "><a href="" style="color: #0074d9; text-decoration:none;"> <img src="./icon/pLogo.png"
-              alt="" style="width: 45px;"> Project</a> </div>
+        <div class="navbar-brand "><a href="#"><img src="./logo/project.png" alt="" style="width: 150px;"></a></div>
         <div class="navbar-collapse d-flex ms-3" id="navbarSupportedContent">
           <ul class="navbar-nav   " style="margin-left: 85px;">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="ProductInfo.html">商品資訊</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="addProduct.html">新增商品</a>
+              <a  class="nav-link" href="addProduct.html">新增商品</a>
             </li>
 
             <li class="nav-item">
@@ -62,7 +64,8 @@
                 alt="">訂單設定</button></a>
           <a href="activityInfo.html"><button class="btn  mb-2 sideBtn"><img src="./icon/activity.png"
                 alt="">活動設定</button></a>
-          <a href="memberInfo.html"><button class="btn  mb-2 sideBtn"><img src="./icon/memberCenter.png" alt="">會員中心</button></a>
+          <a href="memberInfo.html"><button class="btn  mb-2 sideBtn"><img src="./icon/memberCenter.png"
+                alt="">會員中心</button></a>
         </div>
         <button class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="./icon/leave.png" alt="">
           <p class="ms-4">登出</p>
@@ -121,22 +124,22 @@
                       style="visibility: hidden;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span>庫存數量</span>
                   <br>
                   <input type="text" class="rounded form-control form-control-sm bg-light"
-                    style="width: 160px; height: 40px;background-color: rgb(236, 233, 233); display: inline-block;">
-                  <span class="rounded" style="font-size: 20px; margin: 10px;">包</span>
+                    style="width: 220px; height: 40px;background-color: rgb(236, 233, 233); display: inline-block;">
+                
                   <input type="text" class="rounded form-control form-control-sm bg-light"
-                    style="width: 160px; height: 40px;margin-left: 63px; background-color: rgb(236, 233, 233); display: inline-block;">
-                  <span style="font-size: 20px; margin: 10px;">包</span>
+                    style="width: 220px; height: 40px;margin-left: 45px; background-color: rgb(236, 233, 233); display: inline-block;">
+                  
 
-                  <div style="font-size: 20px; margin-top: 25px;">商品數量 : </div>
-                  <span style="color: #686868;">上架數量<span
-                      style="visibility: hidden;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span>特價&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;成本價格</span>
+                  <div style="font-size: 20px; margin-top: 30px;">商品價格 : </div>
+                  <span style="color: #686868;">販售價格<span
+                      style="visibility: hidden;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span>成本價格</span>
                   <br>
                   <input type="text" class="rounded form-control form-control-sm bg-light"
-                    style="width: 160px; height: 40px;background-color: rgb(236, 233, 233);display: inline-block;">
+                    style="width: 220px; height: 40px;background-color: rgb(236, 233, 233); display: inline-block;">
+                  
                   <input type="text" class="rounded form-control form-control-sm bg-light"
-                    style="width: 160px; height: 40px; background-color: rgb(236, 233, 233); margin-left: 10px;display: inline-block;">
-                  <input type="text" class="rounded form-control form-control-sm bg-light"
-                    style="width: 160px; height: 40px; background-color: rgb(236, 233, 233);margin-left: 11px;display: inline-block;">
+                    style="width: 220px; height: 40px;margin-left: 45px; background-color: rgb(236, 233, 233); display: inline-block;">
+                  
 
                 </div>
               </div>
