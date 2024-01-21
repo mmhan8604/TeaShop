@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,20 +19,13 @@ import com.example.utils.EcpayReturnConverter;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/shop")
 public class Viewcontroller {
 	@Autowired
 	ProductService productService;
 	
 	
-	@GetMapping(value = "/model")
-	// 將Model 作為Controller 的引數，由Spring 框架自動創建並作為參數傳入
-	public String model(Model model) {
-		// 設定傳遞資料
-	  model.addAttribute("message", "Hello thymeleaf. (using Model)");
-
-		// 返回值指定頁面路徑a
-	  return "model";
-	}
+	
 	@PostMapping("/clientReturn")									//付款後client端接綠界跳轉		//由表單直接跳轉post所以可以收到
 	public String clientReturn(@RequestBody String returnMsg,Model model) {
 		String MSgJSON = EcpayReturnConverter.convertToJSON(returnMsg);
@@ -47,42 +41,56 @@ public class Viewcontroller {
 		return "/mainIndex";
 	}
 	
-	@GetMapping("/shopindex")
-	public String shopindex(HttpSession session,Model model) {
+	@GetMapping("/{shopId}/shopindex")
+	public String shopindex(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		
-		setLoginInfo(loginInfo, model);
-		
-		return "/shopPage/index.html";		//前台畫面
+		setAllLoginInfo(loginInfo, model, shopId);		
+				
+		return "shopPage/index.html";		//前台畫面
 		
 	}
 	
-	@GetMapping("/aboutUs")
-	public String shopAbout() {
+	@GetMapping("/{shopId}/aboutUs")
+	public String shopAbout(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/about.html";		//前台畫面
 		
 	}
 	
-	@GetMapping("/shoppingPage")
-	public String shoppingPage() {
+	@GetMapping("/{shopId}/shoppingPage")
+	public String shoppingPage(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/shoppingPage.html";		//前台畫面
 		
 	}
 	
-	@GetMapping("/contactUs")
-	public String contactUs() {
+	@GetMapping("/{shopId}/contactUs")
+	public String contactUs(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/connection.html";		//前台畫面
 		
 	}
 	
-	@GetMapping("/shoppingCart")
-	public String shoppingCart() {
+	@GetMapping("/{shopId}/shoppingCart")
+	public String shoppingCart(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/cart01.html";		//購物車		
 	}
 	
-	@GetMapping("/productPage")
-	public String productPage(@RequestParam String productId,Model model) {
-		System.out.println(productId);
+	@GetMapping("/{shopId}/productPage")
+	public String productPage(HttpSession session,@RequestParam String productId,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
+		
 		Products product = productService.queryProductById(productId);
 		model.addAttribute("productId", product.getId());
 		model.addAttribute("productName", product.getName());
@@ -92,28 +100,43 @@ public class Viewcontroller {
 		return "/shopPage/product";		//商品頁	
 	}
 	
-	@GetMapping("/orderPayment")
-	public String orderPayment() {
+	@GetMapping("/{shopId}/orderPayment")
+	public String orderPayment(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/cart03.html";		//付款、運送方式等等		
 	}
 	
-	@GetMapping("/orderInfo")
-	public String orderInfo() {
+	@GetMapping("/{shopId}/orderInfo")
+	public String orderInfo(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/cart04.html";		//訂購人等等		
 	}
 	
-	@GetMapping("/confirmOrder")
-	public String confirmOrder() {
+	@GetMapping("/{shopId}/confirmOrder")
+	public String confirmOrder(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/cart05.html";		//確認訂單等等		
 	}
 	
-	@GetMapping("/regist")
-	public String registPage() {
+	@GetMapping("/{shopId}/regist")
+	public String registPage(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/teaShopRegist.html";		//確認訂單等等		
 	}
 	
 	@GetMapping("/{shopId}/login")
-	public String loginPage(@PathVariable int shopId) {
+	public String loginPage(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
 		return "/shopPage/teaShopLogin.html";		//確認訂單等等		
 	}
 	
@@ -121,8 +144,8 @@ public class Viewcontroller {
 	
 	
 	
-	//內部方法 用於給動態網頁用戶資訊
-	private void setLoginInfo(FrontLoginClasses loginInfo, Model model) {
+	//內部方法，用於給動態網頁用戶及商店資訊
+	private void setAllLoginInfo(FrontLoginClasses loginInfo, Model model,int shopId) {
 		if(loginInfo!=null) {
 			String user = loginInfo.getDisplayName();
 			String email = loginInfo.getEmail();
@@ -137,7 +160,11 @@ public class Viewcontroller {
 				model.addAttribute("userName", null);
 			}
 		}
+		model.addAttribute("shopId", shopId);
+		
 	}
+	
+	
 	
 	
 }

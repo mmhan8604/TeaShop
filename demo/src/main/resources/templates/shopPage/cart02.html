@@ -26,7 +26,7 @@
 		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
 			<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
 				<!-- Logo、官網名，連結首頁 -->
-				<a href="shopindex" class="navbar-brand ms-3 py-0">
+				<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
 					<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
 				</a>
 
@@ -40,24 +40,22 @@
 				<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
 				<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
 					<div class="navbar-nav mx-auto text-center  ">
-						<a class="nav-link" href="shopindex">Home</a>
-						<a class="nav-link" href="aboutUs">About</a>
-						<a class="nav-link" href="shoppingPage">Shopping</a>
-						<a class="nav-link" href="contactUs">Connection</a>
+						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
+						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
+						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
+						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
 					</div>
 					<!-- 登入Login、購物車按鈕icon -->
 
 
 					<div class="dropdown me-1 row">
 						<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false" style="color: #ffffff;">
-							<img src="/DingCha_v7_0109/icon/white/member.png" class="me-2" style="height: 30px;" alt="">
-							Login
+							aria-expanded="false" style="color: #ffffff; display: flex; flex-direction: row; align-items: center;" >
+							<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;" alt="">
+							<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
 						</button>
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu">
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-									href="/frontstage/member01.html"><img src="/frontstage/icon/white/login.png " alt=""
-										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
+							
 							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 									href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 										style="height: 20px;width: auto;">登出</a></li>
@@ -68,16 +66,30 @@
 									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 										style="height: 20px;width: auto;">設定</a></li>
 						</ul>
+						
+						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
+									th:href="@{'/shop/' + ${shopId} + '/login'}">
+									<img src="/frontstage/icon/white/login.png " alt=""
+										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
+							
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
+									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
+										style="height: 20px;width: auto;">訂單</a></li>
+							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+										style="height: 20px;width: auto;">設定</a></li>
+						</ul>
 
 						<button class="btn my-2 my-sm-0 col navCarticon" type="button">
-							<a href="/shoppingCart"><img src="/frontstage/icon/white/cart.png"
+							<a th:href="@{'/shop/' + ${shopId} + '/shoppingCart'}"><img src="/frontstage/icon/white/cart.png"
 									style="width:30px; height: 30px;" alt="購物車"></a>
 						</button>
 					</div>
 				</div>
 			</div>
 		</nav>
-	<!--nav導覽列尾--------------------->
+		<!--nav導覽列尾------------------- -->
 
 	<!-- 主要畫面 --> <!--修改左右margin-->
 	<div id="site" class="siteH1">

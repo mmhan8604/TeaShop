@@ -161,7 +161,7 @@
 							</div>
 							<div class="mb-3">
 
-								<a href="/regist"
+								<a th:href="@{'/shop/' + ${shopId} + '/regist'}"
 									style=" color: #C1C1C1; font-size: 20px; text-decoration-line: none;">還未註冊</a><a
 									href=""
 									style="text-decoration-line: none; color: #C1C1C1; font-size: 20px; margin-left: 15%;">忘記密碼?</a>
@@ -197,7 +197,7 @@
 		</div>
 	</div>
 
-	<script>
+	<script th:inline="javascript">
 		document.addEventListener("DOMContentLoaded", function () {
 			returnMsg();
 			document
@@ -336,7 +336,8 @@
 				data: JSON.stringify(authData),
 				success: function (response) {
 					if (response == 1) {
-						window.location.href = "/shopindex"
+						let shopId = /*[[${shopId}]]*/
+						window.location.href = "/shop/"+shopId+"/shopindex"
 					} else if (response == 2) {
 						alert("請先通過信箱驗證")
 					}
