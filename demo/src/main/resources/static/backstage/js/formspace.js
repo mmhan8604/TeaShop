@@ -17,12 +17,17 @@ $(document).ready(function() {
 				else if (buttonId == "memberInfo") { MemberInfo(); }
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
-				else if (buttonId == "addProduct"||"productSetting") {
-						insideMutipleImg();								//函式在mutipleImg.js內
-					
+				else if (buttonId == "addProduct" || "productSetting") {
+					insideMutipleImg();								//函式在mutipleImg.js內
 				}
 				ActionSetting();			//誰知道在哪裡說一下
 			});
 		});
+
+	$("#upload").on("click", function() {
+
+		EditOrderSetting();
+
+	})
 
 });
