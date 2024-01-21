@@ -84,7 +84,6 @@ function queryAllOrderInfo(choosepage) {
 				$('#EditOrderId').val(orderDetails.order.id);
 				$('#EditOrderTime').val(orderDetails.order.orderDate);
 				$('#EditOrderState').val(orderDetails.order.orderState);
-
 				//								$('#EditOrdersTable ').val(orderDetails.id);
 				$('#EditOrdersName').val(orderDetails.order.member.name);
 				$('#EditOrdersPhone').val(orderDetails.order.member.phone);
@@ -104,7 +103,7 @@ function queryAllOrderInfo(choosepage) {
 				detailsTableBody.empty()
 				var totalQuantity = 0;
 				var totalPrice = 0;
-				
+
 				//				處理訂單細節
 				var orderDetailsList = orderDetails.details;
 
@@ -122,8 +121,8 @@ function queryAllOrderInfo(choosepage) {
 					detailsTableBody.append(row);
 
 
-				totalQuantity += detail.quantity;
-				totalPrice +=detail.amount;
+					totalQuantity += detail.quantity;
+					totalPrice += detail.amount;
 
 				});
 
@@ -143,6 +142,53 @@ function queryAllOrderInfo(choosepage) {
 
 
 	});
+}
+
+
+
+//亨+的 修改方法
+function EditOrderSetting() {
+	function collectOrderUpdateData() {
+		return {
+			name: $("#EditOrdersName").val(),
+			phone: $("#EditOrdersPhone").val(),
+			mail: $("#EditOrdersMail").val(),
+			orderState: $('#EditOrderState').val(),
+			paymentMethod: $('#EditOrdersPayment').val(),
+			receiverName: $('#EditOrdersRecipientName').val(),
+			receiverPhone: $('#EditOrdersRecipientPhone').val(),
+			receiverMail: $('#EditOrdersRecipientMail').val(),
+			receiverAddress: $('#EditOrdersRecipientAddress').val(),
+			shipMethod: $('#EditOrdersShipment').val(),
+			shipState: $('#EditOrdersShipmentStatus').val()
+			// 可根據需要添加其他欄位
+		};
+	}
+
+	function updateOrder(orderId, updatedData) {
+		$.ajax({
+			url: `/Edit/orders/updateOrder/${orderId}`,
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(updatedData),
+			success: function(response) {
+				console.log("更新成功: ", response);
+				// 可以在這裡添加後續處理邏輯
+			},
+			error: function(error) {
+				console.error("更新失敗: ", error);
+			}
+		});
+	}
+
+	var orderId = $('#EditOrderId').val(); // 訂單ID
+	if (!orderId) {
+		console.error("訂單ID未设置");
+		return;
+	}
+
+	var updatedData = collectOrderUpdateData();
+	updateOrder(orderId, updatedData);
 }
 
 
