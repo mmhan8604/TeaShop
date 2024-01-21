@@ -20,26 +20,11 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/shop")
-public class Viewcontroller {
+public class ShopViewcontroller {
 	@Autowired
 	ProductService productService;
 	
 	
-	
-	@PostMapping("/clientReturn")									//付款後client端接綠界跳轉		//由表單直接跳轉post所以可以收到
-	public String clientReturn(@RequestBody String returnMsg,Model model) {
-		String MSgJSON = EcpayReturnConverter.convertToJSON(returnMsg);
-		System.out.println("clientReturn:"+MSgJSON);
-		model.addAttribute("jsonData", MSgJSON);
-
-		return "/payresult";
-	}
-	
-	@GetMapping("/backstage")				//後台畫面
-	public String backstageView(HttpSession session) {
-		
-		return "/mainIndex";
-	}
 	
 	@GetMapping("/{shopId}/shopindex")
 	public String shopindex(HttpSession session,Model model,@PathVariable int shopId) {
