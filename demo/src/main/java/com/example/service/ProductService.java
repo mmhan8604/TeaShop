@@ -14,22 +14,29 @@ import net.sf.jsqlparser.util.validation.ValidationException;
 
 @Service
 public class ProductService {
+	// DI
 	@Autowired
 	ProductsResposity productsRes;
-	//增
-	public void addProduct(Products products) {	
-		
+
+	// 增
+	public void addProduct(Products products) {
 		if (productsRes.existsById(products.getId())) {
-				throw new ValidationException("id重複");
-			
+			throw new ValidationException("id重複");
+		} else {
+			productsRes.save(products);
 		}
-		else {productsRes.save(products);}
 	}
-	//刪
+
+	// 刪
 	public void delProduct(Products products) {
-		productsRes.delete(products);
+		if (productsRes.existsById(products.getId())) {
+			productsRes.delete(products);
+		} else {
+			throw new ValidationException("id不存在，無法刪除");
+		}
 	}
-	//修
+
+	// 修
 	public void editProduct(Products products) {
 		Optional<Products> opOriginProducts = productsRes.findById(products.getId());
 		Products originProducts = opOriginProducts.get();
@@ -38,24 +45,27 @@ public class ProductService {
 			products.setActivity(activity);
 			productsRes.save(products);
 		} else {
-			throw new ValidationException("id不存在");
+			throw new ValidationException("id不存在，無法查詢");
 		}
-		
-		
+
 	}
+
+	// 查全部
 	public List<Products> queryProduct(String shopId) {
 		return productsRes.findByShopIdOrderByNameAsc(shopId);
-		
 	}
-	public List<Products> queryProductByName(String name){
+
+	// 查用商品名稱
+	public List<Products> queryProductByName(String name) {
 		return productsRes.findByNameContaining(name);
 	}
-	
-	public Products queryProductById(String id){
-		if(productsRes.existsById(id)) {
+
+	// 查用商品ID
+	public Products queryProductById(String id) {
+		if (productsRes.existsById(id)) {
 			System.out.println("exist");
-		return productsRes.findById(id).get();}
-		else {
+			return productsRes.findById(id).get();
+		} else {
 			throw new ValidationException("id不存在");
 		}
 	}
