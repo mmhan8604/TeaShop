@@ -11,9 +11,18 @@
 	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
+	<!-- sever傳遞參數 -->
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        /*]]>*/
+    </script>
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/js/memberinfo.js"></script> 
 	<script src="/frontstage/_js/bootstrap.js"></script>
+	<script src="/frontstage/js/logOut.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
@@ -187,7 +196,7 @@
 
 							<li class="checkout-btn">
 								<input type="submit" name="delete"  class="clear01 btn me-3 text-center" value="取消" />
-								<a href="/confirmOrder" type="submit" class="btn text-center cartCheckout py-1" onclick="saveinfo()">確定</a>
+								<a th:href="@{'/shop/' + ${shopId} + '/confirmOrder'}" type="submit" class="btn text-center cartCheckout py-1" onclick="saveinfo()">確定</a>
 							</li>
 
 						</ul>

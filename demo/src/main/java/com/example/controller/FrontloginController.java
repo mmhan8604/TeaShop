@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +35,10 @@ public class FrontloginController {
 			throw new ValidationException("登入資訊錯誤");
 		}
 		
+	}
+	@PostMapping("/shop/logout")
+	public void logout(HttpSession session) {
+		session.setAttribute("authObject", null);
 	}
 	
 }

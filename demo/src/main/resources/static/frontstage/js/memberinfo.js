@@ -71,7 +71,7 @@ function saveinfo() {
     alert('請填寫所有必填資料！');
     return false;
    }else{
-	   window.location.href="/confirmOrder";
+	   window.location.href="/shop/"+shopId+"/confirmOrder";
    }
 
    // 如果所有欄位都已填寫，可以在這裡執行後續操作

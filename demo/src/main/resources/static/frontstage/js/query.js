@@ -1,9 +1,8 @@
 
-
-
 $(document).ready(function() {
 	$("#cardSpace").empty();
 	queryProduct()
+	
 
 })
 
@@ -121,30 +120,36 @@ function queryProduct() {
 			var image = $(this).data('image');
 
 			var quantitySelector, quantity;
-
+			console.log(logInorNot)
+			if(logInorNot){
+			
 			// 检查是否在模态窗口中
-			if ($(this).closest('.modal').length) {
-				// 如果是模态窗口，通过模态窗口的 ID 获取数量
-				var modalId = $(this).closest('.modal').attr('id');
-				quantitySelector = $('#' + modalId + ' .qty');
-			} else {
-				// 如果不是模态窗口，从较近的上级元素获取数量
-				quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
+				if ($(this).closest('.modal').length) {
+					// 如果是模态窗口，通过模态窗口的 ID 获取数量
+					var modalId = $(this).closest('.modal').attr('id');
+					quantitySelector = $('#' + modalId + ' .qty');
+				} else {
+					// 如果不是模态窗口，从较近的上级元素获取数量
+					quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
+				}
+	
+				quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
+	
+				var product = { id: id, name: name, price: price, image: image, quantity: quantity };
+	
+				var cart = JSON.parse(localStorage.getItem('cart')) || [];
+				var existingProductIndex = cart.findIndex(p => p.name === name);
+				if (existingProductIndex !== -1) {
+					cart[existingProductIndex].quantity += quantity;
+				} else {
+					cart.push(product);
+				}
+	
+				localStorage.setItem('cart', JSON.stringify(cart));}
+			else{
+				
+				window.location.href="/shop/"+shopId+"/login"
 			}
-
-			quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
-
-			var product = { id: id, name: name, price: price, image: image, quantity: quantity };
-
-			var cart = JSON.parse(localStorage.getItem('cart')) || [];
-			var existingProductIndex = cart.findIndex(p => p.name === name);
-			if (existingProductIndex !== -1) {
-				cart[existingProductIndex].quantity += quantity;
-			} else {
-				cart.push(product);
-			}
-
-			localStorage.setItem('cart', JSON.stringify(cart));
 		});
 
 		//提示視窗顯示
@@ -193,7 +198,7 @@ function queryProduct() {
 			localStorage.setItem('cart', JSON.stringify(cart));
 
 			// 跳轉到 cart01 頁面
-			window.location.href = `/productPage?productId=${productId}`;
+			window.location.href = "/shop/"+shopId+"/shoppingCart";
 		});
 	}
 }
@@ -203,7 +208,7 @@ function productPage() {
 	$('.productPage').click(function() {
 		var productId = $(this).data('id');
 		console.log(productId)
-		location.href = `/productPage?productId=${productId}`
+		location.href = `/shop/${shopId}/productPage?productId=${productId}`
 		/*		$.ajax({
 						type: 'GET',
 						url: '/productPage',

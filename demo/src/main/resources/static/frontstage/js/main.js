@@ -38,38 +38,45 @@ $(function () {
 
 // 點擊"加入購物車"時，將商品信息保存到localStorage。
 $(document).ready(function () {
+	
+	
     $('.add-to-cart').click(function (event) {
-        event.preventDefault();
-		var id = $(this).data('id')
-        var name = $(this).data('name');
-        var price = $(this).data('price');
-        var image = $(this).data('image');
-
-        var quantitySelector, quantity;
-
-        // 检查是否在模态窗口中
-        if ($(this).closest('.modal').length) {
-            // 如果是模态窗口，通过模态窗口的 ID 获取数量
-            var modalId = $(this).closest('.modal').attr('id');
-            quantitySelector = $('#' + modalId + ' .qty');
-        } else {
-            // 如果不是模态窗口，从较近的上级元素获取数量
-            quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
-        }
-
-        quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
-
-        var product = {id:id, name: name, price: price, image: image, quantity: quantity };
-
-        var cart = JSON.parse(localStorage.getItem('cart')) || [];
-        var existingProductIndex = cart.findIndex(p => p.name === name);
-        if (existingProductIndex !== -1) {
-            cart[existingProductIndex].quantity += quantity;
-        } else {
-            cart.push(product);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
+		console.log(logInorNot)
+		if(logInorNot){
+	        event.preventDefault();
+			var id = $(this).data('id')
+	        var name = $(this).data('name');
+	        var price = $(this).data('price');
+	        var image = $(this).data('image');
+	
+	        var quantitySelector, quantity;
+	
+	        // 检查是否在模态窗口中
+	        if ($(this).closest('.modal').length) {
+	            // 如果是模态窗口，通过模态窗口的 ID 获取数量
+	            var modalId = $(this).closest('.modal').attr('id');
+	            quantitySelector = $('#' + modalId + ' .qty');
+	        } else {
+	            // 如果不是模态窗口，从较近的上级元素获取数量
+	            quantitySelector = $(this).closest('.cart-full-quantity').find('.qty');
+	        }
+	
+	        quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
+	
+	        var product = {id:id, name: name, price: price, image: image, quantity: quantity };
+	
+	        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+	        var existingProductIndex = cart.findIndex(p => p.name === name);
+	        if (existingProductIndex !== -1) {
+	            cart[existingProductIndex].quantity += quantity;
+	        } else {
+	            cart.push(product);
+	        }
+	
+	        localStorage.setItem('cart', JSON.stringify(cart));}
+	        else{
+				
+				window.location.href="/shop/"+shopId+"/login"}
     });
 });
 

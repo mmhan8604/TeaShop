@@ -7,6 +7,7 @@ public class FrontLoginClasses {
 	private Boolean emailVerified;
 	private String providerId;
 	private String loginMethod;
+	private int shopId;
 	
 	public String getDisplayName() {
 		return displayName;
@@ -39,6 +40,14 @@ public class FrontLoginClasses {
 	public void setLoginMethod(String loginMethod) {
 		this.loginMethod = loginMethod;
 	}
+	
+	public int getShopId() {
+		return shopId;
+	}
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
+	}
+	
 	@Override
 	public String toString() {
 		return "FrontLoginClasses [displayName=" + displayName + ", email=" + email + ", emailVerified=" + emailVerified

@@ -146,7 +146,8 @@ public class Viewcontroller {
 	
 	//內部方法，用於給動態網頁用戶及商店資訊
 	private void setAllLoginInfo(FrontLoginClasses loginInfo, Model model,int shopId) {
-		if(loginInfo!=null) {
+		
+		if(loginInfo!=null&&loginInfo.getShopId()==shopId) {
 			String user = loginInfo.getDisplayName();
 			String email = loginInfo.getEmail();
 			
