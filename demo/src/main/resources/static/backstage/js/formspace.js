@@ -14,7 +14,7 @@ $(document).ready(function() {
 				// 判斷哪個id給相對js
 				if (buttonId == "productInfo") { ProductInfoqueryAll(0); }
 				else if (buttonId == "activityInfo") { ActivityInfo(); }
-				else if (buttonId == "memberInfo") { MemberInfo(); }
+				else if (buttonId == "memberInfo") { MemberInfoqueryAll(0); }
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
 				else if (buttonId == "addProduct"||"productSetting") {
