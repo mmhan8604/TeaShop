@@ -15,8 +15,12 @@ public class MemberService {
 	@Autowired
 	MemberRepository memberRes;
 
-	public List<Member> getMemberInfo() {
+	public List<Member> getAllMemberInfo() {
 		return memberRes.findAll();
+	}
+	
+	public Member getMemberInfo(String memberId) {
+		return memberRes.findById(memberId).get();
 	}
 
 }

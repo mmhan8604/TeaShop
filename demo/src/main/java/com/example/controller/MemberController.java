@@ -16,9 +16,12 @@ public class MemberController {
 	@Autowired
 	MemberService memberservice;
 	
-	@PostMapping("/getMemberInfo")
+	@PostMapping("/getAllMemberInfo")
 	public List<Member> getMemberInfo() {
-		return memberservice.getMemberInfo();
+		return memberservice.getAllMemberInfo();
 	}
-
+	@PostMapping("/getMemberInfo")
+	public Member getMemberInfo(@RequestBody String memberId) {
+		return memberservice.getMemberInfo(memberId);
+	}
 }

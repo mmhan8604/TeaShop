@@ -26,7 +26,7 @@ function MemberInfoqueryAll(choosepage) {
 		MemberInfoqueryAll(page + 1);
 	});
 	// 使用JavaScript發送HTTP POST請求獲取會員資料
-	fetch('/getMemberInfo', {
+	fetch('/getAllMemberInfo', {
 		method: 'POST',
 
 	})
