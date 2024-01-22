@@ -191,7 +191,7 @@
 	</div>
 
 
-	<script>
+	<script th:inline="javascript">
 
 		document.addEventListener("DOMContentLoaded", function () {
 			returnMsg();
@@ -323,7 +323,7 @@
 		//到後端取得身分憑證
 
 		function getAuth(displayName, email, emailVerified, providerId, loginMethod) {
-			let shopId = /*[[${shopId}]]*/""
+			let shopId = /*[[${shopId}]]*/5;
 			var authData = {
 				displayName: displayName,
 				email: email,

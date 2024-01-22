@@ -24,10 +24,6 @@ $(document).ready(function() {
 			});
 		});
 
-	$("#upload").on("click", function() {
-
-		EditOrderSetting();
-
-	})
+	
 
 });

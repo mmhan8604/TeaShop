@@ -26,25 +26,6 @@ public class EditOrderController {
 	@Autowired
 	    private EditOrderServiceImpl editOrderService;
 
-//	@GetMapping("/orderSetting/{id}")
-//    public Optional<Orders> getOrderById(@PathVariable String id) {
-//        return editOrderService.findById(id);
-//	    }
-//
-////	將要編輯的資料查詢
-//	@GetMapping("/edit-order")
-//	public String editOrder(@RequestParam Long orderId, HttpSession session) {
-//		session.setAttribute("orderId", orderId);
-//		return "redirect:/orderSetting";
-//	}
-//
-//	@GetMapping("/orderSetting")
-//	public String showOrderSetting(Model model, HttpSession session) {
-//		Long orderId = (Long) session.getAttribute("orderId");
-//		// 使用orderId進行操作
-//		// ...
-//		return "orderSetting";
-//	}
 	
     // 獲取Orderdetais的資料
 	 @GetMapping("/{id}/fullDetails")

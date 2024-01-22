@@ -2,6 +2,12 @@
 //-------------------------------------------------------------------------------顯示訂單
 
 function queryAllOrderInfo(choosepage) {
+	$("#upload").off("click");
+	$("#upload").on("click", function() {
+
+		EditOrderSetting();
+
+	})
 	var trlist;
 	var page = choosepage;
 	//移除多次事件綁定
@@ -29,7 +35,7 @@ function queryAllOrderInfo(choosepage) {
 		.catch(error => console.error('Error fetching order data:', error))
 
 	function query(allpage) {
-
+		
 		$("#bodyContext").empty();
 		if (allpage % 5 == 0) {
 			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
@@ -38,6 +44,7 @@ function queryAllOrderInfo(choosepage) {
 
 
 		for (i = page * 5; i < (page + 1) * 5; i++) {
+			
 			console.log(trlist[i])
 			var oorder = i + 1;
 
@@ -67,7 +74,7 @@ function queryAllOrderInfo(choosepage) {
     `);
 		}
 	}
-
+	$("#bodyContext").off("click", ".edit-button");
 	//亨+ 超連結裡面的屬性   edit-button 
 	$("#bodyContext").on("click", ".edit-button", function() {
 		var orderId = $(this).data("id");

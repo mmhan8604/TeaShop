@@ -320,7 +320,7 @@
 		//到後端取得身分憑證
 
 		function getAuth(displayName, email, emailVerified, providerId, loginMethod) {
-			let shopId = /*[[${shopId}]]*/"";
+			let shopId = /*[[${shopId}]]*/5;
 			var authData = {
 				displayName: displayName,
 				email: email,
@@ -337,7 +337,7 @@
 				data: JSON.stringify(authData),
 				success: function (response) {
 					if (response == 1) {
-						
+						console.log(shopId)
 						window.location.href = "/shop/"+shopId+"/shopindex"
 					} else if (response == 2) {
 						alert("請先通過信箱驗證")
