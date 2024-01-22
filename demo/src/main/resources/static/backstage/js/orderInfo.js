@@ -86,12 +86,10 @@ function queryAllOrderInfo(choosepage) {
 			url: `/Edit/orders/${orderId}/fullDetails`,
 			method: 'GET',
 			success: function(orderDetails) {
-				console.log("成功了", orderDetails); // 这里您可以根据实际情况处理返回的订单详情
-				// 假设您有一些输入框用于显示订单信息
+				console.log("成功了", orderDetails); // 顯示從後端回傳的資訊
 				$('#EditOrderId').val(orderDetails.order.id);
 				$('#EditOrderTime').val(orderDetails.order.orderDate);
 				$('#EditOrderState').val(orderDetails.order.orderState);
-				//								$('#EditOrdersTable ').val(orderDetails.id);
 				$('#EditOrdersName').val(orderDetails.order.member.name);
 				$('#EditOrdersPhone').val(orderDetails.order.member.phone);
 				$('#EditOrdersMail').val(orderDetails.order.member.mail);
@@ -100,7 +98,7 @@ function queryAllOrderInfo(choosepage) {
 				$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
 				$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
 				$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
-				//								$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
+				//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
 				$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
 				$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
 
