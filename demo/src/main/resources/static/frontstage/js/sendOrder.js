@@ -50,7 +50,8 @@ function sendOrder() {
 		receiverPhone: oderStorage.orderPhone,
 		receiverMail: oderStorage.orderEmail,
 		receiverAddress: oderStorage.orderAddress,
-		amount: bigtaltalAmount+shipPrice
+		amount: bigtaltalAmount+shipPrice,
+		orderDate: new Date()
 	}
 
 	var ecpayData = {
