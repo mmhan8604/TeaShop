@@ -1,10 +1,59 @@
 
 //-------------------------------------------------------------------------------顯示訂單
+var globalOrderDetails;//全域變數
+
+function updateOrderDetailsForm(orderDetails) {
+	$('#EditOrderId').val(orderDetails.order.id);
+	$('#EditOrderTime').val(orderDetails.order.orderDate);
+	$('#EditOrderState').val(orderDetails.order.orderState);
+	$('#EditOrdersName').val(orderDetails.order.member.name);
+	$('#EditOrdersPhone').val(orderDetails.order.member.phone);
+	$('#EditOrdersMail').val(orderDetails.order.member.mail);
+	$('#EditOrdersRecipientName').val(orderDetails.order.receiverName);
+	$('#EditOrdersRecipientPhone').val(orderDetails.order.receiverPhone);
+	$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
+	$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
+	$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
+	//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
+	$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
+	$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
+	// 清空訂單詳情表格並填充新數據
+	var detailsTableBody = $('#EditOrdersTable tbody');
+	detailsTableBody.empty()
+	var totalQuantity = 0;
+	var totalPrice = 0;
+	//				處理訂單細節
+	var orderDetailsList = orderDetails.details;
+
+	orderDetailsList.forEach(function(detail, index) {
+		var row = `<tr>
+                    <td>#${index + 1}</td>
+                    <td>${detail.product.id}</td>
+                    <td><img src="${detail.product.picJSON}" alt="${detail.product.name}" style="width: 50px; height: 50px;"></td>
+                    <td>${detail.product.name}</td>
+                    <td>規格</td>
+                    <td>${detail.quantity}</td>
+                    <td>${detail.price}</td>
+                    <td>${detail.amount}</td>
+                </tr>`;
+		detailsTableBody.append(row);
+		totalQuantity += detail.quantity;
+		totalPrice += detail.amount;
+	});
+
+	// 更新tfoot的總計
+	var tfoot = $('#EditOrdersTable tfoot tr');
+	tfoot.find('td:eq(1)').text(`總品項: ${orderDetails.details.length}`);
+	tfoot.find('td:eq(3)').text(`總件數: ${totalQuantity}`);
+	tfoot.find('td:eq(5)').text(`總金額: ${totalPrice}`);
+}
+
+
 
 function queryAllOrderInfo(choosepage) {
 	$("#upload").off("click");
 	$("#upload").on("click", function() {
-
+		//修改方法
 		EditOrderSetting();
 
 	})
@@ -35,7 +84,7 @@ function queryAllOrderInfo(choosepage) {
 		.catch(error => console.error('Error fetching order data:', error))
 
 	function query(allpage) {
-		
+
 		$("#bodyContext").empty();
 		if (allpage % 5 == 0) {
 			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
@@ -44,7 +93,7 @@ function queryAllOrderInfo(choosepage) {
 
 
 		for (i = page * 5; i < (page + 1) * 5; i++) {
-			
+
 			console.log(trlist[i])
 			var oorder = i + 1;
 
@@ -79,75 +128,37 @@ function queryAllOrderInfo(choosepage) {
 	$("#bodyContext").on("click", ".edit-button", function() {
 		var orderId = $(this).data("id");
 		$("#orderSetting").trigger("click");
-		//			window.location.href = `/Edit/orders/orderSetting/${orderId}`;
-		alert(orderId);
 
 		$.ajax({
 			url: `/Edit/orders/${orderId}/fullDetails`,
 			method: 'GET',
 			success: function(orderDetails) {
 				console.log("成功了", orderDetails); // 顯示從後端回傳的資訊
-				$('#EditOrderId').val(orderDetails.order.id);
-				$('#EditOrderTime').val(orderDetails.order.orderDate);
-				$('#EditOrderState').val(orderDetails.order.orderState);
-				$('#EditOrdersName').val(orderDetails.order.member.name);
-				$('#EditOrdersPhone').val(orderDetails.order.member.phone);
-				$('#EditOrdersMail').val(orderDetails.order.member.mail);
-				$('#EditOrdersRecipientName').val(orderDetails.order.receiverName);
-				$('#EditOrdersRecipientPhone').val(orderDetails.order.receiverPhone);
-				$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
-				$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
-				$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
-				//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
-				$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
-				$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
-
-
-				// 清空訂單詳情表格並填充新數據
-				var detailsTableBody = $('#EditOrdersTable tbody');
-				detailsTableBody.empty()
-				var totalQuantity = 0;
-				var totalPrice = 0;
-
-				//				處理訂單細節
-				var orderDetailsList = orderDetails.details;
-
-				orderDetailsList.forEach(function(detail, index) {
-					var row = `<tr>
-                    <td>#${index + 1}</td>
-                    <td>${detail.product.id}</td>
-                    <td><img src="${detail.product.picJSON}" alt="${detail.product.name}" style="width: 50px; height: 50px;"></td>
-                    <td>${detail.product.name}</td>
-                    <td>規格</td>
-                    <td>${detail.quantity}</td>
-                    <td>${detail.price}</td>
-                    <td>${detail.amount}</td>
-                </tr>`;
-					detailsTableBody.append(row);
-
-
-					totalQuantity += detail.quantity;
-					totalPrice += detail.amount;
-
-				});
-
-				// 更新tfoot的總計
-				var tfoot = $('#EditOrdersTable tfoot tr');
-				tfoot.find('td:eq(1)').text(`總品項: ${orderDetails.details.length}`);
-				tfoot.find('td:eq(3)').text(`總件數: ${totalQuantity}`);
-				tfoot.find('td:eq(5)').text(`總金額: ${totalPrice}`);
+				globalOrderDetails = orderDetails; // 保存訂單
+				updateOrderDetailsForm(orderDetails)//方法執行
 
 			},
 			error: function(error) {
 				console.error('Error fetching order details:', error);
 			}
 		});
-
-
-
-
 	});
 }
+
+
+
+//先解除綁定再榜定(當返回編輯訂單時保留資料)
+$("#orderSetting").off("click").on("click", function() {
+	if (globalOrderDetails) {
+		setTimeout(function() {
+			console.log("方法成了", globalOrderDetails); // 顯示從後端回傳的資訊
+			updateOrderDetailsForm(globalOrderDetails)//方法執行
+		}, 100); // 等0.1秒
+	}
+});
+
+
+
 
 
 
