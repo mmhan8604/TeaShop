@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>付款結果通知</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body>
     
@@ -10,12 +11,34 @@
     <div id="paymentStatus"></div>
     
     <script  th:inline="javascript">
-		var jsonData = /*[[${jsonData}]]*/ '';	//取得後端傳送data
+		var jsonData = /*[[${jsonData}]]*/ 'aaa';	//取得後端傳送data
 		var jsonObject = JSON.parse(jsonData);
-		console.log(jsonObject.RtnMsg);
+		var shopId = /*[[${shopId}]]*/
+		console.log(jsonData);
 		
         if(jsonObject.RtnMsg=="Succeeded"){
             document.getElementById("paymentStatus").innerHTML="付款成功<br>訂單編號:"+jsonObject.MerchantTradeNo;
+            $.ajax({
+				url: '/orderStateUpdate',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: jsonObject.MerchantTradeNo,
+				success: function (response) {
+					if(response==true){
+						alert("付款成功")
+						window.location.href = "/shop/"+shopId+"/shopindex"
+						
+					}else if(response==2){
+						alert("付款失敗")
+						window.location.href = "/shop/"+shopId+"/shopindex"
+					}
+				},
+				error: function (err) {
+					calert("付款失敗")
+						window.location.href = "/shop/"+shopId+"/shopindex"
+				}
+
+			})
         }else{
             document.getElementById("paymentStatus").innerHTML="付款失敗<br>訂單編號:"+jsonObject.MerchantTradeNo;
         }

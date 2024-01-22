@@ -57,7 +57,8 @@ function sendOrder() {
 	var ecpayData = {
 		itemName: "訂單",
 		totalAmount: bigtaltalAmount+shipPrice,
-		tradeTime: getTime()
+		tradeTime: getTime(),
+		orderId: orderid
 	}
 
 
@@ -110,6 +111,7 @@ function ajax(url, formData, ecpay) {
 			success: function (response) {
 				if (ecpay == 1) {
 					var newWindow = window.open("", "_self");
+					
 					newWindow.document.write(response);
 					newWindow.document.close();
 				}

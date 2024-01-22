@@ -64,7 +64,7 @@ public class OrderService {
 		AllInOne all = new AllInOne("");
 		
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo(uuId);
+		obj.setMerchantTradeNo(OOB.getOrderId());
 		obj.setMerchantTradeDate(OOB.getTradeTime());
 		obj.setTotalAmount(OOB.getTotalAmount());
 		obj.setTradeDesc("test Description");
@@ -119,5 +119,17 @@ public class OrderService {
 		
 		public List<Orders> findAllOrder(){
 			return ordersRes.findAll();
+		}
+		
+		public boolean orderStateUpdate(String OrderId) {
+			if(ordersRes.findById(OrderId).isPresent()) {
+				Orders order = ordersRes.findById(OrderId).get();
+				order.setOrderState("payed");
+				ordersRes.save(order);
+				return true;
+			}else {
+				return false;
+			}
+			
 		}
 }
