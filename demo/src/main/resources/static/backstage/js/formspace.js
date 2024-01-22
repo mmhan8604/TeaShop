@@ -16,7 +16,7 @@ $(document).ready(function() {
 				else if (buttonId == "activityInfo") { ActivityInfo(); }
 				else if (buttonId == "memberInfo") { MemberInfo(); }
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
-				else if (buttonId == "shopInfo") { shopInfoEvent(); }
+				else if (buttonId == "shopInfo") {console.log("c"); shopInfoEvent(); }
 				else if (buttonId == "addProduct"||"productSetting") {
 						insideMutipleImg();								//函式在mutipleImg.js內
 					

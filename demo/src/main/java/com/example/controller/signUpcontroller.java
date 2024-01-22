@@ -21,9 +21,9 @@ public class signUpcontroller {
 		
 		JSONObject jo=new JSONObject(data);
 		
-		ss.setsData((HashMap)(jo.toMap()));
 		
-		int check= ss.create();
+		
+		int check= ss.create((HashMap)(jo.toMap()));
 		if (check==0) {
 			return"ok";
 		}else {
