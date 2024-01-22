@@ -81,19 +81,20 @@
 
           <div style="margin-left: 55px;">
             <form style=" padding-bottom: 20px;">
-              <div style="margin-top: 20px; display: inline-block; padding-left: -25px; font-size: 20px">
+              <div  style="margin-top: 20px; display: inline-block; padding-left: -25px; font-size: 20px">
                 訂單編號 :
-                <input class="form-control form-control-sm bg-light" style="width: 400px; display: inline-block;"
-                  disabled />
+                <input id="EditOrderId" class="form-control form-control-sm bg-light" style="width: 400px; display: inline-block;"
+                  />
               </div>
               <div style="font-size: 20px; padding-left: 80px; display: inline-block; ">
-                下單時間 : <input class="form-control form-control-sm bg-light "
+                下單時間 : 
+                <input  id="EditOrderTime" class="form-control form-control-sm bg-light "
                   style="width: 400px; display: inline-block;" disabled />
               </div>
               <br />
 
               <div style=" margin-top: 10px; font-size: 20px;">訂單狀態 :
-                <select class="form-control form-control-sm bg-light"
+                <select id="EditOrderState" class="form-control form-control-sm bg-light"
                   style="width: 400px; display: inline-block; font-size: 14px; ">
                   <option>尚未處理</option>
                   <option>處理中</option>
@@ -103,7 +104,7 @@
 
               <div style="margin-top: 20px; padding: 5px;  height: 40px; width: 1088px; background: lightgray;">
                 購物明細</div>
-              <table id="shopingTable"
+              <table id="EditOrdersTable"
                 style="margin-top: 10px; border-collapse: collapse; width: 1088px;border: 2px solid gray;">
                 <tr style=" background-color: lightgray; border: 1px solid black;">
                   <th>排序</th>
@@ -155,25 +156,32 @@
 
           <form class="rounded">
             <div style="font-size: 20px;">
-              <label style="margin-left: 56px; margin-top: 20px;">訂購姓名</label> : <input type="text"
+              <label style="margin-left: 56px; margin-top: 20px;">訂購姓名</label> : 
+              <input id="EditOrdersName" type="text"
                 class="rounded form-control form-control-sm bg-light"
                 style="width: 400px; margin-top: 20px; margin-right: 80px;display: inline-block;">
-              <label style="margin-left: auto;">訂購電話</label> : <input type="text"
+              <label style="margin-left: auto;">訂購電話</label> : 
+              <input id="EditOrdersPhone" type="text"
                 class="rounded form-control form-control-sm bg-light" style="width: 400px;display: inline-block;"><br>
-              <label style="margin-left: 56px; margin-top: 20px;">訂購郵件</label> : <input type="text"
+              <label style="margin-left: 56px; margin-top: 20px;">訂購郵件</label> :
+               <input id="EditOrdersMail" type="text"
                 class="rounded form-control form-control-sm bg-light"
                 style="width: 400px; margin-top: 20px;display: inline-block;">
               <hr style="margin-top: 20px;margin-bottom: 0;">
 
-              <label style="margin-left: 56px; margin-top: 20px;">收件姓名</label> : <input type="text"
+              <label style="margin-left: 56px; margin-top: 20px;">收件姓名</label> :
+               <input id="EditOrdersRecipientName" type="text"
                 class="rounded form-control form-control-sm bg-light"
                 style="width: 400px; margin-top: 20px; margin-right: 80px;display: inline-block;">
-              <label style="margin-left: auto;">收件電話</label> : <input type="text"
+              <label style="margin-left: auto;">收件電話</label> :
+               <input id="EditOrdersRecipientPhone"  type="text"
                 class="rounded form-control form-control-sm bg-light" style="width: 400px;display: inline-block;"><br>
-              <label style="margin-left: 56px; margin-top: 20px;">收件郵件</label> : <input type="text"
+              <label style="margin-left: 56px; margin-top: 20px;">收件郵件</label> :
+               <input id="EditOrdersRecipientMail" type="text"
                 class="rounded form-control form-control-sm bg-light"
                 style="width: 400px; margin-top: 20px; margin-right: 80px; margin-bottom: 20px; display: inline-block;">
-              <label style="margin-left: auto;">收件地址</label> : <input type="text"
+              <label style="margin-left: auto;">收件地址</label> :
+               <input id="EditOrdersRecipientAddress" type="text"
                 class="rounded form-control form-control-sm bg-light" style="width: 400px; display: inline-block;">
             </div>
           </form>
@@ -195,7 +203,7 @@
           <form class="rounded">
             <div style="font-size: 20px;">
               <span style="margin-left: 56px; margin-top: 20px;">付款方式 :
-                <select style="width: 400px; margin-top: 20px; margin-bottom: 20px; display: inline-block;"
+                <select id="EditOrdersPayment"  style="width: 400px; margin-top: 20px; margin-bottom: 20px; display: inline-block;"
                   class="rounded form-select form-select-sm bg-light">
                   <option></option>
                   <option>Paypal</option>
@@ -203,7 +211,7 @@
                   <option>ATM</option>
                 </select>
               </span><span style="margin-left: 80px;">付款狀態 :</span>
-              <select style="width: 400px; margin-top: 20px; display: inline-block ;"
+              <select id="EditOrdersPaymentStatus" style="width: 400px; margin-top: 20px; display: inline-block ;"
                 class="rounded form-select form-select-sm bg-light">
                 <option></option>
                 <option>已付款</option>
@@ -230,7 +238,7 @@
           <form class="rounded">
             <div style="font-size: 20px;">
               <span style="margin-left: 56px; margin-top: 20px;">運送方式 :
-                <select style="width: 400px; margin-top: 20px; margin-bottom: 20px; display: inline-block;"
+                <select id="EditOrdersShipment" style="width: 400px; margin-top: 20px; margin-bottom: 20px; display: inline-block;"
                   class="rounded form-select form-select-sm bg-light">
                   <option></option>
                   <option>賣家宅配</option>
@@ -238,7 +246,7 @@
                   <option>郵局</option>
                 </select>
               </span><span style="margin-left: 80px;">運送狀態 :</span>
-              <select style="width: 400px; margin-top: 20px;display: inline-block;"
+              <select id="EditOrdersShipmentStatus" style="width: 400px; margin-top: 20px;display: inline-block;"
                 class="rounded form-select form-select-sm bg-light">
                 <option></option>
                 <option>已出貨</option>
@@ -252,7 +260,10 @@
     </div>
   </div>
 
-  </div>
+</div>
+
+
 </body>
 
 </html>
+

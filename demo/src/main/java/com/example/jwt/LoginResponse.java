@@ -5,7 +5,7 @@ public class LoginResponse {
     private String refreshToken;
     
     
-    
+
     
 	public String getAccessToken() {
 		return accessToken;

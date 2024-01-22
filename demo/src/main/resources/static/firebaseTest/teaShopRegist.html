@@ -15,13 +15,12 @@
 	<!-- 引入 自己Firebase的資訊 -->
 	<script>
 		const firebaseConfig = {
-			apiKey: "AIzaSyB6YCeEBRQ2KrChghHA7f2dD3zaemr0ApY",
-			authDomain: "animated-axe-350313.firebaseapp.com",
-			projectId: "animated-axe-350313",
-			storageBucket: "animated-axe-350313.appspot.com",
-			messagingSenderId: "125530159088",
-			appId: "1:125530159088:web:3393e4e4c53f04b340cf35",
-			measurementId: "G-FBWW48LLZD",
+			apiKey: "AIzaSyCXNArG8SeQAUY-LsiT0HzK9BHBWSGcMxo",
+			authDomain: "ee73-project.firebaseapp.com",
+			projectId: "ee73-project",
+			storageBucket: "ee73-project.appspot.com",
+			messagingSenderId: "394831866559",
+			appId: "1:394831866559:web:019590966ed2c4ad9e740a"
 		};
 		firebase.initializeApp(firebaseConfig);
 	</script>
@@ -37,7 +36,7 @@
 		}
 
 		.image-area {
-			background-image: url('./scope/scope-2.png');
+			background-image: url('/firebaseTest/scope/scope-2.png');
 			width: 50%;
 			height: 100vh;
 			background-repeat: no-repeat;
@@ -132,12 +131,12 @@
 			<div class="title">
 				<div class="titleContext" style=" margin-bottom: 7%; ">
 					<div class="logoImg" style="width: 25%; height: 20%;display: inline-block;">
-						<img src="./scope/LOGO.png" style="width: 100%; height: 100%;" alt="Logo" />
+						<img src="/firebaseTest/scope/LOGO.png" style="width: 100%; height: 100%;" alt="Logo" />
 					</div>
 					<div class="rounded"
 						style="margin-left: 35%; display: inline-block; width: 10%; height: 20%; background-color: #C20000; text-align: center;">
 						<a href="logout.html ">
-							<img src="./icon/leave.png" style="width: 20%;height: 50%;" class="exitIcon" />
+							<img src="/firebaseTest/icon/leave.png" style="width: 20%;height: 50%;" class="exitIcon" />
 						</a>
 					</div>
 				</div>
@@ -168,7 +167,7 @@
 						<div class="mb-3">
 							<button id="fb" class="btn btn-light"
 								style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
-								<img src="./icon/facebook.png" class="iconImg"
+								<img src="/firebaseTest/icon/facebook.png" class="iconImg"
 									style="width: 5%; height: 5%; vertical-align: middle;" />
 								<b>FB 註冊</b>
 							</button>
@@ -176,7 +175,7 @@
 						<div class="mb-3">
 							<button id="google" class="btn btn-light"
 								style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
-								<img src="./icon/icons8-google-48.png" class="iconImg"
+								<img src="/firebaseTest/icon/icons8-google-48.png" class="iconImg"
 									style="width: 5%; height: 5%; vertical-align: middle;" />
 								<b>Google 註冊</b>
 							</button>
@@ -195,6 +194,7 @@
 	<script>
 
 		document.addEventListener("DOMContentLoaded", function () {
+			returnMsg();
 			document
 				.getElementById("google")
 				.addEventListener("click", function (event) {
@@ -204,12 +204,7 @@
 						.auth()
 						.signInWithRedirect(provider)
 						.then((result) => {
-							window.location.href = '/shopindex'
-							//取得對方user資訊
-							var user = result.user;
-							console.log("登入成功");
-							console.log(user);
-							document.getElementById("userName").innerText = user.displayName
+
 						})
 						.catch((error) => {
 							console.error("登入失敗");
@@ -220,12 +215,24 @@
 			$("#getemail").on("click", function () {
 				var email = $('#username').val();
 				var password = $('#password').val();
-				console.log(email);
+				console.log(firebase.auth().currentUser);
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
 					.then(result => {
-						console.log("ok");
+
+						console.log(result.user);
+						var user = firebase.auth().currentUser;
+						user
+							.sendEmailVerification()
+							.then(function () {
+								// 驗證信發送完成
+								window.alert('驗證信已發送到您的信箱，請查收。')
+							}).catch(error => {
+								// 驗證信發送失敗
+								console.log(error.message);
+							});
+
 					}).catch(function (error) {
 						console.log(error.message)
 					});
@@ -250,35 +257,80 @@
 					});
 			})
 		});
-		firebase.auth()
-			.getRedirectResult()
-			.then((result) => {
-				console.log(result.user)
-				if (result.credential) {
-					/** @type {firebase.auth.OAuthCredential} */
-					var credential = result.credential;
 
-					// This gives you a Google Access Token. You can use it to access the Google API.
-					var token = credential.accessToken;
-					// ...
-					
-					console.log(token)
+
+
+
+
+		// 導回後處理
+		function returnMsg() {
+			firebase.auth()
+				.getRedirectResult()
+				.then((result) => {
+
+					if (result.credential) {
+						/** @type {firebase.auth.OAuthCredential} */
+						var credential = result.credential;
+
+						// This gives you a Google Access Token. You can use it to access the Google API.
+						var token = credential.accessToken;
+						// ...
+
+					}
+					// The signed-in user info.
+					var user = result.user;
+
+					var displayName = user._delegate.displayName
+					var email = user._delegate.email
+					var emailVerified = user._delegate.emailVerified
+					var providerId = user._delegate.providerId
+					var loginMethod = user._delegate.providerData[0].providerId
+
+
+					console.log(user)
+					getAuth(displayName, email, emailVerified, providerId, loginMethod);
+
+				}).catch((error) => {
+
+				});
+		}
+
+
+
+
+
+
+		function getAuth(displayName, email, emailVerified, providerId, loginMethod) {
+			var authData = {
+				displayName: displayName,
+				email: email,
+				emailVerified: emailVerified,
+				providerId: providerId,
+				loginMethod: loginMethod
+
+			}
+			console.log(authData)
+			$.ajax({
+				url: '/getauth',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify(authData),
+				success: function (response) {
+
+				},
+				error: function () {
+					console.log(JSON.stringify(authData))
 				}
-				// The signed-in user info.
-				var user = result.user;
-				// IdP data available in result.additionalUserInfo.profile.
-				// ...
-			}).catch((error) => {
-				console.log("err")
-				// Handle Errors here.
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				// The email of the user's account used.
-				var email = error.email;
-				// The firebase.auth.AuthCredential type that was used.
-				var credential = error.credential;
-				// ...
-			});
+
+			})
+		}
+
+
+
+
+
+
+
 
 	</script>
 </body>

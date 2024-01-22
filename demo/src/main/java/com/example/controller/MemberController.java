@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,10 @@ public class MemberController {
 	@Autowired
 	MemberService memberservice;
 	
+	@PostMapping("/getAllMemberInfo")
+	public List<Member> getMemberInfo() {
+		return memberservice.getAllMemberInfo();
+	}
 	@PostMapping("/getMemberInfo")
 	public Member getMemberInfo(@RequestBody String memberId) {
 		return memberservice.getMemberInfo(memberId);
