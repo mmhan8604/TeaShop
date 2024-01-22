@@ -71,7 +71,7 @@ $(document).ready(function () {
   });
 
   $("#buttonShop").click();
-  $("#shopInfo").click();
+  //$("#shopInfo").click();
 })
 
 $("#upload").on("click", function () {

@@ -5,7 +5,6 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Component;
 
 
 import com.example.entity.shopInfo;
@@ -19,30 +18,10 @@ public class loginServiceImpl implements loginService{
 	@Autowired 
 	private loginDao dao;
 	
-	private String clientAccount;
-	private String clientPassword;
-	
 
 
 	@Override
-	public void setClientAccount(String clientAccount) {
-		this.clientAccount = clientAccount;
-	}
-
-
-
-	
-
-
-	@Override
-	public void setClientPassword(String clientPassword) {
-		this.clientPassword = clientPassword;
-	}
-
-
-
-	@Override
-	public int checkAccount() {
+	public int checkAccount(String clientAccount,String clientPassword) {
 		List<shopInfo> fba= dao.findByEmail(clientAccount);
 		
 		if(fba.isEmpty()) {
@@ -56,14 +35,6 @@ public class loginServiceImpl implements loginService{
 		
 	}
 
-	@Override
-	public boolean checkPassword(String r) {
-		if (r.equals(clientPassword)) {
-			return true;
-		}else {
-			return false;
-		}
-		
-	}
+	
 
 }
