@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 個頁面樣式css -->
+    <link rel="stylesheet" href="backstage/css/style_v2.css" />
+    <link rel="stylesheet" href="backstage/webSource/eleType/element.css" />
+    <!-- js -->
+    <script type="text/javascript" src="backstage/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    
+
+</head>
+
+
+<body>
+    <!-- NAV -->
+    <div style="position: fixed;top: 0;margin: 40px;width: 100%;margin-bottom: 25px;">
+        <a href="#"><img class="me-auto" src="backstage/img/project.png" alt="" style="height: 50px" /></a>
+        <a href="#"><img src="backstage/img/btn/btn_merchant background.png" alt="" style="height: 50px" /></a>
+        <a href="#"><img src="backstage/img/btn/btn_publishDesign.png" alt="" style="height: 50px" /></a>
+    </div>
+    <div id="fullview" class="fullview" style="margin-top: 120px;">
+        <!--左邊區塊-->
+        <div class="block formSpace formSpaceStyle" id="bar">
+            <div style="text-align: center">
+                <div class="fw-bold barTitFont">商店設定</div>
+                <div style="padding: 20px">
+                    <div style="margin-top: 20px">
+                        <label style="font-size: 16px">商店字型：</label>
+                        <select
+                            style=" width: 300px; display: inline-block; font-size: 14px; background-color: #b8b8b8;"
+                            class="rounded form-control form-control-sm" id="fontSelector" onchange="changeFont()">
+                            <option value="'Microsoft JhengHei', sans-serif">微軟正黑體</option>
+                            <option value="'jf open 粉圓 1.1', sans-serif">jf open 粉圓體</option>
+                            <option value="'Noto Serif TC Medium', serif">思源宋體</option>
+                            <option value="'Noto Sans CJK TC Medium', serif">思源黑體</option>
+                        </select>
+                    </div>
+                    <div style="font-size: 40px; margin-top: 10px" class="selected-font fw-bold">
+                        這是一段範例文字。 This is a sample text.
+                    </div>
+
+                    <div class="dottedLine"></div>
+
+                    <div class="fw-bold barSecFont">導覽列</div>
+                    <div style="text-align: left; margin-left: 7%">
+                        <label class="previeTitle" style="margin-top: 20px">樣式：</label><br />
+                    </div>
+                    <input type="radio" name="emotion" id="nav1" class="inputHidden" />
+                    <label for="nav1">
+                        <img src="backstage/img/nav-1.png" alt=""
+                            style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
+                    </label>
+                    <input type="radio" name="emotion" id="nav2" class="inputHidden" />
+                    <label for="nav2" style="margin-bottom: 20px">
+                        <img src="backstage/img/nav-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
+                    </label>
+                    <div style=" display: flex; align-content: center; justify-content: center; align-items: center;">
+                        <label for="colorPicker1" style="font-size: 16px">背景顏色：</label>
+                        <input type="color" id="colorPicker1" name="colorPicker1" value="#FFFFFF"
+                            oninput="updateColorInput('colorCodeInput1', this.value)" />
+                        <input type="text" id="colorCodeInput1" class="rounded form-control form-control-sm"
+                            value="#FFFFFF" oninput="updateColorPicker('colorPicker1', this.value)"
+                            style=" width: 250px; display: inline-block; background-color: #b8b8b8;" />
+                        <br />
+                    </div>
+                    <div
+                        style="display: flex; align-content: center; justify-content: center; align-items: center; margin-top: 10px;">
+                        <label for="colorPicker2" style="font-size: 16px">文字顏色：</label>
+                        <input type="color" id="colorPicker2" name="colorPicker2" value="#FFFFFF"
+                            oninput="updateColorInput('colorCodeInput2', this.value)" />
+                        <input type="text" id="colorCodeInput2" class="rounded form-control form-control-sm"
+                            value="#FFFFFF" oninput="updateColorPicker('colorPicker2', this.value)"
+                            style=" width: 250px; display: inline-block; background-color: #b8b8b8;" />
+                        <br />
+                    </div>
+                    <div
+                        style=" display: flex; align-content: center; justify-content: center; align-items: center; margin-top: 10px;">
+                        <label for="colorPicker3" style="font-size: 16px">圖示顏色：</label>
+                        <input type="color" id="colorPicker3" name="colorPicker3" value="#FFFFFF"
+                            oninput="updateColorInput('colorCodeInput3', this.value)" />
+                        <input type="text" id="colorCodeInput3" class="rounded form-control form-control-sm"
+                            value="#FFFFFF" oninput="updateColorPicker('colorPicker3', this.value)"
+                            style=" width: 250px; display: inline-block; background-color: #b8b8b8;" /><br />
+                    </div>
+
+                    <div class="dottedLine"></div>
+
+                    <div class="fw-bold" style=" font-size: 20px; margin-top: 20px; text-align: left; margin-left: 7%;">
+                        頁尾列
+                    </div>
+                    <div style="text-align: left; margin-left: 7%">
+                        <label class="previeTitle" style="margin-top: 20px">樣式：</label><br />
+                    </div>
+                    <input type="radio" name="emotion" id="nav3" class="inputHidden" />
+                    <label for="nav3">
+                        <img src="backstage/img/footer-1.png" alt=""
+                            style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
+                    </label>
+                    <input type="radio" name="emotion" id="nav4" class="inputHidden" />
+                    <label for="nav4" style="margin-bottom: 20px">
+                        <img src="backstage/img/footer-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
+                    </label>
+
+                    <div style=" display: flex; align-content: center; justify-content: center; align-items: center;">
+                        <label for="colorPicker4" style="font-size: 16px">背景顏色：</label>
+                        <input type="color" id="colorPicker4" name="colorPicker4" value="#FFFFFF"
+                            oninput="updateColorInput('colorCodeInput4', this.value)" />
+                        <input type="text" id="colorCodeInput4" class="rounded form-control form-control-sm"
+                            value="#FFFFFF" oninput="updateColorPicker('colorPicker4', this.value)"
+                            style=" width: 250px; display: inline-block; background-color: #b8b8b8;" /><br />
+                    </div>
+                    <div
+                        style=" display: flex; align-content: center; justify-content: center; align-items: center; margin-top: 10px;">
+                        <label for="colorPicker5" style="font-size: 16px">文字顏色：</label>
+                        <input type="color" id="colorPicker5" name="colorPicker5" value="#FFFFFF"
+                            oninput="updateColorInput('colorCodeInput5', this.value)" />
+                        <input type="text" id="colorCodeInput5" class="rounded form-control form-control-sm"
+                            value="#FFFFFF" oninput="updateColorPicker('colorPicker5', this.value)"
+                            style=" width: 250px; display: inline-block; background-color: #b8b8b8;" /><br />
+                    </div>
+                </div>
+            </div>
+            <script>
+                // 字體選擇 //
+                function changeFont() {
+                    var fontSelector = document.getElementById("fontSelector");
+                    var selectedFont =
+                        fontSelector.options[fontSelector.selectedIndex].value;
+                    document.querySelector(".selected-font").style.fontFamily =
+                        selectedFont;
+                }
+
+                // 選擇樣式//
+                function showContent(contentId) {
+                    // 隱藏所有的內容
+                    var allContents = document.getElementsByClassName("contentEle");
+                    for (var i = 0; i < allContents.length; i++) {
+                        allContents[i].style.display = "none";
+                    }
+
+                    // 顯示被選擇的內容
+                    document.getElementById(contentId).style.display = "block";
+                }
+
+                // 顏色選擇器//
+                // 監聽顏色選擇器的 input 事件，更新對應的色碼輸入框
+                function updateColorInput(colorCodeInputId, colorValue) {
+                    var colorCodeInput = document.getElementById(colorCodeInputId);
+                    colorCodeInput.value = colorValue;
+                }
+
+                // 監聽輸入框的 input 事件，更新對應的顏色選擇器
+                function updateColorPicker(colorPickerId, colorCode) {
+                    var colorPicker = document.getElementById(colorPickerId);
+                    colorPicker.value = colorCode;
+                }
+            </script>
+        </div>
+
+        <!--右邊區塊-->
+        <div id="container" class="allViews" style="margin-left: 600px;">
+            <div class="view" id="view-1">
+                <h3 class="text-center">選擇區塊元件</h3>
+                <div class="row mt-5">
+                    <div class="col-4" id="mybtn0" onclick="LoadLayout(0,'block_1')">
+                        <img src="backstage/img/block/block0.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                    <div class="col-4" id="mybtn1" onclick="LoadLayout(1,'block_1')">
+                        <img src="backstage/img/block/block1.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                    <div class="col-4" id="mybtn2" onclick="LoadLayout(2,'block_1')">
+                        <img src="backstage/img/block/block2.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-4" id="mybtn3" onclick="LoadLayout(3,'block_1')">
+                        <img src="backstage/img/block/block3.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                    <div class="col-4" id="mybtn4" onclick="LoadLayout(4,'block_1')">
+                        <img src="backstage/img/block/block4.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                    <div class="col-4" id="mybtn5" onclick="LoadLayout(5,'block_1')">
+                        <img src="backstage/img/block/block5.png" alt=""
+                            style="width: 100%; height: 100%; object-fit: contain" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 按鈕"+"，按鈕"-" -->
+    <div id="btnArea">
+        <!-- 開始時隱藏減號按鈕 -->
+        <button id="v1pBtn" class="btn btn-warning btnWHP" onclick="addView(this)">
+            <h3>＋</h3>
+        </button>
+        <button id="v1rBtn" class="btn btn-danger btnWHP" onclick="removeView(this)">
+            <h3>－</h3>
+        </button>
+        <button id="v2pBtn" class="btn btn-warning btnWHP" onclick="addView(this)">
+            <h3>＋</h3>
+        </button>
+        <button id="v2rBtn" class="btn btn-danger btnWHP" onclick="removeView(this)">
+            <h3>－</h3>
+        </button>
+        <button id="v3pBtn" class="btn btn-warning btnWHP" onclick="addView(this)">
+            <h3>＋</h3>
+        </button>
+        <button id="v3rBtn" class="btn btn-danger btnWHP" onclick="removeView(this)">
+            <h3>－</h3>
+        </button>
+
+        <button id="v4rBtn" class="btn btn-danger btnWHP" onclick="removeView(this)">
+            <h3>－</h3>
+        </button>
+    </div>
+
+    <script>
+        // id view_控制數
+        var viewCount = 1;
+        // 最大view數=4
+        var maxViews = 4;
+
+        // 按鈕"+"，新增view
+        function addView(button) {
+            if (viewCount < maxViews) {
+                viewCount++;
+                var container = document.getElementById("container");
+                var newView = document.createElement("div");
+                newView.className = "view";
+                newView.id = "view-" + viewCount;
+                newView.innerHTML = `
+                    <h3 class="text-center">選擇區塊元件${viewCount}</h3>
+                    <div class="row mt-5">
+                        <div class="col-4" onclick="LoadLayout(0,'block_${viewCount}')">
+                            <img src="backstage/img/block/block0.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                        <div class="col-4"  onclick="LoadLayout(1,'block_${viewCount}')">
+                            <img src="backstage/img/block/block1.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                        <div class="col-4"  onclick="LoadLayout(2,'block_${viewCount}')">
+                            <img src="backstage/img/block/block2.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-4"  onclick="LoadLayout(3,'block_${viewCount}')">
+                            <img src="backstage/img/block/block3.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                        <div class="col-4"  onclick="LoadLayout(4,'block_${viewCount}')">
+                            <img src="backstage/img/block/block4.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                        <div class="col-4" onclick="LoadLayout(5,'block_${viewCount}')">
+                            <img src="backstage/img/block/block5.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                        </div>
+                    </div>
+                `;
+
+                // 獲取按鈕的ID（例如，v1pBtn）並提取視圖號碼
+                var btnId = button.id;
+                var viewNumber = parseInt(btnId.substring(1, 2));
+
+                // 在相應號碼的現有視圖之後插入新視圖
+                var existingView = document.getElementById("view-" + viewNumber);
+                existingView.insertAdjacentElement('afterend', newView);
+
+                // 更新剩餘區塊的ID
+                var remainingViews = container.getElementsByClassName("view");
+                for (var i = viewCount; i >= viewNumber; i--) {
+                    remainingViews[i - 1].id = "view-" + i;
+                    // bigBlock = "block_"+i;
+                    // bigBlockNum = i;
+                }
+
+                // 更新按鈕狀態
+                toggleButtons();
+                // 更新所有 view 元素的 onclick 屬性
+                updateViewOnclickAttributes();
+            }
+        }
+
+        // 按鈕"-"
+        function removeView(button) {
+            var btnId = button.id;
+            var viewNumber = parseInt(btnId.substring(1, 2));
+            var viewId = "view-" + viewNumber;
+
+            var viewToRemove = document.getElementById(viewId);
+            if (viewToRemove) {
+                var container = document.getElementById("container");
+                container.removeChild(viewToRemove);
+
+                // 重新設定剩餘 view 的 id
+                var remainingViews = container.getElementsByClassName("view");
+                for (var i = 0; i < remainingViews.length; i++) {
+                    remainingViews[i].id = "view-" + (i + 1);
+                }
+
+                viewCount--;
+
+                // 更新按鈕狀態
+                toggleButtons();
+                // 更新所有 view 元素的 onclick 屬性
+                updateViewOnclickAttributes();
+
+            }
+        }
+
+        function toggleButtons() {
+            var viewElements = document.getElementsByClassName("view");
+            var totalViews = viewElements.length;
+
+            if (totalViews === 1) {
+                document.getElementById("v1pBtn").style.display = "inline";
+                document.getElementById("v1rBtn").style.display = "none";
+                document.getElementById("v2pBtn").style.display = "none";
+                document.getElementById("v2rBtn").style.display = "none";
+                document.getElementById("v3pBtn").style.display = "none";
+                document.getElementById("v3rBtn").style.display = "none";
+                document.getElementById("v4rBtn").style.display = "none";
+            } else if (totalViews === 2) {
+                document.getElementById("v1pBtn").style.display = "inline";
+                document.getElementById("v1rBtn").style.display = "inline";
+                document.getElementById("v2pBtn").style.display = "inline";
+                document.getElementById("v2rBtn").style.display = "inline";
+                document.getElementById("v3pBtn").style.display = "none";
+                document.getElementById("v3rBtn").style.display = "none";
+                document.getElementById("v4rBtn").style.display = "none";
+            } else if (totalViews === 3) {
+                document.getElementById("v1pBtn").style.display = "inline";
+                document.getElementById("v1rBtn").style.display = "inline";
+                document.getElementById("v2pBtn").style.display = "inline";
+                document.getElementById("v2rBtn").style.display = "inline";
+                document.getElementById("v3pBtn").style.display = "inline";
+                document.getElementById("v3rBtn").style.display = "inline";
+                document.getElementById("v4rBtn").style.display = "none";
+            } else if (totalViews === 4) {
+                document.getElementById("v1pBtn").style.display = "none";
+                document.getElementById("v1rBtn").style.display = "inline";
+                document.getElementById("v2pBtn").style.display = "none";
+                document.getElementById("v2rBtn").style.display = "inline";
+                document.getElementById("v3pBtn").style.display = "none";
+                document.getElementById("v3rBtn").style.display = "inline";
+                document.getElementById("v4rBtn").style.display = "inline";
+            }
+        }
+
+        // 更新所有 view 元素的 onclick 屬性的函數
+        function updateViewOnclickAttributes() {
+            for (var i = 1; i <= viewCount; i++) {
+                var blockNumber = "block_" + i;
+                var viewElement = document.getElementById("view-" + i);
+                if (viewElement) {
+                    // 更新視圖中每個圖像元素的 onclick 屬性
+                    var imageElements = viewElement.querySelectorAll("[onclick^='LoadLayout']");
+                    imageElements.forEach(function (imgElement, index) {
+                        // 將 0 修改為相應的區塊編號
+                        imgElement.setAttribute("onclick", "LoadLayout(" + index + ",'" + blockNumber + "')");
+                    });
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

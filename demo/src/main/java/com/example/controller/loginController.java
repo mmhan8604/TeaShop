@@ -37,11 +37,8 @@ public class loginController {
 		JSONObject jo=new JSONObject(data);
 		
 		
-		ls.setClientAccount(jo.get("email").toString());
-		ls.setClientPassword(jo.get("password").toString());
-		
 				
-		int state= ls.checkAccount();
+		int state= ls.checkAccount(jo.get("email").toString(),jo.get("password").toString());
 		
 		if(state==0) {
 			

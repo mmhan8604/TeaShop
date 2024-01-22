@@ -14,8 +14,9 @@ function readURL(input,whichImg) {
     }
 
     function shopInfoEvent(){
+		console.log("b")
 		document.getElementById("logoUpdate").addEventListener("change", function () {
-      console.log(event.target.files[0].size)
+      
       if(event.target.files[0].size>5000000){
         alert("logo圖片過大")
         return
@@ -33,6 +34,7 @@ function readURL(input,whichImg) {
     })
 
     document.getElementById("upload").addEventListener("click",async function(){
+		console.log("a")
       let data={
         "shopName":document.getElementById("shopNameInput").value,
         "name":document.getElementById("nameInput").value,
