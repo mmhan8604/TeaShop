@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.Activitys;
 import com.example.entity.Products;
 import com.example.repository.ProductsResposity;
 
@@ -30,6 +29,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void delProduct(Products products) {
+		Optional<Products> opOriginProducts = productsRes.findById(products.getId());
+		Products originProducts = opOriginProducts.get();
 		if (productsRes.existsById(products.getId())) {
 			productsRes.delete(products);
 		} else {
@@ -40,23 +41,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Products save(Products products) {
-		// TODO Auto-generated method stub
+		
 		return productsRes.save(products);
 	}
 
-	@Override
-	public void editProduct(Products products) {
-		Optional<Products> opOriginProducts = productsRes.findById(products.getId());
-		Products originProducts = opOriginProducts.get();
-		if (productsRes.existsById(products.getId())) {
-			Activitys activity = originProducts.getActivity();
-			products.setActivity(activity);
-			productsRes.save(products);
-		} else {
-			throw new ValidationException("id不存在，無法查詢");
-		}
 
-	}
 
 	@Override
 	public Products updateProduct(String productId, Products products) {

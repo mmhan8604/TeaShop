@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Products;
-import com.example.service.ProductService;
 import com.example.service.ProductServiceImpl;
 
 @RestController
@@ -69,11 +68,10 @@ public class ProductController {
 	
 //	刪除刪品
 	@PostMapping("/delProduct/{id}")
-	public String delProduct(@RequestBody Products products) {
-
-		System.out.println("刪除id" + products.getId());
-		productService.delProduct(products);
-		return products.toString();
+	public String delProduct(@PathVariable String id) {
+		Optional<Products> Products = productService.findById(id);
+		
+		return null;
 	}
 	
 //	編輯商品

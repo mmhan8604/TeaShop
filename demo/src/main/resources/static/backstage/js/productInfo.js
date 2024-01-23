@@ -76,7 +76,7 @@ function ProductInfoqueryAll(choosepage) {
 		
 		            <td>
 		                <a href="#" class="btn btn-light editBtn" data-id="${pcode}"><img src="../icon/btn_revise.png" style="width: 15px;"></a>
-		                <a href="#" class="btn btn-light removeBtn"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+		                <a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
 		            </td>
 		        </tr>
 		    `);
@@ -112,8 +112,11 @@ function ProductInfoqueryAll(choosepage) {
 			});
 
 			//刪除按鈕的處理事件
-			$(`#bodyContext #deleteBtn${i}`).on("click", function() {
-				deleteProduct(trlist[i].id);
+			$("#bodyContext").off("click", ".removeBtn");
+			$("#bodyContext").on("click", ".removeBtn", function() {
+				let productId = $(this).data("id");
+				alert(productId);
+				deleteProduct(productId);
 			});
 		}
 	}

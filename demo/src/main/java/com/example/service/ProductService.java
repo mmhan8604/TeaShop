@@ -11,7 +11,6 @@ import com.example.entity.Products;
 public interface ProductService {
     void addProduct(Products products);
     void delProduct(Products products);
-    void editProduct(Products products);
     
     List<Products> queryProduct(String shopId);
     List<Products> queryProductByName(String name);
