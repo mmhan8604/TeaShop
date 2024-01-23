@@ -86,22 +86,22 @@ function ProductInfoqueryAll(choosepage) {
 			$("#bodyContext").on("click", ".editBtn", function() {
 				let productId = $(this).data("id");
 				$("#productSetting").trigger("click");
-				alert(productId);				
-				
+				alert(productId);
+
 				$.ajax({
 					url: `/products/${productId}`,
 					method: 'GET',
 					success: function(productDatas) {
 						console.log("成功了", productDatas);
 						// 抓商品資料
-						//						$('#editProductImgs').val(productDatas.products.picjson);
-						//						$('#editProductID').val(productDatas.products.id);
-						//						$('#editProductName').val(productDatas.products.name);
-						//						$('#editProductQuantity').val(productDatas.products.quantity);
-						//						$('#editProductShelves').val(productDatas.products.shelves);
-						//						$('#editProductPrice').val(productDatas.products.price);
-						//						$('#editProductCost').val(productDatas.products.cost);
-						//						$('#editProductIntro').val(productDatas.products.description);				
+						//						$('#editProductImgs').val(productDatas.product.picjson);
+						$('#editProductID').val(productDatas.product.id);
+						$('#editProductName').val(productDatas.product.name);
+						$('#editProductQuantity').val(productDatas.product.stock);
+						$('#editProductShelves').val(productDatas.product.shelves);
+						$('#editProductPrice').val(productDatas.product.price);
+						$('#editProductCost').val(productDatas.product.cost);
+						$('#editProductIntro').val(productDatas.product.discription);
 
 					},
 					error: function(error) {
@@ -137,10 +137,39 @@ function ProductInfoqueryAll(choosepage) {
 
 	//編輯
 	function editProduct() {
-		var filename = `/backstage/html/productSetting.html?productId=${productId} #formSpace`;
-		$("#formSpace").load(filename, function() {
-			ProductSetting();
-		});
+		function productUpdateData() {
+			return {
+				//			picjson: $("#editProductImgs").val(),
+				id: $("#editProductID").val(),
+				name: $("#editProductName").val(),
+				stock: $('#editProductQuantity').val(),
+				shelves: $('#editProductShelves').val(),
+				price: $('#editProductPrice').val(),
+				cost: $('#editProductCost').val(),
+				discription: $('#editProductIntro').val()
+				// 可根據需要添加其他欄位
+			};
+		}
+
+		function updateProduct(productIdPOST, updatedData) {
+			$.ajax({
+				url: `/updateProducts/${productIdPOST}`,
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(updatedData),
+				success: function(response) {
+					console.log("更新成功: ", response);
+					// 可以在這裡添加後續處理邏輯
+				},
+				error: function(error) {
+					console.error("更新失敗: ", error);
+				}
+			});
+		}
+		var productIdPOST = $('#editProductID').val();
+		var updatedData = productUpdateData();
+		updateProduct(productIdPOST, updatedData);
+
 	}
 
 }

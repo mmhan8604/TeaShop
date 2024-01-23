@@ -39,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public Products save(Products products) {
+		// TODO Auto-generated method stub
+		return productsRes.save(products);
+	}
+
+	@Override
 	public void editProduct(Products products) {
 		Optional<Products> opOriginProducts = productsRes.findById(products.getId());
 		Products originProducts = opOriginProducts.get();
@@ -50,6 +56,22 @@ public class ProductServiceImpl implements ProductService {
 			throw new ValidationException("id不存在，無法查詢");
 		}
 
+	}
+
+	@Override
+	public Products updateProduct(String productId, Products products) {
+		Optional<Products> opOriginProducts = productsRes.findById(productId);
+		Products product = opOriginProducts.get();
+
+		product.setId(products.getId());
+		product.setName(products.getName());
+		product.setStock(products.getStock());
+		product.setShelves(products.getShelves());
+		product.setPrice(products.getPrice());
+		product.setCost(products.getCost());
+		product.setDiscription(products.getDiscription());
+
+		return save(product);
 	}
 
 	@Override

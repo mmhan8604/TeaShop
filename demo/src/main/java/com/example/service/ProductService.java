@@ -12,8 +12,12 @@ public interface ProductService {
     void addProduct(Products products);
     void delProduct(Products products);
     void editProduct(Products products);
+    
     List<Products> queryProduct(String shopId);
     List<Products> queryProductByName(String name);
     Products queryProductById(String id);
     Optional<Products> findById(String id);
+    
+    Products save(Products products);
+    Products updateProduct(String productId,Products products);
 }
