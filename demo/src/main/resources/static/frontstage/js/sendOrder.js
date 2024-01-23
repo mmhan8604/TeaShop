@@ -9,6 +9,7 @@ $(document).ready(function() {
 	$('#orderEmail').text(orderinfo.orderEmail)
 	$('#orderPhone').text(orderinfo.orderPhone)
 	$('#orderAddress').text(orderinfo.orderAddress)
+	console.log(auth);
 
 })
 var shipPrice=60;
@@ -26,6 +27,9 @@ function sendOrder() {
 	var cart = JSON.parse(localStorage.getItem('cart')) || [];
 	var oderStorage = JSON.parse(localStorage.getItem('orderinfo'));
 	var payStorage = JSON.parse(localStorage.getItem('payStorage'));
+	localStorage.removeItem('orderinfo');
+	localStorage.removeItem('payStorage');
+	localStorage.removeItem('cart');
 	if (cart.length > 0) {
 		cart.forEach(function(item) {
 			detail[`${i}`] = {
@@ -87,7 +91,9 @@ function sendOrder() {
 				contentType: 'application/json; charset=UTF-8',
 				data: JSON.stringify(detail)
 			});
-
+			localStorage.setItem("shopId",shopId);
+			
+			localStorage.setItem("auth",JSON.stringify(auth));
 			// 處理 ECPay
 			ajax('/ecpayCheckout', JSON.stringify(ecpayData), 1);
 		} catch (error) {

@@ -105,16 +105,17 @@ public class ShopViewcontroller {
 	public String confirmOrder(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
+		model.addAttribute("auth",loginInfo);
 		return "/shopPage/cart05.html";		//確認訂單等等		
 	}
 	
 	@GetMapping("/{shopId}/regist")
 	public String registPage(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		setAllLoginInfo(loginInfo, model, shopId);		
+		setAllLoginInfo(loginInfo, model, shopId);	
 		
-		return "/shopPage/teaShopRegist.html";		//確認訂單等等		
+		
+		return "/shopPage/teaShopRegist.html";		//註冊		
 	}
 	
 	@GetMapping("/{shopId}/login")
@@ -122,7 +123,7 @@ public class ShopViewcontroller {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
 		
-		return "/shopPage/teaShopLogin.html";		//確認訂單等等		
+		return "/shopPage/teaShopLogin.html";		//登入	
 	}
 	
 	

@@ -104,7 +104,7 @@ public class OrderController {
 	
 	@PostMapping("/orderStateUpdate")
 	public boolean orderStateUpdate (@RequestBody String OrderId) {
-		System.out.println(OrderId+"除錯");
+		
 		return orderService.orderStateUpdate(OrderId);
 	}
 	
