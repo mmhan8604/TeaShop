@@ -80,8 +80,8 @@ public class ShopViewcontroller {
 		model.addAttribute("productId", product.getId());
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
-//		model.addAttribute("productDiscription", product.getDiscription());
-		model.addAttribute("productDiscription", "資料庫尚無打上敘述，僅測試用");
+		model.addAttribute("productDiscription", product.getDiscription());
+		model.addAttribute("imgSrc",product.getPicJSON());
 		return "/shopPage/product";		//商品頁	
 	}
 	

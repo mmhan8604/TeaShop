@@ -163,7 +163,8 @@ $(document).ready(function () {
         
         // 如果購物車為空，跳轉到空購物車頁面
         if (newCart.length === 0) {
-            window.location.href = '/shoppingCart';
+            localStorage.removeItem("cart")
+            window.location.reload()
         }
     });
 

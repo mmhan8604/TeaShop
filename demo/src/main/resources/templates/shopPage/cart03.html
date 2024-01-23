@@ -11,10 +11,18 @@
 	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        /*]]>*/
+    </script>
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/js/orderMethod.js"></script>
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<script src="/frontstage/js/logOut.js"></script>
+	<script src="/frontstage/js/cart.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->

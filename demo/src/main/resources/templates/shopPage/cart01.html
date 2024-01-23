@@ -128,7 +128,7 @@
 				<ul id="shopping-cart-actions" class="flex-container" th:if="${userName!=null}">
 					<li class="checkout-btn">
 						<a class="clear01 btn text-center py-1" onclick="clearLocalStorage()">清除</a>						
-						<a th:href="@{'/shop/' + ${shopId} + '/orderPayment'}" class="btn text-center cartCheckout py-1">結帳</a>
+						<a  onclick="checkcart()" class="btn text-center cartCheckout py-1">結帳</a>
 					</li>
 				</ul>
 				<ul id="shopping-cart-actions" class="flex-container" th:if="${userName==null}">
@@ -152,3 +152,12 @@
 		<p class="mb-0">版權所有 &copy; 頂茶TopTea.</p>
 	</div>
 </footer>
+<script>
+	function checkcart(){
+		if(localStorage.getItem("cart")==null||localStorage.getItem("cart").length==0){
+			alert("購物車沒有商品")
+		}else{
+			window.location.href='/shop/' + shopId + '/orderPayment'
+		}
+	}
+</script>
