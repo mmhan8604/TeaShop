@@ -3,9 +3,8 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import com.example.entity.Member;
 import com.example.service.MemberService;
@@ -14,14 +13,20 @@ import com.example.service.MemberService;
 public class MemberController {
 	
 	@Autowired
-	MemberService memberservice;
-	
-	@PostMapping("/getAllMemberInfo")
-	public List<Member> getMemberInfo() {
-		return memberservice.getAllMemberInfo();
-	}
-	@PostMapping("/getMemberInfo")
-	public Member getMemberInfo(@RequestBody String memberId) {
-		return memberservice.getMemberInfo(memberId);
-	}
+    private MemberService memberService;
+    
+//    @PostMapping("/getAllMemberInfo")
+//    public List<Member> getMemberInfo() {
+//        return memberService.getAllMemberInfo();
+//    }
+//    
+//    @PostMapping("/members/{memberId}/totalSpent")
+//    public Integer getTotalSpentByMember(@PathVariable String memberId) {
+//        return memberService.getTotalSpentByMember(memberId);
+//    }
+//    
+    @PostMapping("/getAllMemberInfoWithTotalSpent")
+    public List<Object[]> getAllMembersWithTotalSpent() {
+        return memberService.getAllMembersWithTotalSpent();
+    }
 }
