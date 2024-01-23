@@ -14,19 +14,17 @@ $(document).ready(function() {
 				// 判斷哪個id給相對js
 				if (buttonId == "productInfo") { ProductInfoqueryAll(0); }
 				else if (buttonId == "activityInfo") { ActivityInfoqueryAll(0); }
-				else if (buttonId == "actionSetting"){ActionSetting();}
-            	else if (buttonId == "addAction"){AddAction();}
+				else if (buttonId == "actionSetting") { ActionSetting(); }
+				else if (buttonId == "addAction") { AddAction(); }
 				else if (buttonId == "memberInfo") { MemberInfo(); }
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
-				else if (buttonId == "addProduct"||"productSetting") {
-						insideMutipleImg();								//函式在mutipleImg.js內
+				else if (buttonId == "addProduct" || "productInfo") {insideMutipleImg();}//函式在mutipleImg.js內
+				else if (buttonId == "addProduct"){addProduct();}
 					
-				}
-				ActionSetting();			//誰知道在哪裡說一下
+				ActionSetting();//誰知道在哪裡說一下
 			});
 		});
 
 });
 
-    

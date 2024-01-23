@@ -1,8 +1,14 @@
-//-------------------------------------------------------------後端抓資料
+
 //	每次進到介面的時候就查詢所有資料出來
 function ProductInfoqueryAll(choosepage) {
+	$("#upload").off("click");
+	$("#upload").on("click", function() {
+		editProduct();
+	})
+
 	var trlist;
 	var page = choosepage;
+
 	//移除多次事件綁定
 	$("#prepage").off("click");
 	$("#nextpage").off("click");
@@ -53,7 +59,7 @@ function ProductInfoqueryAll(choosepage) {
 			$("#bodyContext").append(`
 		        <tr style="height:80px;">
 		            <td scope="row">#${porder}</td>
-		            <td id="product${i}">${pcode}</td>
+		            <td>${pcode}</td>
 		            <td><img src="${pimg}" style="width: 70px; height: 50px;"></td>
 		            <td>${pname}</td>            
 		            <td>${pprice}</td>
@@ -69,20 +75,45 @@ function ProductInfoqueryAll(choosepage) {
 		            </td>
 		
 		            <td>
-		                <a href="#" value="${i}" onclick="getProduct()" class="btn btn-light"><img src="../icon/btn_revise.png" style="width: 15px;"></a>
-		                <a href="#" class="btn btn-light"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+		                <a href="#" class="btn btn-light editBtn" data-id="${pcode}"><img src="../icon/btn_revise.png" style="width: 15px;"></a>
+		                <a href="#" class="btn btn-light removeBtn"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
 		            </td>
 		        </tr>
 		    `);
 
+			//編輯按鈕的處理事件
+			$("#bodyContext").off("click", ".editBtn");
+			$("#bodyContext").on("click", ".editBtn", function() {
+				let productId = $(this).data("id");
+				$("#productSetting").trigger("click");
+				alert(productId);				
+				
+				$.ajax({
+					url: `/products/${productId}`,
+					method: 'GET',
+					success: function(productDatas) {
+						console.log("成功了", productDatas);
+						// 抓商品資料
+						//						$('#editProductImgs').val(productDatas.products.picjson);
+						//						$('#editProductID').val(productDatas.products.id);
+						//						$('#editProductName').val(productDatas.products.name);
+						//						$('#editProductQuantity').val(productDatas.products.quantity);
+						//						$('#editProductShelves').val(productDatas.products.shelves);
+						//						$('#editProductPrice').val(productDatas.products.price);
+						//						$('#editProductCost').val(productDatas.products.cost);
+						//						$('#editProductIntro').val(productDatas.products.description);				
+
+					},
+					error: function(error) {
+						console.error('Error products:', error);
+					}
+				})
+
+			});
+
 			//刪除按鈕的處理事件
 			$(`#bodyContext #deleteBtn${i}`).on("click", function() {
 				deleteProduct(trlist[i].id);
-			});
-
-			//編輯按鈕的處理事件
-			$(`#bodyContext #editBtn${i}`).on("click", function() {
-				getProduct(trlist[i].id);
 			});
 		}
 	}
@@ -96,12 +127,16 @@ function ProductInfoqueryAll(choosepage) {
 			.then(result => {
 				console.log('Product deleted:', result);
 				ProductInfoqueryAll(page);
+				var filename = '/backstage/html/productInfo.html #formSpace';
+				$("#formSpace").load(filename, function() {
+					ProductInfoqueryAll(0);
+				});
 			})
 			.catch(error => console.error('Error deleting product:', error));
 	}
 
 	//編輯
-	function getProduct(productId) {
+	function editProduct() {
 		var filename = `/backstage/html/productSetting.html?productId=${productId} #formSpace`;
 		$("#formSpace").load(filename, function() {
 			ProductSetting();
