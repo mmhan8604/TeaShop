@@ -1,5 +1,12 @@
 //活動設定->選擇折扣商品左右切換功能
 function AddAction() {
+	$("#upload").off("click");
+	$("#upload").on("click", function() {
+		addActivity(function() {
+			$("#activityInfo").trigger("click");
+		});
+
+	});
 
 	$(document).ready(function() {
 		$('#sourceTable').on('click', '.moveItem', function() {
@@ -30,14 +37,19 @@ function AddAction() {
 
 }
 
-document.getElementById('upload').addEventListener('click', function() {
-	var activityName = document.getElementById('activityName').value;
-	var activityDiscription = document.getElementById('activityDiscription').value;
-	var activityStartDate = document.getElementById('activityStartDate').value;
-	var startDate = moment(activityStartDate).format('YYYY-MM-DD');
-	var activityEndDate = document.getElementById('activityEndDate').value;
-	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
-	var activityFreeShipping = document.getElementById('activityFreeShipping').value;
+function addActivity(callback) {
+	var activityName = document.getElementById('addactivityName').value;
+	var activityDiscription = document.getElementById('addactivityDiscription').value;
+	var activityStartDate = document.getElementById('addactivityStartDate').value;
+	var momentStartDate = moment(activityStartDate, 'YYYY/MM/DD');
+	var startDate = momentStartDate.format('YYYY-MM-DD');
+
+	var activityEndDate = document.getElementById('addactivityEndDate').value;
+	var momentEndDate = moment(activityEndDate, 'YYYY/MM/DD');
+	var endDate = momentEndDate.format('YYYY-MM-DD');
+
+	var activityFreeShipping = document.getElementById('addactivityFreeShipping').value;
+	var activityDiscount = document.getElementById('addactivityDiscount').value;
 
 	var radioButtons = document.getElementsByName('discount');
 	function getSelectedValue() {
@@ -50,24 +62,38 @@ document.getElementById('upload').addEventListener('click', function() {
 		return '';
 	}
 	var activityMethod = getSelectedValue();
+	//const uuid = java.util.UUID.randomUUID().toString();
+	const timestampId = Date.now().toString();
 
-	var Activity = {
-		shopId: "shop01",
-		name: activityName,
-		discription: activityDiscription,
-		startDate: startDate,
-		endDate: endDate,
-		method: activityMethod,
-		freeShipping: activityFreeShipping
+	var datatosave = {
+		activitys: {
+			id: timestampId,
+			shopId: "shop01",
+			name: activityName,
+			method: activityMethod,
+			startDate: startDate,
+			endDate: endDate,
+			discription: activityDiscription,
+			freeShipping: activityFreeShipping
+		},
 
-	};
+		activitydetails: {
+			products: {
+				id: "TW_tt_R_0001"
+			},
+			activitys: {
+				id: timestampId
+			},
+			discount: activityDiscount
+		}
+	}
 
 	fetch('/addActivity', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(Activity),
+		body: JSON.stringify(datatosave)
 	})
 		.then(response => {
 			if (!response.ok) {
@@ -77,14 +103,14 @@ document.getElementById('upload').addEventListener('click', function() {
 		})
 		.then(message => {
 			console.log(message);
-			var filename = '/backstage/html/activityInfo.html #formSpace'; 
-        			$("#formSpace").load(filename, function(){
-						ActivityInfoqueryAll(0);
-					}); 
+			if (typeof callback === 'function') {
+				callback();
+			}
+
 		})
 		.catch(error => {
 			console.error('Error adding activity:', error);
 		})
-})
+}
 
 

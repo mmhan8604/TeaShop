@@ -1,4 +1,6 @@
 function ActivityInfoqueryAll(choosepage) {
+	$("#upload").off("click");
+
 	var trlist;
 	var page = choosepage;
 	//移除多次事件綁定
@@ -43,8 +45,10 @@ function ActivityInfoqueryAll(choosepage) {
 			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
 		}
 		else { $("#page").html(`${page + 1}/${Math.floor(allpage / 5) + 1}`) }
-		
+
 		for (let i = page * 5; i < (page + 1) * 5; i++) {
+
+
 			var aid = trlist[i].id;
 			var aorder = i + 1;
 			var aname = trlist[i].name;
@@ -60,13 +64,13 @@ function ActivityInfoqueryAll(choosepage) {
             <td>${astartdate} ~ ${aenddate}</td>
             <td>${amethod}</td>
             <td>
-        		<a href="#"  class="btn btn-light" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
-        		<a href="#" class="btn btn-light" onclick="deleteActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
+        		<a href="#"  class="btn btn-light editactivity" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
+        		<a href="#" class="btn btn-light delactivity" onclick="deleteActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
       		</td>
 			</tr>
     		`);
 
-		
+
 		}
 
 	}
@@ -76,39 +80,41 @@ function ActivityInfoqueryAll(choosepage) {
 
 
 function deleteActivity(id) {
-		
-			// 使用 fetch() 方法向後端發送刪除請求
-			fetch('/delActivity/' + id, {
-				method: 'DELETE'
-			})
-				.then(response => response.toString())
-				.then(data => {
-					// 處理後端回傳的結果，例如重新載入表格等
-					console.log(data);
-					//window.location.href = /backstage/html/activityInfo.html;
-					
-        			var filename = '/backstage/html/activityInfo.html #formSpace'; 
-        			$("#formSpace").load(filename, function(){
-						ActivityInfoqueryAll(0);
-					}); 
- 
-					})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-		
-    }
+
+	// 使用 fetch() 方法向後端發送刪除請求
+	fetch('/delActivity/' + id, {
+		method: 'POST',
+		body: "shop01",
+	})
+		.then(response => response.toString())
+		.then(data => {
+			// 處理後端回傳的結果，例如重新載入表格等
+			console.log(data);
+
+			var filename = '/backstage/html/activityInfo.html #formSpace';
+			$("#formSpace").load(filename, function() {
+				ActivityInfoqueryAll(0);
+			});
+
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+}
 
 function getActivity(id) {
-			sessionStorage.setItem('id', id);
-			
-			var filename = '/backstage/html/actionSetting.html #formSpace'; 
-        			$("#formSpace").load(filename, function(){
-						ActionSetting();
-					}); 
-			var retrievedValue = sessionStorage.getItem('id');
-			console.log(retrievedValue); 
+	sessionStorage.setItem('id', id);
 
+	$("#bodyContext").off("click", ".editactivity");
+	$("#bodyContext").on("click", ".editactivity", function() {
+		var retrievedValue = sessionStorage.getItem('id');
+		console.log(retrievedValue);
+		$("#actionSetting").trigger("click");
+
+
+
+	})
 }
 
 

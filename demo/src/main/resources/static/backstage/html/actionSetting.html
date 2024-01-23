@@ -111,9 +111,9 @@
 
                 <input id="activityEndDate" class="form-control form-control-sm bg-light" type="date"
                   style="width: 200px; margin-left: 8px; display: inline-block;" />
-                 <button onclick="showActivity()">取得</button>
+
                  <button onclick="saveActivity()">儲存</button>
-                 <button>test</button>
+
                  
               </div>
             </div>
@@ -136,8 +136,8 @@
 
           <div style="margin-left: 56px;">
             <label style="margin-top: 20px; margin-bottom: 12px; font-size: 20px;">優惠主軸:</label><br />
-            <input class="form-check-input" type="radio" name="discount" style="font-size: 16px;" />免運活動
-            <input class="form-check-input" type="radio" name="discount" style="margin-left: 120px;"
+            <input id="freeShippingRadio" class="form-check-input" type="radio" name="discount" style="font-size: 16px;" />免運活動
+            <input id="discountRadio" class="form-check-input" type="radio" name="discount" style="margin-left: 120px;"
               style="font-size: 16px;" />商品折扣<br />
             <span style="font-size: 14px;display: inline-block;">滿</span> <input
               
@@ -146,7 +146,7 @@
             <span style="font-size: 14px;display: inline-block;">則免運費</span>
             <span style="font-size: 14px; display: inline-block; margin-left: 46px;">折扣</span><br>
             <div style="display: inline-block;margin-left: 240px; font-size: 14px;">
-              <input class="form-control form-control-sm bg-light" type="text"
+              <input id="activityDiscount" class="form-control form-control-sm bg-light" type="text"
                 style="height: 36px;  display: inline-block;width: 80px;" />
               折
             </div>
