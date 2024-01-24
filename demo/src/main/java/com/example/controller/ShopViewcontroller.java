@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
 import com.example.entity.Products;
+import com.example.service.FrontloginService;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
@@ -23,6 +25,8 @@ import jakarta.servlet.http.HttpSession;
 public class ShopViewcontroller {
 	@Autowired
 	ProductService productService;
+	@Autowired
+	FrontloginService frontloginService;
 	
 	
 	
@@ -126,11 +130,25 @@ public class ShopViewcontroller {
 		return "/shopPage/teaShopLogin.html";		//登入	
 	}
 	
-	@PostMapping("{shopId}/checkMember")
+	@GetMapping("/{shopId}/login1")
+	public String loginPagex(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
+		return "/shopPage/memberDetail.html";		//登入	
+	}
+	
+	@GetMapping("{shopId}/checkMember")
 	public String checkMember(HttpSession session,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		String userEmail = loginInfo.getEmail();
+		String StringshopId = Integer.toString(loginInfo.getShopId());
+		if(frontloginService.checkMember(userEmail,StringshopId)) {
+			return "shopPage/index.html";
+		}else {
+			return "/shopPage/memberDetail.html";
+		}
 		
-		return "/shopPage/teaShopLogin.html";
 	}
 	
 	

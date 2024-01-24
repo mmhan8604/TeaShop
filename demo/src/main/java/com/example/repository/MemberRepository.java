@@ -15,7 +15,8 @@ public interface MemberRepository extends JpaRepository<Member,String>{
 	//新增
 	@Query("SELECT m, COALESCE(SUM(o.amount), 0) as totalSpent FROM Member m LEFT JOIN Orders o ON m.id = o.member.id GROUP BY m.id ORDER BY totalSpent DESC")
 	List<Object[]> findAllMembersWithTotalSpent();
-
 	
+	//用email找member
+	List<Member>findByShopIdAndMail(String shopId,String mail);
 	
 }
