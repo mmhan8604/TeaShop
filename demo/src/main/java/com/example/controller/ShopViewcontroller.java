@@ -126,6 +126,13 @@ public class ShopViewcontroller {
 		return "/shopPage/teaShopLogin.html";		//登入	
 	}
 	
+	@PostMapping("{shopId}/checkMember")
+	public String checkMember(HttpSession session,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		
+		return "/shopPage/teaShopLogin.html";
+	}
+	
 	
 	
 	
