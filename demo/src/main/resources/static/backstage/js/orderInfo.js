@@ -5,7 +5,11 @@ var globalOrderDetails;//全域變數
 function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderId').val(orderDetails.order.id);
 	$('#EditOrderTime').val(orderDetails.order.orderDate);
-	$('#EditOrderState').val(orderDetails.order.orderState);
+	if (orderDetails.order.orderState == "已成立") {
+		$('#EditOrderState').val(orderDetails.order.orderState);
+	} else {
+		$('#EditOrderState').val("尚未處理");
+	}
 	$('#EditOrdersName').val(orderDetails.order.member.name);
 	$('#EditOrdersPhone').val(orderDetails.order.member.phone);
 	$('#EditOrdersMail').val(orderDetails.order.member.mail);
@@ -14,7 +18,7 @@ function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
 	$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
 	$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
-	//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
+	$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
 	$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
 	$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
 	// 清空訂單詳情表格並填充新數據

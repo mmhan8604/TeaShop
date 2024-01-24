@@ -11,7 +11,6 @@ public interface EditOrderService {
     Optional<Orders> findById(String id); // 修改參數類型為 String
     List<Orders> findAll();
     Orders save(Orders order);
-    Orders update(Orders order); 
     void deleteById(String id); // 修改參數類型為 
     List<Orderdetails> findByOrderId(String orderId);
     // 更新訂單的方法
