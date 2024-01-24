@@ -9,21 +9,14 @@
 	<!-- JQ -->
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<!-- // 這邊是第三方登入api -->
-	<!-- 引入 Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
-	<!-- 引入 自己Firebase的資訊 -->
-	<script>
-		const firebaseConfig = {
-			apiKey: "AIzaSyCXNArG8SeQAUY-LsiT0HzK9BHBWSGcMxo",
-			authDomain: "ee73-project.firebaseapp.com",
-			projectId: "ee73-project",
-			storageBucket: "ee73-project.appspot.com",
-			messagingSenderId: "394831866559",
-			appId: "1:394831866559:web:01a788a080190b689e740a"
-		};
-		firebase.initializeApp(firebaseConfig);
-	</script>
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        var mail= /*[[${mail}]]*/null;
+        /*]]>*/
+    </script>
 	<style>
 		.login-container {
 			display: flex;
@@ -152,17 +145,17 @@
 						<div style="display: flex; flex-direction: column; justify-content: center;">
 							<div class="mb-3">
 								<label for="username" class="form-label" style="font-size: 24px;">姓名</label>
-								<input type="text" class="form-control" id="username" placeholder="請輸入帳號"
+								<input type="text" class="form-control" id="memberName" placeholder="請輸入姓名"
 									style="width: 60%;height: 19%;">
 							</div>
 							<div class="mb-3">
-								<label for="password" class="form-label" style="font-size: 24px;">電子信箱</label>
-								<input type="password" class="form-control" id="password" placeholder="請輸入密碼"
+								<label for="password" class="form-label" style="font-size: 24px;">地址</label>
+								<input type="text" class="form-control" id="address" placeholder="請輸入地址"
 									style="width: 60%;height: 19%;">
 							</div>
 							<div class="mb-3">
 								<label for="username" class="form-label" style="font-size: 24px;">手機號碼</label>
-								<input type="text" class="form-control" id="username" placeholder="請輸入帳號"
+								<input type="text" class="form-control" id="phone" placeholder="請輸入連絡電話"
 									style="width: 60%;height: 19%;">
 							</div>
 
@@ -183,20 +176,32 @@
 	</div>
 
 	<script th:inline="javascript">
-
-
-
-		//到後端取得身分憑證
+		document.getElementById('getemail').addEventListener('click', function () {
+    createMember();
+});
+	function createMember(){
+		userData={
+			mail: /*[[${email}]]*/null,
+			name: $("#userName").val(),
+			phone: $("#phone").val(),
+			address: $("#address").val(),
+			shopId: /*[[${email}]]*/null
+		}
+		console.log(userData)
+	}
+		
+/**
+		//建立用戶資料
 		$.ajax({
 			url: '/getauth',
 			method: 'POST',
 			contentType: 'application/json; charset=UTF-8',
-			data: JSON.stringify(authData),
+			data: JSON.stringify(userData),
 			success: function (response) {
 				if (response == 1) {
 					console.log(shopId);
-					checkMember();
-					//window.location.href = "/shop/"+shopId+"/shopindex"
+					
+					window.location.href = "/shop/"+shopId+"/shopindex"
 				} else if (response == 2) {
 					alert("請先通過信箱驗證")
 				}
@@ -205,7 +210,7 @@
 				console.log(JSON.stringify(authData))
 			}
 
-		})
+		})*/
 		
 
 		function checkMember() {

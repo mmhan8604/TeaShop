@@ -24,6 +24,16 @@
 		};
 		firebase.initializeApp(firebaseConfig);
 	</script>
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        var mail= /*[[${mail}]]*/null;
+        
+        /*]]>*/
+    </script>
+    <script src="/frontstage/js/createMember.js"></script>
 	<style>
 		.login-container {
 			display: flex;
@@ -220,18 +230,18 @@
 			$("#getemail").on("click", function () {
 				var email = $('#username').val();
 				var password = $('#password').val();
-				
+
 				firebase
 					.auth().
 					signInWithEmailAndPassword(email, password)
 					.then((userCredential) => {
 						// Signed in
 						var user = userCredential.user;
-						
+
 						// ...
 						if (user._delegate.emailVerified == true) {
 							emailUserInfo(user);
-							
+
 						} else {
 							alert("請完成信箱驗證")
 						}
@@ -291,7 +301,7 @@
 					var loginMethod = user._delegate.providerData[0].providerId
 
 
-					console.log(user)
+					
 					getAuth(displayName, email, emailVerified, providerId, loginMethod);
 
 				}).catch((error) => {
@@ -329,7 +339,7 @@
 				loginMethod: loginMethod,
 				shopId: shopId
 			}
-			console.log(authData)
+			
 			$.ajax({
 				url: '/getauth',
 				method: 'POST',
@@ -338,10 +348,13 @@
 				success: function (response) {
 					console.log(response)
 					if (response == 1) {
-						checkMember();
-						//window.location.href = "/shop/"+shopId+"/shopindex"
+
+						window.location.href = "/shop/" + shopId + "/shopindex"
 					} else if (response == 2) {
 						alert("請先通過信箱驗證")
+					} else if (response == 3) {
+						MemberDetail()
+
 					}
 				},
 				error: function () {
@@ -351,14 +364,18 @@
 			})
 		}
 
-		function checkMember(){
+		function MemberDetail() {
 			let shopId = /*[[${shopId}]]*/5;
 			$.ajax({
-				url: '/shop/'+shopId+'/checkMember',
-				method: 'GET',
+				url: '/shop/' + shopId + '/memberDetail',
+				method: 'POST',
 				contentType: 'application/json; charset=UTF-8',
 				success: function (response) {
-					
+					document.documentElement.innerHTML = response
+					$("#getemail").off("click")
+					document.getElementById('getemail').addEventListener('click', function () {
+						createMember();
+					});
 				},
 				error: function (err) {
 					console.log(err)

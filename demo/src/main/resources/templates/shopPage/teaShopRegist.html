@@ -24,6 +24,16 @@
 		};
 		firebase.initializeApp(firebaseConfig);
 	</script>
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        var mail= /*[[${mail}]]*/null;
+        
+        /*]]>*/
+    </script>
+    <script src="/frontstage/js/createMember.js"></script>
 	<style>
 		.login-container {
 			display: flex;
@@ -296,7 +306,7 @@
 					var loginMethod = user._delegate.providerData[0].providerId
 
 
-					console.log(user)
+					
 					getAuth(displayName, email, emailVerified, providerId, loginMethod);
 
 				}).catch((error) => {
@@ -331,25 +341,47 @@
 				providerId: providerId,
 				loginMethod: loginMethod,
 				shopId: shopId
-
 			}
-			console.log(authData)
+			
 			$.ajax({
 				url: '/getauth',
 				method: 'POST',
 				contentType: 'application/json; charset=UTF-8',
 				data: JSON.stringify(authData),
 				success: function (response) {
-					if(response==1){
-						
-						window.location.href = "/shop/"+shopId+"/shopindex"
-						
-					}else if(response==2){
+					console.log(response)
+					if (response == 1) {
+
+						window.location.href = "/shop/" + shopId + "/shopindex"
+					} else if (response == 2) {
 						alert("請先通過信箱驗證")
+					} else if (response == 3) {
+						MemberDetail()
+
 					}
 				},
 				error: function () {
 					console.log(JSON.stringify(authData))
+				}
+
+			})
+		}
+
+		function MemberDetail() {
+			let shopId = /*[[${shopId}]]*/5;
+			$.ajax({
+				url: '/shop/' + shopId + '/memberDetail',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				success: function (response) {
+					document.documentElement.innerHTML = response
+					$("#getemail").off("click")
+					document.getElementById('getemail').addEventListener('click', function () {
+						createMember();
+					});
+				},
+				error: function (err) {
+					console.log(err)
 				}
 
 			})

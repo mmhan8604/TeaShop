@@ -10,6 +10,14 @@
 	<link rel="stylesheet" href="/frontstage/css/dingcha.css">
 	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var shopId = /*[[${shopId}]]*/ null;
+        var auth = /*[[${auth}]]*/null;
+        var logInuserName=/*[[${userName}]]*/null;
+        var logInorNot = logInuserName!=null;
+        /*]]>*/
+    </script>
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/main.js"></script>

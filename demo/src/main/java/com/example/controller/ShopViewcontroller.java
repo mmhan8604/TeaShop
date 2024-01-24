@@ -130,7 +130,7 @@ public class ShopViewcontroller {
 		return "/shopPage/teaShopLogin.html";		//登入	
 	}
 	
-	@GetMapping("/{shopId}/login1")
+	@PostMapping("/{shopId}/memberDetail")
 	public String loginPagex(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
@@ -138,18 +138,7 @@ public class ShopViewcontroller {
 		return "/shopPage/memberDetail.html";		//登入	
 	}
 	
-	@GetMapping("{shopId}/checkMember")
-	public String checkMember(HttpSession session,@PathVariable int shopId) {
-		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		String userEmail = loginInfo.getEmail();
-		String StringshopId = Integer.toString(loginInfo.getShopId());
-		if(frontloginService.checkMember(userEmail,StringshopId)) {
-			return "shopPage/index.html";
-		}else {
-			return "/shopPage/memberDetail.html";
-		}
-		
-	}
+	
 	
 	
 	
@@ -171,6 +160,8 @@ public class ShopViewcontroller {
 			} else {
 				model.addAttribute("userName", null);
 			}
+			model.addAttribute("mail",loginInfo.getEmail());
+			System.out.println(loginInfo.getEmail());
 		}
 		model.addAttribute("shopId", shopId);
 		
