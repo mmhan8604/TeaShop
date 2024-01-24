@@ -65,15 +65,21 @@ public class ProductController {
 //		list.add(productService.queryProductById(id));
 //		return list;
 //	}
-	
+
 //	刪除刪品
 	@PostMapping("/delProduct/{id}")
-	public String delProduct(@PathVariable String id) {
-		Optional<Products> Products = productService.findById(id);
-		
-		return null;
+	public ResponseEntity<?> delProduct(@PathVariable String id) {
+		Products deletedProduct = productService.delProduct(id);
+
+		if (deletedProduct != null) {
+			// 成功刪除，可以使用deletedProduct
+			return ResponseEntity.ok("Product deleted successfully");
+		} else {
+			// 找不到要刪除的產品，返回相應的錯誤訊息
+			return ResponseEntity.notFound().build();
+		}
 	}
-	
+
 //	編輯商品
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> queryProductById(@PathVariable String id) {
@@ -81,22 +87,20 @@ public class ProductController {
 		if (Products.isPresent()) {
 			Map<String, Object> response = new HashMap<>();
 			response.put("product", Products.get());
-			System.out.println("response是" + response);
-			System.out.println("product是" + Products);
 			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@PostMapping("/updateProducts/{id}")
-	 public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Products products) {
+	public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Products products) {
 		Products updateProducts = productService.updateProduct(id, products);
-	     if (updateProducts != null) {
-	         return ResponseEntity.ok(updateProducts);
-	     } else {
-	         return ResponseEntity.notFound().build();
-	     }
-	 }
+		if (updateProducts != null) {
+			return ResponseEntity.ok(updateProducts);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 }

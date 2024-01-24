@@ -116,30 +116,47 @@ function ProductInfoqueryAll(choosepage) {
 			$("#bodyContext").on("click", ".removeBtn", function() {
 				let productId = $(this).data("id");
 				alert(productId);
-				deleteProduct(productId);
+				deleteProduct(productId)
+					.then(function(response) {
+						// 刪除成功後的後續處理邏輯
+						ProductInfoqueryAll(page - 1);
+					})
+					.catch(function(error) {
+						// 處理刪除失敗的情況
+						console.error("刪除失敗: ", error);
+					});
 			});
 		}
 	}
 
-	//刪除
+	//刪除商品
 	function deleteProduct(productId) {
-		fetch(`/deleteProduct/${productId}`, {
-			method: 'DELETE'
-		})
-			.then(response => response.json())
-			.then(result => {
-				console.log('Product deleted:', result);
-				ProductInfoqueryAll(page);
-				var filename = '/backstage/html/productInfo.html #formSpace';
-				$("#formSpace").load(filename, function() {
-					ProductInfoqueryAll(0);
-				});
-			})
-			.catch(error => console.error('Error deleting product:', error));
+		console.log(productId);
+
+		// 返回Promise對象
+		return new Promise(function(resolve, reject) {
+			$.ajax({
+				url: `/delProduct/${productId}`,
+				method: 'POST',
+				contentType: 'application/json',
+				success: function(response) {
+					console.log("刪除成功: ", response);
+					resolve(response);  // 成功時呼叫resolve
+				},
+				error: function(error) {
+					console.error("刪除失敗: ", error);
+					reject(error);  // 失敗時呼叫reject
+				}
+			});
+		});
 	}
 
-	//編輯
+	//修改商品
 	function editProduct() {
+		var productIdPOST = $('#editProductID').val();
+		var updatedData = productUpdateData();
+		updateProduct(productIdPOST, updatedData);
+		//抓資料
 		function productUpdateData() {
 			return {
 				//			picjson: $("#editProductImgs").val(),
@@ -153,7 +170,7 @@ function ProductInfoqueryAll(choosepage) {
 				// 可根據需要添加其他欄位
 			};
 		}
-
+		//更新資料
 		function updateProduct(productIdPOST, updatedData) {
 			$.ajax({
 				url: `/updateProducts/${productIdPOST}`,
@@ -169,10 +186,5 @@ function ProductInfoqueryAll(choosepage) {
 				}
 			});
 		}
-		var productIdPOST = $('#editProductID').val();
-		var updatedData = productUpdateData();
-		updateProduct(productIdPOST, updatedData);
-
 	}
-
 }
