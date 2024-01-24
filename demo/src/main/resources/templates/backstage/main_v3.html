@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="backstage/css/style_v2.css" />
     <link rel="stylesheet" href="backstage/webSource/eleType/element.css" />
     <!-- js -->
-    <script type="text/javascript" src="backstage/js/main.js"></script>
+    <script defer type="text/javascript" src="backstage/js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script defer type="text/javascript" src="backstage/js/main_ajax.js"></script>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
@@ -22,9 +23,9 @@
 <body>
     <!-- NAV -->
     <div style="position: fixed;top: 0;margin: 40px;width: 100%;margin-bottom: 25px;">
-        <a href="#"><img class="me-auto" src="backstage/img/project.png" alt="" style="height: 50px" /></a>
-        <a href="#"><img src="backstage/img/btn/btn_merchant background.png" alt="" style="height: 50px" /></a>
-        <a href="#"><img src="backstage/img/btn/btn_publishDesign.png" alt="" style="height: 50px" /></a>
+        <a href="#"><img class="me-auto" src="./img/project.png" alt="" style="height: 50px" /></a>
+        <a class="btn btn-secondary" href="#"><img src="./img/btn/btn_merchant background.png" alt="" style="height: 50px" /></a>
+        <a class="btn btn-secondary" id="publishDesign" ><img src="./img/btn/btn_publishDesign.png" alt="" style="height: 50px" /></a>
     </div>
     <div id="fullview" class="fullview" style="margin-top: 120px;">
         <!--左邊區塊-->
@@ -55,12 +56,12 @@
                     </div>
                     <input type="radio" name="emotion" id="nav1" class="inputHidden" />
                     <label for="nav1">
-                        <img src="backstage/img/nav-1.png" alt=""
+                        <img src="./img/nav-1.png" alt=""
                             style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
                     </label>
                     <input type="radio" name="emotion" id="nav2" class="inputHidden" />
                     <label for="nav2" style="margin-bottom: 20px">
-                        <img src="backstage/img/nav-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
+                        <img src="./img/nav-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
                     </label>
                     <div style=" display: flex; align-content: center; justify-content: center; align-items: center;">
                         <label for="colorPicker1" style="font-size: 16px">背景顏色：</label>
@@ -101,12 +102,12 @@
                     </div>
                     <input type="radio" name="emotion" id="nav3" class="inputHidden" />
                     <label for="nav3">
-                        <img src="backstage/img/footer-1.png" alt=""
+                        <img src="./img/footer-1.png" alt=""
                             style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
                     </label>
                     <input type="radio" name="emotion" id="nav4" class="inputHidden" />
                     <label for="nav4" style="margin-bottom: 20px">
-                        <img src="backstage/img/footer-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
+                        <img src="./img/footer-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
                     </label>
 
                     <div style=" display: flex; align-content: center; justify-content: center; align-items: center;">
@@ -171,29 +172,29 @@
                 <h3 class="text-center">選擇區塊元件</h3>
                 <div class="row mt-5">
                     <div class="col-4" id="mybtn0" onclick="LoadLayout(0,'block_1')">
-                        <img src="backstage/img/block/block0.png" alt=""
+                        <img src="./img/block/block0.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                     <div class="col-4" id="mybtn1" onclick="LoadLayout(1,'block_1')">
-                        <img src="backstage/img/block/block1.png" alt=""
+                        <img src="./img/block/block1.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                     <div class="col-4" id="mybtn2" onclick="LoadLayout(2,'block_1')">
-                        <img src="backstage/img/block/block2.png" alt=""
+                        <img src="./img/block/block2.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-4" id="mybtn3" onclick="LoadLayout(3,'block_1')">
-                        <img src="backstage/img/block/block3.png" alt=""
+                        <img src="./img/block/block3.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                     <div class="col-4" id="mybtn4" onclick="LoadLayout(4,'block_1')">
-                        <img src="backstage/img/block/block4.png" alt=""
+                        <img src="./img/block/block4.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                     <div class="col-4" id="mybtn5" onclick="LoadLayout(5,'block_1')">
-                        <img src="backstage/img/block/block5.png" alt=""
+                        <img src="./img/block/block5.png" alt=""
                             style="width: 100%; height: 100%; object-fit: contain" />
                     </div>
                 </div>
@@ -242,27 +243,27 @@
                 newView.className = "view";
                 newView.id = "view-" + viewCount;
                 newView.innerHTML = `
-                    <h3 class="text-center">選擇區塊元件${viewCount}</h3>
+                    <h3 class="text-center">選擇區塊元件</h3>
                     <div class="row mt-5">
                         <div class="col-4" onclick="LoadLayout(0,'block_${viewCount}')">
-                            <img src="backstage/img/block/block0.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block0.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                         <div class="col-4"  onclick="LoadLayout(1,'block_${viewCount}')">
-                            <img src="backstage/img/block/block1.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block1.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                         <div class="col-4"  onclick="LoadLayout(2,'block_${viewCount}')">
-                            <img src="backstage/img/block/block2.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block2.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                     </div>
                     <div class="row mt-5">
                         <div class="col-4"  onclick="LoadLayout(3,'block_${viewCount}')">
-                            <img src="backstage/img/block/block3.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block3.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                         <div class="col-4"  onclick="LoadLayout(4,'block_${viewCount}')">
-                            <img src="backstage/img/block/block4.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block4.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                         <div class="col-4" onclick="LoadLayout(5,'block_${viewCount}')">
-                            <img src="backstage/img/block/block5.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+                            <img src="./img/block/block5.png" alt="" style="width:100%; height:100%; object-fit: contain;">
                         </div>
                     </div>
                 `;

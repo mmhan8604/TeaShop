@@ -150,7 +150,14 @@
 
     // 生成卡片相應數量的設定//
     // 設定所選卡片數量
-    function setCardCount(number, containerId) {
+    async function setCardCount(number, containerId) {
+        carouselImages = [];
+        await new Promise(resolve=>{
+            carouselElement(event,'view-' , grid_test,resolve)
+        })
+        
+        
+        
         let localCounter = 1; // 區域變數，歸零 localCounter
         let selectedNumber = number; // 區域變數
         generateDivs(containerId, localCounter, selectedNumber); // 生成容器
@@ -219,6 +226,7 @@
 
     //  亨+的輪播圖做法
     function updateCarousel(images) {
+        
         console.log(images);
         var carouselInner = $(".carousel-inner");
         var carouselIndicators = $(".carousel-indicators");
@@ -241,6 +249,7 @@
             }
             indicatorButton.prop('aria-label', 'Slide ' + (index + 1));
             carouselIndicators.append(indicatorButton);
+            
         });
     }
 
