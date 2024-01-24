@@ -124,7 +124,7 @@ public class OrderService {
 		public boolean orderStateUpdate(String OrderId) {
 			if(ordersRes.findById(OrderId).isPresent()) {
 				Orders order = ordersRes.findById(OrderId).get();
-				order.setOrderState("payed");
+				order.setOrderState("已成立");
 				ordersRes.save(order);
 				return true;
 			}else {
