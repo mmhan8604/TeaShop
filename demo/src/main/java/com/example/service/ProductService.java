@@ -9,7 +9,7 @@ import com.example.entity.Products;
 
 @Service
 public interface ProductService {
-    void addProduct(Products products);
+	Products addProduct(String id,Products products);
     Products delProduct(String id);
     
     List<Products> queryProduct(String shopId);

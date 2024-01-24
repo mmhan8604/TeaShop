@@ -2,10 +2,9 @@ package com.example.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -14,33 +13,33 @@ public class Products {
 	private String id;
 
 	private String name;
-	
-	
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ActivitysID")
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ActivitysID")
 	private Activitys activity;
-	
+
 	private int price;
-	
+
 	private int cost;
 
 	private String discription;
-	
+
 	private int shelves;
 
 	private int stock;
-	
-	private boolean discontinued;
-	
-	private String shopId;
-	
-	private String picJSON;
 
-	public String getPicJSON() {
+	private boolean discontinued;
+
+	private String shopId;
+
+	@Lob
+	private byte[] picJSON;
+
+	public byte[] getPicJSON() {
 		return picJSON;
 	}
 
-	public void setPicJSON(String picJSON) {
+	public void setPicJSON(byte[] picJSON) {
 		this.picJSON = picJSON;
 	}
 
@@ -130,6 +129,5 @@ public class Products {
 				+ cost + ", discription=" + discription + ", shelves=" + shelves + ", stock=" + stock
 				+ ", discontinued=" + discontinued + "]";
 	}
-	
-	
+
 }

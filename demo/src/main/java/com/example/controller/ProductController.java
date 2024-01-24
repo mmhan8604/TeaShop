@@ -21,31 +21,6 @@ public class ProductController {
 	@Autowired
 	ProductServiceImpl productService;
 
-	@PostMapping("/addProduct")
-	public String AddProduct(@RequestBody Products products) {
-
-		System.out.println("新增" + products.toString());
-		// System.out.println(products.getActivity().getID());
-		productService.addProduct(products);
-		return products.toString();
-	}
-
-//	@PostMapping("/delProduct")
-//	public String delProduct(@RequestBody Products products) {
-//
-//		System.out.println("刪除id" + products.getId());
-//		productService.delProduct(products);
-//		return products.toString();
-//	}
-
-//	@PostMapping("/editProduct/{id}")
-//	public String editProduct(@RequestBody Products products) {
-//
-//		System.out.println("修改id" + products.getId());
-//		productService.editProduct(products);
-//		return products.toString();
-//	}
-
 	@PostMapping("/queryProduct")
 	public List<Products> queryProduct(@RequestBody String shopId) {
 		System.out.println("查詢全部" + shopId);
@@ -58,13 +33,16 @@ public class ProductController {
 		return productService.queryProductByName(name);
 	}
 
-//	@PostMapping("/queryProductById")
-//	public List<Products> queryProductById(@RequestBody String id) {
-//		System.out.println("查詢部分:"+id);
-//		List<Products> list= new ArrayList<>();
-//		list.add(productService.queryProductById(id));
-//		return list;
-//	}
+//	新增商品
+	@PostMapping("/addProduct/{id}")
+	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products) {
+		Products addProduct = productService.addProduct(id, products);
+		if (addProduct != null) {
+			return ResponseEntity.ok(addProduct);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 //	刪除刪品
 	@PostMapping("/delProduct/{id}")
@@ -92,7 +70,7 @@ public class ProductController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
+//	更新商品
 	@PostMapping("/updateProducts/{id}")
 	public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Products products) {
 		Products updateProducts = productService.updateProduct(id, products);

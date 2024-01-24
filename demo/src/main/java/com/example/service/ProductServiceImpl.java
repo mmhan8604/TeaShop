@@ -18,11 +18,15 @@ public class ProductServiceImpl implements ProductService {
 	private ProductsResposity productsRes;
 
 	@Override
-	public void addProduct(Products products) {
-		if (productsRes.existsById(products.getId())) {
-			throw new ValidationException("id重複");
+	public Products addProduct(String id, Products products) {
+		Optional<Products> optionalAddProduct = productsRes.findById(id);
+		if (optionalAddProduct.isPresent()) {
+			// 根據需求處理重複ID的情況，例如拋出異常
+			throw new ValidationException("商品ID已存在");
 		} else {
-			productsRes.save(products);
+			// ID唯一，保存商品
+			products.setId(id);
+			return productsRes.save(products);
 		}
 
 	}
@@ -80,7 +84,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Optional<Products> findById(String id) {
-		// TODO Auto-generated method stub
 		return productsRes.findById(id);
 	}
 

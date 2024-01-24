@@ -1,72 +1,76 @@
-// addProduct.js
+// 新增商品的js
 function addProduct() {
-	document.getElementById('upload').addEventListener("click", function() {
-		var productID = document.getElementById('productID').value;
-		var productName = document.getElementById('productName').value;
-		var productQuantity = document.getElementById('productQuantity').value;
-		var productShelves = document.getElementById('productShelves').value;
-		var productPrice = document.getElementById('productPrice').value;
-		var productCost = document.getElementById('productCost').value;
-		var productIntro = document.getElementById('productIntro').value;
-		var imageInputs = document.getElementById('productImages').files;
-
-		//	送出之前要記得查詢所有商品ID看看使用者輸入的ID有沒有被使用過
-
-		var newPtdData = {
-			shopId: "shop01",
-			ID: productID,
-			name: productName,
-			stock: productQuantity,
-			shelves: productShelves,
-			cost: productCost,
-			price: productPrice,
-			description: productIntro,
-			images: [] // 儲存 base64 編碼的圖片數據
-		};
-
-		var promises = [];
-		for (var i = 0; i < imageInputs.length; i++) {
-			promises.push(getBase64(imageInputs[i]));
-		}
-
-		Promise.all(promises)
-			.then(base64Images => {
-				newPtdData.images = base64Images;
-
-				return fetch('/addProduct', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(newPtdData),
-				});
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error(`Network response was not ok: ${response.status}`);
-				}
-				return response.text();
-			})
-			.then(message => {
-				console.log(message);
-				var filename = '/backstage/html/productInfo.html #formSpace';
-				$("#formSpace").load(filename, function() {
-					ProductInfoqueryAll(0);
-				});
-			})
-			.catch(error => {
-				console.error('Error adding product:', error);
-			});
+	$("#upload").off("click");
+	$("#upload").on("click", function() {
+		var productIdPOST = $('#addProductID').val();
+		var newProductData = catchProductData();
+		console.log(productIdPOST);
+		console.log(newProductData);
+		addNewProduct(productIdPOST, newProductData);
 	});
+}
 
-	// 將文件轉換為 base64 字串的函數
-	function getBase64(file) {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result.split(',')[1]);
-			reader.onerror = error => reject(error);
-		});
+// 抓資料
+function catchProductData() {
+	// 获取上传的图片，转成BLOB并存为JSON
+	var picjson = getBlobImages();
+
+	return {
+		picjson: picjson,
+		id: $("#addProductID").val(),
+		name: $("#addProductName").val(),
+		stock: $('#addProductQuantity').val(),
+		shelves: $('#addProductShelves').val(),
+		price: $('#addProductPrice').val(),
+		cost: $('#addProductCost').val(),
+		discription: $('#addProductIntro').val()
+		// 可根据需要添加其他字段
+	};
+}
+
+// 获取上传的图片并转成BLOB
+function getBlobImages() {
+	var images = document.getElementById("addProductImgs").getElementsByClassName("previewM");
+	var picjson = [];
+
+	for (var i = 0; i < images.length; i++) {
+		var img = images[i].getElementsByTagName("img")[0];
+
+		// 转换为BLOB
+		var blob = dataURItoBlob(img.src);
+		picjson.push(blob);
 	}
 
+	return picjson;
+}
+
+// 将Data URI转换为BLOB
+function dataURItoBlob(dataURI) {
+	var byteString = atob(dataURI.split(',')[1]);
+	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+	var ab = new ArrayBuffer(byteString.length);
+	var ia = new Uint8Array(ab);
+
+	for (var i = 0; i < byteString.length; i++) {
+		ia[i] = byteString.charCodeAt(i);
+	}
+
+	return new Blob([ab], { type: mimeString });
+}
+
+// 更新資料
+function addNewProduct(productIdPOST, newProductData) {
+	$.ajax({
+		url: `/addProduct/${productIdPOST}`,
+		method: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify(newProductData),
+		success: function(response) {
+			console.log("新增商品成功: ", response);
+			// 可以在這裡添加後續處理邏輯
+		},
+		error: function(error) {
+			console.error("新增商品失敗: ", error);
+		}
+	});
 }

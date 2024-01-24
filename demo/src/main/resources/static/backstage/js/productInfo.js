@@ -1,4 +1,3 @@
-
 //	每次進到介面的時候就查詢所有資料出來
 function ProductInfoqueryAll(choosepage) {
 	$("#upload").off("click");
@@ -117,12 +116,10 @@ function ProductInfoqueryAll(choosepage) {
 				let productId = $(this).data("id");
 				alert(productId);
 				deleteProduct(productId)
-					.then(function(response) {
-						// 刪除成功後的後續處理邏輯
-						ProductInfoqueryAll(page - 1);
+					.then(function() {
+						ProductInfoqueryAll(0);
 					})
 					.catch(function(error) {
-						// 處理刪除失敗的情況
 						console.error("刪除失敗: ", error);
 					});
 			});
