@@ -30,6 +30,9 @@ public class FrontloginController {
 			String StringshopId = Integer.toString(FC.getShopId());
 			String userEmail = FC.getEmail();
 			if(frontloginService.checkMember(userEmail,StringshopId)) {
+				FC.setMemberId(frontloginService.getMember(userEmail, StringshopId).getId());
+				FC.setDisplayName(frontloginService.getMember(userEmail, StringshopId).getName());
+				session.setAttribute("authObject", FC);
 				return 1;
 			}else {
 				return 3;

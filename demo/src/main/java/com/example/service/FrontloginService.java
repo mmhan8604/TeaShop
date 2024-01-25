@@ -40,4 +40,10 @@ public class FrontloginService {
 		}
 		
 	}
+	
+	public Member getMember(String email,String shopId) {
+		List<Member> members = memberRes.findByShopIdAndMail(shopId, email);
+		return members.get(0);
+		
+	}
 }

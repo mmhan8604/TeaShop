@@ -6,5 +6,18 @@ function createMember(){
 			address: $("#address").val(),
 			shopId: shopId
 		}
-		console.log(userData)
+		$.ajax({
+				url: "/insertMember",
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data:JSON.stringify(userData),
+				success: function (response) {
+					console.log(response)
+					window.location.href="/shop/1/shopindex"
+				},
+				error: function (err) {
+					console.log(err)
+				}
+
+			})
 	}

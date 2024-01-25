@@ -17,6 +17,7 @@
         var mail= /*[[${mail}]]*/null;
         /*]]>*/
     </script>
+    <script src="/frontstage/js/createMember.js"></script>
 	<style>
 		.login-container {
 			display: flex;
@@ -175,59 +176,7 @@
 		</div>
 	</div>
 
-	<script th:inline="javascript">
-		document.getElementById('getemail').addEventListener('click', function () {
-    createMember();
-});
-	function createMember(){
-		userData={
-			mail: /*[[${email}]]*/null,
-			name: $("#userName").val(),
-			phone: $("#phone").val(),
-			address: $("#address").val(),
-			shopId: /*[[${email}]]*/null
-		}
-		console.log(userData)
-	}
-		
-/**
-		//建立用戶資料
-		$.ajax({
-			url: '/getauth',
-			method: 'POST',
-			contentType: 'application/json; charset=UTF-8',
-			data: JSON.stringify(userData),
-			success: function (response) {
-				if (response == 1) {
-					console.log(shopId);
-					
-					window.location.href = "/shop/"+shopId+"/shopindex"
-				} else if (response == 2) {
-					alert("請先通過信箱驗證")
-				}
-			},
-			error: function () {
-				console.log(JSON.stringify(authData))
-			}
-
-		})*/
-		
-
-		function checkMember() {
-			let shopId = /*[[${shopId}]]*/5;
-			$.ajax({
-				url: '/shop/' + shopId + '/checkMember',
-				method: 'POST',
-				contentType: 'application/json; charset=UTF-8',
-				success: function (response) {
-					console.log(response)
-				},
-				error: function (err) {
-					console.log(err)
-				}
-
-			})
-		}
+	
 
 	</script>
 </body>
