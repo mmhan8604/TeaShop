@@ -138,6 +138,14 @@ public class ShopViewcontroller {
 		return "/shopPage/memberDetail.html";		//登入	
 	}
 	
+	@GetMapping("/{shopId}/member")
+	public String memberPage(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
+		return "/shopPage/member01.html";		//確認訂單等等		
+	}
+	
 	
 	
 	
