@@ -131,11 +131,55 @@
 			}
 
 		}
+		
+		/*讀取動畫*/
+			
+
+			#loading-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgb(255, 255, 255);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+			}
+
+			.loading-spinner {
+				border: 8px solid #f3f3f3;
+				border-top: 8px solid #3498db;
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				animation: spin 1s linear infinite;
+			}
+
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			#loading-text {
+				margin-top: 10px;
+			}
 	</style>
 	</style>
 </head>
 
 <body>
+	<div id="loading-overlay">
+		<div class="loading-spinner"></div>
+		<div id="loading-text">Loading...</div>
+	</div>
 	<div class="container-fluid login-container">
 		<div class="form-area">
 			<div class="title">
@@ -208,6 +252,8 @@
 			document
 				.getElementById("google")
 				.addEventListener("click", function (event) {
+					localStorage.setItem("google", "google")	//紀錄一下去google		
+						
 					event.preventDefault(); //防止按鈕被默認點出
 					const provider = new firebase.auth.GoogleAuthProvider();
 					firebase
@@ -275,6 +321,16 @@
 						var credential = error.credential;
 					});
 			})
+			
+			if (!localStorage.getItem("google")) {
+				document.getElementById('loading-overlay').style.display = 'none';
+			}else{
+				setTimeout(function () {
+        		stopLoading()
+    			}, 2500);
+			}
+			
+			
 		});
 
 
@@ -349,7 +405,8 @@
 				contentType: 'application/json; charset=UTF-8',
 				data: JSON.stringify(authData),
 				success: function (response) {
-					console.log(response)
+					stopLoading()
+					
 					if (response == 1) {
 
 						window.location.href = "/shop/" + shopId + "/shopindex"
@@ -362,6 +419,7 @@
 				},
 				error: function () {
 					console.log(JSON.stringify(authData))
+					stopLoading()
 				}
 
 			})
@@ -383,7 +441,12 @@
 
 			})
 		}
-
+		
+		//解除loding動畫
+		function stopLoading(){
+			document.getElementById('loading-overlay').style.display = 'none';
+			localStorage.removeItem("google")
+		}
 
 
 
