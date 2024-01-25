@@ -30,6 +30,7 @@ public class MemberService {
         return memberRepository.calculateTotalSpentByMemberId(memberId);
     }
     
+    //獲取所有會員及其總消費:
     public List<Object[]> getAllMembersWithTotalSpent() {
         return memberRepository.findAllMembersWithTotalSpent();
     }
