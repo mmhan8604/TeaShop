@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.classes.ActivitysDTO;
 import com.example.entity.Activitydetails;
@@ -17,8 +15,6 @@ import com.example.repository.ActivityDetailsRepository;
 import com.example.repository.ActivityRepository;
 import com.example.repository.ProductsResposity;
 
-import jakarta.transaction.Transactional;
-import net.sf.jsqlparser.util.validation.ValidationException;
 
 @Service
 public class ActivityService {
@@ -32,12 +28,12 @@ public class ActivityService {
 	private ProductsResposity productsResposity;
 	
 	
-	//查全部
+	//查全部活動
 	public List<Activitys> queryActivitys(String shopId) {
 		return activityRepository.findByShopId(shopId);	
 	}
 
-	//增
+	//增加活動
 	public String addActivityWithDetails(Activitys activitys, List<Activitydetails> activitydetailsList) {
 		activityRepository.save(activitys);
 		
@@ -56,7 +52,7 @@ public class ActivityService {
     }
 
 
-	//刪
+	//刪除活動
     public void deleteActivitys(String activityId) {
 		try {
 			List<Activitydetails> activitydetaillist= activityDetailsRepository.findByActivitysId(activityId);
@@ -70,7 +66,7 @@ public class ActivityService {
     }
 
 	
-	//查一筆
+	//查一筆活動
 	public ActivitysDTO getActivityWithDetails(String activityId) throws NotFoundException {
         Optional<Activitys> activitysOptional = activityRepository.findById(activityId);
         if (activitysOptional.isPresent()) {
@@ -88,7 +84,7 @@ public class ActivityService {
         }
     }
 
-	//修
+	//編輯活動
 	public String updateActivityWithDetails(Activitys activitys, List<Activitydetails> activitydetailsList) {
 		List<Activitydetails> activitydetail= activityDetailsRepository.findByActivitysId(activitys.getId());
 		activityDetailsRepository.deleteAll(activitydetail);
@@ -109,7 +105,7 @@ public class ActivityService {
     }
 	
 	
-	//撈產品
+	//查全部產品
 	public List<Products> queryProducts(String shopId) {
 		return productsResposity.findByShopIdOrderByNameAsc(shopId);	
 	}

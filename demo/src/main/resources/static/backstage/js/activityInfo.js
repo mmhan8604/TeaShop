@@ -65,7 +65,7 @@ function ActivityInfoqueryAll(choosepage) {
             <td>${amethod}</td>
             <td>
         		<a href="#"  class="btn btn-light editactivity" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
-        		<a href="#" class="btn btn-light delactivity" onclick="deleteActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
+        		<a href="#" class="btn btn-light delactivity" onclick="deleteActivity(${aid},${aorder})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
       		</td>
 			</tr>
     		`);
@@ -79,28 +79,26 @@ function ActivityInfoqueryAll(choosepage) {
 }
 
 
-function deleteActivity(activityId) {
-	// 使用 fetch() 方法向後端發送刪除請求
+function deleteActivity(activityId, i) {
+	var acorder = i;
+	var confirmation = window.confirm("確定要刪除第"+ acorder + "筆活動嗎？");
+    if (confirmation) {
+    
 	fetch('/delActivity/' + activityId,  {
 		method: 'POST'
 	})
 		.then(response => response.toString())
 		.then(data => {
-			// 處理後端回傳的結果，例如重新載入表格等
-			console.log(data);
+			console.log('刪除成功');
 			$("#activityInfo").trigger("click");
-
-			/*var filename = '/backstage/html/activityInfo.html #formSpace';
-			$("#formSpace").load(filename, function() {
-				ActivityInfoqueryAll(0);
-			});
-			*/
 
 		})
 		.catch(error => {
 			console.error('Error:', error);
 		});
-
+} else {
+        console.log("取消刪除操作");
+    }
 }
 
 function getActivity(id) {
@@ -108,42 +106,6 @@ function getActivity(id) {
 	var retrievedValue = sessionStorage.getItem('id');
 		console.log(retrievedValue);
 		$("#actionSetting").trigger("click");
-
-	/*
-	$("#bodyContext").off("click", ".editactivity");
-	$("#bodyContext").on("click", ".editactivity", function() {
-		var retrievedValue = sessionStorage.getItem('id');
-		console.log(retrievedValue);
-		$("#actionSetting").trigger("click");
-
-	})
-	*/
 }
 
-
-/*
- var trlist = [
-	{ order: "#1", activity: "新店開幕/商品折扣大放送", period: "2023/11/01-2023/12/31", discount: "商品折扣" },
-	{ order: "#1", activity: "新店開幕/商品折扣大放送", period: "2023/11/01-2023/12/31", discount: "商品折扣" }
-  ] 
-
-  $("#bodyContext").empty();
-  for (i = 0; i < trlist.length; i++) {
-	var aorder = trlist[i].order;
-	var aactivity = trlist[i].activity;
-	var aperiod = trlist[i].period;
-	var adiscount = trlist[i].discount;
-
-	$("#bodyContext").append(`
-	<tr style="height:80px;">
-	  <td scope="row">${aorder}</td>
-	  <td>${aactivity}</td>
-	  <td>${aperiod}</td>
-	  <td>${adiscount}</td>
-	  <td>
-		<a href="#" class="btn btn-light"><img src="./icon/revise.png" style="width: 15px;"></a>
-	  </td>
-	</tr>
-	`);
-  } */
 

@@ -6,13 +6,7 @@ function AddAction() {
 
 	});
 
-	/*
-	$("#upload").on("click", async function() {
-		await new Promise(resolve,addActivity(resolve))
-		$("#activityInfo").trigger("click");
-	});
-	*/
-	
+	//產生商品列表
 	fetch('/findProducts', {
 		method: "POST",
 		body: "shop01"
@@ -21,16 +15,16 @@ function AddAction() {
 		.then(data => {
 			console.log('Product Data from server:', data);
 			trlist = data;
-			
+
 			$("#sourceTable").empty();
-			for (let i = 0; i < trlist.length ; i++) {
+			for (let i = 0; i < trlist.length; i++) {
 
 
-			var aid = trlist[i].id;
-			var aname = trlist[i].name;
-			var apic = trlist[i].picjson;
+				var aid = trlist[i].id;
+				var aname = trlist[i].name;
+				var apic = trlist[i].picjson;
 
-			$("#sourceTable").append(`
+				$("#sourceTable").append(`
         
         		<tr>
                   <td>
@@ -47,14 +41,63 @@ function AddAction() {
     		`);
 
 
-		}
+			}
 
-			
+
 
 		})
 		.catch(error => console.error('Error fetching activity data:', error))
+	
+	//優惠主軸判斷
+	var fsradio = document.getElementById('fsradio');
+	var fscontent = document.getElementById('addactivityFreeShipping');
+	var dsradio = document.getElementById('dsradio');
+	var dscontent = document.getElementById('addactivityDiscount');
+
+	fsradio.addEventListener('change', function() {
+		if (fsradio.checked) {
+			dscontent.value = "";
+			$('#sourceTable').off('click', '.moveItem');
+			$('#targetTable').off('click', '.backItem');
+			}
+	})
+	dsradio.addEventListener('change', function() {
+	 if (dsradio.checked) {
+			fscontent.value = "";
+			$('#sourceTable').off('click', '.moveItem');
+		$('#sourceTable').on('click', '.moveItem', function() {
+			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
+			var itemName = $(this).siblings('.itemName').text();
+			var itemImageSrc = $(this).siblings('img').prop('src');
+			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
 
 
+			//創新的一排html(div格子)變數
+			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
+			// 把這排變數移過去另一個表格
+			$("#targetTable").append(newRow);
+			thisItem.remove();
+		});
+		$('#targetTable').off('click', '.backItem');
+		$('#targetTable').on('click', '.backItem', function() {
+			console.log("點了")
+			var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
+			var itemName = $(this).siblings('.itemName').text();
+			var itemImageSrc = $(this).siblings('img').prop('src');
+			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+			//創新的一排html(div格子)變數
+			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goRight.png" alt="">');
+			// 把這排變數移過去另一個表格
+			$("#sourceTable").append(newRow);
+			thisItem.remove();
+
+		});
+			
+		}
+	})
+	
+	//選擇優惠商品js
+	/*
 	$(document).ready(function() {
 		$('#sourceTable').off('click', '.moveItem');
 		$('#sourceTable').on('click', '.moveItem', function() {
@@ -63,7 +106,7 @@ function AddAction() {
 			var itemImageSrc = $(this).siblings('img').prop('src');
 			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
 
-			
+
 			//創新的一排html(div格子)變數
 			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
 			// 把這排變數移過去另一個表格
@@ -86,23 +129,57 @@ function AddAction() {
 		});
 
 	});
-
+*/
 
 
 
 }
 
+
 function addActivity() {
 	var activityName = document.getElementById('addactivityName').value;
 	var activityDiscription = document.getElementById('addactivityDiscription').value;
+
 	var activityStartDate = document.getElementById('addactivityStartDate').value;
 	var startDate = moment(activityStartDate).format('YYYY-MM-DD');
-
 	var activityEndDate = document.getElementById('addactivityEndDate').value;
 	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
 
 	var activityFreeShipping = document.getElementById('addactivityFreeShipping').value;
 	var activityDiscount = document.getElementById('addactivityDiscount').value;
+
+	//抓折扣產品id的陣列
+	var elementsWithDataPdid = document.querySelectorAll('#targetTable [data-pdid]');
+	var pdidArray = Array.from(elementsWithDataPdid).map(function(element) {
+		return element.getAttribute('data-pdid');
+	});
+
+	//判斷優惠主軸
+	var fsradio = document.getElementById('fsradio');
+	var fscontent = document.getElementById('addactivityFreeShipping');
+	var dsradio = document.getElementById('dsradio');
+	var dscontent = document.getElementById('addactivityDiscount');
+
+	if (fsradio.checked) {
+		if (fscontent.value.trim() === "") {
+			alert("請輸入免運門檻!");
+			return; 
+		} else if (dscontent.value !== "") {
+			alert('請勿輸入商品折扣!');
+			return;
+		} else if (pdidArray.length > 0){
+			alert('請勿選擇折扣商品!');
+			return;
+		}
+	} else if (dsradio.checked) {
+		if (dscontent.value.trim() === "") {
+			alert("請輸入商品折數!");
+			return; 
+		} else if (fscontent.value !== "") {
+			alert('請勿輸入免運門檻!');
+			return;
+		}
+	}
 
 	var radioButtons = document.getElementsByName('discount');
 	function getSelectedValue() {
@@ -111,19 +188,14 @@ function addActivity() {
 				return radioButtons[i].value;
 			}
 		}
-		// 如果沒有任何單選按鈕被選擇，返回空字符串或其他適當的默認值
 		return '';
 	}
 	var activityMethod = getSelectedValue();
-	//const uuid = java.util.UUID.randomUUID().toString();
+	console.log(activityMethod);
+
+	//產生活動id
 	const timestampId = Date.now().toString();
 	var activitysid = timestampId;
-
-	//抓產品
-	var elementsWithDataPdid = document.querySelectorAll('#targetTable [data-pdid]');
-	var pdidArray = Array.from(elementsWithDataPdid).map(function(element) {
-    return element.getAttribute('data-pdid');
-	});
 
 	var datatosave = {
 		activitys: {
@@ -141,8 +213,6 @@ function addActivity() {
 	};
 
 	var productIds = pdidArray;
-
-	// 遍历产品 ID 数组，为每个产品创建一个活动详情对象
 	for (var i = 0; i < productIds.length; i++) {
 		var productId = productIds[i];
 
@@ -156,48 +226,10 @@ function addActivity() {
 			discount: activityDiscount
 		};
 
-		// 将活动详情对象添加到数组中
 		datatosave.activitydetailsList.push(activityDetails);
 	}
 
 	console.log(datatosave);
-
-	/*
-	var datatosave = {
-		activitys: {
-			id: activitysid,
-			shopId: "shop01",
-			name: activityName,
-			method: activityMethod,
-			startDate: startDate,
-			endDate: endDate,
-			discription: activityDiscription,
-			freeShipping: activityFreeShipping
-		},
-
-		activitydetailsList: [
-			{
-				activitys: {
-					id: activitysid
-				},
-				products: {
-					id: "TW_tt_R_0001"
-				},
-				discount: activityDiscount
-			},
-			{
-				activitys: {
-					id: activitysid
-				},
-				products: {
-					id: "TW_tt_R_0002"
-				},
-				discount: activityDiscount
-			}
-		]
-
-	}
-	*/
 
 	fetch('/addActivity', {
 		method: 'POST',
@@ -215,13 +247,6 @@ function addActivity() {
 		.then(message => {
 			console.log(message);
 			$("#activityInfo").trigger("click");
-			/*
-			if (typeof callback === 'function') {
-				callback();
-			}
-			*/
-
-
 		})
 		.catch(error => {
 			console.error('Error adding activity:', error);
