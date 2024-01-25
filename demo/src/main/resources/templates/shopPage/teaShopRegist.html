@@ -152,7 +152,7 @@
 				</div>
 				<!-- 測試用的  登入後顯示-->
 				<label id="userName" style="border: 1px,solid,black;"></label>
-				<form action="#">
+				
 					<div style="margin-left: 10%;">
 						<div style="margin-bottom: 5%;">
 							<h1 style=" display: inline-block; position: relative; left: 0;">註冊會員</h1>
@@ -193,7 +193,7 @@
 					</div>
 			</div>
 		</div>
-		</form>
+		
 		<!-- 右側背景區 -->
 		<div class="image-area">
 		</div>
@@ -375,10 +375,7 @@
 				contentType: 'application/json; charset=UTF-8',
 				success: function (response) {
 					document.documentElement.innerHTML = response
-					$("#getemail").off("click")
-					document.getElementById('getemail').addEventListener('click', function () {
-						createMember();
-					});
+					
 				},
 				error: function (err) {
 					console.log(err)
