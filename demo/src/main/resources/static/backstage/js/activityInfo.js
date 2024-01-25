@@ -79,22 +79,22 @@ function ActivityInfoqueryAll(choosepage) {
 }
 
 
-function deleteActivity(id) {
-
+function deleteActivity(activityId) {
 	// 使用 fetch() 方法向後端發送刪除請求
-	fetch('/delActivity/' + id, {
-		method: 'POST',
-		body: "shop01",
+	fetch('/delActivity/' + activityId,  {
+		method: 'POST'
 	})
 		.then(response => response.toString())
 		.then(data => {
 			// 處理後端回傳的結果，例如重新載入表格等
 			console.log(data);
+			$("#activityInfo").trigger("click");
 
-			var filename = '/backstage/html/activityInfo.html #formSpace';
+			/*var filename = '/backstage/html/activityInfo.html #formSpace';
 			$("#formSpace").load(filename, function() {
 				ActivityInfoqueryAll(0);
 			});
+			*/
 
 		})
 		.catch(error => {
@@ -105,16 +105,19 @@ function deleteActivity(id) {
 
 function getActivity(id) {
 	sessionStorage.setItem('id', id);
+	var retrievedValue = sessionStorage.getItem('id');
+		console.log(retrievedValue);
+		$("#actionSetting").trigger("click");
 
+	/*
 	$("#bodyContext").off("click", ".editactivity");
 	$("#bodyContext").on("click", ".editactivity", function() {
 		var retrievedValue = sessionStorage.getItem('id');
 		console.log(retrievedValue);
 		$("#actionSetting").trigger("click");
 
-
-
 	})
+	*/
 }
 
 

@@ -10,8 +10,10 @@ import com.example.entity.Activitydetails.ActivityDetailsId;
 
 
 public interface ActivityDetailsRepository extends JpaRepository<Activitydetails, ActivityDetailsId> {
+	
+	void deleteByActivitysId(String activityId);
 
-	//List<Activitys> findByActivityId(String activityId);
-	void deleteByProductsIdAndActivitysId(String productsId, String activitysId);
+	List<Activitydetails> findByActivitysId(String activityId);
+	
 	
 }

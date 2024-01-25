@@ -23,7 +23,6 @@ $(document).ready(function() {
 						insideMutipleImg();								//函式在mutipleImg.js內
 					
 				}
-				ActionSetting();			//誰知道在哪裡說一下
 			});
 		});
 
