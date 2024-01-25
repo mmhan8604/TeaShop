@@ -12,51 +12,51 @@ function addProduct() {
 
 // 抓資料
 function catchProductData() {
-	// 获取上传的图片，转成BLOB并存为JSON
-	var picjson = getBlobImages();
+	// 使用一個空對象來存放圖片數據
+	var imagesData = {};
 
-	return {
-		picjson: picjson,
+	// 獲取 addProductImgs 區域的子元素，即上傳的圖片預覽區域
+	var imagePreviews = document.getElementById("addProductImgs").children;
+
+	// 遍歷每個圖片預覽區域，將其 base64 編碼的數據存入對應的 pictext 字段
+	for (var i = 0; i < imagePreviews.length; i++) {
+		var imagePreview = imagePreviews[i];
+		var base64Data = getImageBase64Data(imagePreview);
+		imagesData['pictext_' + i] = base64Data;
+	}
+
+	// 其餘商品數據
+	var otherProductData = {
 		id: $("#addProductID").val(),
 		name: $("#addProductName").val(),
 		stock: $('#addProductQuantity').val(),
 		shelves: $('#addProductShelves').val(),
 		price: $('#addProductPrice').val(),
 		cost: $('#addProductCost').val(),
-		discription: $('#addProductIntro').val()
-		// 可根据需要添加其他字段
+		discription: $('#addProductIntro').val(),
+		shopId:"shop01"
 	};
+
+	// 將圖片數據和其他商品數據合併
+	var productData = { ...imagesData, ...otherProductData };
+
+	return productData;
 }
 
-// 获取上传的图片并转成BLOB
-function getBlobImages() {
-	var images = document.getElementById("addProductImgs").getElementsByClassName("previewM");
-	var picjson = [];
-
-	for (var i = 0; i < images.length; i++) {
-		var img = images[i].getElementsByTagName("img")[0];
-
-		// 转换为BLOB
-		var blob = dataURItoBlob(img.src);
-		picjson.push(blob);
+// 獲取圖片 base64 編碼的函數
+function getImageBase64Data(imagePreview) {
+	var image = imagePreview.querySelector('img');
+	if (image) {
+		var canvas = document.createElement('canvas');
+		canvas.width = image.width;
+		canvas.height = image.height;
+		var context = canvas.getContext('2d');
+		context.drawImage(image, 0, 0, image.width, image.height);
+		return canvas.toDataURL('image/png');
 	}
-
-	return picjson;
+	return null;
 }
 
-// 将Data URI转换为BLOB
-function dataURItoBlob(dataURI) {
-	var byteString = atob(dataURI.split(',')[1]);
-	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-	var ab = new ArrayBuffer(byteString.length);
-	var ia = new Uint8Array(ab);
-
-	for (var i = 0; i < byteString.length; i++) {
-		ia[i] = byteString.charCodeAt(i);
-	}
-
-	return new Blob([ab], { type: mimeString });
-}
 
 // 更新資料
 function addNewProduct(productIdPOST, newProductData) {

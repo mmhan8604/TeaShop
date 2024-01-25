@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -32,16 +33,116 @@ public class Products {
 
 	private String shopId;
 
-	@Lob
-	private byte[] picJSON;
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_0; 
 
-	public byte[] getPicJSON() {
-		return picJSON;
+	public String getPictext_0() {
+		return pictext_0;
 	}
 
-	public void setPicJSON(byte[] picJSON) {
-		this.picJSON = picJSON;
+	public void setPictext_0(String pictext_0) {
+		this.pictext_0 = pictext_0;
 	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_1; 
+	
+	public String getPictext_1() {
+		return pictext_1;
+	}	
+	public void setPictext_1(String pictext_1) {
+		this.pictext_1 = pictext_1;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_2; 
+	
+	public String getPictext_2() {
+		return pictext_2;
+	}	
+	public void setPictext_2(String pictext_2) {
+		this.pictext_2 = pictext_2;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_3; 
+	
+	public String getPictext_3() {
+		return pictext_3;
+	}	
+	public void setPictext_3(String pictext_3) {
+		this.pictext_3 = pictext_3;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_4; 
+	
+	public String getPictext_4() {
+		return pictext_4;
+	}	
+	public void setPictext_4(String pictext_4) {
+		this.pictext_4 = pictext_4;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_5; 
+	
+	public String getPictext_5() {
+		return pictext_5;
+	}	
+	public void setPictext_5(String pictext_5) {
+		this.pictext_5 = pictext_5;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_6; 
+	
+	public String getPictext_6() {
+		return pictext_6;
+	}	
+	public void setPictext_6(String pictext_6) {
+		this.pictext_6 = pictext_6;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_7; 
+	
+	public String getPictext_7() {
+		return pictext_7;
+	}	
+	public void setPictext_7(String pictext_7) {
+		this.pictext_7 = pictext_7;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_8; 
+	
+	public String getPictext_8() {
+		return pictext_8;
+	}	
+	public void setPictext_8(String pictext_8) {
+		this.pictext_8 = pictext_8;
+	}
+	
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String pictext_9; 
+	
+	public String getPictext_9() {
+		return pictext_9;
+	}	
+	public void setPictext_9(String pictext_9) {
+		this.pictext_9 = pictext_9;
+	}
+
+//	private String picJSON;
+//
+//	public String getPicJSON() {
+//		return picJSON;
+//	}
+//
+//	public void setPicJSON(String picJSON) {
+//		this.picJSON = picJSON;
+//	}
 
 	public String getShopId() {
 		return shopId;

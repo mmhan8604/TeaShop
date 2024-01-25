@@ -152,11 +152,26 @@ function ProductInfoqueryAll(choosepage) {
 	function editProduct() {
 		var productIdPOST = $('#editProductID').val();
 		var updatedData = productUpdateData();
+		console.log(productIdPOST);
+		console.log(updatedData);
 		updateProduct(productIdPOST, updatedData);
 		//抓資料
 		function productUpdateData() {
-			return {
-				//			picjson: $("#editProductImgs").val(),
+			// 使用一個空對象來存放圖片數據
+			var imagesData = {};
+
+			// 獲取 editProductImgs 區域的子元素，即上傳的圖片預覽區域
+			var imagePreviews = document.getElementById("editProductImgs").children;
+
+			// 遍歷每個圖片預覽區域，將其 base64 編碼的數據存入對應的 pictext 字段
+			for (var i = 0; i < imagePreviews.length; i++) {
+				var imagePreview = imagePreviews[i];
+				var base64Data = getImageBase64Data(imagePreview);
+				imagesData['pictext_' + i] = base64Data;
+			}
+
+			// 其餘商品數據
+			var otherProductData = {
 				id: $("#editProductID").val(),
 				name: $("#editProductName").val(),
 				stock: $('#editProductQuantity').val(),
@@ -164,9 +179,28 @@ function ProductInfoqueryAll(choosepage) {
 				price: $('#editProductPrice').val(),
 				cost: $('#editProductCost').val(),
 				discription: $('#editProductIntro').val()
-				// 可根據需要添加其他欄位
 			};
+
+			// 將圖片數據和其他商品數據合併
+			var productData = { ...imagesData, ...otherProductData };
+
+			return productData;
 		}
+
+		// 獲取圖片 base64 編碼的函數
+		function getImageBase64Data(imagePreview) {
+			var image = imagePreview.querySelector('img');
+			if (image) {
+				var canvas = document.createElement('canvas');
+				canvas.width = image.width;
+				canvas.height = image.height;
+				var context = canvas.getContext('2d');
+				context.drawImage(image, 0, 0, image.width, image.height);
+				return canvas.toDataURL('image/png');
+			}
+			return null;
+		}
+
 		//更新資料
 		function updateProduct(productIdPOST, updatedData) {
 			$.ajax({
