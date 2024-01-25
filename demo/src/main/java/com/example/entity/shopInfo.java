@@ -48,8 +48,13 @@ public class shopInfo {
 	private String deli_cod;
 	private String deli_refri;
 	
+	private String shopNav;
+	
 	
 
+
+
+	
 
 
 	@Column(columnDefinition = "BLOB")
@@ -249,6 +254,17 @@ public class shopInfo {
 	public void setDeli_refri(String deli_refri) {
 		this.deli_refri = deli_refri;
 	}
+	
+	public String getShopNav() {
+		return shopNav;
+	}
+
+
+
+	public void setShopNav(String shopNav) {
+		this.shopNav = shopNav;
+	}
+
 	
 
 

@@ -222,10 +222,46 @@ const gridPointer_1_5=(id)=>(event)=>{
   
 }
 
-function LoadLayout(divtype, divBlock) {
+async function getNavInfo(){
+  let data={}
+  data["fontStyle"]= document.getElementById("fontSelector").value
+  data["navStyle"]="1"? document.getElementById("nav1").checked:document.getElementById("nav2").checked
+  data["navBackround"]= document.getElementById("colorPicker1").value
+  data["navFontColor"]= document.getElementById("colorPicker2").value
+  data["nacIconColor"]= document.getElementById("colorPicker3").value
+  data["footerStyle"]="1"? document.getElementById("nav3").checked:document.getElementById("nav4").checked
+  data["footerBackround"]= document.getElementById("colorPicker4").value
+  data["footerFontColor"]= document.getElementById("colorPicker5").value
+  sessionStorage.setItem("navInfo",JSON.stringify(data))
+  try {
+    let response = await $.ajax({
+      url: "/FrontStageSet/update/nav",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(data)
+    });
+    
+    if (response === "ok") {
+      return 0
+  } else {
+      return 1
+  }
+    
+  } catch (error) {
+    return 2
+  }
+  
+}
+async function LoadLayout(divtype, divBlock) {
     bigBlockNum = divBlock.match(/\d+/)[0]; // 使用正則表示法提取數字丟置全域
     bigBlock = divBlock; //提取數字丟置全域
     subblock = divtype; //提取數字丟置全域
+    let check= await getNavInfo();
+    if(check>0){
+      alert("11")
+      return
+    }
+    
     $("#view-" + bigBlockNum).load(
         `backstage/websource/layType/block${divtype}.html`, () => {
           
@@ -309,7 +345,7 @@ function productBar(onlyid) {
 }
 
 function textbar(onlyid) {
-    $("#bar").load("backstage/websource/eleBar/elementBarText.html", function () {
+    $("#bar").load("websource/eleBar/elementBarText.html", function () {
         // 在 elementBarImg.html 載入後執行
         updateTextBlock(bigBlock, subblock, onlyid, GridBlock); //最後一個為該小區塊id
         console.log("成功置換textbar");
