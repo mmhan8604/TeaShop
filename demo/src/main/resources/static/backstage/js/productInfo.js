@@ -230,6 +230,7 @@ function ProductInfoqueryAll(choosepage) {
 
 			// 其餘商品數據
 			var otherProductData = {
+				picjson: imagesData['pictext_0'],
 				id: $("#editProductID").val(),
 				name: $("#editProductName").val(),
 				stock: $('#editProductQuantity').val(),

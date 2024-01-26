@@ -24,9 +24,10 @@ function catchProductData() {
 		var base64Data = getImageBase64Data(imagePreview);
 		imagesData['pictext_' + i] = base64Data;
 	}
-
+	
 	// 其餘商品數據
 	var otherProductData = {
+		picjson: imagesData['pictext_0'],
 		id: $("#addProductID").val(),
 		name: $("#addProductName").val(),
 		stock: $('#addProductQuantity').val(),
@@ -34,7 +35,7 @@ function catchProductData() {
 		price: $('#addProductPrice').val(),
 		cost: $('#addProductCost').val(),
 		discription: $('#addProductIntro').val(),
-		shopId:"shop01"
+		shopId: "shop01"
 	};
 
 	// 將圖片數據和其他商品數據合併

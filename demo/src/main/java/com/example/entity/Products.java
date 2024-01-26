@@ -134,15 +134,20 @@ public class Products {
 		this.pictext_9 = pictext_9;
 	}
 
-//	private String picJSON;
-//
-//	public String getPicJSON() {
-//		return picJSON;
-//	}
-//
-//	public void setPicJSON(String picJSON) {
-//		this.picJSON = picJSON;
-//	}
+	@Column(length = 60000 ,columnDefinition = "TEXT")
+	private String picjson;
+
+	
+
+	
+
+	public String getPicjson() {
+		return picjson;
+	}
+
+	public void setPicjson(String picjson) {
+		this.picjson = picjson;
+	}
 
 	public String getShopId() {
 		return shopId;
