@@ -1,7 +1,9 @@
 package com.example.controller.view;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +13,16 @@ import com.example.interf.ShopIndexService;
 
 @Controller
 public class shopIndexController {
-	
+	@Autowired
 	ShopIndexService sis;
 	
 	@GetMapping("/shopPage/{shopid}")
 	public String index(Model model,@PathVariable Integer shopid) {
-		HashMap<String, Object> styleInfo=sis.getStyle(shopid);
-		model.addAttribute("nav", styleInfo.get("nav"));
-		model.addAttribute("fullView", styleInfo.get("fullView"));
+//		HashMap<String, Object> styleInfo=sis.getStyle(shopid);
+		System.out.println("1");
+		LinkedList<String>htmls=sis.createBigDivHTML(shopid);
+//		model.addAttribute("nav", styleInfo.get("nav"));
+//		model.addAttribute("fullView", styleInfo.get("fullView"));
 		return"shopPage/customize.html";
 	}
 }

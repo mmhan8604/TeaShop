@@ -50,14 +50,7 @@ public class shopInfo {
 	
 	private String shopNav;
 	
-	
-
-
-
-	
-
-
-	@Column(columnDefinition = "BLOB")
+	@Column( columnDefinition = "BLOB")
 	@Lob
 	private byte[] frontStage;
 

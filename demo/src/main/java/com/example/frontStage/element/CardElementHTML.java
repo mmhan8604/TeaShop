@@ -21,13 +21,13 @@ public class CardElementHTML {
 //	private String textHead;
 //	private String textBody;
 	
-	private String cardElement01;
-	private String cardElement02;
-	private String cardElement03;
-	private String cardElement04;
-	private String cardElement05;
-	private String cardElement06;
-	private String cardElement07;
+	private String cardElement;
+//	private String cardElement02;
+//	private String cardElement03;
+//	private String cardElement04;
+//	private String cardElement05;
+//	private String cardElement06;
+//	private String cardElement07;
 	
 	public CardElementHTML(int type,String backroundColor,String backroundImg,String headerText1,String headerText2,String cardBackround,String cardTitleColor, String cardTextColor,LinkedList<String> cardTitle,LinkedList<String> cardImg,LinkedList<String> cardText) {
 		this.backroundColor=backroundColor;
@@ -95,7 +95,7 @@ public class CardElementHTML {
 //	}
 	
 	public String createCardElement01() {
-		cardElement01=String.format(" <div class=\"child\" style=\"display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s \">\r\n"
+		cardElement=String.format(" <div class=\"child\" style=\"display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s \">\r\n"
 				+ "        <h1 class=\"headerText1\">%s</h1>\r\n"
 				+ "        <h2 class=\"headerText2\">%s</h2>\r\n"
 				+ "    \r\n"
@@ -167,11 +167,11 @@ public class CardElementHTML {
 				+ "        </div>\r\n"
 				+ "    \r\n"
 				+ "    </div>",backroundColor,backroundImg,headerText1,headerText2,cardBackround,cardImg.get(0),cardTitleColor,cardTitle.get(0),cardTextColor,cardText.get(0),cardBackround,cardImg.get(1),cardTitleColor,cardTitle.get(1),cardTextColor,cardText.get(1),cardBackround,cardImg.get(2),cardTitleColor,cardTitle.get(2),cardTextColor,cardText.get(2),cardBackround,cardImg.get(3),cardTitleColor,cardTitle.get(3),cardTextColor,cardText.get(3));
-				return cardElement01;
+				return cardElement;
 	}
 	
 	public String createCardElement02() {
-		cardElement02= String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement= String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -215,11 +215,11 @@ public class CardElementHTML {
 				+ "\r\n"
 				+ "    </div>\r\n"
 				+ "  </div>",backroundColor,backroundImg,headerText1,headerText2,cardBackround,cardImg.get(0),cardTitleColor,cardTitle.get(0),cardTextColor,cardText.get(0),cardBackround,cardImg.get(1),cardTitleColor,cardTitle.get(1),cardTextColor,cardText.get(1),cardBackround,cardImg.get(2),cardTitleColor,cardTitle.get(2),cardTextColor,cardText.get(2));
-		return cardElement02;
+		return cardElement;
 	}
 	
 	public String createCardElement03() {
-		cardElement03=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -263,11 +263,11 @@ public class CardElementHTML {
 				+ "\r\n"
 				+ "    </div>\r\n"
 				+ "  </div>",backroundColor,backroundImg,headerText1,headerText2,cardBackround,cardImg.get(0),cardTitleColor,cardTitle.get(0),cardTextColor,cardText.get(0),cardBackround,cardImg.get(1),cardTitleColor,cardTitle.get(1),cardTextColor,cardText.get(1),cardBackround,cardImg.get(2),cardTitleColor,cardTitle.get(2),cardTextColor,cardText.get(2));
-		return cardElement03;
+		return cardElement;
 	}
 	
 	public String createCardElement04() {
-		cardElement04=String.format("<div class='child'\r\n"
+		cardElement=String.format("<div class='child'\r\n"
 				+ "    style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
@@ -309,11 +309,11 @@ public class CardElementHTML {
 				+ "    </div>\r\n"
 				+ "\r\n"
 				+ "  </div>",backroundColor,backroundImg,headerText1,headerText2,cardBackround,cardImg.get(0),cardTitleColor,cardTitle.get(0),cardTextColor,cardText.get(0),cardBackround,cardImg.get(1),cardTitleColor,cardTitle.get(1),cardTextColor,cardText.get(1) );
-		return cardElement04;
+		return cardElement;
 		
 	}
 	public String createCardElement05() {
-		cardElement05=String.format(" <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement=String.format(" <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -355,7 +355,7 @@ public class CardElementHTML {
 				+ "\r\n"
 				+ "\r\n"
 				+ "  </div>",backroundColor,backroundImg,headerText1,headerText2,cardBackround,cardImg.get(0),cardTitleColor,cardTitle.get(0),cardTextColor,cardText.get(0),cardBackround,cardImg.get(1),cardTitleColor,cardTitle.get(1),cardTextColor,cardText.get(1) );
-		return cardElement05;
+		return cardElement;
 	}
 //	public String createCardElement06() {
 //		cardElement06=String.format(" <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
@@ -427,25 +427,7 @@ public class CardElementHTML {
 //		this.textBody = textBody;
 //	}
 
-	public String getCardElement03() {
-		return cardElement03;
-	}
-
-	public String getCardElement04() {
-		return cardElement04;
-	}
-
-	public String getCardElement05() {
-		return cardElement05;
-	}
-
-	public String getCardElement06() {
-		return cardElement06;
-	}
-
-	public String getCardElement07() {
-		return cardElement07;
-	}
+	
 
 	public String getHeaderText1() {
 		return headerText1;
@@ -495,13 +477,10 @@ public class CardElementHTML {
 		this.cardText = cardText;
 	}
 
-	public String getCardElement01() {
-		return cardElement01;
+	public String getCardElement() {
+		return cardElement;
 	}
 
-	public String getCardElement02() {
-		return cardElement02;
-	}
 	
 }
 

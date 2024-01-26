@@ -12,7 +12,7 @@ function parseCard(view,webEle){
     webEle["cardImg"]=[];
     
     
-    if(view.getElementsByClassName("card-title")>0){
+    
         for(let i=0;i<view.getElementsByClassName("card-title").length;i++){
             webEle["card-title"][i]=view.getElementsByClassName("card-title")[i].innerHTML;
             webEle["card-text"][i]=view.getElementsByClassName("card-text")[i].innerHTML;      
@@ -26,11 +26,7 @@ function parseCard(view,webEle){
                 webEle["cardImg"][i]=view.getElementsByClassName("cardImg")[i].src;
              }
         }
-    }else{
-        webEle["backImg"]=view.getElementsByTagName("img")[0].src;
-        webEle["textHead"]=view.getElementsByTagName("h1")[0].innerHTML;
-        webEle["textBody"]=view.getElementsByTagName("h4")[0].innerHTML;
-    }
+    
     
     return webEle;
 }
@@ -179,7 +175,7 @@ document.getElementById("publishDesign").addEventListener('click',async()=>{
         data[i]= viewToObj(views[i])
     }
     // let viewObj= viewToObj(views[0])
-    
+    console.log( JSON.stringify(data));
     try {
         let res=await fetch("/FrontStageSet/update", {
             method: 'POST',

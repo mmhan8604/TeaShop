@@ -14,20 +14,21 @@ public class BigDiv implements Serializable{
 	
 	private LinkedList<Map<String, String>> webElements;
 	
-	@SafeVarargs
-	public BigDiv(Map<String, String>...webelements){
-		webElements=new LinkedList<Map<String, String>>();
-		for(Map<String, String> we:webelements) {
-			this.webElements.add(we);
-		}
-//		style=webelements.length;
-	}
+//	@SafeVarargs
+//	public BigDiv(Map<String, String>...webelements){
+//		
+//		webElements=new LinkedList<Map<String, String>>();
+//		for(Map<String, String> we:webelements) {
+//			this.webElements.add(we);
+//		}
+////		style=webelements.length;
+//	}
 	
-	public BigDiv(LinkedList<Map<String, String>> webelements) {
-		this.webElements=webelements;
-//		style=webelements.size();
-	}
-	
+//	public BigDiv(LinkedList<Map<String, String>> webelements) {
+//		this.webElements=webelements;
+////		style=webelements.size();
+//	}
+//	
 	public BigDiv(String templateType,LinkedList<Map<String, String>> webElements) {
 		this.templateType=templateType;
 		this.webElements=webElements;

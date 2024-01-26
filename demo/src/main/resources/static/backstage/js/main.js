@@ -256,11 +256,16 @@ async function LoadLayout(divtype, divBlock) {
     bigBlockNum = divBlock.match(/\d+/)[0]; // 使用正則表示法提取數字丟置全域
     bigBlock = divBlock; //提取數字丟置全域
     subblock = divtype; //提取數字丟置全域
-    let check= await getNavInfo();
-    if(check>0){
-      alert("11")
+    if(document.getElementById("fontSelector")!=undefined){
+		let check= await getNavInfo();
+		if(check>0){
+      	alert("11")
       return
     }
+	}
+    
+    
+    
     
     $("#view-" + bigBlockNum).load(
         `backstage/websource/layType/block${divtype}.html`, () => {

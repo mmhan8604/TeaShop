@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.frontStage.BigDiv;
+import com.example.frontStage.fullView;
 import com.example.interf.FrontStageStyleService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,10 +22,10 @@ public class FrontStageStyle {
 	FrontStageStyleService fss;
 	
 	@PostMapping("/FrontStageSet/update")
-	public String setStyle(HttpSession session,@RequestBody  LinkedList<BigDiv> li) {
+	public String setStyle(HttpSession session,@RequestBody  String fulview) {
 		
 //		int check= fss.updateStyle((String)session.getAttribute("email"),(String)session.getAttribute("nav"), li);
-		int check= fss.updateStyle("test",(String)session.getAttribute("nav"), li);
+		int check= fss.updateStyle("test",(String)session.getAttribute("nav"), fulview);
 		  ObjectMapper objectMapper = new ObjectMapper();
           String jsonMessage = null;
 		try {
