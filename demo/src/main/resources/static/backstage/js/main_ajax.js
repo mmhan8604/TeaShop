@@ -11,23 +11,29 @@ function parseCard(view,webEle){
     webEle["card-img-top"]=[];
     webEle["cardImg"]=[];
     
-    for(let i=0;i<view.getElementsByClassName("card-title").length;i++){
-        webEle["card-title"][i]=view.getElementsByClassName("card-title")[i].innerHTML;
-        webEle["card-text"][i]=view.getElementsByClassName("card-text")[i].innerHTML;      
-        webEle["card-backround"][i]=view.getElementsByClassName("card")[i].style.backgroundColor==""?"#FFFFFF":view.getElementsByClassName("card")[i].style.backgroundColor
-        webEle["card-title-color"][i]=view.getElementsByClassName("card-title")[i].style.color==""?"#000000":view.getElementsByClassName("card-title")[i].style.color
-        webEle["card-text-color"][i]=view.getElementsByClassName("card-text")[i].style.color==""?"#000000":view.getElementsByClassName("card-text")[i].style.color
-         if(view.getElementsByClassName("card-img-top")[i]!=undefined){
-            webEle["card-img-top"][i]=view.getElementsByClassName("card-img-top")[i].src;
-         }
-         if(view.getElementsByClassName("cardImg")[i]!=undefined){
-            webEle["cardImg"][i]=view.getElementsByClassName("cardImg")[i].src;
-         }
+    
+    if(view.getElementsByClassName("card-title")>0){
+        for(let i=0;i<view.getElementsByClassName("card-title").length;i++){
+            webEle["card-title"][i]=view.getElementsByClassName("card-title")[i].innerHTML;
+            webEle["card-text"][i]=view.getElementsByClassName("card-text")[i].innerHTML;      
+            webEle["card-backround"][i]=view.getElementsByClassName("card")[i].style.backgroundColor==""?"#FFFFFF":view.getElementsByClassName("card")[i].style.backgroundColor
+            webEle["card-title-color"][i]=view.getElementsByClassName("card-title")[i].style.color==""?"#000000":view.getElementsByClassName("card-title")[i].style.color
+            webEle["card-text-color"][i]=view.getElementsByClassName("card-text")[i].style.color==""?"#000000":view.getElementsByClassName("card-text")[i].style.color
+             if(view.getElementsByClassName("card-img-top")[i]!=undefined){
+                webEle["card-img-top"][i]=view.getElementsByClassName("card-img-top")[i].src;
+             }
+             if(view.getElementsByClassName("cardImg")[i]!=undefined){
+                webEle["cardImg"][i]=view.getElementsByClassName("cardImg")[i].src;
+             }
+        }
+    }else{
+        webEle["backImg"]=view.getElementsByTagName("img")[0].src;
+        webEle["textHead"]=view.getElementsByTagName("h1")[0].innerHTML;
+        webEle["textBody"]=view.getElementsByTagName("h4")[0].innerHTML;
     }
     
     return webEle;
 }
-
 function parseCarousel(view,webEle){
     webEle["carouselImg"]=[]
     let imgDiv= view.getElementsByClassName("carousel-item");

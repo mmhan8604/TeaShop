@@ -58,5 +58,11 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 		
 		
 	}
+	
+	public String createBigDivHTML(Integer shopid) {
+		HashMap<String, Object> style= getStyle(shopid);
+		
+		return"";
+	}
 
 }
