@@ -70,12 +70,28 @@ public class ProductController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+
 //	更新商品
 	@PostMapping("/updateProducts/{id}")
 	public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Products products) {
 		Products updateProducts = productService.updateProduct(id, products);
 		if (updateProducts != null) {
 			return ResponseEntity.ok(updateProducts);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	// 新增用於更新商品狀態的端點
+	@PostMapping("/updateDiscontinued/{id}")
+	public ResponseEntity<?> updateDiscontinued(@PathVariable String id, @RequestBody Map<String, Boolean> updateData) {
+		boolean discontinued = updateData.get("discontinued");
+
+		// 呼叫服務進行商品狀態的更新
+		Products updatedProduct = productService.updateDiscontinued(id, discontinued);
+
+		if (updatedProduct != null) {
+			return ResponseEntity.ok(updatedProduct);
 		} else {
 			return ResponseEntity.notFound().build();
 		}

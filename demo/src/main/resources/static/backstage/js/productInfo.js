@@ -92,8 +92,8 @@ function ProductInfoqueryAll(choosepage) {
 					method: 'GET',
 					success: function(productDatas) {
 						console.log("成功了", productDatas);
-						// 抓商品資料
-						//						$('#editProductImgs').val(productDatas.product.picjson);
+						// 從資料庫抓商品資料
+
 						$('#editProductID').val(productDatas.product.id);
 						$('#editProductName').val(productDatas.product.name);
 						$('#editProductQuantity').val(productDatas.product.stock);
@@ -102,33 +102,87 @@ function ProductInfoqueryAll(choosepage) {
 						$('#editProductCost').val(productDatas.product.cost);
 						$('#editProductIntro').val(productDatas.product.discription);
 
+						// 清空圖片預覽區域
+						$("#editProductImgs").empty();
+
+						// 遍歷每個圖片資料
+						for (let i = 0; i < 10; i++) {
+							// 構造圖片預覽的HTML
+							let pictextKey = 'pictext_' + i;
+							let imageData = productDatas.product[pictextKey];
+
+							if (imageData) {
+								// 創建預覽區域
+								let previewDiv = document.createElement('div');
+								previewDiv.className = 'previewM';
+
+								// 創建圖片
+								let img = new Image();
+								img.src = imageData;
+								previewDiv.appendChild(img);
+
+								// 創建刪除按鈕
+								let deleteButton = document.createElement('button');
+								deleteButton.className = 'deleteButton';
+								deleteButton.innerHTML = 'X';
+								deleteButton.onclick = function(event) {
+									event.stopPropagation();
+									previewDiv.parentNode.removeChild(previewDiv);
+									showPlaceholderText(dropArea, originalContent);
+								};
+
+								previewDiv.appendChild(deleteButton);
+
+								// 將圖片預覽加入到 editProductImgs 區域
+								$("#editProductImgs").append(previewDiv);
+							}
+						}
+
 					},
 					error: function(error) {
 						console.error('Error products:', error);
 					}
 				})
-
 			});
 
 			//刪除按鈕的處理事件
 			$("#bodyContext").off("click", ".removeBtn");
 			$("#bodyContext").on("click", ".removeBtn", function() {
 				let productId = $(this).data("id");
-				alert(productId);
 				deleteProduct(productId)
-					.then(function() {
-						ProductInfoqueryAll(0);
-					})
-					.catch(function(error) {
-						console.error("刪除失敗: ", error);
-					});
 			});
+
+
+
+			$("#bodyContext").on("click", ".switch-checkbox", function() {
+				let productId = trlist[$(this).attr('id').replace('switchID', '')].id;
+				let isChecked = $(this).prop("checked");
+				let status = isChecked ? '已上架' : '未上架';
+				console.log(`商品ID: ${productId}, 現在狀態: ${status}`);
+
+				// 發送 AJAX POST 請求更新商品的 discontinued 狀態
+				$.ajax({
+					url: `/updateDiscontinued/${productId}`,
+					method: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify({ discontinued: isChecked ? 1 : 0 }),
+					success: function(response) {
+						// 請根據實際情況處理成功後的操作
+						console.log(`商品ID: ${productId} 的 discontinued 狀態已更新為: ${isChecked ? '已上架' : '未上架'}`);
+					},
+					error: function(error) {
+						console.error("更新 discontinued 狀態失敗: ", error);
+					}
+				});
+			});
+
+
 		}
 	}
 
 	//刪除商品
 	function deleteProduct(productId) {
-		console.log(productId);
+		console.log("要刪除的商品UD" + productId);
 
 		// 返回Promise對象
 		return new Promise(function(resolve, reject) {
@@ -137,11 +191,15 @@ function ProductInfoqueryAll(choosepage) {
 				method: 'POST',
 				contentType: 'application/json',
 				success: function(response) {
+					alert("商品刪除成功");
 					console.log("刪除成功: ", response);
 					resolve(response);  // 成功時呼叫resolve
+					$("#buttonProduct").trigger("click");
 				},
 				error: function(error) {
 					console.error("刪除失敗: ", error);
+					console.error("伺服器端錯誤:", error.responseText);
+					alert("此商品有綁活動，無法刪除");
 					reject(error);  // 失敗時呼叫reject
 				}
 			});
@@ -155,7 +213,7 @@ function ProductInfoqueryAll(choosepage) {
 		console.log(productIdPOST);
 		console.log(updatedData);
 		updateProduct(productIdPOST, updatedData);
-		//抓資料
+		//抓畫面上的資料
 		function productUpdateData() {
 			// 使用一個空對象來存放圖片數據
 			var imagesData = {};
@@ -209,13 +267,15 @@ function ProductInfoqueryAll(choosepage) {
 				contentType: 'application/json',
 				data: JSON.stringify(updatedData),
 				success: function(response) {
+					alert("商品資料更新成功");
 					console.log("更新成功: ", response);
-					// 可以在這裡添加後續處理邏輯
+					$("#buttonProduct").trigger("click");
 				},
 				error: function(error) {
 					console.error("更新失敗: ", error);
 				}
 			});
 		}
+
 	}
 }

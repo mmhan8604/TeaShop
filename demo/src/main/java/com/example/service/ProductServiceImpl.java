@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setPrice(products.getPrice());
 		product.setCost(products.getCost());
 		product.setDiscription(products.getDiscription());
-		
+
 		product.setPictext_0(products.getPictext_0());
 		product.setPictext_1(products.getPictext_1());
 		product.setPictext_2(products.getPictext_2());
@@ -96,6 +96,19 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Optional<Products> findById(String id) {
 		return productsRes.findById(id);
+	}
+
+	@Override
+	public Products updateDiscontinued(String productId, boolean discontinued) {
+		Optional<Products> optionalProduct = productsRes.findById(productId);
+
+		if (optionalProduct.isPresent()) {
+			Products productToUpdate = optionalProduct.get();
+			productToUpdate.setDiscontinued(discontinued);
+			return productsRes.save(productToUpdate);
+		}
+
+		return null;
 	}
 
 }

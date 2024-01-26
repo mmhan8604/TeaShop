@@ -66,8 +66,9 @@ function addNewProduct(productIdPOST, newProductData) {
 		contentType: 'application/json',
 		data: JSON.stringify(newProductData),
 		success: function(response) {
+			alert("新增商品成功");
 			console.log("新增商品成功: ", response);
-			// 可以在這裡添加後續處理邏輯
+			$("#buttonProduct").trigger("click");
 		},
 		error: function(error) {
 			console.error("新增商品失敗: ", error);
