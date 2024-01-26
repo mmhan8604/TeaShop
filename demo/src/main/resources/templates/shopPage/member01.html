@@ -13,16 +13,27 @@
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<!-- sever傳遞參數 -->
 	<script th:inline="javascript">
-        /*<![CDATA[*/
-        var shopId = /*[[${shopId}]]*/ null;
-        var logInuserName=/*[[${userName}]]*/null;
-        var logInorNot = logInuserName!=null;
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
+		var memberId = /*[[${memberId}]]*/ null;
         /*]]>*/
-    </script>
+	</script>
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/js/main.js"></script>
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<script src="/frontstage/js/logOut.js"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
+		var memberId = /*[[${memberId}]]*/null;
+        /*]]>*/
+	</script>
+	<script src="/frontstage/js/cart.js"></script>
+
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
@@ -32,73 +43,69 @@
 <body>
 
 	<!--nav導覽列頭-->
-		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
-			<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
-				<!-- Logo、官網名，連結首頁 -->
-				<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
-					<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
-				</a>
+	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
+		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
+			<!-- Logo、官網名，連結首頁 -->
+			<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
+				<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
+			</a>
 
-				<!-- 響應式的導航欄 -->
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<!-- 響應式的導航欄 -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-				<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
-				<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
-					<div class="navbar-nav mx-auto text-center  ">
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
-					</div>
-					<!-- 登入Login、購物車按鈕icon -->
+			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
+			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
+				<div class="navbar-nav mx-auto text-center  ">
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
+				</div>
+				<!-- 登入Login、購物車按鈕icon -->
 
 
-					<div class="dropdown me-1 row">
-						<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false" style="color: #ffffff; display: flex; flex-direction: row; align-items: center;" >
-							<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;" alt="">
-							<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
-						</button>
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
-							
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
-									href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">登出</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">訂單</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">設定</a></li>
-						</ul>
+				<div class="dropdown me-1 row">
+					<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"
+						style="color: #ffffff; display: flex; flex-direction: row; align-items: center;">
+						<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;"
+							alt="">
+						<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
+					</button>
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
+
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
+								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">登出</a></li>
 						
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-									th:href="@{'/shop/' + ${shopId} + '/login'}">
-									<img src="/frontstage/icon/white/login.png " alt=""
-										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
-							
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">訂單</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">設定</a></li>
-						</ul>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">設定</a></li>
+					</ul>
 
-						<button class="btn my-2 my-sm-0 col navCarticon" type="button">
-							<a th:href="@{'/shop/' + ${shopId} + '/shoppingCart'}"><img src="/frontstage/icon/white/cart.png"
-									style="width:30px; height: 30px;" alt="購物車"></a>
-						</button>
-					</div>
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/login'}">
+								<img src="/frontstage/icon/white/login.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">登入</a></li>
+
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">設定</a></li>
+					</ul>
+
+					<button class="btn my-2 my-sm-0 col navCarticon" type="button">
+						<a th:href="@{'/shop/' + ${shopId} + '/shoppingCart'}"><img
+								src="/frontstage/icon/white/cart.png" style="width:30px; height: 30px;" alt="購物車"></a>
+					</button>
 				</div>
 			</div>
-		</nav>
-		<!--nav導覽列尾------------------- -->
+		</div>
+	</nav>
+	<!--nav導覽列尾------------------- -->
 	<!-- 主要畫面 --> <!--修改左右margin-->
 	<div id="site" class="siteH1">
 
@@ -115,8 +122,8 @@
 						<div class="d-flex align-items-center justify-content-center">
 							<h3 class="flex-grow-1 ms-5	mb-0">會員資訊</h3>
 							<button class="btn memberRevisebutton d-flex justify-content-center align-items-center"
-								 id="memberInformationChange">
-								<img src="/frontstage/icon/white/save02.png" class="memberReviseicon" >
+								id="memberInformationChange">
+								<img src="/frontstage/icon/white/save02.png" class="memberReviseicon">
 							</button>
 							<!-- ***新增彈出視窗 -->
 							<div class="modal fade" id="succesMemberInformationChange" tabindex="-1"
@@ -140,33 +147,33 @@
 						</div>
 
 						<div class="my-3 text-start ">
-							<label for="" class="form-label ms-3">會員帳號</label>
-							<input type="email" class="form-control  mx-auto" id=""
-								style="width: 95%; background-color: #dbdada;" value="Brad@gmail.com" disabled>
+							<label for="" class="form-label ms-3" >會員帳號</label>
+							<input type="email" class="form-control  mx-auto" id="memberEmail"
+								style="width: 95%; background-color: #dbdada;" th:value="${memberMail}" disabled>
 						</div>
 
 						<div class="my-3 text-start">
-							<label for="" class="form-label ms-3">會員姓名</label>
-							<input class="form-control  mx-auto" id="" style="width: 95%; background-color: #dbdada;"
-								value="王大明" disabled>
+							<label for="" class="form-label ms-3" >會員姓名</label>
+							<input class="form-control  mx-auto" id="memberName" style="width: 95%; background-color: #dbdada;"
+								th:value="${memberName}" disabled>
 						</div>
 
 						<div class="my-3 text-start">
-							<label for="" class="form-label ms-3">會員電話</label>
+							<label for="" class="form-label ms-3" >會員電話</label>
 							<input class="form-control  mx-auto" id="memberPhone" style="width: 95%;"
-								value="0912-345678">
+								th:value="${memberPhone}" value="0912-345678">
 						</div>
 
 						<div class="my-3 text-start">
 							<label for="" class="form-label ms-3">會員地址</label>
-							<input class="form-control  mx-auto" id="memberAddress" style="width: 95%;"
-								value="408台中市南屯區公益路二段51號">
+							<input class="form-control  mx-auto" id="memberAddress1" style="width: 95%;"
+								th:value="${memberAddress}" value="408台中市南屯區公益路二段51號">
 						</div>
 
 						<div class="my-3 text-start">
-							<label for="" class="form-label ms-3">累積消費</label>
-							<input class="form-control  mx-auto pb-2" id=""
-								style="width: 95%; background-color: #d8d8d8;" value="999,999,999元" disabled>
+							<label for="" class="form-label ms-3" >會員點數</label>
+							<input class="form-control  mx-auto pb-2" id="memberCount"
+								style="width: 95%; background-color: #d8d8d8;" th:value="${memberCount}" disabled>
 						</div>
 
 					</div>
@@ -185,7 +192,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center  " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center  "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">23/12/05
 							</div>
 							<div class="col-3 py-2">荔枝紅茶</div>
@@ -194,16 +202,18 @@
 							<div class="col-sm-2 col-3 py-2"><button class=" rounded cancelOrder px-2">取消</button></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">23/11/05
 							</div>
 							<div class="col-3 py-2">荔枝紅茶</div>
 							<div class="col-2 py-2 amount">$9,999</div>
 							<div class="col-sm-2 col-3 py-2">已收到</div>
-							<div class="col-sm-2 col-3 py-2"><button class="rounded checkOrder px-2" >查看</button></div>
+							<div class="col-sm-2 col-3 py-2"><button class="rounded checkOrder px-2">查看</button></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -211,7 +221,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -219,7 +230,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -227,7 +239,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -235,7 +248,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -243,7 +257,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -251,7 +266,8 @@
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center " style="width: 95%; background-color: rgb(236, 236, 235);">
+						<div class="row mx-auto rounded d-flex align-items-center "
+							style="width: 95%; background-color: rgb(236, 236, 235);">
 							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
 							<div class="col-3 py-2"></div>
 							<div class="col-2 py-2 amount"></div>
@@ -271,18 +287,46 @@
 	<script>
 		$(document).ready(function () {
 			$('#memberInformationChange').click(function () {
-				// 獲取輸入框的值
 				var phone = $('#memberPhone').val();
 				var address = $('#memberAddress').val();
 
-				// 將值保存到 localStorage
 				localStorage.setItem('memberPhone', phone);
 				localStorage.setItem('memberAddress', address);
-
-				// 會員資料修改成功
-				$('#succesMemberInformationChange').modal('show');
+				editMember()
+				
+				
 			});
 		});
+
+
+		function editMember() {
+			userData = {
+				id: memberId,
+				mail: $("#memberEmail").val(),
+				name: $("#memberName").val(),
+				phone: $("#memberPhone").val(),
+				address: $("#memberAddress1").val(),
+				count: $("#memberCount").val(),
+				shopId: shopId
+			}
+			console.log(userData)
+			$.ajax({
+				url: "/editMember",
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify(userData),
+				success: function (response) {
+					console.log("success")// 會員資料修改成功
+				$('#succesMemberInformationChange').modal('show');
+					
+					
+				},
+				error: function (err) {
+					console.log(err)
+				}
+
+			})
+		}
 
 	</script>
 </body>

@@ -23,9 +23,17 @@ public class MemberControllerForOrder {
 	
 	@PostMapping("/insertMember")
 	public void insertMember(@RequestBody Member member,HttpSession session) {
-		memberservice.insertMember(member);
+		member =memberservice.insertMember(member);
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		loginInfo.setDisplayName(member.getName());
+		loginInfo.setMemberId(member.getId());
 		session.setAttribute("authObject", loginInfo);
+	}
+	
+	@PostMapping("/editMember")
+	public void editMember(@RequestBody Member member,HttpSession session) {
+		System.out.println(member.getAddress());
+		memberservice.editMember(member);
+		
 	}
 }

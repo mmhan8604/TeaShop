@@ -8,6 +8,9 @@ import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
 import com.example.repository.MemberRepository;
 
+import jakarta.servlet.http.HttpSession;
+import net.sf.jsqlparser.util.validation.ValidationException;
+
 @Service
 public class MCFOservice {
 	@Autowired
@@ -23,7 +26,13 @@ public class MCFOservice {
 		memberRes.save(member);
 		return member;
 	}
-	
+	public void editMember(Member member) {
+		if(memberRes.existsById(member.getId())) {
+			memberRes.save(member);
+		}else {
+			throw new ValidationException("無此id");
+		}
+	}
 	
 	
 	
