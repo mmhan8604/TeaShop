@@ -6,7 +6,7 @@ function ActionSetting() {
 	});
 	
 	//產生storeId資料
-	var storedId = sessionStorage.getItem('id');
+	var storedId = sessionStorage.getItem('activityid');
 	fetch('/queryActivitys/' + storedId, {
 		method: "GET"
 	})
@@ -24,18 +24,47 @@ function ActionSetting() {
 
 			//判斷優惠主軸
 			var activitymethod = data.activitys.method;
-			console.log(activitymethod);
 			if (activitymethod === "免運活動") {
 				document.getElementById("freeshippingRadio").checked = true;
 			} else if (activitymethod === "商品折扣") {
 				document.getElementById("discountRadio").checked = true;
 			}
 			
+			var dsradiocheck = document.getElementById("discountRadio").checked;
 			
-			if (data.activitys.freeShipping != null){
+			if (dsradiocheck) {
+			$('#sourceTable').off('click', '.moveItem');
+			$('#sourceTable').on('click', '.moveItem', function() {
+			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
+			var itemName = $(this).siblings('.itemName').text();
+			var itemImageSrc = $(this).siblings('img').prop('src');
+			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+
+
+			var newRow = $('<div class=" moveItemMain rounded" style=" display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt="">');
+			$("#targetTable").append(newRow);
+			thisItem.remove();
+		});
+		$('#targetTable').off('click', '.backItem');
+		$('#targetTable').on('click', '.backItem', function() {
+			var thisItem = $(this).closest('.moveItemMain');
+			var itemName = $(this).siblings('.itemName').text();
+			var itemImageSrc = $(this).siblings('img').prop('src');
+			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+
+			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt="">');
+			$("#sourceTable").append(newRow);
+			thisItem.remove();
+
+		});		
+			
+		}		
+			
+			
+			if (data.activitys.freeShipping != 0){
 				document.getElementById('activityFreeShipping').value = data.activitys.freeShipping;
-			}else {
-				document.getElementById('activityFreeShipping').value = "" ;
+			}else if (data.activitys.freeShipping = 0) {
+				document.getElementById('activityFreeShipping').value = "";
 			}
 
 			if(data.activitydetailsList[0].discount != null){
@@ -59,11 +88,11 @@ function ActionSetting() {
 				<tr>
 				  <td>
 					<div class="rounded moveItemMain"
-					  style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
+					  style=" display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
 						style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;"
 						src="${apic}" data-pdid="${aid}" alt=""><span class="itemName"
-						style="margin-left: 20px; font-size: 16px;">${aname}</span><img class="backItem"
-						style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt=""> </div>
+						style="margin-left: 20px; margin-right:auto; font-size: 16px;">${aname}</span><img class="backItem"
+						style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt=""> </div>
 				  </td>
 				</tr>
 			    
@@ -76,54 +105,6 @@ function ActionSetting() {
 
 		.catch(error => console.error('Error fetching activity data:', error))
 		
-	//優惠主軸判斷
-	var fsradio = document.getElementById('freeshippingRadio');
-	var fscontent = document.getElementById('activityFreeShipping');
-	var dsradio = document.getElementById('discountRadio');
-	var dscontent = document.getElementById('activityDiscount');
-
-	fsradio.addEventListener('change', function() {
-		if (fsradio.checked) {
-			dscontent.value = "";
-			$('#sourceTable').off('click', '.moveItem');
-			$('#targetTable').off('click', '.backItem');
-			}
-	})
-	dsradio.addEventListener('change', function() {
-	 if (dsradio.checked) {
-			fscontent.value = "";
-			$('#sourceTable').off('click', '.moveItem');
-		$('#sourceTable').on('click', '.moveItem', function() {
-			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-
-
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#targetTable").append(newRow);
-			thisItem.remove();
-		});
-		$('#targetTable').off('click', '.backItem');
-		$('#targetTable').on('click', '.backItem', function() {
-			console.log("點了")
-			var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goRight.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#sourceTable").append(newRow);
-			thisItem.remove();
-
-		});
-			
-		}
-
-	})
 	
 	//產生商品列表
 	fetch('/findProducts', {
@@ -148,11 +129,11 @@ function ActionSetting() {
         		<tr>
                   <td>
                     <div class="rounded moveItemMain"
-                      style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
+                      style="display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
                         style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;"
                         src="${apic}" data-pdid="${aid}" alt=""><span class="itemName"
-                        style="margin-left: 20px; font-size: 16px;">${aname}</span><img class="moveItem"
-                        style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt=""> </div>
+                        style="margin-left: 20px; margin-right:auto; font-size: 16px;">${aname}</span><img class="moveItem"
+                        style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt=""> </div>
                         
                   </td>
                 </tr>
@@ -166,17 +147,35 @@ function ActionSetting() {
 
 		})
 		.catch(error => console.error('Error fetching activity data:', error))
+	
+	//優惠主軸判斷
+	var fsradio = document.getElementById('freeshippingRadio');
+	var fscontent = document.getElementById('activityFreeShipping');
+	var dsradio = document.getElementById('discountRadio');
+	var dscontent = document.getElementById('activityDiscount');
+	
 
-/*
-	$(document).ready(function() {
-		$('#sourceTable').off('click', '.moveItem');
+	fsradio.addEventListener('change', function() {
+		if (fsradio.checked) {
+			dscontent.value = "";
+			$('#sourceTable').off('click', '.moveItem');
+			$('#targetTable').off('click', '.backItem');
+			}
+	})
+	dsradio.addEventListener('change', function() {
+	 if (dsradio.checked) {
+			fscontent.value = "";
+			$('#sourceTable').off('click', '.moveItem');
+			
 		$('#sourceTable').on('click', '.moveItem', function() {
 			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
 			var itemName = $(this).siblings('.itemName').text();
 			var itemImageSrc = $(this).siblings('img').prop('src');
 			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+
+
 			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
+			var newRow = $('<div class=" moveItemMain rounded" style=" display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt="">');
 			// 把這排變數移過去另一個表格
 			$("#targetTable").append(newRow);
 			thisItem.remove();
@@ -188,13 +187,18 @@ function ActionSetting() {
 			var itemImageSrc = $(this).siblings('img').prop('src');
 			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
 			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goRight.png" alt="">');
+			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt="">');
 			// 把這排變數移過去另一個表格
 			$("#sourceTable").append(newRow);
 			thisItem.remove();
-		});
+
+		});		
+			
+		}		
+
 	})
-*/
+	
+
  }
 
 
@@ -202,7 +206,7 @@ function ActionSetting() {
 //儲存
 function editActivity() {
 
-	var storedId = sessionStorage.getItem('id');
+	var storedId = sessionStorage.getItem('activityid');
 	var activityName = document.getElementById('activityName').value;
 	var activityDiscription = document.getElementById('activityDiscription').value;
 	
@@ -309,7 +313,7 @@ function editActivity() {
 		})
 		.then(message => {
 			console.log(message);
-			sessionStorage.removeItem('id');
+			sessionStorage.removeItem('activityid');
 			$("#activityInfo").trigger("click");
 
 		})
@@ -317,60 +321,5 @@ function editActivity() {
 			console.error('Error editing activity:', error);
 		})
 
-	/*
-	var activityName = document.getElementById('activityName').value;
-	var activityDiscription = document.getElementById('activityDiscription').value;
-	var activityStartDate = document.getElementById('activityStartDate').value;
-	var startDate = moment(activityStartDate).format('YYYY-MM-DD');
-	var activityEndDate = document.getElementById('activityEndDate').value;
-	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
-	var activityFreeShipping = document.getElementById('activityFreeShipping').value;
-
-	var radioButtons = document.getElementsByName('discount');
-	function getSelectedValue() {
-		for (var i = 0; i < radioButtons.length; i++) {
-			if (radioButtons[i].checked) {
-				return radioButtons[i].value;
-			}
-		}
-		// 如果沒有任何單選按鈕被選擇，返回空字符串或其他適當的默認值
-		return '';
-	}
-	var activityMethod = getSelectedValue();
-	var storedId = sessionStorage.getItem('id');
-	var Activity = {
-		shopId: "shop01",
-		id: storedId,
-		name: activityName,
-		discription: activityDiscription,
-		startDate: startDate,
-		endDate: endDate,
-		method: activityMethod,
-		freeShipping: activityFreeShipping
-
-	};
-
-	fetch('/updateActivity', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(Activity),
-	})
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`Network response was not ok: ${response.status}`);
-			}
-			return response.text();
-		})
-		.then(message => {
-			console.log(message);
-			sessionStorage.removeItem('id');
-
-		})
-		.catch(error => {
-			console.error('Error adding activity:', error);
-		})
-		*/
 }
 

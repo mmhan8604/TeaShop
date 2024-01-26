@@ -29,14 +29,15 @@ function AddAction() {
         		<tr>
                   <td>
                     <div class="rounded moveItemMain"
-                      style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
+                      style=" display:flex; align-items:center; margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img
                         style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;"
                         src="${apic}" data-pdid="${aid}" alt=""><span class="itemName"
-                        style="margin-left: 20px; font-size: 16px;">${aname}</span><img class="moveItem"
-                        style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt=""> </div>
+                        style="margin-left: 20px; margin-right:auto; font-size: 16px;">${aname}</span><img class="moveItem"
+                        style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt=""> </div>
                         
                   </td>
                 </tr>
+                
                 
     		`);
 
@@ -73,20 +74,19 @@ function AddAction() {
 
 
 			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
+			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt="">');
 			// 把這排變數移過去另一個表格
 			$("#targetTable").append(newRow);
 			thisItem.remove();
 		});
 		$('#targetTable').off('click', '.backItem');
 		$('#targetTable').on('click', '.backItem', function() {
-			console.log("點了")
 			var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
 			var itemName = $(this).siblings('.itemName').text();
 			var itemImageSrc = $(this).siblings('img').prop('src');
 			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
 			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goRight.png" alt="">');
+			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt="">');
 			// 把這排變數移過去另一個表格
 			$("#sourceTable").append(newRow);
 			thisItem.remove();
@@ -96,43 +96,6 @@ function AddAction() {
 		}
 	})
 	
-	//選擇優惠商品js
-	/*
-	$(document).ready(function() {
-		$('#sourceTable').off('click', '.moveItem');
-		$('#sourceTable').on('click', '.moveItem', function() {
-			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-
-
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goLeft.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#targetTable").append(newRow);
-			thisItem.remove();
-		});
-		$('#targetTable').off('click', '.backItem');
-		$('#targetTable').on('click', '.backItem', function() {
-			console.log("點了")
-			var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style=" margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-left: 140px;  width: 32px; height: 28px;" src="./icon/goRight.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#sourceTable").append(newRow);
-			thisItem.remove();
-
-		});
-
-	});
-*/
-
-
-
 }
 
 
@@ -146,6 +109,7 @@ function addActivity() {
 	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
 
 	var activityFreeShipping = document.getElementById('addactivityFreeShipping').value;
+	
 	var activityDiscount = document.getElementById('addactivityDiscount').value;
 
 	//抓折扣產品id的陣列
@@ -191,7 +155,6 @@ function addActivity() {
 		return '';
 	}
 	var activityMethod = getSelectedValue();
-	console.log(activityMethod);
 
 	//產生活動id
 	const timestampId = Date.now().toString();

@@ -64,8 +64,8 @@ function ActivityInfoqueryAll(choosepage) {
             <td>${astartdate} ~ ${aenddate}</td>
             <td>${amethod}</td>
             <td>
-        		<a href="#"  class="btn btn-light editactivity" onclick="getActivity(${aid})"><img src="./icon/revise.png" style="width: 15px;"></a>
-        		<a href="#" class="btn btn-light delactivity" onclick="deleteActivity(${aid},${aorder})"><img src="./icon/revise.png" style="width: 15px;">刪除</a>
+        		<a href="#"  class="btn btn-light editactivity" onclick="getActivity(${aid})"><img src="/backstage/icon/revise.png" style="width: 15px;"></a>
+        		<a href="#" class="btn btn-light delactivity" onclick="deleteActivity(${aid},${aorder})"><img src="/backstage/icon/cancel.png" style="width: 15px;">刪除</a>
       		</td>
 			</tr>
     		`);
@@ -102,8 +102,8 @@ function deleteActivity(activityId, i) {
 }
 
 function getActivity(id) {
-	sessionStorage.setItem('id', id);
-	var retrievedValue = sessionStorage.getItem('id');
+	sessionStorage.setItem('activityid', id);
+	var retrievedValue = sessionStorage.getItem('activityid');
 		console.log(retrievedValue);
 		$("#actionSetting").trigger("click");
 }
