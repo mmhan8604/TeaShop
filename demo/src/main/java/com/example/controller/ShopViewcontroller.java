@@ -101,7 +101,7 @@ public class ShopViewcontroller {
 	public String orderInfo(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
+		model.addAttribute("memberId",loginInfo.getMemberId());
 		return "/shopPage/cart04.html";		//訂購人等等		
 	}
 	
@@ -110,6 +110,7 @@ public class ShopViewcontroller {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
 		model.addAttribute("auth",loginInfo);
+		model.addAttribute("memberId",loginInfo.getMemberId());
 		return "/shopPage/cart05.html";		//確認訂單等等		
 	}
 	

@@ -48,7 +48,7 @@ function sendOrder() {
 	}
 	var order = {
 		id: orderid,
-		memberId: "M01",
+		memberId: memberId,
 		shipMethod: payStorage.shippingMethod,
 		receiverName: oderStorage.orderName,
 		receiverPhone: oderStorage.orderPhone,
