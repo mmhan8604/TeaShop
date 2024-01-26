@@ -39,11 +39,6 @@ public class EditOrderServiceImpl implements EditOrderService {
 		return ordersRepository.save(order);
 	}
 
-	@Override
-	public Orders update(Orders order) {
-		// 可以在這裡添加更新邏輯
-		return ordersRepository.save(order);
-	}
 
 	@Override
 	public void deleteById(String id) {
@@ -67,15 +62,14 @@ public class EditOrderServiceImpl implements EditOrderService {
 //			這邊是外鍵來的資料要在下一層更改
 			Member member = order.getMember();
 			 if (member != null) {
-	                // 这里可能需要判断 orderUpdateDto 中的 name, phone, mail 是否为空
+	                // 這裡可能需要判断 orderUpdateDto 中的 name, phone, mail 是否为空
 	                member.setName(orderUpdateDto.getName());
 	                member.setPhone(orderUpdateDto.getPhone());
 	                member.setMail(orderUpdateDto.getMail());
-	                memberRepository.save(member); // 更新 Member 实体
+	                memberRepository.save(member); // 更新 Member 實體
 	            }
-	            
+	      
 //			更新欄位
-
 			order.setOrderState(orderUpdateDto.getOrderState());
 			order.setPaymentMethod(orderUpdateDto.getPaymentMethod());
 			order.setReceiverName(orderUpdateDto.getReceiverName());
@@ -85,8 +79,6 @@ public class EditOrderServiceImpl implements EditOrderService {
 			order.setShipMethod(orderUpdateDto.getShipMethod());
 			order.setShipState(orderUpdateDto.getOrderState());
 			return save(order); // 保存更新
-			
- 
 		}
 		// 如果訂單不存在，可以拋出一個異常或者返回 null
 		throw new ValidationException("id不存在");
