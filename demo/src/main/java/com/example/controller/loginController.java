@@ -38,7 +38,7 @@ public class loginController {
 		
 		
 				
-		int state= ls.checkAccount(jo.get("email").toString(),jo.get("password").toString());
+		int state= ls.checkAccount(jo.get("account").toString(),jo.get("password").toString());
 		
 		if(state==0) {
 			

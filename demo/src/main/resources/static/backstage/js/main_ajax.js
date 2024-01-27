@@ -3,6 +3,8 @@
 function parseCard(view,webEle){
     webEle["headerText1"]=view.getElementsByClassName("headerText1")[0].innerHTML;
     webEle["headerText2"]=view.getElementsByClassName("headerText2")[0].innerHTML;
+    webEle["backRoundColor"]=view.getElementsByClassName("child")[0].style.backgroundColor;
+    webEle["backRoundImg"]=view.style.backgroundImage;
     webEle["card-title"]=[];
     webEle["card-text"]=[];
     webEle["card-backround"]=[];
@@ -26,8 +28,7 @@ function parseCard(view,webEle){
                 webEle["cardImg"][i]=view.getElementsByClassName("cardImg")[i].src;
              }
         }
-    
-    
+   console.log(webEle);
     return webEle;
 }
 function parseCarousel(view,webEle){

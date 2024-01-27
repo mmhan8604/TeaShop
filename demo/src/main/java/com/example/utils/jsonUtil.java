@@ -1,5 +1,6 @@
 package com.example.utils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,5 +29,15 @@ public class jsonUtil {
 
         // 返回轉換後的 LinkedList<String>
         return stringLinkedList;
+    }
+    
+    public static LinkedList<String> objtoLinkedList(Object list){
+    	ArrayList<Object>alist= (ArrayList<Object>)list;
+    	LinkedList<String>llist = new LinkedList<String>();
+    	for(int i=0;i<alist.size();i++) {
+    		llist.add(alist.get(i).toString());
+    	}
+    	
+    	return(llist);
     }
 }

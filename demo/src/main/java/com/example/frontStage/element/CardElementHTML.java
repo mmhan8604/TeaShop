@@ -95,7 +95,7 @@ public class CardElementHTML {
 //	}
 	
 	public String createCardElement01() {
-		cardElement=String.format(" <div class=\"child\" style=\"display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s \">\r\n"
+		cardElement=String.format(" <div class=\"child\" style=\"display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;background-color: %s;background-image:%s \">\r\n"
 				+ "        <h1 class=\"headerText1\">%s</h1>\r\n"
 				+ "        <h2 class=\"headerText2\">%s</h2>\r\n"
 				+ "    \r\n"
@@ -171,7 +171,7 @@ public class CardElementHTML {
 	}
 	
 	public String createCardElement02() {
-		cardElement= String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement= String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -179,7 +179,7 @@ public class CardElementHTML {
 				+ "    <div class='row'>\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
 				+ "        <div class='card'  style='background-color:%s'>\r\n"
-				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%; object-fit: contain;'>\r\n"
+				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%%; object-fit: contain;'>\r\n"
 				+ "          <div class='card-body card-1'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title' style='color:%s'>%s</h5>\r\n"
@@ -191,7 +191,7 @@ public class CardElementHTML {
 				+ "\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
 				+ "        <div class='card'  style='background-color:%s'>\r\n"
-				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%; object-fit: contain;'>\r\n"
+				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%%; object-fit: contain;'>\r\n"
 				+ "          <div class='card-body card-2'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title'style='color:%s'>%s</h5>\r\n"
@@ -203,7 +203,7 @@ public class CardElementHTML {
 				+ "\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
 				+ "        <div class='card'  style='background-color:%s'>\r\n"
-				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%; object-fit: contain;'>\r\n"
+				+ "          <img src='%s' class='card-img-top p-3' style=' height: 65%%; object-fit: contain;'>\r\n"
 				+ "          <div class='card-body card-3'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title'style='color:%s'>%s</h5>\r\n"
@@ -219,15 +219,15 @@ public class CardElementHTML {
 	}
 	
 	public String createCardElement03() {
-		cardElement=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
 				+ "\r\n"
 				+ "    <div class='row'>\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
-				+ "        <div class='card' style='width: 80%; margin: 0 auto;background-color:%s'>\r\n"
-				+ "          <img src='.%s' class='card-img-top p-3' style='height:65%; object-fit:cover;'>\r\n"
+				+ "        <div class='card' style='width: 80%%; margin: 0 auto;background-color:%s'>\r\n"
+				+ "          <img src='.%s' class='card-img-top p-3' style='height:65%%; object-fit:cover;'>\r\n"
 				+ "          <div class='card-body card-1'style='color:%s'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title'>%s</h5>\r\n"
@@ -238,8 +238,8 @@ public class CardElementHTML {
 				+ "      </div>\r\n"
 				+ "\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
-				+ "        <div class='card' style='width: 80%; margin: 0 auto;background-color:%s'>\r\n"
-				+ "          <img src='%s' class='card-img-top p-3' style='height:65%; object-fit:cover;'>\r\n"
+				+ "        <div class='card' style='width: 80%%; margin: 0 auto;background-color:%s'>\r\n"
+				+ "          <img src='%s' class='card-img-top p-3' style='height:65%%; object-fit:cover;'>\r\n"
 				+ "          <div class='card-body card-2'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title'style='color:%s'>%s</h5>\r\n"
@@ -250,8 +250,8 @@ public class CardElementHTML {
 				+ "      </div>\r\n"
 				+ "\r\n"
 				+ "      <div class='col-12 col-lg-4 mb-3'>\r\n"
-				+ "        <div class='card' style='width: 80%; margin: 0 auto;background-color:%s'>\r\n"
-				+ "          <img src='%s' class='card-img-top p-3' style='height:65%; object-fit:cover;'>\r\n"
+				+ "        <div class='card' style='width: 80%%; margin: 0 auto;background-color:%s'>\r\n"
+				+ "          <img src='%s' class='card-img-top p-3' style='height:65%%; object-fit:cover;'>\r\n"
 				+ "          <div class='card-body card-3'>\r\n"
 				+ "            <a href='#'>\r\n"
 				+ "              <h5 class='card-title'style='color:%s'>%s</h5>\r\n"
@@ -268,7 +268,7 @@ public class CardElementHTML {
 	
 	public String createCardElement04() {
 		cardElement=String.format("<div class='child'\r\n"
-				+ "    style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+				+ "    style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -313,7 +313,7 @@ public class CardElementHTML {
 		
 	}
 	public String createCardElement05() {
-		cardElement=String.format(" <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;background-color: %s;background-image:%s '>\r\n"
+		cardElement=String.format(" <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;background-color: %s;background-image:%s '>\r\n"
 				+ "    <h1 class='headerText1'>%s</h1>\r\n"
 				+ "    <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
