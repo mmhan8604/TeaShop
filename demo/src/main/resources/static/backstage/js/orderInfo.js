@@ -3,7 +3,7 @@ var globalOrderDetails;//全域變數
 
 function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderId').val(orderDetails.order.id);
-	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).format('YYYY-MM-DD HH:mm'));
+	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm'));
 	console.log(orderDetails.order.orderDate)
 	if (orderDetails.order.orderState == "已成立") {
 		$('#EditOrderState').val(orderDetails.order.orderState);
@@ -107,7 +107,7 @@ function queryAllOrderInfo(choosepage) {
 			var oorder = i + 1;
 
 			var ocode = trlist[i].id;
-			var odate = moment(trlist[i].orderDate).format('YYYY-MM-DD HH:mm');			//利用moment.js Date
+			var odate = moment(trlist[i].orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm');			//利用moment.js Date
 			var osituation = trlist[i].orderState;
 			var oname = trlist[i].member.name;
 			var omail = trlist[i].member.mail;
