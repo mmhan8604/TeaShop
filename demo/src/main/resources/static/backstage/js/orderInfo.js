@@ -6,7 +6,7 @@ function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).format('YYYY-MM-DD HH:mm'));
 	console.log(orderDetails.order.orderDate)
 	if (orderDetails.order.orderState == "已成立") {
-		$('#EditOrderState').val(orderDetaider.orderState);
+		$('#EditOrderState').val(orderDetails.order.orderState);
 		$('#EditOrdersPaymentStatus').val("已付款");
 		
 		
