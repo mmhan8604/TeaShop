@@ -19,7 +19,7 @@ $(document).ready(function() {
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
 				else if(buttonId=="addAction"){AddAction();}
-				else if (buttonId == "addProduct" ||buttonId == "productSetting") {insideMutipleImg();}//函式在mutipleImg.js內
+				else if (buttonId == "addProduct" ) {addProduct();}
 			});
 		});
 

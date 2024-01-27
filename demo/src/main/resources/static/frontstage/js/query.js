@@ -30,7 +30,7 @@ function queryProduct() {
 		for (i = 0; i < length; i++) {
 			name = productslist[i].name
 			id = productslist[i].id;
-			pimg = productslist[i].picJSON;
+			pimg = productslist[i].picjson;
 			productName = productslist[i].name;
 
 			price = productslist[i].price;

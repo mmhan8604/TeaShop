@@ -89,7 +89,7 @@ public class ShopViewcontroller {
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
 		model.addAttribute("productDiscription", product.getDiscription());
-		model.addAttribute("imgSrc",product.getPicJSON());
+		model.addAttribute("imgSrc",product.getPicjson());
 		return "/shopPage/product";		//商品頁	
 	}
 	
