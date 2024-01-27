@@ -79,7 +79,7 @@ function ProductInfoqueryAll(choosepage) {
 		            </td>
 		        </tr>
 		    `);
-//<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
 		                
 			//修改商品GET
 			$("#bodyContext").off("click", ".editBtn");
