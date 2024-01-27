@@ -3,11 +3,17 @@ var globalOrderDetails;//全域變數
 
 function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderId').val(orderDetails.order.id);
-	$('#EditOrderTime').val(orderDetails.order.orderDate);
+	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).format('YYYY-MM-DD HH:mm'));
+	console.log(orderDetails.order.orderDate)
 	if (orderDetails.order.orderState == "已成立") {
-		$('#EditOrderState').val(orderDetails.order.orderState);
+		$('#EditOrderState').val(orderDetaider.orderState);
+		$('#EditOrdersPaymentStatus').val("已付款");
+		
+		
 	} else {
 		$('#EditOrderState').val("尚未處理");
+		$('#EditOrdersPaymentStatus').val("尚未付款");
+		
 	}
 	$('#EditOrdersName').val(orderDetails.order.member.name);
 	$('#EditOrdersPhone').val(orderDetails.order.member.phone);
@@ -17,7 +23,7 @@ function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
 	$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
 	$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
-	$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
+	//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
 	$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
 	$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
 	// 清空訂單詳情表格並填充新數據

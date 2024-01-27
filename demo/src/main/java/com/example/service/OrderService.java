@@ -114,6 +114,7 @@ public class OrderService {
 			return memberOptional.get();
 	}
 		public void postOrder(Orders order) {
+			order.setPaymentMethod("綠界");
 			ordersRes.save(order);
 		}
 		

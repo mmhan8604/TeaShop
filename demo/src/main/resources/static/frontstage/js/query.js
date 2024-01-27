@@ -64,8 +64,8 @@ function queryProduct() {
                                     <p class="card-text text-end product-price">${price}</p>
                                     <select class="form-select qty qty-greentea"
                                         aria-label="Default select example" id="myform">
-                                        <option selected>1</option>
-                                        <option value="1">1</option>
+                                        
+                                        <option value="1" selected>1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
