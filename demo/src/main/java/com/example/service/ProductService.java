@@ -20,6 +20,5 @@ public interface ProductService {
     Products save(Products products);
     Products updateProduct(String productId,Products products);
     
- // 新增方法用於更新商品狀態（discontinued）
     Products updateDiscontinued(String productId, boolean discontinued);
 }

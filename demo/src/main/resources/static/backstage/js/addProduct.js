@@ -72,6 +72,7 @@ function addNewProduct(productIdPOST, newProductData) {
 			$("#buttonProduct").trigger("click");
 		},
 		error: function(error) {
+			alert("商品ID已存在");
 			console.error("新增商品失敗: ", error);
 		}
 	});

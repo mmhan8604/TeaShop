@@ -1,5 +1,6 @@
 //	每次進到介面的時候就查詢所有資料出來
 function ProductInfoqueryAll(choosepage) {
+	$("#productSetting").off("click");
 	$("#upload").off("click");
 	$("#upload").on("click", function() {
 		editProduct();
@@ -80,12 +81,12 @@ function ProductInfoqueryAll(choosepage) {
 		        </tr>
 		    `);
 
-			//編輯按鈕的處理事件
+			//修改商品GET
 			$("#bodyContext").off("click", ".editBtn");
 			$("#bodyContext").on("click", ".editBtn", function() {
-				let productId = $(this).data("id");
 				$("#productSetting").trigger("click");
-				alert(productId);
+				let productId = $(this).data("id");
+				$('#editProductID').prop('readonly', true);
 
 				$.ajax({
 					url: `/products/${productId}`,
@@ -142,10 +143,11 @@ function ProductInfoqueryAll(choosepage) {
 					error: function(error) {
 						console.error('Error products:', error);
 					}
+
 				})
 			});
 
-			//刪除按鈕的處理事件
+			//刪除商品GET
 			$("#bodyContext").off("click", ".removeBtn");
 			$("#bodyContext").on("click", ".removeBtn", function() {
 				let productId = $(this).data("id");
@@ -153,7 +155,7 @@ function ProductInfoqueryAll(choosepage) {
 			});
 
 
-
+			//更新商品上架狀態的處理事件
 			$("#bodyContext").on("click", ".switch-checkbox", function() {
 				let productId = trlist[$(this).attr('id').replace('switchID', '')].id;
 				let isChecked = $(this).prop("checked");
@@ -180,7 +182,7 @@ function ProductInfoqueryAll(choosepage) {
 		}
 	}
 
-	//刪除商品
+	//刪除商品POST
 	function deleteProduct(productId) {
 		console.log("要刪除的商品UD" + productId);
 
@@ -206,14 +208,16 @@ function ProductInfoqueryAll(choosepage) {
 		});
 	}
 
-	//修改商品
+	//修改商品POST
 	function editProduct() {
 		var productIdPOST = $('#editProductID').val();
 		var updatedData = productUpdateData();
-		console.log(productIdPOST);
-		console.log(updatedData);
+		console.log("畫面上的商品ID:" + productIdPOST);
+		console.log("要更新的所有畫面上的商品資訊:" + updatedData);
 		updateProduct(productIdPOST, updatedData);
+
 		//抓畫面上的資料
+
 		function productUpdateData() {
 			// 使用一個空對象來存放圖片數據
 			var imagesData = {};
