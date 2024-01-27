@@ -3,17 +3,17 @@ var globalOrderDetails;//全域變數
 
 function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderId').val(orderDetails.order.id);
-	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).format('YYYY-MM-DD HH:mm'));
+	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm'));
 	console.log(orderDetails.order.orderDate)
 	if (orderDetails.order.orderState == "已成立") {
 		$('#EditOrderState').val(orderDetaider.orderState);
 		$('#EditOrdersPaymentStatus').val("已付款");
-		
-		
+
+
 	} else {
 		$('#EditOrderState').val("尚未處理");
 		$('#EditOrdersPaymentStatus').val("尚未付款");
-		
+
 	}
 	$('#EditOrdersName').val(orderDetails.order.member.name);
 	$('#EditOrdersPhone').val(orderDetails.order.member.phone);
@@ -107,13 +107,13 @@ function queryAllOrderInfo(choosepage) {
 			var oorder = i + 1;
 
 			var ocode = trlist[i].id;
-			var odate = moment(trlist[i].orderDate).format('YYYY-MM-DD HH:mm');			//利用moment.js Date
+			var odate = moment(trlist[i].orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm');
 			var osituation = trlist[i].orderState;
 			var oname = trlist[i].member.name;
 			var omail = trlist[i].member.mail;
 			var omount = trlist[i].amount;
 			var opayment = "ecpay";
-
+			console.log("odate是", odate);
 			$("#bodyContext").append(`
     <tr style="height:80px;">
         <td scope="row">#${oorder}</td>
@@ -132,6 +132,8 @@ function queryAllOrderInfo(choosepage) {
     `);
 		}
 	}
+
+
 	$("#bodyContext").off("click", ".edit-button");
 	//亨+ 超連結裡面的屬性   edit-button 
 	$("#bodyContext").on("click", ".edit-button", function() {
