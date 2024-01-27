@@ -133,12 +133,12 @@
 										<div class="modal-header">
 											<h5 class="modal-title" id="successMemChange">會員資料修改成功</h5>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close"></button>
+												aria-label="Close" ></button>
 										</div>
 
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">確定</button>
+												data-bs-dismiss="modal" onclick="reload()">確定</button>
 										</div>
 
 									</div>
@@ -154,8 +154,8 @@
 
 						<div class="my-3 text-start">
 							<label for="" class="form-label ms-3" >會員姓名</label>
-							<input class="form-control  mx-auto" id="memberName" style="width: 95%; background-color: #dbdada;"
-								th:value="${memberName}" disabled>
+							<input class="form-control  mx-auto" id="memberName" style="width: 95%; "
+								th:value="${memberName}" >
 						</div>
 
 						<div class="my-3 text-start">
@@ -285,6 +285,10 @@
 	</div>
 
 	<script>
+		function reload(){
+			location.reload();
+			
+		}
 		$(document).ready(function () {
 			$('#memberInformationChange').click(function () {
 				var phone = $('#memberPhone').val();

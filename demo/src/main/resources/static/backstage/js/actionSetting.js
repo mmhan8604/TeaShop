@@ -229,7 +229,10 @@ function editActivity() {
 	var fscontent = document.getElementById('activityFreeShipping');
 	var dsradio = document.getElementById('discountRadio');
 	var dscontent = document.getElementById('activityDiscount');
-
+	if(endDate=="Invalid date"||startDate=="Invalid date"){
+		alert("請填寫日期")
+	}
+	
 	if (fsradio.checked) {
 		if (fscontent.value.trim() === "") {
 			alert("請輸入免運門檻!");

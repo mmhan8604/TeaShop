@@ -32,7 +32,8 @@ public class MemberControllerForOrder {
 	
 	@PostMapping("/editMember")
 	public void editMember(@RequestBody Member member,HttpSession session) {
-		System.out.println(member.getAddress());
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		loginInfo.setDisplayName(member.getName());
 		memberservice.editMember(member);
 		
 	}

@@ -13,7 +13,7 @@ function createMember(){
 				data:JSON.stringify(userData),
 				success: function (response) {
 					console.log(response)
-					window.location.href="/shop/1/shopindex"
+					window.location.href="/shop/"+shopId+"/shopindex"
 				},
 				error: function (err) {
 					console.log(err)

@@ -123,7 +123,11 @@ function addActivity() {
 	var fscontent = document.getElementById('addactivityFreeShipping');
 	var dsradio = document.getElementById('dsradio');
 	var dscontent = document.getElementById('addactivityDiscount');
-
+	console.log(endDate)
+	if(endDate=="Invalid date"||startDate=="Invalid date"){
+		alert("請填寫日期")
+	}
+	
 	if (fsradio.checked) {
 		if (fscontent.value.trim() === "") {
 			alert("請輸入免運門檻!");
@@ -213,6 +217,7 @@ function addActivity() {
 		})
 		.catch(error => {
 			console.error('Error adding activity:', error);
+			
 		})
 }
 
