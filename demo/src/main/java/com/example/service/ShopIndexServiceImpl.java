@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import com.example.entity.shopInfo;
 import com.example.frontStage.BigDiv;
 import com.example.frontStage.element.CardElementHTML;
+import com.example.frontStage.element.CarouselElementHTML;
+import com.example.frontStage.element.FormElementHTML;
+import com.example.frontStage.element.ImgElementHTML;
 import com.example.interf.ShopIndexService;
 import com.example.repository.frontStageDao;
 import com.example.utils.jsonUtil;
@@ -74,14 +77,14 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 		
 	}
 	
-	public HashMap<String, List<String>> createBigDivHTML(Integer shopid) {
+	public HashMap<String, List> createBigDivHTML(Integer shopid) {
 		HashMap<String, Object> style= getStyle(1);
 //		System.out.println(style);
 		System.out.println("2");
 		LinkedList<Map<String, Object>> fv= (LinkedList<Map<String, Object>>) style.get("fullView");
 		
 		
-		LinkedList<String> htmls=new LinkedList<String>();
+		LinkedList<List<String>> htmls=new LinkedList<List<String>>();
 		LinkedList<String> templateTypes=new LinkedList<String>();
 		
 		for(Map<String, Object> bd:fv) {
@@ -91,15 +94,15 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 			 templateTypes.add(bd.get("templateType").toString());
 			
 			String html="";
+			LinkedList<String> welw=new LinkedList<String>();
 			for(int i=0;i<webElements.size();i++) {
 				Map<String, Object> webElement=((Map<String, Object>) (webElements.get(i)));
-				int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
-				System.out.println("type");
-				System.out.println(type);
+				
+				
 				
 				switch (webElement.get("elementType").toString().substring(0, 2)){
 				case "卡片": {
-					
+					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
 					CardElementHTML card=new CardElementHTML(type,
 							 webElement.get("backRoundColor").toString(),
 							 webElement.get("backRoundImg").toString(),
@@ -111,10 +114,41 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							 jsonUtil.objtoLinkedList(webElement.get("card-title")),
 							 jsonUtil.objtoLinkedList(webElement.get("cardImg")),
 							 jsonUtil.objtoLinkedList(webElement.get("card-text")));
-					System.out.println(card.getCardElement());
-					html= html.concat(card.getCardElement());
+					
+//					html= html.concat();
+					welw.add(card.getCardElement());
+					htmls.add(welw);
 					break;
 					
+				} case"輪播":{
+					
+					CarouselElementHTML carousel=new CarouselElementHTML(jsonUtil.objtoLinkedList(webElement.get("carouselImg")));
+					welw.add(carousel.getCarouselElement());
+					
+					htmls.add(welw);
+					break;
+				} case"表單":{
+					int type=Integer.parseInt(webElement.get("elementType").toString().substring(5));
+					
+					FormElementHTML form=new FormElementHTML(type,
+							webElement.get("headerText1").toString(),
+							 webElement.get("headerText2").toString(),
+							 webElement.get("childBackroundColor").toString(), 
+							 webElement.get("childBackroundImg").toString(), 
+							 webElement.get("formImg").toString());
+					welw.add(form.getFormElement());
+					htmls.add(welw);
+					break;
+					
+				} case"圖片":{
+					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
+					
+					ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
+							webElement.get("headerText2").toString(),
+							jsonUtil.objtoLinkedList(webElement.get("img")));
+					welw.add(img.getImgElement());
+					htmls.add(welw);
+					break;
 				}
 				default:
 					throw new IllegalArgumentException("Unexpected value: " +webElement.get("elementType").toString().substring(0, 2));
@@ -122,14 +156,14 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 				
 				
 				
-				System.out.println(html);
-				htmls.add(html);
+				
+				
 			}
 			
 			
 		}
 		
-		HashMap<String, List<String>> data=new HashMap<String, List<String>>();
+		HashMap<String, List> data=new HashMap<String, List>();
 		data.put("htmls", htmls);
 		data.put("templateTypes", templateTypes);
 		

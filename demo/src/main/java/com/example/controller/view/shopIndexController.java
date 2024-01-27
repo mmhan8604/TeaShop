@@ -21,8 +21,8 @@ public class shopIndexController {
 	public String index(Model model,@PathVariable Integer shopid) {
 		HashMap<String, Object> styleInfo=sis.getStyle(shopid);
 		System.out.println("1");
-		HashMap<String, List<String>> data=sis.createBigDivHTML(shopid);
-		
+		HashMap<String, List> data=sis.createBigDivHTML(shopid);
+		model.addAttribute("fullView",(List<List<String>>) data.get("htmls"));
 		
 		
 //		model.addAttribute("nav", styleInfo.get("nav"));

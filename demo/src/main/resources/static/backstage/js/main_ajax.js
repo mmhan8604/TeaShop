@@ -48,7 +48,7 @@ function pareseForm(view,webEle){
     webEle["headerText2"]=view.getElementsByClassName("headerText2")[0].innerHTML;
     webEle["childBackroundColor"]=view.getElementsByClassName("child")[0].style.backgroundColor==""?"#dedede":view.getElementsByClassName("child")[0].style.backgroundColor
     webEle["childBackroundImg"]=view.style.backgroundImage;
-    webEle["formImg"]=view.getElementsByClassName("imageArea02").getElementsByTagName("img")[0].src
+    webEle["formImg"]=view.getElementsByClassName("imageArea02")[0].getElementsByTagName("img")[0].src
 
     return webEle;
 }

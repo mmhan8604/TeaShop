@@ -7,5 +7,5 @@ import java.util.List;
 public interface ShopIndexService {
 
 	public HashMap<String, Object> getStyle(Integer shopid);
-	public HashMap<String, List<String>> createBigDivHTML(Integer shopid);
+	public HashMap<String, List> createBigDivHTML(Integer shopid);
 }
