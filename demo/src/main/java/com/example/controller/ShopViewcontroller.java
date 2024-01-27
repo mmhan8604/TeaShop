@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
+import com.example.entity.Member;
 import com.example.entity.Products;
 import com.example.service.FrontloginService;
+import com.example.service.MCFOservice;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
@@ -27,6 +29,8 @@ public class ShopViewcontroller {
 	ProductService productService;
 	@Autowired
 	FrontloginService frontloginService;
+	@Autowired
+	MCFOservice MCFOservice;
 	
 	
 	
@@ -140,10 +144,20 @@ public class ShopViewcontroller {
 	}
 	
 	@GetMapping("/{shopId}/member")
-	public String memberPage(HttpSession session,Model model,@PathVariable int shopId) {
-		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		setAllLoginInfo(loginInfo, model, shopId);		
+	public String memberPage(HttpSession session, Model model, @PathVariable int shopId) {
+	    FrontLoginClasses loginInfo = (FrontLoginClasses)session.getAttribute("authObject");
+	    
+	    setAllLoginInfo(loginInfo, model, shopId);
+	    
 		
+	    if(loginInfo!=null) {
+	    model.addAttribute("memberId",loginInfo.getMemberId());
+		Member member = MCFOservice.getMemberInfo(loginInfo.getMemberId());
+		model.addAttribute("memberMail", member.getMail());
+		model.addAttribute("memberName", member.getName());
+		model.addAttribute("memberPhone", member.getPhone());
+		model.addAttribute("memberAddress", member.getAddress());
+		model.addAttribute("memberCount", member.getCount());}
 		return "/shopPage/member01.html";		//確認訂單等等		
 	}
 	
