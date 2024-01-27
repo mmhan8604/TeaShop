@@ -473,5 +473,9 @@ input.qtyplus {
 		justify-content: center;
 		font-size: 0.9em;
 	}
+	
+	.amount{
+		display: none !important;
+	}
 
 }
