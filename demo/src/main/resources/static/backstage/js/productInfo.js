@@ -50,7 +50,7 @@ function ProductInfoqueryAll(choosepage) {
 		for (i = page * 5; i < (page + 1) * 5; i++) {
 			var porder = i + 1;
 			var pcode = trlist[i].id;
-			var pimg = "./imgs/blacktea-3.png";
+			var pimg = trlist[i].picjson;
 			var pname = trlist[i].name;
 			var pprice = trlist[i].price;
 			var pstock = trlist[i].stock;
@@ -76,11 +76,11 @@ function ProductInfoqueryAll(choosepage) {
 		
 		            <td>
 		                <a href="#" class="btn btn-light editBtn" data-id="${pcode}"><img src="../icon/btn_revise.png" style="width: 15px;"></a>
-		                <a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
 		            </td>
 		        </tr>
 		    `);
-
+//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+		                
 			//修改商品GET
 			$("#bodyContext").off("click", ".editBtn");
 			$("#bodyContext").on("click", ".editBtn", function() {
@@ -102,7 +102,7 @@ function ProductInfoqueryAll(choosepage) {
 						$('#editProductPrice').val(productDatas.product.price);
 						$('#editProductCost').val(productDatas.product.cost);
 						$('#editProductIntro').val(productDatas.product.discription);
-
+						
 						// 清空圖片預覽區域
 						$("#editProductImgs").empty();
 

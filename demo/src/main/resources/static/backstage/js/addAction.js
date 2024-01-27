@@ -48,7 +48,7 @@ function AddAction() {
 
 		})
 		.catch(error => console.error('Error fetching activity data:', error))
-	
+
 	//優惠主軸判斷
 	var fsradio = document.getElementById('fsradio');
 	var fscontent = document.getElementById('addactivityFreeShipping');
@@ -60,42 +60,42 @@ function AddAction() {
 			dscontent.value = "";
 			$('#sourceTable').off('click', '.moveItem');
 			$('#targetTable').off('click', '.backItem');
-			}
-	})
-	dsradio.addEventListener('change', function() {
-	 if (dsradio.checked) {
-			fscontent.value = "";
-			$('#sourceTable').off('click', '.moveItem');
-		$('#sourceTable').on('click', '.moveItem', function() {
-			var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-
-
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#targetTable").append(newRow);
-			thisItem.remove();
-		});
-		$('#targetTable').off('click', '.backItem');
-		$('#targetTable').on('click', '.backItem', function() {
-			var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
-			var itemName = $(this).siblings('.itemName').text();
-			var itemImageSrc = $(this).siblings('img').prop('src');
-			var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
-			//創新的一排html(div格子)變數
-			var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt="">');
-			// 把這排變數移過去另一個表格
-			$("#sourceTable").append(newRow);
-			thisItem.remove();
-
-		});
-			
 		}
 	})
-	
+	dsradio.addEventListener('change', function() {
+		if (dsradio.checked) {
+			fscontent.value = "";
+			$('#sourceTable').off('click', '.moveItem');
+			$('#sourceTable').on('click', '.moveItem', function() {
+				var thisItem = $(this).closest('.moveItemMain'); // 獲取當下取得的項目
+				var itemName = $(this).siblings('.itemName').text();
+				var itemImageSrc = $(this).siblings('img').prop('src');
+				var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+
+
+				//創新的一排html(div格子)變數
+				var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '"alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="backItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goLeft.png" alt="">');
+				// 把這排變數移過去另一個表格
+				$("#targetTable").append(newRow);
+				thisItem.remove();
+			});
+			$('#targetTable').off('click', '.backItem');
+			$('#targetTable').on('click', '.backItem', function() {
+				var thisItem = $(this).closest('.moveItemMain');//獲取當下取得的項目
+				var itemName = $(this).siblings('.itemName').text();
+				var itemImageSrc = $(this).siblings('img').prop('src');
+				var itemPdid = $(this).siblings('[data-pdid]').attr('data-pdid');
+				//創新的一排html(div格子)變數
+				var newRow = $('<div class=" moveItemMain rounded" style="display:flex; align-items:center;  margin-top: 10px;  margin-left: 20px; background: white; width: 320px; height: 48px;"><img style="margin-left: 5px; margin-top: 4px; background-color: #d9d9d9; width: 40px; height: 40px;" src="' + itemImageSrc + '" data-pdid="' + itemPdid + '" alt=""><span class="itemName" style="margin-left: 20px; margin-right:auto; font-size: 16px;">' + itemName + '</span><img class="moveItem" style="margin-right: 20px;  width: 32px; height: 28px;" src="backstage/icon/goRight.png" alt="">');
+				// 把這排變數移過去另一個表格
+				$("#sourceTable").append(newRow);
+				thisItem.remove();
+
+			});
+
+		}
+	})
+
 }
 
 
@@ -108,15 +108,33 @@ function addActivity() {
 	var activityEndDate = document.getElementById('addactivityEndDate').value;
 	var endDate = moment(activityEndDate).format('YYYY-MM-DD');
 
-	var activityFreeShipping = document.getElementById('addactivityFreeShipping').value;
-	
-	var activityDiscount = document.getElementById('addactivityDiscount').value;
+	if (activityStartDate > activityEndDate) {
+		alert("結束日期要在開始日期之後");
+		return;
+	}
+	if (activityName.trim() === "") {
+		alert("請填活動名稱");
+		return;
+	}
 
+	var activityFreeShipping = document.getElementById('addactivityFreeShipping').value;
+
+	var acdiscount = document.getElementById('addactivityDiscount').value;
+	var activityDiscount = acdiscount / 100;
+	if (acdiscount > 100 || acdiscount < 1) {
+		alert("折扣數請在1到99之間");
+		return;
+	}
 	//抓折扣產品id的陣列
 	var elementsWithDataPdid = document.querySelectorAll('#targetTable [data-pdid]');
 	var pdidArray = Array.from(elementsWithDataPdid).map(function(element) {
 		return element.getAttribute('data-pdid');
 	});
+
+	if (pdidArray.length === 0) {
+		alert("請選擇需折扣商品");
+		return;
+	}
 
 	//判斷優惠主軸
 	var fsradio = document.getElementById('fsradio');
@@ -124,25 +142,26 @@ function addActivity() {
 	var dsradio = document.getElementById('dsradio');
 	var dscontent = document.getElementById('addactivityDiscount');
 	console.log(endDate)
-	if(endDate=="Invalid date"||startDate=="Invalid date"){
+	if (endDate == "Invalid date" || startDate == "Invalid date") {
 		alert("請填寫日期")
 	}
-	
+
+
 	if (fsradio.checked) {
 		if (fscontent.value.trim() === "") {
 			alert("請輸入免運門檻!");
-			return; 
+			return;
 		} else if (dscontent.value !== "") {
 			alert('請勿輸入商品折扣!');
 			return;
-		} else if (pdidArray.length > 0){
+		} else if (pdidArray.length > 0) {
 			alert('請勿選擇折扣商品!');
 			return;
 		}
 	} else if (dsradio.checked) {
 		if (dscontent.value.trim() === "") {
 			alert("請輸入商品折數!");
-			return; 
+			return;
 		} else if (fscontent.value !== "") {
 			alert('請勿輸入免運門檻!');
 			return;
@@ -217,7 +236,7 @@ function addActivity() {
 		})
 		.catch(error => {
 			console.error('Error adding activity:', error);
-			
+
 		})
 }
 
