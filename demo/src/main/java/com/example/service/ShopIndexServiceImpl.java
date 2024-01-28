@@ -170,7 +170,11 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 				} case "文字":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
 					
-					TextElementHTML text=new TextElementHTML(type,webElement.get("textHead").toString(), webElement.get("textBody").toString());
+					TextElementHTML text=new TextElementHTML(type,
+							webElement.get("textHead").toString(), 
+							webElement.get("textBody").toString(),
+							webElement.get("BackroundColor").toString(),
+							webElement.get("childBackroundImg").toString());
 					welw.add(text.getTextElement());
 					htmls.add(welw);
 					break;
