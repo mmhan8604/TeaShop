@@ -259,7 +259,7 @@ async function LoadLayout(divtype, divBlock) {
     if(document.getElementById("fontSelector")!=undefined){
 		let check= await getNavInfo();
 		if(check>0){
-      	alert("11")
+      	
       return
     }
 	}
@@ -350,7 +350,7 @@ function productBar(onlyid) {
 }
 
 function textbar(onlyid) {
-    $("#bar").load("websource/eleBar/elementBarText.html", function () {
+    $("#bar").load("backstage/websource/eleBar/elementBarText.html", function () {
         // 在 elementBarImg.html 載入後執行
         updateTextBlock(bigBlock, subblock, onlyid, GridBlock); //最後一個為該小區塊id
         console.log("成功置換textbar");

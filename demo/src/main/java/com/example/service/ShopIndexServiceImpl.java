@@ -20,6 +20,8 @@ import com.example.frontStage.element.CardElementHTML;
 import com.example.frontStage.element.CarouselElementHTML;
 import com.example.frontStage.element.FormElementHTML;
 import com.example.frontStage.element.ImgElementHTML;
+import com.example.frontStage.element.ProductElementHTML;
+import com.example.frontStage.element.TextElementHTML;
 import com.example.interf.ShopIndexService;
 import com.example.repository.frontStageDao;
 import com.example.utils.jsonUtil;
@@ -147,6 +149,29 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							webElement.get("headerText2").toString(),
 							jsonUtil.objtoLinkedList(webElement.get("img")));
 					welw.add(img.getImgElement());
+					htmls.add(welw);
+					break;
+				} case"商品":{
+					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
+					
+					ProductElementHTML product=new ProductElementHTML(type,
+							webElement.get("headerText1").toString(),
+							webElement.get("headerText2").toString(),
+							webElement.get("childBackroundColor").toString(),
+							webElement.get("childBackroundImg").toString(),
+							jsonUtil.objtoLinkedList(webElement.get("productAreaBackround")),
+							jsonUtil.objtoLinkedList(webElement.get("productTitleColor")),
+							jsonUtil.objtoLinkedList(webElement.get("buttonBorder")),
+							jsonUtil.objtoLinkedList(webElement.get("buttonColor")),
+							jsonUtil.objtoLinkedList(webElement.get("buttonTextColor")));
+					welw.add(product.getProductElement());
+					htmls.add(welw);
+					break;
+				} case "文字":{
+					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
+					
+					TextElementHTML text=new TextElementHTML(type,webElement.get("textHead").toString(), webElement.get("textBody").toString());
+					welw.add(text.getTextElement());
 					htmls.add(welw);
 					break;
 				}

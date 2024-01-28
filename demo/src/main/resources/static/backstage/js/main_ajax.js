@@ -91,7 +91,10 @@ function parseTextEle(view,webEle){
     
     webEle["textHead"]=view.getElementsByTagName("h1")[0].innerHTML;
     webEle["textBody"]=view.getElementsByTagName("h4")[0].innerHTML
-
+    webEle["BackroundColor"]=view.getElementsByClassName("child")[0].getElementsByTagName("div")[0].style.backgroundColor==""?"#dedede":view.getElementsByClassName("child")[0].getElementsByTagName("div")[0].style.backgroundColor
+    webEle["childBackroundImg"]=view.style.backgroundImage;
+    
+    
     return webEle
 }
 
