@@ -76,11 +76,11 @@
 }
 
 
-#textHead {
+.textHead {
     font-size: 5rem;
 }
 
-#textBody {
+.textBody {
     font-size: 1.5rem;
 }
 
@@ -136,14 +136,14 @@
 }
 
 /*文字1-2 */
-#backColor {
+.backColor {
     position: relative;
     width: 100%;
     height: 50vh;
     background-color: #8F8F8F;
 }
 
-#textLeft2 {
+.textLeft2 {
     position: absolute;
     top: 50%;
     left: 20%;
@@ -152,7 +152,7 @@
 
 }
 
-#textCenter2 {
+.textCenter2 {
     position: relative;
     top: 50%;
     left: 50%;
@@ -164,14 +164,14 @@
 
 @media (max-width: 992px) {
 
-    #backColor {
+    .backColor {
         position: relative;
         width: 100%;
         height: 50vh;
         background-color: #8F8F8F;
     }
 
-    #textLeft2 {
+    .textLeft2 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -179,7 +179,7 @@
         text-align: center;
     }
 
-    #textCenter2 {
+    .textCenter2 {
         position: absolute;
         top: 50%;
         left: 50%;

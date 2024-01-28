@@ -19,7 +19,7 @@ public class VideoElementHTML {
 	
 	public String createVideoElement() {
 		
-		videoElement=String.format("<div class='child' style='background-color:%s ;background-image: %s; display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;padding: 3%;'>\r\n"
+		videoElement=String.format("<div class='child' style='background-color:%s ;background-image: %s; display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
 				+ "      <h1 class='headerText1' >%s</h1>\r\n"
 				+ "      \r\n"
 				+ "      <div class='ratio ratio-16x9'>\r\n"

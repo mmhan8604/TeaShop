@@ -47,6 +47,8 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 			
 			
 			String fvJson=new String(si.getFrontStage(),"UTF-8");
+			System.out.println(fvJson);
+			
 			JSONArray ja=new JSONArray(fvJson);
 			LinkedList<Map<String, Object>> bds=new LinkedList<Map<String, Object>>();
 			for(Object bigDiv:ja) {
@@ -118,7 +120,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 					
 //					html= html.concat();
 					welw.add(card.getCardElement());
-					htmls.add(welw);
+					
 					break;
 					
 				} case"輪播":{
@@ -126,7 +128,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 					CarouselElementHTML carousel=new CarouselElementHTML(jsonUtil.objtoLinkedList(webElement.get("carouselImg")));
 					welw.add(carousel.getCarouselElement());
 					
-					htmls.add(welw);
+					
 					break;
 				} case"表單":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(5));
@@ -138,7 +140,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							 webElement.get("childBackroundImg").toString(), 
 							 webElement.get("formImg").toString());
 					welw.add(form.getFormElement());
-					htmls.add(welw);
+					
 					break;
 					
 				} case"圖片":{
@@ -146,9 +148,11 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 					
 					ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
 							webElement.get("headerText2").toString(),
+							webElement.get("childBackroundColor").toString(),
+							webElement.get("childBackroundImg").toString(),
 							jsonUtil.objtoLinkedList(webElement.get("img")));
 					welw.add(img.getImgElement());
-					htmls.add(welw);
+					
 					break;
 				} case"商品":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
@@ -164,7 +168,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							jsonUtil.objtoLinkedList(webElement.get("buttonColor")),
 							jsonUtil.objtoLinkedList(webElement.get("buttonTextColor")));
 					welw.add(product.getProductElement());
-					htmls.add(welw);
+					
 					break;
 				} case "文字":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
@@ -175,7 +179,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							webElement.get("BackroundColor").toString(),
 							webElement.get("childBackroundImg").toString());
 					welw.add(text.getTextElement());
-					htmls.add(welw);
+					
 					break;
 				} case "影片":{
 					VideoElementHTML video=new VideoElementHTML(
@@ -184,7 +188,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							webElement.get("backroundColor").toString(),
 							webElement.get("backroundImg").toString());
 					welw.add(video.getVideoElement());
-					htmls.add(welw);
+					
 					break;
 				}
 				default:
@@ -196,14 +200,18 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 				
 				
 			}
-			
+			htmls.add(welw);
 			
 		}
 		
 		HashMap<String, List> data=new HashMap<String, List>();
 		data.put("htmls", htmls);
 		data.put("templateTypes", templateTypes);
-		
+		System.out.println(htmls.size());
+		for(List<String> html:htmls) {
+			System.out.println("html");
+			System.out.println(html.size());
+		}
 		return data;
 	}
 

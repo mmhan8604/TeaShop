@@ -5,9 +5,11 @@ import java.util.HashMap;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.classes.logisticsUpdateDTO;
 import com.example.interf.logisticsService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +29,20 @@ public class logisticsController {
 		JSONObject ljson=new JSONObject(ldata);
 		System.out.println(ldata.toString());
 		return ljson.toString();
+	}
+	
+	@PostMapping("/logisticsSet/update")
+	public String logisticsUpdate(HttpServletRequest request,@RequestBody logisticsUpdateDTO lud) {
+		HttpSession session=request.getSession();
+//		(String) session.getAttribute("email")
+		boolean check= logis.update((String) session.getAttribute("email"), lud);
+		
+		if(check) {
+			return"ok";
+		}else {
+			return"error";
+		}
+		
 	}
 
 }

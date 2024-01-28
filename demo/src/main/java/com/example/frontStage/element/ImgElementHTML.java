@@ -5,14 +5,18 @@ import java.util.List;
 public class ImgElementHTML {
 	private String headerText1;
 	private String headerText2;
+	private String childBackroundColor;
+	private String childBackroundImg;
 	private List<String> img;
 	
 	private String imgElement;
 
-	public ImgElementHTML(int type, String headerText1, String headerText2, List<String> img) {
+	public ImgElementHTML(int type, String headerText1, String headerText2,String childBackroundColor,String childBackroundImg, List<String> img) {
 		
 		this.headerText1 = headerText1;
 		this.headerText2 = headerText2;
+		this.childBackroundColor=childBackroundColor;
+		this.childBackroundImg=childBackroundImg;
 		this.img = img;
 		
 		if(type==1) {
@@ -25,7 +29,7 @@ public class ImgElementHTML {
 	}
 	
 	public String createImgElement01() {
-		imgElement=String.format("<div  class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
+		imgElement=String.format("<div  class='child' style='background-color:%s ;background-image: %s;display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
 				+ "  <h1 class='headerText1' >%s</h1>\r\n"
 				+ "  <h2 class='headerText2' >%s</h2>\r\n"
 				+ "\r\n"
@@ -74,12 +78,12 @@ public class ImgElementHTML {
 				+ "      </div>\r\n"
 				+ "\r\n"
 				+ "  </div>\r\n"
-				+ "</div>",headerText1,headerText2,img.get(0),img.get(1),img.get(2),img.get(3),img.get(4),img.get(5) );
+				+ "</div>",childBackroundColor,childBackroundImg,headerText1,headerText2,img.get(0),img.get(1),img.get(2),img.get(3),img.get(4),img.get(5) );
 		return imgElement;
 	}
 	
 	public String createImgElement02() {
-		imgElement=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;' >\r\n"
+		imgElement=String.format("<div class='child' style='background-color:%s ;background-image: %s;display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;' >\r\n"
 				+ "  <h1 class='headerText1' >%s</h1>\r\n"
 				+ "  <h2 class='headerText2' >%s</h2>\r\n"
 				+ "\r\n"
@@ -115,12 +119,12 @@ public class ImgElementHTML {
 				+ "\r\n"
 				+ "\r\n"
 				+ "  </div>\r\n"
-				+ "</div>",headerText1,headerText2,img.get(0),img.get(1),img.get(2),img.get(3) );
+				+ "</div>",childBackroundColor,childBackroundImg,headerText1,headerText2,img.get(0),img.get(1),img.get(2),img.get(3) );
 		return imgElement;
 	}
 
 	public String createImgElement03() {
-		imgElement=String.format("<div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
+		imgElement=String.format("<div class='child' style='background-color:%s ;background-image: %s;display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
 				+ "  <h1 class='headerText1'>%s</h1>\r\n"
 				+ "  <h2 class='headerText2'>%s</h2>\r\n"
 				+ "\r\n"
@@ -145,7 +149,7 @@ public class ImgElementHTML {
 				+ "      </div>\r\n"
 				+ "\r\n"
 				+ "  </div>\r\n"
-				+ "</div>", headerText1,headerText2,img.get(0),img.get(1),img.get(2));
+				+ "</div>",childBackroundColor,childBackroundImg, headerText1,headerText2,img.get(0),img.get(1),img.get(2));
 		return imgElement;
 }
 
