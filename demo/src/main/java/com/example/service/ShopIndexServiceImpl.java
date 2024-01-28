@@ -22,6 +22,7 @@ import com.example.frontStage.element.FormElementHTML;
 import com.example.frontStage.element.ImgElementHTML;
 import com.example.frontStage.element.ProductElementHTML;
 import com.example.frontStage.element.TextElementHTML;
+import com.example.frontStage.element.VideoElementHTML;
 import com.example.interf.ShopIndexService;
 import com.example.repository.frontStageDao;
 import com.example.utils.jsonUtil;
@@ -81,8 +82,6 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 	
 	public HashMap<String, List> createBigDivHTML(Integer shopid) {
 		HashMap<String, Object> style= getStyle(1);
-//		System.out.println(style);
-		System.out.println("2");
 		LinkedList<Map<String, Object>> fv= (LinkedList<Map<String, Object>>) style.get("fullView");
 		
 		
@@ -176,6 +175,15 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 							webElement.get("BackroundColor").toString(),
 							webElement.get("childBackroundImg").toString());
 					welw.add(text.getTextElement());
+					htmls.add(welw);
+					break;
+				} case "影片":{
+					VideoElementHTML video=new VideoElementHTML(
+							webElement.get("youtubeUrl").toString(),
+							webElement.get("headerText1").toString(),
+							webElement.get("backroundColor").toString(),
+							webElement.get("backroundImg").toString());
+					welw.add(video.getVideoElement());
 					htmls.add(welw);
 					break;
 				}
