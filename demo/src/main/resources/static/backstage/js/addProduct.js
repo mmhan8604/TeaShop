@@ -37,10 +37,10 @@ function catchProductData() {
 		discription: $('#addProductIntro').val(),
 		shopId: "shop01"
 	};
-
+	
 	// 將圖片數據和其他商品數據合併
 	var productData = { ...imagesData, ...otherProductData };
-
+	
 	return productData;
 }
 
@@ -61,6 +61,14 @@ function getImageBase64Data(imagePreview) {
 
 // 更新資料
 function addNewProduct(productIdPOST, newProductData) {
+	if(isNaN(newProductData.price)||isNaN(newProductData.stock)||isNaN(newProductData.shelves)||isNaN(newProductData.cost)){
+		alert("商品庫存、上架數量、價格及成本請填入數字")
+		return 
+	}
+	if(newProductData.stock<newProductData.shelves){
+		alert("上架數量不可高於商品庫存")
+		return 
+	}
 	$.ajax({
 		url: `/addProduct/${productIdPOST}`,
 		method: 'POST',

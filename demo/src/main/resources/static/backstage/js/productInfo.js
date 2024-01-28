@@ -79,8 +79,8 @@ function ProductInfoqueryAll(choosepage) {
 		            </td>
 		        </tr>
 		    `);
-//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
-		                
+			//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+
 			//修改商品GET
 			$("#bodyContext").off("click", ".editBtn");
 			$("#bodyContext").on("click", ".editBtn", function() {
@@ -102,7 +102,7 @@ function ProductInfoqueryAll(choosepage) {
 						$('#editProductPrice').val(productDatas.product.price);
 						$('#editProductCost').val(productDatas.product.cost);
 						$('#editProductIntro').val(productDatas.product.discription);
-						
+
 						// 清空圖片預覽區域
 						$("#editProductImgs").empty();
 
@@ -145,10 +145,10 @@ function ProductInfoqueryAll(choosepage) {
 					}
 
 				})
-				
-				function editPage(){
-			$("#formSpace").load( "/backstage/html/" + "productSetting" + ".html #formSpace>*")
-		}
+
+				function editPage() {
+					$("#formSpace").load("/backstage/html/" + "productSetting" + ".html #formSpace>*")
+				}
 			});
 
 			//刪除商品GET
@@ -271,6 +271,14 @@ function ProductInfoqueryAll(choosepage) {
 
 		//更新資料
 		function updateProduct(productIdPOST, updatedData) {
+			if (isNaN(updatedData.price) || isNaN(updatedData.stock) || isNaN(updatedData.shelves) || isNaN(updatedData.cost)) {
+				alert("商品庫存、上架數量、價格及成本請填入數字")
+				return
+			}
+			if (updatedData.stock < updatedData.shelves) {
+				alert("上架數量不可高於商品庫存")
+				return
+			}
 			$.ajax({
 				url: `/updateProducts/${productIdPOST}`,
 				method: 'POST',
@@ -286,8 +294,8 @@ function ProductInfoqueryAll(choosepage) {
 				}
 			});
 		}
-		
-		
+
+
 
 	}
 }
