@@ -363,6 +363,11 @@ input.qtyplus {
 	border: 1px solid black;
 }
 
+.img-fluid{
+	width: 100%;
+	height: 212px;
+}
+
 @media(max-width:1400px) {
 
 
@@ -473,5 +478,10 @@ input.qtyplus {
 		justify-content: center;
 		font-size: 0.9em;
 	}
+	
+	.img-fluid{
+	width: 100%;
+	height: auto;
+}
 
 }

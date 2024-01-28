@@ -30,6 +30,12 @@ public class ProductController {
 		System.out.println("查詢全部" + shopid);
 		return productService.queryProduct(shopid);
 	}
+	
+	@PostMapping("/frontqueryProduct")
+	public List<Products> frontqueryProduct(@RequestBody String shopId) {
+		
+		return productService.queryProduct(shopId);
+	}
 
 	@PostMapping("/queryProductByname")
 	public List<Products> queryProductByName(@RequestBody String name) {

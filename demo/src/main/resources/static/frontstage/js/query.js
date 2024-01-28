@@ -13,7 +13,7 @@ function queryProduct() {
 	var price;
 
 	var productslist;
-	fetch('/queryProduct', {
+	fetch('/frontqueryProduct', {
 		method: 'POST',
 		body: shopId
 	})
