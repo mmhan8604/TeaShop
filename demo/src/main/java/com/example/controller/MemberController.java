@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.entity.Member;
 import com.example.service.MemberService;
+import com.example.utils.Tools;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class MemberController {
@@ -26,7 +29,8 @@ public class MemberController {
 //    }
 //    
     @PostMapping("/getAllMemberInfoWithTotalSpent")
-    public List<Object[]> getAllMembersWithTotalSpent() {
-        return memberService.getAllMembersWithTotalSpent();
+    public List<Object[]> getAllMembersWithTotalSpent(HttpSession session) {
+    	String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+        return memberService.getAllMembersWithTotalSpent(shopid);
     }
 }

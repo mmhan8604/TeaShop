@@ -160,6 +160,7 @@ function ProductInfoqueryAll(choosepage) {
 
 
 			//更新商品上架狀態的處理事件
+			$("#bodyContext").off("click", ".switch-checkbox");
 			$("#bodyContext").on("click", ".switch-checkbox", function() {
 				let productId = trlist[$(this).attr('id').replace('switchID', '')].id;
 				let isChecked = $(this).prop("checked");

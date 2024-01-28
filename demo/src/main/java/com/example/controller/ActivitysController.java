@@ -17,6 +17,9 @@ import com.example.entity.Activitydetails;
 import com.example.entity.Activitys;
 import com.example.entity.Products;
 import com.example.service.ActivityService;
+import com.example.utils.Tools;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class ActivitysController {
@@ -25,15 +28,18 @@ public class ActivitysController {
 
 	//查全部活動
 	@PostMapping("/queryActivitys")
-	public List<Activitys> queryActivitys(@RequestBody String shopId) {
-		System.out.println("查詢全部" + shopId);
-		return activityService.queryActivitys(shopId);
+	public List<Activitys> queryActivitys(@RequestBody String shopId,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		System.out.println("查詢全部" + shopid);
+		return activityService.queryActivitys(shopid);
 	}
 
 	//增加活動
 	@PostMapping("/addActivity")
-	public String addActivityWithDetails(@RequestBody ActivitysDTO activitysDTO) {
+	public String addActivityWithDetails(@RequestBody ActivitysDTO activitysDTO,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
 		Activitys activitys = activitysDTO.getActivitys();
+		activitys.setShopId(shopid);
 		List<Activitydetails> activitydetailsList = activitysDTO.getActivitydetailsList();
 
 		return activityService.addActivityWithDetails(activitys, activitydetailsList);
@@ -75,9 +81,9 @@ public class ActivitysController {
 	
 	//查全部產品
 	@PostMapping("/findProducts")
-	public List<Products> findProducts(@RequestBody String shopId) {
-		
-		return activityService.queryProducts(shopId);
+	public List<Products> findProducts(@RequestBody String shopId,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		return activityService.queryProducts(shopid);
 	}
 
 

@@ -118,8 +118,8 @@ public class OrderService {
 			ordersRes.save(order);
 		}
 		
-		public List<Orders> findAllOrder(){
-			return ordersRes.findAll();
+		public List<Orders> findAllOrder(String shopId){
+			return ordersRes.findByShopIdOrderByOrderDateAsc(shopId);
 		}
 		
 		public boolean orderStateUpdate(String OrderId) {

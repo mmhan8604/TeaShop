@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Products;
 import com.example.service.ProductServiceImpl;
+import com.example.utils.Tools;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class ProductController {
@@ -22,9 +25,10 @@ public class ProductController {
 	ProductServiceImpl productService;
 
 	@PostMapping("/queryProduct")
-	public List<Products> queryProduct(@RequestBody String shopId) {
-		System.out.println("查詢全部" + shopId);
-		return productService.queryProduct(shopId);
+	public List<Products> queryProduct(@RequestBody String shopId,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		System.out.println("查詢全部" + shopid);
+		return productService.queryProduct(shopid);
 	}
 
 	@PostMapping("/queryProductByname")
@@ -35,7 +39,9 @@ public class ProductController {
 
 //	新增商品
 	@PostMapping("/addProduct/{id}")
-	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products) {
+	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		products.setShopId(shopid);
 		Products addProduct = productService.addProduct(id, products);
 		if (addProduct != null) {
 			return ResponseEntity.ok(addProduct);
