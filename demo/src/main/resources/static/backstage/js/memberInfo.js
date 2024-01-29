@@ -12,10 +12,13 @@ var trlist = [
 
 //-------------------------------------------------------------後端抓資料
 
+// 使用 JavaScript 發送 HTTP POST 請求獲取會員資料
+// 使用 JavaScript 發送 HTTP POST 請求獲取會員資料
 function MemberInfoqueryAll(choosepage) {
 	var trlist;
 	var page = choosepage;
-	//移除多次事件綁定
+	console.log(choosepage+"test")
+	// 移除多次事件綁定
 	$("#prepage").off("click");
 	$("#nextpage").off("click");
 
@@ -25,51 +28,71 @@ function MemberInfoqueryAll(choosepage) {
 	$("#nextpage").on("click", function() {
 		MemberInfoqueryAll(page + 1);
 	});
-	// 使用JavaScript發送HTTP POST請求獲取會員資料
-	fetch('/getAllMemberInfo', {
-		method: 'POST',
 
+	// 使用 JavaScript 發送 HTTP POST 請求獲取包含總消費金額的會員資料
+	fetch('/getAllMemberInfoWithTotalSpent', {
+		method: 'POST',
 	})
 		.then(response => response.json())
-		.then(member => {
-			trlist = member;
-			var allpage = trlist.length == 0 ? 1 : trlist.length;
-
-			if (page + 1 > (allpage % 5 == 0 ? Math.floor(allpage / 5) : Math.floor(allpage / 5) + 1)) {			//判斷是否超出頁數
+		.then(data => {
+			// 處理返回的數據，將 Object[] 轉換為會員物件，並附加總消費金額
+			trlist = data.map(item => ({
+				id: item[0].id, // 假設這是 Member 物件的id
+				name: item[0].name, // 假設這是 Member 物件的name
+				mail: item[0].mail, // 假設這是 Member 物件的mail
+				totalSpent: item[1], // totalSpent 是單獨的一個值
+				count: item[0].count,
+			}));
+			// 然後調用 displayMembers 來更新頁面
+			displayMembers(page, trlist);
+			
+			var allpage = data.length === 0 ? 1 : data.length;
+			console.log(allpage)
+			if (page + 1 > (allpage % 5 === 0 ? Math.floor(allpage / 5) : Math.floor(allpage / 5) + 1)) {
 				MemberInfoqueryAll(page - 1);
 			} else if (page + 1 < 1) {
 				MemberInfoqueryAll(page + 1);
-			} else { firstquery(allpage) }
-
+			} else {
+				displayMembers(page, trlist);
+			}
 		})
-		.catch(error => console.error('Error fetching product data:', error))
+		.catch(error => console.error('Error:', error));
 
-	function firstquery(allpage) {
-
+	// 定義顯示會員資料的函數
+	function displayMembers(page, trlist) {
 		$("#bodyContext").empty();
-		if (allpage % 5 == 0) {
-			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`)
+		var allpage = trlist.length === 0 ? 1 : trlist.length;
+
+		if (allpage % 5 === 0) {
+			$("#page").html(`${page + 1}/${Math.floor(allpage / 5)}`);
+		} else {
+			$("#page").html(`${page + 1}/${Math.floor(allpage / 5) + 1}`);
 		}
-		else { $("#page").html(`${page + 1}/${Math.floor(allpage / 5) + 1}`) }
 
-		for (i = page * 5; i < (page + 1) * 5; i++) {
-			var morder = i + 1;
-			var mcode = trlist[i].id;	//會員編號
-			var mname = trlist[i].name;
-			var mmail = trlist[i].mail;
-			var mamount = "9999元";
-			var mcount = trlist[i].count;
+		// 計算顯示的範圍
+		var start = page * 5;
+		var end = (page + 1) * 5;
+		for (var i = start; i < end; i++) {
+			if (i < trlist.length) {
+				var morder = i + 1;
+				var mcode = trlist[i].id; // 會員編號
+				var mname = trlist[i].name; // 會員姓名
+				var mmail = trlist[i].mail; // 會員郵件
+				var mamount = trlist[i].totalSpent + '元'; // 會員總消費金額
+				var mcount = trlist[i].count; // 會員消費次數
 
-			$("#bodyContext").append(`
-      <tr style="height:80px;">
-        <td scope="row">#${morder}</td>
-        <td>${mcode}</td>
-        <td>${mname}</td>
-        <td>${mmail}</td>
-        <td>${mamount}</td>
-        <td>${mcount}</td>
-      </tr>
-    `);
+				// 動態添加會員資料至表格
+				$("#bodyContext").append(`
+                    <tr style="height:80px;">
+                        <td scope="row">${morder}</td>
+                        <td>${mcode}</td>
+                        <td>${mname}</td>
+                        <td>${mmail}</td>
+                        <td>${mamount}</td>
+                        <td>${mcount}</td>
+                    </tr>
+                `);
+			}
 		}
 	}
 }

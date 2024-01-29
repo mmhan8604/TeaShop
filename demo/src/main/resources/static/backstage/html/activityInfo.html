@@ -19,6 +19,7 @@
   <script src="backstage.js"></script>
   <!-- 表格JS -->
   <script src="activityInfo.js" defer></script>
+  
 
 </head>
 
@@ -85,6 +86,7 @@
                 <th scope="col">折扣方式</th>
                 <th scope="col">活動狀態</th>
               </tr>
+                     
             </thead>
 
             <tbody id="bodyContext"> </tbody>
@@ -93,9 +95,9 @@
 
         <!-- 分頁標籤 -->
         <div id="pageBtn" class="btn-group">
-          <button type="button" class="btn btn-light">上一頁</button>
-          <button type="button" class="btn btn-light">1/10頁</button>
-          <button type="button" class="btn btn-light">下一頁</button>
+          <button id="prepage" type="button" class="btn btn-light">上一頁</button>
+          <button id="page" type="button" class="btn btn-light">1/10頁</button>
+          <button id="nextpage" type="button" class="btn btn-light">下一頁</button>
         </div>
 
 

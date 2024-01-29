@@ -1,14 +1,19 @@
-
 //-------------------------------------------------------------------------------顯示訂單
 var globalOrderDetails;//全域變數
 
 function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrderId').val(orderDetails.order.id);
-	$('#EditOrderTime').val(orderDetails.order.orderDate);
+	$('#EditOrderTime').val(moment(orderDetails.order.orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm'));
+	console.log(orderDetails.order.orderDate)
 	if (orderDetails.order.orderState == "已成立") {
 		$('#EditOrderState').val(orderDetails.order.orderState);
+		$('#EditOrdersPaymentStatus').val("已付款");
+		
+		
 	} else {
 		$('#EditOrderState').val("尚未處理");
+		$('#EditOrdersPaymentStatus').val("尚未付款");
+		
 	}
 	$('#EditOrdersName').val(orderDetails.order.member.name);
 	$('#EditOrdersPhone').val(orderDetails.order.member.phone);
@@ -18,7 +23,7 @@ function updateOrderDetailsForm(orderDetails) {
 	$('#EditOrdersRecipientMail').val(orderDetails.order.receiverMail);
 	$('#EditOrdersRecipientAddress').val(orderDetails.order.receiverAddress);
 	$('#EditOrdersPayment').val(orderDetails.order.paymentMethod);
-	$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
+	//$('#EditOrdersPaymentStatus').val(orderDetails.orderState);
 	$('#EditOrdersShipment').val(orderDetails.order.shipMethod);
 	$('#EditOrdersShipmentStatus').val(orderDetails.order.shipState);
 	// 清空訂單詳情表格並填充新數據
@@ -102,7 +107,7 @@ function queryAllOrderInfo(choosepage) {
 			var oorder = i + 1;
 
 			var ocode = trlist[i].id;
-			var odate = moment(trlist[i].orderDate).format('YYYY-MM-DD HH:mm');			//利用moment.js Date
+			var odate = moment(trlist[i].orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm');			//利用moment.js Date
 			var osituation = trlist[i].orderState;
 			var oname = trlist[i].member.name;
 			var omail = trlist[i].member.mail;
@@ -210,6 +215,3 @@ function EditOrderSetting() {
 	var updatedData = collectOrderUpdateData();
 	updateOrder(orderId, updatedData);
 }
-
-
-

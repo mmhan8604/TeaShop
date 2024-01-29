@@ -7,7 +7,7 @@ function getMemberinfo(){
                 type: 'POST',
                 url: '/getMemberInfo',
                 contentType: 'application/json; charset=UTF-8',
-                data: "M01",
+                data: memberId,
                 success: function (response) {
                     // 处理成功的响应
 					$('#memberName').val(response.name)

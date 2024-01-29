@@ -11,10 +11,19 @@
 	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
+		var memberId = /*[[${memberId}]]*/null;
+        /*]]>*/
+	</script>
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/js/orderMethod.js"></script>
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<script src="/frontstage/js/logOut.js"></script>
+	<script src="/frontstage/js/cart.js"></script>
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
@@ -24,73 +33,71 @@
 <body>
 
 	<!--nav導覽列頭-->
-		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
-			<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
-				<!-- Logo、官網名，連結首頁 -->
-				<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
-					<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
-				</a>
+	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
+		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
+			<!-- Logo、官網名，連結首頁 -->
+			<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
+				<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
+			</a>
 
-				<!-- 響應式的導航欄 -->
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<!-- 響應式的導航欄 -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-				<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
-				<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
-					<div class="navbar-nav mx-auto text-center  ">
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
-						<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
-					</div>
-					<!-- 登入Login、購物車按鈕icon -->
+			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
+			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
+				<div class="navbar-nav mx-auto text-center  ">
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
+				</div>
+				<!-- 登入Login、購物車按鈕icon -->
 
 
-					<div class="dropdown me-1 row">
-						<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
-							aria-expanded="false" style="color: #ffffff; display: flex; flex-direction: row; align-items: center;" >
-							<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;" alt="">
-							<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
-						</button>
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
-							
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
-									href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">登出</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">訂單</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">設定</a></li>
-						</ul>
-						
-						<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
-									th:href="@{'/shop/' + ${shopId} + '/login'}">
-									<img src="/frontstage/icon/white/login.png " alt=""
-										class="me-2 mb-1" style="height: 20px;width: auto;">登入</a></li>
-							
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navOrder" type="button"
-									href="#"><img src="/frontstage/icon/white/order.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">訂單</a></li>
-							<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-									href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
-										style="height: 20px;width: auto;">設定</a></li>
-						</ul>
+				<div class="dropdown me-1 row">
+					<button class="btn  my-2 my-sm-0 dropdown-toggle col" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"
+						style="color: #ffffff; display: flex; flex-direction: row; align-items: center;">
+						<img src="/backstage/icon/member.png" class="me-2" style="height: 30px; display: inline-block;"
+							alt="">
+						<span th:text="${userName!=null? userName:'Login'}" style="display: inline-block;"></span>
+					</button>
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:if="${userName!=null}">
 
-						<button class="btn my-2 my-sm-0 col navCarticon" type="button">
-							<a th:href="@{'/shop/' + ${shopId} + '/shoppingCart'}"><img src="/frontstage/icon/white/cart.png"
-									style="width:30px; height: 30px;" alt="購物車"></a>
-						</button>
-					</div>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
+								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">登出</a></li>
+
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">設定</a></li>
+					</ul>
+
+					<ul class="dropdown-menu loginMenu text-center " id="navMembermenu" th:else>
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navLogin" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/login'}">
+								<img src="/frontstage/icon/white/login.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">登入</a></li>
+
+						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+									style="height: 20px;width: auto;">設定</a></li>
+					</ul>
+
+					<button class="btn my-2 my-sm-0 col navCarticon" type="button">
+						<a th:href="@{'/shop/' + ${shopId} + '/shoppingCart'}"><img
+								src="/frontstage/icon/white/cart.png" style="width:30px; height: 30px;" alt="購物車"></a>
+					</button>
 				</div>
 			</div>
-		</nav>
-		<!--nav導覽列尾------------------- -->
+		</div>
+	</nav>
+	<!--nav導覽列尾------------------- -->
 
 	<!-- 主要畫面 --> <!--修改左右margin-->
 	<div id="site" class="siteH1">
@@ -98,7 +105,7 @@
 		<div id="content" class="mx-4 w-100">
 
 			<!-- 購物車 -->
-			<h1 class="h1exceptMember" >購物車</h1>
+			<h1 class="h1exceptMember">購物車</h1>
 			<form id="shopping-cart" action="cart.html" method="post">
 				<div class="shopping-cart text-center">
 
@@ -124,7 +131,7 @@
 							<div class="col-2 d-flex align-items-center"></div>
 							<div class="col-2 d-flex align-items-center"></div>
 						</div>
-						 
+
 
 						<div class="row cart-box rounded">
 							<div class="col-2 d-flex align-items-center">
@@ -137,7 +144,7 @@
 							<div class="col-2 d-flex align-items-center"></div>
 							<div class="col-2 d-flex align-items-center"></div>
 						</div>
-						 
+
 
 						<div class="row cart-box rounded">
 							<div class="col-2 d-flex align-items-center"></div>
@@ -147,7 +154,7 @@
 							<div class="col-2 ">運費：$60</div>
 							<div class="col-2 total-price ">總金額：29,997</div>
 						</div>
-						 
+
 
 						<!-- <div class="row cart-box rounded">
 							<div class="col-2 d-flex align-items-center"></div>
@@ -157,7 +164,7 @@
 							<div class="col-2 "></div>
 							<div class="col-2 total-price "></div>
 						</div> -->
-						 
+
 
 						<!-- <div class="row cart-box rounded">
 							<div class="col-2 d-flex align-items-center"></div>
@@ -167,11 +174,11 @@
 							<div class="col-2 "></div>
 							<div class="col-2 total-price "></div>
 						</div> -->
-						
+
 
 					</div>
 
-					
+
 				</div>
 				<!-- 聯絡方式 -->
 				<form>
@@ -181,8 +188,7 @@
 						</div>
 						<div class="row shoppingMethodbody rounded">
 							<!--  -->
-							<div
-								class=" col-md-2 my-2 payment d-flex align-items-center ms-auto shoppingMethodbody01">
+							<div class=" col-md-2 my-2 payment d-flex align-items-center ms-auto shoppingMethodbody01">
 								付款方式：</div>
 
 							<div class=" col-md-4 my-2 payment d-flex align-items-center">
@@ -190,13 +196,12 @@
 								<label for="inputShoppingmethod" class="form-label"></label>
 								<select id="inputShoppingmethod" class="btn form-select selectyCart03">
 									<option class="text-center  selected" value="Paypal">Paypal</option>
-									<option class="text-center"  value="綠界科技ECPAY">綠界科技ECPAY</option>
+									<option class="text-center" value="綠界科技ECPAY">綠界科技ECPAY</option>
 								</select>
 
 							</div>
 							<!--  -->
-							<div
-								class=" col-md-2 my-2 payment d-flex align-items-center ms-auto shoppingMethodbody01">
+							<div class=" col-md-2 my-2 payment d-flex align-items-center ms-auto shoppingMethodbody01">
 								運送方式：</div>
 
 							<div class=" col-md-4 my-2 payment d-flex align-items-center">
@@ -209,7 +214,8 @@
 							<!--  -->
 							<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">折扣點數：
 							</div>
-							<div class=" col-md-4 my-2 "><input id="inputDiscount" class="form-control oints inputCart03"></div>
+							<div class=" col-md-4 my-2 "><input id="inputDiscount"
+									class="form-control oints inputCart03"></div>
 							<div class="col-md-6"></div>
 							<div class=" col-md-2"></div>
 							<div class=" col-md-4  form-text text-md-start text-center ">目前擁有1點：每1點折扣1,111元</div>
@@ -223,8 +229,9 @@
 					<ul id="shopping-cart-actions" class="flex-container">
 
 						<li class="checkout-btn">
-							<input type="submit" name="delete"  class="btn clear01 me-3 text-center" value="取消" />
-							<a th:href="@{'/shop/' + ${shopId} + '/orderInfo'}" type="submit" class="btn text-center cartCheckout py-1" onclick="savepayment()">確定</a>
+							<input type="submit" name="delete" class="btn clear01 me-3 text-center" value="取消" />
+							<a th:href="@{'/shop/' + ${shopId} + '/orderInfo'}" type="submit"
+								class="btn text-center cartCheckout py-1" onclick="savepayment()">確定</a>
 						</li>
 
 					</ul>
@@ -235,17 +242,17 @@
 
 	</div>
 	<script>
-		
-		
-		function savepayment(){
+
+
+		function savepayment() {
 			var payment = $('#inputShoppingmethod').val();
 			var shippingMethod = $('#inputTransportmethod').val();
 			var discount = $('#inputDiscount').val();
-			var data = {payment:payment, shippingMethod: shippingMethod, discount: discount };
+			var data = {payment: payment, shippingMethod: shippingMethod, discount: discount};
 			localStorage.setItem('payStorage', JSON.stringify(data));
 
 		}
-		
+
 	</script>
 
 </body>

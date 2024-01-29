@@ -1,7 +1,6 @@
 package com.example.entity;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -9,9 +8,10 @@ import jakarta.persistence.Id;
 public class Activitys {
 	@Id
 	private String id;
+	
 	private String name;
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private String discription;
 	private String method;
 	private int freeShipping;
@@ -32,7 +32,7 @@ public class Activitys {
 	public String getId() {
 		return id;
 	}
-
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -45,19 +45,19 @@ public class Activitys {
 		this.name = name;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -83,6 +83,12 @@ public class Activitys {
 
 	public void setFreeShipping(int freeShipping) {
 		this.freeShipping = freeShipping;
+	}
+	
+	@Override
+	public String toString() {
+		return " [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", discription="
+				+ discription + ", method=" + method + ", freeShipping=" + freeShipping + ", shopId=" + shopId + "]";
 	}
 
 	

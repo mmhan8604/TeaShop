@@ -64,7 +64,7 @@ public class OrderService {
 		AllInOne all = new AllInOne("");
 		
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo(uuId);
+		obj.setMerchantTradeNo(OOB.getOrderId());
 		obj.setMerchantTradeDate(OOB.getTradeTime());
 		obj.setTotalAmount(OOB.getTotalAmount());
 		obj.setTradeDesc("test Description");
@@ -114,10 +114,23 @@ public class OrderService {
 			return memberOptional.get();
 	}
 		public void postOrder(Orders order) {
+			order.setPaymentMethod("綠界");
 			ordersRes.save(order);
 		}
 		
-		public List<Orders> findAllOrder(){
-			return ordersRes.findAll();
+		public List<Orders> findAllOrder(String shopId){
+			return ordersRes.findByShopIdOrderByOrderDateAsc(shopId);
+		}
+		
+		public boolean orderStateUpdate(String OrderId) {
+			if(ordersRes.findById(OrderId).isPresent()) {
+				Orders order = ordersRes.findById(OrderId).get();
+				order.setOrderState("已成立");
+				ordersRes.save(order);
+				return true;
+			}else {
+				return false;
+			}
+			
 		}
 }

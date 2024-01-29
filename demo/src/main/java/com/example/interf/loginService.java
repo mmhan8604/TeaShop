@@ -6,6 +6,7 @@ public interface loginService {
 	
 	
 	int checkAccount(String clientAccount,String clientPassword);
+	public int getShopId(String clientAccount);
 	
 	
 }

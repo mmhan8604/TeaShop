@@ -8,6 +8,7 @@ public class FrontLoginClasses {
 	private String providerId;
 	private String loginMethod;
 	private int shopId;
+	private String memberId;
 	
 	public String getDisplayName() {
 		return displayName;
@@ -48,6 +49,12 @@ public class FrontLoginClasses {
 		this.shopId = shopId;
 	}
 	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
 		return "FrontLoginClasses [displayName=" + displayName + ", email=" + email + ", emailVerified=" + emailVerified

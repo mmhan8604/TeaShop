@@ -13,9 +13,9 @@ function queryProduct() {
 	var price;
 
 	var productslist;
-	fetch('/queryProduct', {
+	fetch('/frontqueryProduct', {
 		method: 'POST',
-		body: "shop01"
+		body: shopId
 	})
 		.then(response => response.json())
 		.then(products => {
@@ -30,17 +30,17 @@ function queryProduct() {
 		for (i = 0; i < length; i++) {
 			name = productslist[i].name
 			id = productslist[i].id;
-			pimg = "./imgs/blacktea-3.png";
+			pimg = productslist[i].picjson;
 			productName = productslist[i].name;
 
 			price = productslist[i].price;
-
+			console.log(productslist[i])
 			var cardHTML = `<div class="col-md-3 rounded">
 <a data-id="${id}" class="productPage">
     <div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
         <div class="product-image">
 
-            <img src="/frontstage/product/新增資料夾/greentea-3.png" alt="商品圖片1" class="img-fluid rounded-top" style="cursor: pointer;">
+            <img src="${pimg}" alt="商品圖片1" class="img-fluid rounded-top" style="cursor: pointer;">
             <a>
                 <button href="#" type="button" class="shopping-cart-icon m-0 "
                     data-bs-toggle="modal" data-bs-target="#product${id}Modal">
@@ -64,8 +64,8 @@ function queryProduct() {
                                     <p class="card-text text-end product-price">${price}</p>
                                     <select class="form-select qty qty-greentea"
                                         aria-label="Default select example" id="myform">
-                                        <option selected>1</option>
-                                        <option value="1">1</option>
+                                        
+                                        <option value="1" selected>1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>

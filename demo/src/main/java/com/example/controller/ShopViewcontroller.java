@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
+import com.example.entity.Member;
 import com.example.entity.Products;
+import com.example.service.FrontloginService;
+import com.example.service.MCFOservice;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
@@ -23,6 +27,10 @@ import jakarta.servlet.http.HttpSession;
 public class ShopViewcontroller {
 	@Autowired
 	ProductService productService;
+	@Autowired
+	FrontloginService frontloginService;
+	@Autowired
+	MCFOservice MCFOservice;
 	
 	
 	
@@ -80,8 +88,8 @@ public class ShopViewcontroller {
 		model.addAttribute("productId", product.getId());
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
-//		model.addAttribute("productDiscription", product.getDiscription());
-		model.addAttribute("productDiscription", "資料庫尚無打上敘述，僅測試用");
+		model.addAttribute("productDiscription", product.getDiscription());
+		model.addAttribute("imgSrc",product.getPicjson());
 		return "/shopPage/product";		//商品頁	
 	}
 	
@@ -97,7 +105,7 @@ public class ShopViewcontroller {
 	public String orderInfo(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
+		model.addAttribute("memberId",loginInfo.getMemberId());
 		return "/shopPage/cart04.html";		//訂購人等等		
 	}
 	
@@ -105,16 +113,18 @@ public class ShopViewcontroller {
 	public String confirmOrder(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
+		model.addAttribute("auth",loginInfo);
+		model.addAttribute("memberId",loginInfo.getMemberId());
 		return "/shopPage/cart05.html";		//確認訂單等等		
 	}
 	
 	@GetMapping("/{shopId}/regist")
 	public String registPage(HttpSession session,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		setAllLoginInfo(loginInfo, model, shopId);		
+		setAllLoginInfo(loginInfo, model, shopId);	
 		
-		return "/shopPage/teaShopRegist.html";		//確認訂單等等		
+		
+		return "/shopPage/teaShopRegist.html";		//註冊		
 	}
 	
 	@GetMapping("/{shopId}/login")
@@ -122,8 +132,36 @@ public class ShopViewcontroller {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
 		
-		return "/shopPage/teaShopLogin.html";		//確認訂單等等		
+		return "/shopPage/teaShopLogin.html";		//登入	
 	}
+	
+	@PostMapping("/{shopId}/memberDetail")
+	public String loginPagex(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
+		return "/shopPage/memberDetail.html";		//登入	
+	}
+	
+	@GetMapping("/{shopId}/member")
+	public String memberPage(HttpSession session, Model model, @PathVariable int shopId) {
+	    FrontLoginClasses loginInfo = (FrontLoginClasses)session.getAttribute("authObject");
+	    
+	    setAllLoginInfo(loginInfo, model, shopId);
+	    
+		
+	    if(loginInfo!=null) {
+	    model.addAttribute("memberId",loginInfo.getMemberId());
+		Member member = MCFOservice.getMemberInfo(loginInfo.getMemberId());
+		model.addAttribute("memberMail", member.getMail());
+		model.addAttribute("memberName", member.getName());
+		model.addAttribute("memberPhone", member.getPhone());
+		model.addAttribute("memberAddress", member.getAddress());
+		model.addAttribute("memberCount", member.getCount());}
+		return "/shopPage/member01.html";		//確認訂單等等		
+	}
+	
+	
 	
 	
 	
@@ -145,6 +183,8 @@ public class ShopViewcontroller {
 			} else {
 				model.addAttribute("userName", null);
 			}
+			model.addAttribute("mail",loginInfo.getEmail());
+			System.out.println(loginInfo.getEmail());
 		}
 		model.addAttribute("shopId", shopId);
 		

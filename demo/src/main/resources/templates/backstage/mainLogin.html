@@ -108,7 +108,7 @@
 			<!-- 登入表單標題 -->
 			<h1 style="font-size: 64px;" class="mb-4"><b>商家後台</b></h1>
 			<!-- 登入表單 -->
-			<form action="#">
+			
 				<div class="mb-3">
 					<label for="username" class="form-label">帳號</label>
 					<input type="text" class="form-control" id="account" placeholder="請輸入帳號">
@@ -121,9 +121,9 @@
 					<a href="/signup" class="text-decoration-none">還未註冊</a>
 					<a href="" class="text-decoration-none" style="margin-left: 280px;">忘記密碼?</a>
 				</div>
-				<button id="submit" type="submit" class="btn btn-primary mt-3 mb-2"
+				<button id="submit"  class="btn btn-primary mt-3 mb-2"
 					style="margin-left: 25%; width: 200px; height: 70px; font-size: 32px;">登入</button>
-			</form>
+			
 
 
 		</div>
@@ -146,11 +146,12 @@
 				data: JSON.stringify(data),
 				contentType: "application/json",
 				success: function (response) {
-					if (response === 'login_success') {
+					
+					if (response == 'login_success') {
 						// 在這裡處理登入成功的情況
-
+						alert("登入成功")
 						sessionStorage.setItem("account", data.account);
-						window.location.href = "/main";
+						window.location.href = "/backstage";
 					} else {
 						// 登入失敗
 						alert('帳號或密碼錯誤');

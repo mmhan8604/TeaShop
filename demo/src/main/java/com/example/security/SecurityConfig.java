@@ -18,6 +18,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     	
     	http
+    	.cors(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(registry ->
                 registry
                         .requestMatchers(HttpMethod.POST, "/**").permitAll()

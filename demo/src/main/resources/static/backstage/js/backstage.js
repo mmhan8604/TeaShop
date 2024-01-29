@@ -75,15 +75,19 @@ $(document).ready(function () {
 })
 
 $("#upload").on("click", function () {
-    $("#upTxt").html("儲存成功")//sucess function
+    $("#upTxt").html("儲存成功");
 
 })
+
+
 
 $("#formSpace").on("click", function () {
     $("#upTxt").html("儲存資訊")//點表單時
 })
 
+
 // 點選按鈕轉換網站僅限同層
 function goto(x) {
   window.location.href = x +'.html'; // 將這裡的URL替換為您要導航到的頁面地址
 }
+
