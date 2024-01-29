@@ -83,7 +83,7 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 	}
 	
 	public HashMap<String, List> createBigDivHTML(Integer shopid) {
-		HashMap<String, Object> style= getStyle(1);
+		HashMap<String, Object> style= getStyle(shopid);
 		LinkedList<Map<String, Object>> fv= (LinkedList<Map<String, Object>>) style.get("fullView");
 		
 		

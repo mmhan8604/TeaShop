@@ -25,7 +25,7 @@ public class logisticsController {
 		HttpSession session=request.getSession();
 //		data.setEmail((String) session.getAttribute("email"));
 		//(String) session.getAttribute("email")
-		HashMap<String, String> ldata= logis.getLogistics("a@mail.com");
+		HashMap<String, String> ldata= logis.getLogistics((String) session.getAttribute("email"));
 		JSONObject ljson=new JSONObject(ldata);
 		System.out.println(ldata.toString());
 		return ljson.toString();
