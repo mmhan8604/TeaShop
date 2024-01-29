@@ -80,9 +80,10 @@
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">登出</a></li>
-						
+
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -93,7 +94,8 @@
 									style="height: 20px;width: auto;">登入</a></li>
 
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -118,7 +120,7 @@
 
 
 				<div class="col-md-6 text-center">
-					<div class=" rounded py-4 mb-2" style="width: 98%; background-color: rgb(236, 236, 235);">
+					<div class=" rounded py-4 mb-2" style="height: 99%; width: 98%; background-color: rgb(236, 236, 235);">
 						<div class="d-flex align-items-center justify-content-center">
 							<h3 class="flex-grow-1 ms-5	mb-0">會員資訊</h3>
 							<button class="btn memberRevisebutton d-flex justify-content-center align-items-center"
@@ -147,19 +149,21 @@
 						</div>
 
 						<div class="my-3 text-start ">
-							<label for="" class="form-label ms-3" >會員帳號</label>
+							<label for="" class="form-label ms-3">會員帳號</label>
 							<input type="email" class="form-control  mx-auto" id="memberEmail"
 								style="width: 95%; background-color: #dbdada;" th:value="${memberMail}" disabled>
 						</div>
 
 						<div class="my-3 text-start">
+
 							<label for="" class="form-label ms-3" >會員姓名</label>
 							<input class="form-control  mx-auto" id="memberName" style="width: 95%; "
 								th:value="${memberName}" >
+
 						</div>
 
 						<div class="my-3 text-start">
-							<label for="" class="form-label ms-3" >會員電話</label>
+							<label for="" class="form-label ms-3">會員電話</label>
 							<input class="form-control  mx-auto" id="memberPhone" style="width: 95%;"
 								th:value="${memberPhone}" value="0912-345678">
 						</div>
@@ -171,7 +175,7 @@
 						</div>
 
 						<div class="my-3 text-start">
-							<label for="" class="form-label ms-3" >會員點數</label>
+							<label for="" class="form-label ms-3">會員點數</label>
 							<input class="form-control  mx-auto pb-2" id="memberCount"
 								style="width: 95%; background-color: #d8d8d8;" th:value="${memberCount}" disabled>
 						</div>
@@ -181,98 +185,34 @@
 
 
 				<div class="col-md-6 rounded text-center">
-					<div class="rounded py-4 mb-2" style="width: 98%; background-color: rgb(236, 236, 235);">
+					<div class="rounded py-4 mb-2" style="height: 99%; width: 98%; background-color: rgb(236, 236, 235);">
 						<h3 class="">歷史訂單</h3>
 
 						<div class="row mx-auto rounded mt-4 mb-4 " style="width: 95%; background-color: #dbdada;">
 							<div class="col-3 py-2">日期</div>
-							<div class="col-3 py-2">品項</div>
-							<div class="col-2 py-2 amount">金額</div>
+							<div class="col-3 py-2 px-0 amount">訂單代碼</div>
+							<div class="col-sm-2 col-3 py-2 ">金額</div>
 							<div class="col-sm-2 col-3 py-2">狀態</div>
 							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
-						<div class="row mx-auto rounded d-flex align-items-center  "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">23/12/05
+						<!-- 在你的HTML模板中，使用Thymeleaf的迭代來顯示每筆訂單 -->
+						<div th:each="order : ${orders}">
+							<div class="row mx-auto rounded d-flex align-items-center"
+								style="width: 95%; background-color: rgb(236, 236, 235);">
+								<div th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}" class="col-3 py-2 orderHistorytime" style="border-right: 2px solid #c2c2c2;">
+									</div>
+								<div th:text="${order.id}" class="col-3 py-2 px-0 amount"></div>
+								<div th:text="${order.amount}" class="col-sm-2 col-3 py-2 "></div>
+								<div th:text="${order.orderState}" class="col-sm-2 col-3 py-2 px-0">尚未處理</div>
+								<div class="col-sm-2 col-3 py-2">
+									<a th:if="${order.orderState!='已成立'}" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"><button
+											class="rounded cancelOrder px-2">取消</button></a>
+											
+									<a th:if="${order.orderState=='已成立'}" th:href="@{'/shop/' + ${shopId} + '/orderHistory'}">		
+									<button  class="rounded checkOrder px-2">查看</button></a>
+								</div>
 							</div>
-							<div class="col-3 py-2">荔枝紅茶</div>
-							<div class="col-2 py-2 amount">$9,999</div>
-							<div class="col-sm-2 col-3 py-2">尚未處理</div>
-							<div class="col-sm-2 col-3 py-2"><button class=" rounded cancelOrder px-2">取消</button></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">23/11/05
-							</div>
-							<div class="col-3 py-2">荔枝紅茶</div>
-							<div class="col-2 py-2 amount">$9,999</div>
-							<div class="col-sm-2 col-3 py-2">已收到</div>
-							<div class="col-sm-2 col-3 py-2"><button class="rounded checkOrder px-2">查看</button></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-						</div>
-
-						<div class="row mx-auto rounded d-flex align-items-center "
-							style="width: 95%; background-color: rgb(236, 236, 235);">
-							<div class="col-3 py-2 orderHistorytime " style="border-right:2px solid #c2c2c2;">　</div>
-							<div class="col-3 py-2"></div>
-							<div class="col-2 py-2 amount"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
-							<div class="col-sm-2 col-3 py-2"></div>
 						</div>
 
 
@@ -297,8 +237,8 @@
 				localStorage.setItem('memberPhone', phone);
 				localStorage.setItem('memberAddress', address);
 				editMember()
-				
-				
+
+
 			});
 		});
 
@@ -321,9 +261,9 @@
 				data: JSON.stringify(userData),
 				success: function (response) {
 					console.log("success")// 會員資料修改成功
-				$('#succesMemberInformationChange').modal('show');
-					
-					
+					$('#succesMemberInformationChange').modal('show');
+
+
 				},
 				error: function (err) {
 					console.log(err)
