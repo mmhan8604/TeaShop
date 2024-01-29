@@ -15,4 +15,6 @@ public interface OrdersRepository extends JpaRepository<Orders, String>{
     List<Orders> findOrdersByMemberIdOrderByOrderDateDesc(String memberId);
 	
 	List<Orders> findByOrderDateBetweenAndShopId(LocalDateTime startDateTime, LocalDateTime endDateTime,String shopId);
+	
+	
 }

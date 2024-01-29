@@ -1,8 +1,10 @@
 package com.example.controller;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public class BackStageChartController {
 	BackStageChartService chartService;
 	
 	@PostMapping("/dayRevenue")
-	public Map<String, Integer> darRevenue(@RequestBody String today,HttpSession session) {
+	public Map<String, Integer> dayRevenue(@RequestBody String today,HttpSession session) {
 		String shopid =Tools.intObjToString( session.getAttribute("backShopId")); 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 		LocalDateTime dateTime = LocalDateTime.parse(today, formatter);
@@ -45,4 +47,18 @@ public class BackStageChartController {
 		String shopid =Tools.intObjToString( session.getAttribute("backShopId")); 
 		return chartService.bestSellProduct(shopid);
 	}
+	
+	@PostMapping("/lastFewMonthRevenue")
+	public Map<String, Integer> lastFewMonthRevenue(@RequestBody String today,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId")); 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+		LocalDateTime dateTime = LocalDateTime.parse(today, formatter);
+		Map<String, Integer> revenueMap = new LinkedHashMap<>();
+		for(int i=0;i<=6;i++) {
+			revenueMap.put(Integer.toString(dateTime.minusMonths(i).getMonthValue())+"/"+Integer.toString(dateTime.minusMonths(i).getYear())
+			, chartService.getMonthRevenue(dateTime.minusMonths(i),shopid));
+		}
+		
+		return revenueMap;
+		}
 }

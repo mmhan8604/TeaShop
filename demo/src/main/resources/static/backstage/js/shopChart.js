@@ -42,7 +42,20 @@ function chart() {
 		}
 	});
 
+	$.ajax({
+		url: `/lastFewMonthRevenue`,
+		method: 'POST',
+		contentType: 'application/json',
+		data: formattedDate,
+		success: function(response) {
+			console.log(response)
+			revenueLine(response)
 
+		},
+		error: function(error) {
+			console.error("更新失敗: ", error);
+		}
+	});
 
 
 
@@ -83,25 +96,37 @@ function chart() {
 		const pdtSalesRank = new Chart(ctx, psrConfig);
 	}
 
-	// 營收圖表-折線圖//
-	const revenueCtx = document.getElementById('revenueReport');
-	const revenueLabels = ['23/09', '23/10', '23/11', '23/12', '23/01', '23/02'];  // 设置 X 轴上对应的标签
-	const revenuedata = {
-		labels: revenueLabels,
-		datasets: [{
-			label: '每月營收',
-			data: [9999, 0, 9999, 39996, 19998, 49995],
-			fill: true,
-			borderColor: 'rgba(54, 108, 241, 1)', // 设置线的颜色
-			backgroundColor: 'rgba(54, 108, 241, 0.2)',
-			tension: 0.1
-		}]
-	};
-	const revenueConfig = {
-		type: 'line', // 设置图表类型
-		data: revenuedata,
-	};
-	const revenueReport = new Chart(revenueCtx, revenueConfig);
+	function revenueLine(response) {
+		var revenueData=[];
+		var dateData=[];
+		for (const key in response) {
+			if (response.hasOwnProperty(key)) {
+				revenueData.unshift(response[key])
+				dateData.unshift(key)
+				const value = response[key];
+				console.log(`Key: ${key}, Value: ${value}`);
+			}
+		}
+		// 營收圖表-折線圖//
+		const revenueCtx = document.getElementById('revenueReport');
+		const revenueLabels = dateData;  // 设置 X 轴上对应的标签
+		const revenuedata = {
+			labels: revenueLabels,
+			datasets: [{
+				label: '每月營收',
+				data: revenueData,
+				fill: true,
+				borderColor: 'rgba(54, 108, 241, 1)', // 设置线的颜色
+				backgroundColor: 'rgba(54, 108, 241, 0.2)',
+				tension: 0.1
+			}]
+		};
+		const revenueConfig = {
+			type: 'line', // 设置图表类型
+			data: revenuedata,
+		};
+		const revenueReport = new Chart(revenueCtx, revenueConfig);
+	}
 
 	// 客流圖表-折線圖//
 	const passengerFlowCtx = document.getElementById('passengerFlowReport');
