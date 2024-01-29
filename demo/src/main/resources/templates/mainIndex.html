@@ -107,6 +107,10 @@
 						</li>
 					</ul>
 
+					<a id="FrontPageViews" th:href="@{'/shop/' + ${shopId} + '/shopindex'}" style=" margin-left: 350px;">
+						<img src="/backstage/icon/dw_web.png" alt="" style="height: 50px">
+					</a>
+
 					<button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="/backstage/icon/update.png"
 							style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
 						<p id="upTxt">儲存資訊</p>
@@ -135,8 +139,8 @@
 					<button id="buttonMember" class="btn  mb-2 sideBtn"><img src="/backstage/icon/memberCenter.png"
 							alt="">會員中心</button>
 				</div>
-				<button  onclick="logout()" class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="/backstage/icon/leave.png"
-						alt="">
+				<button onclick="logout()" class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img
+						src="/backstage/icon/leave.png" alt="">
 					<p class="ms-4">登出</p>
 				</button>
 			</div>
@@ -152,10 +156,10 @@
 		document.getElementById("buttonFront").addEventListener("click", () => {
 			window.open("/FrontStageSet", "_blank");
 		})
-		function logout(){
+		function logout() {
 			alert("登出")
-			window.location.href="/logout"
-			
+			window.location.href = "/logout"
+
 		}
 
 	</script>

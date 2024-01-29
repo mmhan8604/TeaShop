@@ -20,8 +20,8 @@ public class ViewController {
 	
 	
 	@GetMapping("/backstage")				//後台畫面
-	public String backstageView(HttpSession session) {
-		
+	public String backstageView(HttpSession session,Model model) {
+		model.addAttribute("shopId", (int)(session.getAttribute("backShopId")));
 		return "/mainIndex";
 	}
 }
