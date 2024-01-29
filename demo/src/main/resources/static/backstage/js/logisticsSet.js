@@ -1,5 +1,8 @@
 let whichTd;
 	
+	
+	
+	
 	async function updateLogistics(){
 		 let data={
             "isp_cod":"",
@@ -37,6 +40,11 @@ let whichTd;
 		}catch{
 			alert("上傳失敗")
 		}
+	}
+	
+	function updateLogisticsBTN(){
+		document.getElementById("upload").removeEventListener("click");
+		document.getElementById("upload").addEventListener("click",updateLogistics());
 	}
 	
       async function getLogisticsData(){
