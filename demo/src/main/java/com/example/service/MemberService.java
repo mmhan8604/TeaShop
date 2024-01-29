@@ -13,14 +13,26 @@ import com.example.repository.MemberRepository;
 public class MemberService {
 
 	@Autowired
-	MemberRepository memberRes;
+    private MemberRepository memberRepository;
 
-	public List<Member> getAllMemberInfo() {
-		return memberRes.findAll();
-	}
-	
-	public Member getMemberInfo(String memberId) {
-		return memberRes.findById(memberId).get();
-	}
+    // 獲取所有會員資訊
+    public List<Member> getAllMemberInfo() {
+        return memberRepository.findAll();
+    }
+    
+    // 獲取特定會員資訊
+    public Member getMemberInfo(String memberId) {
+        return memberRepository.findById(memberId).orElse(null);
+    }
+    
+    // 計算特定會員的總消費金額
+    public Integer getTotalSpentByMember(String memberId) {
+        return memberRepository.calculateTotalSpentByMemberId(memberId);
+    }
+    
+    //獲取所有會員及其總消費:
+    public List<Object[]> getAllMembersWithTotalSpent(String shopId) {
+        return memberRepository.findAllMembersWithTotalSpent(shopId);
+    }
 
 }

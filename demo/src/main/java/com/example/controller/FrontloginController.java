@@ -22,12 +22,22 @@ public class FrontloginController {
 	@PostMapping("/getauth")
 	public int getauth(HttpSession session,@RequestBody FrontLoginClasses loginInfo) {
 		int state = frontloginService.getauth(loginInfo);
+		
 		System.out.println(loginInfo);
 		if(state==1) {
 			session.setAttribute("authObject", loginInfo);
 			FrontLoginClasses FC= (FrontLoginClasses)session.getAttribute("authObject");
+			String StringshopId = Integer.toString(FC.getShopId());
+			String userEmail = FC.getEmail();
+			if(frontloginService.checkMember(userEmail,StringshopId)) {
+				FC.setMemberId(frontloginService.getMember(userEmail, StringshopId).getId());
+				FC.setDisplayName(frontloginService.getMember(userEmail, StringshopId).getName());
+				session.setAttribute("authObject", FC);
+				return 1;
+			}else {
+				return 3;
+			}
 			
-			return 1;
 		}else if(state == 2) {
 			return 2;
 		}

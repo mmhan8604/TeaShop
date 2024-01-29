@@ -24,6 +24,16 @@
 		};
 		firebase.initializeApp(firebaseConfig);
 	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
+		var mail = /*[[${mail}]]*/null;
+
+		/*]]>*/
+	</script>
+	<script src="/frontstage/js/createMember.js"></script>
 	<style>
 		.login-container {
 			display: flex;
@@ -118,17 +128,56 @@
 
 			.form-area b {
 				font-size: 12px;
+			}}
+
+			/*讀取動畫*/
+			
+
+			#loading-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgb(255, 255, 255,1);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
 			}
 
-		}
+			.loading-spinner {
+				border: 8px solid #f3f3f3;
+				border-top: 8px solid #3498db;
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				animation: spin 1s linear infinite;
+			}
+
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			#loading-text {
+				margin-top: 10px;
+			}
 	</style>
 
 </head>
 
 <body>
-
-
-
+	<div id="loading-overlay">
+		<div class="loading-spinner"></div>
+		<div id="loading-text">Loading...</div>
+	</div>
 	<div class="container-fluid login-container">
 		<div class="form-area">
 			<div class="title">
@@ -145,64 +194,65 @@
 				</div>
 				<!-- 測試用的  登入後顯示-->
 				<label id="userName" style="border: 1px,solid,black;"></label>
-				<form action="#">
-					<div style="margin-left: 5%;">
-						<h1 style="font-size: 64px; position: relative; left: 0;">登入</h1>
-						<div style="display: flex; flex-direction: column; justify-content: center;">
-							<div class="mb-3">
-								<label for="username" class="form-label" style="font-size: 24px;">帳號</label>
-								<input type="text" class="form-control" id="username" placeholder="請輸入帳號"
-									style="width: 60%;height: 19%;">
-							</div>
-							<div class="mb-3">
-								<label for="password" class="form-label" style="font-size: 24px;">密碼</label>
-								<input type="password" class="form-control" id="password" placeholder="請輸入密碼"
-									style="width: 60%;height: 19%;">
-							</div>
-							<div class="mb-3">
 
-								<a th:href="@{'/shop/' + ${shopId} + '/regist'}"
-									style=" color: #C1C1C1; font-size: 20px; text-decoration-line: none;">還未註冊</a><a
-									href=""
-									style="text-decoration-line: none; color: #C1C1C1; font-size: 20px; margin-left: 15%;">忘記密碼?</a>
-							</div>
-							<div class="mb-3">
-								<button id="getemail" type="submit" class="btn btn-primary"
-									style="width: 60%; height: 6%; background-color: #C31111;"><b>登入</b></button>
-							</div>
+				<div style="margin-left: 5%;">
+					<h1 style="font-size: 64px; position: relative; left: 0;">登入</h1>
+					<div style="display: flex; flex-direction: column; justify-content: center;">
+						<div class="mb-3">
+							<label for="username" class="form-label" style="font-size: 24px;">帳號</label>
+							<input type="text" class="form-control" id="username" placeholder="請輸入帳號"
+								style="width: 60%;height: 19%;">
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label" style="font-size: 24px;">密碼</label>
+							<input type="password" class="form-control" id="password" placeholder="請輸入密碼"
+								style="width: 60%;height: 19%;">
+						</div>
+						<div class="mb-3">
 
-							<div class="mb-3">
-								<button id="fb" class="btn btn-light"
-									style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
-									<img src="/firebaseTest/icon/facebook.png" class="iconImg"
-										style="width: 5%; height: 5%; vertical-align: middle;" />
-									<b>FB 登入</b>
-								</button>
-							</div>
-							<div class="mb-3">
-								<button id="google" class="btn btn-light"
-									style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
-									<img src="/firebaseTest/icon/icons8-google-48.png"
-										style="width: 5%; height: 5%; vertical-align: middle;" class="iconImg" />
-									<b>Google 登入</b>
-								</button>
-							</div>
+							<a th:href="@{'/shop/' + ${shopId} + '/regist'}"
+								style=" color: #C1C1C1; font-size: 20px; text-decoration-line: none;">還未註冊</a><a href=""
+								style="text-decoration-line: none; color: #C1C1C1; font-size: 20px; margin-left: 15%;">忘記密碼?</a>
+						</div>
+						<div class="mb-3">
+							<button id="getemail" type="submit" class="btn btn-primary"
+								style="width: 60%; height: 6%; background-color: #C31111;"><b>登入</b></button>
+						</div>
+
+						<div class="mb-3">
+							<button id="fb" class="btn btn-light"
+								style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
+								<img src="/firebaseTest/icon/facebook.png" class="iconImg"
+									style="width: 5%; height: 5%; vertical-align: middle;" />
+								<b>FB 登入</b>
+							</button>
+						</div>
+						<div class="mb-3">
+							<button id="google" class="btn btn-light"
+								style="width: 60%; height: 6%; position: relative; border: #C31111 1px solid;">
+								<img src="/firebaseTest/icon/icons8-google-48.png"
+									style="width: 5%; height: 5%; vertical-align: middle;" class="iconImg" />
+								<b>Google 登入</b>
+							</button>
 						</div>
 					</div>
+				</div>
 			</div>
-			</form>
+
 		</div>
 		<!-- 右側背景區 -->
 		<div class="image-area">
 		</div>
 	</div>
 
-	<script th:inline="javascript">
+	<script th:inline="javascript">		
 		document.addEventListener("DOMContentLoaded", function () {
 			returnMsg();
+			
 			document
 				.getElementById("google")
 				.addEventListener("click", function (event) {
+					localStorage.setItem("google", "google")	//紀錄一下去google					
 					event.preventDefault(); //防止按鈕被默認點出
 					const provider = new firebase.auth.GoogleAuthProvider();
 					firebase
@@ -220,18 +270,18 @@
 			$("#getemail").on("click", function () {
 				var email = $('#username').val();
 				var password = $('#password').val();
-				
+
 				firebase
 					.auth().
 					signInWithEmailAndPassword(email, password)
 					.then((userCredential) => {
 						// Signed in
 						var user = userCredential.user;
-						
+
 						// ...
 						if (user._delegate.emailVerified == true) {
 							emailUserInfo(user);
-							
+
 						} else {
 							alert("請完成信箱驗證")
 						}
@@ -241,6 +291,7 @@
 					.catch((error) => {
 						var errorCode = error.code;
 						var errorMessage = error.message;
+						
 						alert("帳號或密碼錯誤，請重新輸入")
 					});
 
@@ -264,6 +315,13 @@
 						var credential = error.credential;
 					});
 			})
+			if (!localStorage.getItem("google")) {
+				document.getElementById('loading-overlay').style.display = 'none';
+			}else{
+				setTimeout(function () {
+        		stopLoading()
+    			}, 5000);
+			}
 		});
 
 		// google導回後處理
@@ -290,8 +348,9 @@
 					var providerId = user._delegate.providerId
 					var loginMethod = user._delegate.providerData[0].providerId
 
+					mail = user._delegate.email
 
-					console.log(user)
+
 					getAuth(displayName, email, emailVerified, providerId, loginMethod);
 
 				}).catch((error) => {
@@ -310,7 +369,7 @@
 			var emailVerified = user._delegate.emailVerified
 			var providerId = user._delegate.providerId
 			var loginMethod = user._delegate.providerData[0].providerId
-
+			mail = user._delegate.email
 			getAuth(displayName, email, emailVerified, providerId, loginMethod);
 		}
 
@@ -329,28 +388,54 @@
 				loginMethod: loginMethod,
 				shopId: shopId
 			}
-			console.log(authData)
+
 			$.ajax({
 				url: '/getauth',
 				method: 'POST',
 				contentType: 'application/json; charset=UTF-8',
 				data: JSON.stringify(authData),
 				success: function (response) {
+					stopLoading()
 					if (response == 1) {
-						console.log(shopId)
-						window.location.href = "/shop/"+shopId+"/shopindex"
+
+						window.location.href = "/shop/" + shopId + "/shopindex"
 					} else if (response == 2) {
 						alert("請先通過信箱驗證")
+					} else if (response == 3) {
+						MemberDetail()
+
 					}
+					
 				},
 				error: function () {
 					console.log(JSON.stringify(authData))
+					stopLoading()
 				}
 
 			})
 		}
 
+		function MemberDetail() {
+			let shopId = /*[[${shopId}]]*/5;
+			$.ajax({
+				url: '/shop/' + shopId + '/memberDetail',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				success: function (response) {
+					document.documentElement.innerHTML = response
 
+				},
+				error: function (err) {
+					console.log(err)
+				}
+
+			})
+		}
+		//解除loding動畫
+		function stopLoading(){
+			document.getElementById('loading-overlay').style.display = 'none';
+			localStorage.removeItem("google")
+		}
 
 	</script>
 </body>

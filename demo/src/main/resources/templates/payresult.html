@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>付款結果通知</title>
+	<meta charset="UTF-8">
+	<title>付款結果通知</title>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
+
 <body>
-    
-    
-    <div id="paymentStatus"></div>
-    
-    <script  th:inline="javascript">
-		var jsonData = /*[[${jsonData}]]*/ '';	//取得後端傳送data
+
+
+	<div id="paymentStatus"></div>
+
+	<script th:inline="javascript">
+		var jsonData = /*[[${jsonData}]]*/ 'aaa';	//取得後端傳送data
 		var jsonObject = JSON.parse(jsonData);
-		console.log(jsonObject.RtnMsg);
-		
-        if(jsonObject.RtnMsg=="Succeeded"){
-            document.getElementById("paymentStatus").innerHTML="付款成功<br>訂單編號:"+jsonObject.MerchantTradeNo;
-        }else{
-            document.getElementById("paymentStatus").innerHTML="付款失敗<br>訂單編號:"+jsonObject.MerchantTradeNo;
-        }
-        		
+		var shopId = localStorage.getItem("shopId") || 404;
+		var authdata = localStorage.getItem("auth") || null;
+		console.log(jsonData);
+
+		if (jsonObject.RtnMsg == "Succeeded") {
+			document.getElementById("paymentStatus").innerHTML = "付款成功<br>訂單編號:" + jsonObject.MerchantTradeNo;
+			getauth(authdata);
+			$.ajax({
+				url: '/orderStateUpdate',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: jsonObject.MerchantTradeNo,
+				success: function (response) {
+					if (response == true) {
+						alert("付款成功")
+						window.location.href = "/shop/" + shopId + "/shopindex"
+
+					} else {
+						alert("付款失敗")
+						window.location.href = "/shop/" + shopId + "/shopindex"
+					}
+				},
+				error: function (err) {
+					alert("付款失敗")
+					window.location.href = "/shop/" + shopId + "/shopindex"
+				}
+
+			})
+		} else {
+			document.getElementById("paymentStatus").innerHTML = "付款失敗<br>訂單編號:" + jsonObject.MerchantTradeNo;
+			getauth(authdata);
+			alert("付款失敗")
+			window.location.href = "/shop/" + shopId + "/shopindex"
+
+		}
+		function getauth(authData) {
+			$.ajax({
+				url: '/getauth',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: authData,
+				success: function (response) {
+					if (response == 1) {
+						localStorage.removeItem("auth");
+						localStorage.removeItem("shopId");
+
+						window.location.href = "/shop/" + shopId + "/shopindex"
+					} else if (response == 2) {
+						alert("請先通過信箱驗證")
+					}
+				},
+				error: function () {
+					console.log(JSON.stringify(authData))
+				}
+
+			})
+		}
+
 	</script>
 </body>
+
 </html>

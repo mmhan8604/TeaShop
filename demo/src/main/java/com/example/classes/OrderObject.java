@@ -1,6 +1,7 @@
 package com.example.classes;
 
 public class OrderObject {
+	private String OrderId;
 	private String itemName;
 	private String totalAmount;
 	private String tradeTime;
@@ -23,5 +24,12 @@ public class OrderObject {
 	public void setTradeTime(String tradeTime) {
 		this.tradeTime = tradeTime;
 	}
+	public String getOrderId() {
+		return OrderId;
+	}
+	public void setOrderId(String orderId) {
+		OrderId = orderId;
+	}
+	
 	
 }

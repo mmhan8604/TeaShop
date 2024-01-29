@@ -19,11 +19,14 @@ import com.example.entity.Member;
 import com.example.entity.Orders;
 import com.example.service.OrderService;
 import com.example.utils.EcpayReturnConverter;
+import com.example.utils.Tools;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -98,8 +101,16 @@ public class OrderController {
 	}
 	
 	@PostMapping("/findAllOrder")
-	public List<Orders> findAllOrder () {
-		return orderService.findAllOrder();
+	public List<Orders> findAllOrder (HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		
+		return orderService.findAllOrder(shopid);
+	}
+	
+	@PostMapping("/orderStateUpdate")
+	public boolean orderStateUpdate (@RequestBody String OrderId) {
+		
+		return orderService.orderStateUpdate(OrderId);
 	}
 	
 }

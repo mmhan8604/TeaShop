@@ -325,9 +325,9 @@ input.qtyplus {
 }
 
 .memberRevisebutton{
-	background-color: rgb(187, 187, 186) !important;
+	background-color: rgb(235, 235, 235) !important;
 	height: 35px;
-	width: 35px;
+	width: 120px;
 	margin-right: 20px;
 }
 
@@ -335,6 +335,37 @@ input.qtyplus {
 	
 	width: 20px; 
 	height: 20px;
+}
+
+.memberReviseicon{
+	
+	height: 35px;
+	width: 120px; 
+}
+
+.cancelOrder{
+	border: none; 
+	background-color:#f7c6c7; 
+	color: red;
+}
+
+.cancelOrder:hover {
+	border: 1px solid black;
+}
+
+.checkOrder{
+	border: none; 
+	background-color:#dbdada; 
+	color: #7b7b7b;
+}
+
+.checkOrder:hover {
+	border: 1px solid black;
+}
+
+.img-fluid{
+	width: 100%;
+	height: 212px;
 }
 
 @media(max-width:1400px) {
@@ -447,5 +478,10 @@ input.qtyplus {
 		justify-content: center;
 		font-size: 0.9em;
 	}
+	
+	.img-fluid{
+	width: 100%;
+	height: auto;
+}
 
 }
