@@ -215,6 +215,37 @@ function ProductInfoqueryAll(choosepage) {
 
 	//修改商品POST
 	function editProduct() {
+
+		//	判斷錯誤跳錯誤訊息
+		if ($("#editProductID").val() === "") {
+			alert("請填寫商品編號");
+			return;
+		}
+		if ($("#editProductName").val() === "") {
+			alert("請填寫商品名稱");
+			return;
+		}
+		var quantity = parseInt($('#editProductQuantity').val());
+		if (isNaN(quantity) || quantity < 0) {
+			alert("庫存數量應為非負整數");
+			return;
+		}
+		var shelves = parseInt($('#editProductShelves').val());
+		if (isNaN(shelves) || shelves < 0) {
+			alert("上架數量應為非負整數");
+			return;
+		}
+		var price = parseFloat($('#editProductPrice').val());
+		if (isNaN(price) || price <= 0) {
+			alert("販售價格應為有效且大於零的數字");
+			return;
+		}
+		var cost = parseFloat($('#editProductCost').val());
+		if (isNaN(cost) || cost <= 0) {
+			alert("成本價格應為有效且大於零的數字");
+			return;
+		}
+
 		var productIdPOST = $('#editProductID').val();
 		var updatedData = productUpdateData();
 		console.log("畫面上的商品ID:" + productIdPOST);
