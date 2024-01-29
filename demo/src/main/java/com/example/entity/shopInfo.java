@@ -2,6 +2,8 @@ package com.example.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 public class shopInfo {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 
@@ -48,11 +51,9 @@ public class shopInfo {
 	private String deli_cod;
 	private String deli_refri;
 	
+	private String shopNav;
 	
-
-
-
-	@Column(columnDefinition = "BLOB")
+	@Column( columnDefinition = "LONGBLOB")
 	@Lob
 	private byte[] frontStage;
 
@@ -249,6 +250,17 @@ public class shopInfo {
 	public void setDeli_refri(String deli_refri) {
 		this.deli_refri = deli_refri;
 	}
+	
+	public String getShopNav() {
+		return shopNav;
+	}
+
+
+
+	public void setShopNav(String shopNav) {
+		this.shopNav = shopNav;
+	}
+
 	
 
 

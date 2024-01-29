@@ -31,8 +31,8 @@ public class MemberService {
     }
     
     //獲取所有會員及其總消費:
-    public List<Object[]> getAllMembersWithTotalSpent() {
-        return memberRepository.findAllMembersWithTotalSpent();
+    public List<Object[]> getAllMembersWithTotalSpent(String shopId) {
+        return memberRepository.findAllMembersWithTotalSpent(shopId);
     }
 
 }

@@ -1,5 +1,52 @@
 let whichTd;
+	
+	
+	
+	
+	async function updateLogistics(){
+		 let data={
+            "isp_cod":"",
+            "isp_ref":"",
+             "del_cod":"",
+             "del_ref":""
 
+           }
+		
+		let table=document.getElementById("beweite");
+		let tr=table.getElementsByTagName("tr");
+		for(let i=0;i<tr.length;i++){
+			if(tr[i].getElementsByTagName("td")[0].innerHTML=="賣家宅配"&&tr[i].getElementsByTagName("td")[1].innerHTML=="一般宅配"){
+				data.del_cod=tr[i].getElementsByTagName("td")[3].innerHTML
+			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="賣家宅配"&&tr[i].getElementsByTagName("td")[1].innerHTML=="冷藏宅配"){
+				data.del_ref=tr[i].getElementsByTagName("td")[3].innerHTML
+			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="超商店到店"&&tr[i].getElementsByTagName("td")[1].innerHTML=="一般宅配"){
+				data.isp_cod=tr[i].getElementsByTagName("td")[3].innerHTML
+			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="超商店到店"&&tr[i].getElementsByTagName("td")[1].innerHTML=="冷藏宅配"){
+				data.isp_ref=tr[i].getElementsByTagName("td")[3].innerHTML
+			}
+		}
+		
+		try{
+			let res=await $.ajax({
+				type:"POST",
+            	url:"/logisticsSet/update",
+            	 data:JSON.stringify(data),
+        		contentType: "application/json"
+            	
+			})
+			
+			if(res=="ok"){alert("上傳成功")}else{alert("上傳失敗")};
+			
+		}catch{
+			alert("上傳失敗")
+		}
+	}
+	
+	function updateLogisticsBTN(){
+		document.getElementById("upload").removeEventListener("click");
+		document.getElementById("upload").addEventListener("click",updateLogistics());
+	}
+	
       async function getLogisticsData(){
         try {
           let res= await $.ajax({

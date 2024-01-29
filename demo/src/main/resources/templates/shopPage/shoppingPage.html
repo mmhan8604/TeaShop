@@ -7,28 +7,28 @@
 	<!--==CSS========================-->
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" href="/frontstage/css/nav.css">
-	<link rel="stylesheet" href="/frontstage/css/dingcha.css">
 	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
+	<link rel="stylesheet" href="/frontstage/css/dingcha.css">
 	<script th:inline="javascript">
-        /*<![CDATA[*/
-        var shopId = /*[[${shopId}]]*/ null;
-        var auth = /*[[${auth}]]*/null;
-        var logInuserName=/*[[${userName}]]*/null;
-        var logInorNot = logInuserName!=null;
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var auth = /*[[${auth}]]*/null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
         /*]]>*/
-    </script>
+	</script>
 	<script src="/frontstage/_js/popper.min.js"></script>
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<!-- sever傳遞參數 -->
 	<script th:inline="javascript">
-        /*<![CDATA[*/
-        var shopId = /*[[${shopId}]]*/ null;
-        var logInuserName=/*[[${userName}]]*/null;
-        var logInorNot = logInuserName!=null;
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
         /*]]>*/
-    </script>
+	</script>
 	<script src="/frontstage/js/query.js"></script>
 	<script src="/frontstage/js/main.js" defer></script>
 	<script src="/frontstage/js/logOut.js"></script>
@@ -41,7 +41,7 @@
 <body>
 
 	<!--nav導覽列頭-->
-		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
+	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
 		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
 			<!-- Logo、官網名，連結首頁 -->
 			<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
@@ -78,9 +78,10 @@
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">登出</a></li>
-						
+
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -91,7 +92,8 @@
 									style="height: 20px;width: auto;">登入</a></li>
 
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -103,7 +105,7 @@
 			</div>
 		</div>
 	</nav>
-		<!--nav導覽列尾------------------- -->
+	<!--nav導覽列尾 -->
 	<!-- 主要畫面 --> <!--修改左右margin-->
 	<div id="site" class="siteH1">
 
@@ -112,298 +114,6 @@
 			<h1 class="mb h1exceptMember">所有商品</h1>
 
 			<div class="row" id="cardSpace">
-				<!-- 第一排的四個產品 -->
-				<!-- 荔枝紅茶產品圖片 -->
-				<div class="col-md-3 rounded">
-					<a href="product01.html">
-						<div class="card mb-3 shopping01Card" style="border-color:#b9b8b8 ;">
-							<div class="product-image">
-
-								<img src="/frontstage/product/新增資料夾/blacktea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-
-								<!-- 荔枝紅茶產品圖片的購物車icon -->
-								<a>
-									<button href="#" type="button" class="shopping-cart-icon m-0 "
-										data-bs-toggle="modal" data-bs-target="#product01Modal">
-										<img src="/frontstage/icon/white/cart.png" alt="荔枝紅茶加入購物車" class="shoppingProducticon">
-									</button>
-									<!-- modal-header標題：荔枝紅茶 -->
-									<div class="modal fade" id="product01Modal" tabindex="-1"
-										aria-labelledby="blackteaModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered"
-											style="display: flex;justify-content: center;">
-											<div class="modal-content w-75">
-												<div class="modal-header">
-													<h5 class="modal-title flex-grow-1 text-center m-2"
-														id="blackteaModalLabel">荔枝紅茶</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
-												</div>
-												<!-- modal-body：價格及下拉選單 -->
-												<div class="modal-body">
-													<form id="myform" method="POST" action="#">
-														<p class="card-text text-end product-price">$500</p>
-														<select class="form-select qty qty-blacktea"
-															aria-label="Default select example" id="myform">
-															<option selected>1</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</select>
-													</form>
-												</div>
-												<!-- modal-footer：加入購物車、立即購買 -->
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-secondary add-to-cart"
-														data-name="荔枝紅茶" data-price="500"
-														data-image="/frontstage/product/新增資料夾/blacktea-3.png"
-														data-bs-dismiss="modal">加入購物車</button>
-													<button type="button" class="btn btn-primary">立即購買</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="card-body shopping01Cardbody rounded-bottom">
-
-								<h4 class="card-title">荔枝紅茶</h4>
-								<p class="card-text product-price">$500</p>
-
-							</div>
-						</div>
-					</a>
-				</div>
-
-
-
-				<div class="col-md-3 rounded">
-					<a href="product02.html">
-						<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-							<div class="product-image">
-
-								<img src="/frontstage/product/新增資料夾/greentea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-								<a>
-									<button href="#" type="button" class="shopping-cart-icon m-0 "
-										data-bs-toggle="modal" data-bs-target="#product02Modal">
-										<img src="/frontstage/icon/white/cart.png" alt="八爪綠茶加入購物車" class="shoppingProducticon">
-									</button>
-									<!-- modal-header標題：八爪綠茶 -->
-									<div class="modal fade" id="product02Modal" tabindex="-1"
-										aria-labelledby="greenteaModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered"
-											style="display: flex;justify-content: center;">
-											<div class="modal-content w-75">
-												<div class="modal-header">
-													<h5 class="modal-title flex-grow-1 text-center m-2"
-														id="greenteaModalLabel">八爪綠茶</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
-												</div>
-												<!-- modal-body：價格及下拉選單 -->
-												<div class="modal-body cart-full-quantity">
-													<form id="myform" method="POST" action="#">
-														<p class="card-text text-end product-price">$600</p>
-														<select class="form-select qty qty-greentea"
-															aria-label="Default select example" id="myform">
-															<option selected>1</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</select>
-													</form>
-												</div>
-												<!-- modal-footer：加入購物車、立即購買 -->
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-secondary add-to-cart"
-														data-name="八爪綠茶" data-price="600"
-														data-image="/frontstage/product/新增資料夾/greentea-3.png"
-														data-bs-dismiss="modal">加入購物車</button>
-													<button type="button" class="btn btn-primary">立即購買</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="card-body shopping01Cardbody rounded-bottom">
-								<h4 class="card-title">八爪綠茶</h4>
-								<p class="card-text product-price">$600</p>
-
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-md-3 rounded">
-					<a href="product03.html">
-						<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-							<div class="product-image">
-
-								<img src="/frontstage/product/新增資料夾/oolongtea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-								<a>
-									<button href="#" type="button" class="shopping-cart-icon m-0 "
-										data-bs-toggle="modal" data-bs-target="#product03Modal">
-										<img src="/frontstage/icon/white/cart.png" alt="凍頂烏龍加入購物車" class="shoppingProducticon">
-									</button>
-									<!-- modal-header標題：八爪綠茶 -->
-									<div class="modal fade" id="product03Modal" tabindex="-1"
-										aria-labelledby="oolongteaModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered"
-											style="display: flex;justify-content: center;">
-											<div class="modal-content w-75">
-												<div class="modal-header">
-													<h5 class="modal-title flex-grow-1 text-center m-2"
-														id="oolongteaModalLabel">凍頂烏龍</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
-												</div>
-												<!-- modal-body：價格及下拉選單 -->
-												<div class="modal-body cart-full-quantity">
-													<form id="myform" method="POST" action="#">
-														<p class="card-text text-end product-price">$500</p>
-														<select class="form-select qty qty-oolongtea"
-															aria-label="Default select example" id="myform">
-															<option selected>1</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</select>
-													</form>
-												</div>
-												<!-- modal-footer：加入購物車、立即購買 -->
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-secondary add-to-cart"
-														data-name="凍頂烏龍" data-price="500"
-														data-image="/frontstage/product/新增資料夾/oolongtea-3.png"
-														data-bs-dismiss="modal">加入購物車</button>
-													<button type="button" class="btn btn-primary">立即購買</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="card-body shopping01Cardbody rounded-bottom">
-								<h4 class="card-title">凍頂烏龍</h4>
-								<p class="card-text product-price">$500</p>
-
-							</div>
-						</div>
-					</a>
-				</div>
-
-
-				<div class="col-md-3 rounded">
-					<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-						<div class="product-image">
-
-							<img src="/frontstage/product/新增資料夾/tieguanyin-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-							<a href="" class="shopping-cart-icon">
-								<img src="/frontstage/icon/white/cart.png" alt="商品1購物車" class="shoppingProducticon">
-							</a>
-						</div>
-						<div class="card-body shopping01Cardbody rounded-bottom">
-							<h4 class="card-title">木柵鐵觀音</h4>
-							<p class="card-text product-price">$600</p>
-
-						</div>
-					</div>
-				</div>
-
-				<!-- 第二排的四個產品 -->
-				<div class="col-md-3 rounded">
-					<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-						<div class="product-image">
-
-							<img src="/frontstage/product/新增資料夾/fourseasonsspringtea-3.png" alt="商品圖片1"
-								class="img-fluid rounded-top">
-							<a href="" class="shopping-cart-icon">
-								<img src="/frontstage/icon/white/cart.png" alt="商品1購物車" class="shoppingProducticon">
-							</a>
-						</div>
-						<div class="card-body shopping01Cardbody rounded-bottom">
-							<h4 class="card-title">荔枝紅茶</h4>
-							<p class="card-text product-price">$500</p>
-
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-3 rounded">
-					<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-						<div class="product-image">
-
-							<img src="/frontstage/product/新增資料夾/whiletea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-							<a href="" class="shopping-cart-icon">
-								<img src="/frontstage/icon/white/cart.png" alt="商品1購物車" class="shoppingProducticon">
-							</a>
-						</div>
-						<div class="card-body shopping01Cardbody rounded-bottom">
-							<h4 class="card-title">八爪綠茶</h4>
-							<p class="card-text product-price">$600</p>
-
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-3 rounded ">
-					<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-						<div class="product-image">
-
-							<img src="/frontstage/product/新增資料夾/honeyblacktea-3.png " alt="商品圖片1" class="img-fluid rounded-top">
-							<a href="" class="shopping-cart-icon">
-								<img src="/frontstage/icon/white/cart.png" alt="商品1購物車" class="shoppingProducticon">
-							</a>
-						</div>
-						<div class="card-body shopping01Cardbody rounded-bottom">
-							<h4 class="card-title">凍頂烏龍</h4>
-							<p class="card-text product-price">$500</p>
-
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-3 rounded">
-					<div class="card mb-3 shopping01Card " style="border-color:#b9b8b8 ;">
-						<div class="product-image">
-
-							<img src="/frontstage/product/新增資料夾/puertea-3.png" alt="商品圖片1" class="img-fluid rounded-top">
-							<a href="" class="shopping-cart-icon">
-								<img src="/frontstage/icon/white/cart.png" alt="商品1購物車" class="shoppingProducticon">
-							</a>
-						</div>
-						<div class="card-body shopping01Cardbody rounded-bottom">
-							<h4 class="card-title">木柵鐵觀音</h4>
-							<p class="card-text product-price">$600</p>
-
-						</div>
-					</div>
-				</div>
 
 			</div>
 

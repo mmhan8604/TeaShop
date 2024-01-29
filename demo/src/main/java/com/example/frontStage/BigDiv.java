@@ -2,6 +2,7 @@ package com.example.frontStage;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class BigDiv implements Serializable{
 	/**
@@ -9,37 +10,46 @@ public class BigDiv implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int style;
+	private String templateType;
 	
-	private LinkedList<Webelement> webElements;
+	private LinkedList<Map<String, String>> webElements;
 	
-	public BigDiv(Webelement...webelements){
-		webElements=new LinkedList<Webelement>();
-		for(Webelement we:webelements) {
-			this.webElements.add(we);
-		}
-		style=webelements.length;
-	}
+//	@SafeVarargs
+//	public BigDiv(Map<String, String>...webelements){
+//		
+//		webElements=new LinkedList<Map<String, String>>();
+//		for(Map<String, String> we:webelements) {
+//			this.webElements.add(we);
+//		}
+////		style=webelements.length;
+//	}
 	
-	public BigDiv(LinkedList<Webelement> webelements) {
-		this.webElements=webelements;
-		style=webelements.size();
+//	public BigDiv(LinkedList<Map<String, String>> webelements) {
+//		this.webElements=webelements;
+////		style=webelements.size();
+//	}
+//	
+	public BigDiv(String templateType,LinkedList<Map<String, String>> webElements) {
+		this.templateType=templateType;
+		this.webElements=webElements;
 	}
 
-	public int getStyle() {
-		return style;
-	}
+	
 
-	public void setStyle(int style) {
-		this.style = style;
-	}
-
-	public LinkedList<Webelement> getWebElements() {
+	public LinkedList<Map<String, String>> getWebElements() {
 		return webElements;
 	}
 
-	public void setWebElements(LinkedList<Webelement> webElements) {
+	public void setWebElements(LinkedList<Map<String, String>> webElements) {
 		this.webElements = webElements;
+	}
+
+	public String getTemplateType() {
+		return templateType;
+	}
+
+	public void setTemplateType(String templateType) {
+		this.templateType = templateType;
 	}
 	
 

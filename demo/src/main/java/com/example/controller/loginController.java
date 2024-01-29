@@ -37,12 +37,14 @@ public class loginController {
 		JSONObject jo=new JSONObject(data);
 		
 		
-				
-		int state= ls.checkAccount(jo.get("email").toString(),jo.get("password").toString());
+			
+		int state= ls.checkAccount(jo.get("account").toString(),jo.get("password").toString());
 		
 		if(state==0) {
 			
 			session.setAttribute("email", jo.get("account").toString());
+			session.setAttribute("backShopId",ls.getShopId(jo.get("account").toString()));
+				
 			return "login_success";
 		} else {
 			return "login_failed";

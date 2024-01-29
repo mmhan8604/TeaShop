@@ -4,6 +4,8 @@ let bigBlockNum;  //全域 1~4 跟上面一樣
 let GridBlock;    //全域  LayOut小區塊 型態為 block2-1-1 (塞入小區塊判定)
 let subblock;    //全域  6種樣式切法 0~5 目前拿來做唯一block0~5的ID
 
+let grid_test="block0-1";
+
 // 編輯器全域變數 (Bar通用變數)
 // 動態id//
 let block = 1;//區塊，從1-4，共4個區塊
@@ -205,25 +207,67 @@ const bigBlockPointer=(pointer,subBlockPointer)=>(event)=>{
   
 }
 
-const gridPointer=()=>(event)=>{
+const gridPointer=(id)=>(event)=>{
   
-  GridBlock= event.target.id
- 
+  GridBlock= id;
+  grid_test=id.substr(6);
+  
 }
 
 const gridPointer_1_5=(id)=>(event)=>{
   
   GridBlock= id
-  console.log("g-pointer"+GridBlock)
-  
+  grid_test=id.substr(6);
   
   
 }
 
-function LoadLayout(divtype, divBlock) {
+async function getNavInfo(){
+  let data={}
+  data["fontStyle"]= document.getElementById("fontSelector").value
+  data["navStyle"]="1"? document.getElementById("nav1").checked:document.getElementById("nav2").checked
+  data["navBackround"]= document.getElementById("colorPicker1").value
+  data["navFontColor"]= document.getElementById("colorPicker2").value
+  data["nacIconColor"]= document.getElementById("colorPicker3").value
+  data["footerStyle"]="1"? document.getElementById("nav3").checked:document.getElementById("nav4").checked
+  data["footerBackround"]= document.getElementById("colorPicker4").value
+  data["footerFontColor"]= document.getElementById("colorPicker5").value
+  sessionStorage.setItem("navInfo",JSON.stringify(data))
+  try {
+    let response = await $.ajax({
+      url: "/FrontStageSet/update/nav",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(data)
+    });
+    
+    if (response === "ok") {
+		sessionStorage.setItem("navUpload","true");
+      return 0
+  } else {
+      return 1
+  }
+    
+  } catch (error) {
+    return 2
+  }
+  
+}
+async function LoadLayout(divtype, divBlock) {
     bigBlockNum = divBlock.match(/\d+/)[0]; // 使用正則表示法提取數字丟置全域
     bigBlock = divBlock; //提取數字丟置全域
     subblock = divtype; //提取數字丟置全域
+    if(sessionStorage.getItem("navUpload")!="true"){
+		let check= await getNavInfo();
+		if(check>0){
+      	
+      return
+    }
+	}
+    
+    
+    
+    
     $("#view-" + bigBlockNum).load(
         `backstage/websource/layType/block${divtype}.html`, () => {
           
@@ -233,14 +277,14 @@ function LoadLayout(divtype, divBlock) {
           if(divtype==0){
             document.getElementById(`view-${bigBlockNum}`).getElementsByClassName("container")[0].id=`view-${bigBlockNum}`+document.getElementById(`view-${bigBlockNum}`).getElementsByClassName("container")[0].id
             document.getElementById(`view-${bigBlockNum}`).getElementsByClassName("container")[0].addEventListener("mousedown",
-            gridPointer())
+            gridPointer( document.getElementById(`view-${bigBlockNum}`).getElementsByClassName("container")[0].id))
           }else{
             let gridEles= document.getElementById(`view-${bigBlockNum}`).getElementsByClassName("gridblock")
-            console.log(gridEles)
+            
             
             for (let i=0;i<gridEles.length;i++) {
               gridEles[i].id=`view-${bigBlockNum}`+gridEles[i].id
-              console.log(gridEles[i].id)
+              
               gridEles[i].addEventListener("mousedown",gridPointer_1_5(gridEles[i].id))
             }
             
@@ -263,12 +307,12 @@ function getOnclick(element){
 function cardBar(onlyid) {
   
   //  console.log(getOnclick(event))
-  //  debugger
+  
     // 塞入相關全域變數 onlyid
     $("#bar").load("backstage/websource/eleBar/elementBarcard.html", function () {
         // 在 elementBarImg.html 載入後執行
         // console.log(bigBlock, subblock, onlyid, GridBlock)
-        // debugger
+        
         // alert("card")
         console.log(bigBlock, subblock, onlyid, GridBlock)
         
@@ -311,7 +355,7 @@ function textbar(onlyid) {
         // 在 elementBarImg.html 載入後執行
         updateTextBlock(bigBlock, subblock, onlyid, GridBlock); //最後一個為該小區塊id
         console.log("成功置換textbar");
-        // debugger
+        
     });
 }
 
@@ -327,7 +371,7 @@ function videoBar(onlyid) {
 // Element的方法(呼叫右邊預覽圖)
 // 輪播圖樣式
 // -------------------------------------------------
-function carouselElement(event,id, littleBlock) {
+ function carouselElement(event,id, littleBlock,callback) {
   let barEvent=event.currentTarget.getAttribute("onclick").split(";")[0]
     let viewid = id + bigBlockNum; // 變成view-1~4
     // 如果有填入第二個參數 及為有多個layout在這個view區塊中
@@ -343,8 +387,12 @@ function carouselElement(event,id, littleBlock) {
       ()=>{eval(barEvent)}
       
       )
-      
+      if(typeof callback === 'function'){
+        callback();
+      }
     });
+
+    
     
     console.log("將元件置入區塊" + viewid);
 }
@@ -357,7 +405,7 @@ function textElement1(event,id, littleBlock) {
     // GridBlock = littleBlock;
     viewid = viewid + " " + "#" +"view-"+bigBlockNum+ littleBlock;
     console.log("textElement1" + GridBlock);
-
+    
     $(`#${viewid} `).load("backstage/websource/eleType/TextElement01.html",()=>{
       
       
@@ -375,7 +423,10 @@ function textElement2(event,id, littleBlock) {
     let viewid = id + bigBlockNum; //拿取目前區塊的id從全域變數拿
     // GridBlock = littleBlock;
     viewid = viewid + " " + "#" +"view-"+bigBlockNum+ littleBlock;
-
+    console.log("textElement2" + GridBlock);
+    
+    console.log(viewid)
+    
     $(`#${viewid} `).load("backstage/websource/eleType/TextElement02.html",()=>{
       
       
@@ -481,7 +532,7 @@ function cardElement06(event,id, littleBlock) {
     $(`#${viewid} `).load("backstage/websource/eleType/CardElement06.html",()=>{
       
       
-      document.getElementById(`${"view-"+bigBlockNum+ littleBlock}`).getElementsByClassName("child")[0].addEventListener("click",
+      document.getElementById(`${littleBlock}`).getElementsByClassName("child")[0].addEventListener("click",
       ()=>{eval(barEvent)}
       
       )
@@ -497,7 +548,7 @@ function cardElement07(event,id, littleBlock) {
     $(`#${viewid} `).load("backstage/websource/eleType/CardElement07.html",()=>{
       
       
-      document.getElementById(`${"view-"+bigBlockNum+ littleBlock}`).getElementsByClassName("child")[0].addEventListener("click",
+      document.getElementById(`${littleBlock}`).getElementsByClassName("child")[0].addEventListener("click",
       ()=>{eval(barEvent)}
       
       )
@@ -613,6 +664,7 @@ function productElement(event,id, littleBlock) {
     let viewid = id + bigBlockNum; //拿取目前區塊的id從全域變數拿  GridBlock = littleBlock;
     // GridBlock = littleBlock;
     viewid = viewid + " " + "#" +"view-"+bigBlockNum+ littleBlock;
+    
     $(`#${viewid} `).load("backstage/websource/eleType/ProductElement01.html",()=>{
       
       
@@ -623,13 +675,15 @@ function productElement(event,id, littleBlock) {
       
     });
     console.log("將元件置入區塊" + viewid);
-    // debugger
+    
 }
 function productElement2(event,id, littleBlock) {
   let barEvent=event.currentTarget.getAttribute("onclick").split(";")[0]
     let viewid = id + bigBlockNum; //拿取目前區塊的id從全域變數拿  GridBlock = littleBlock;
     viewid = viewid + " " + "#" +"view-"+bigBlockNum+ littleBlock;
     // GridBlock = littleBlock;
+    console.log(grid_test)
+    
     $(`#${viewid} `).load("backstage/websource/eleType/ProductElement02.html",()=>{
       
       

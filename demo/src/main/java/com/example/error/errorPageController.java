@@ -9,7 +9,7 @@ import com.example.aop.loginException;
 public class errorPageController {
 	@ExceptionHandler(loginException.class)
 	String loginError(loginException ex) {
-		return "loginError";
+		return "/backstage/mainLogin";
 	}
 
 }

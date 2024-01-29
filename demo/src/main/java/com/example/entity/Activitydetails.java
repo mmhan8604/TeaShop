@@ -15,12 +15,12 @@ import jakarta.persistence.Table;
 @IdClass(Activitydetails.ActivityDetailsId.class)
 public class Activitydetails implements Serializable {
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ProductsID")
     private Products products;
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ActivitysID")
     private Activitys activitys;
 

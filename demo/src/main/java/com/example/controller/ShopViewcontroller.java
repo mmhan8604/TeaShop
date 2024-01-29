@@ -1,5 +1,7 @@
 package com.example.controller;
 
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
 import com.example.entity.Orders;
 import com.example.entity.Products;
+import com.example.interf.ShopIndexService;
 import com.example.service.FrontloginService;
 import com.example.service.MCFOservice;
 import com.example.service.OrderService;
@@ -40,6 +43,9 @@ public class ShopViewcontroller {
 	
 	@Autowired
     OrderService orderService;
+	@Autowired
+	ShopIndexService sis;
+
 	
 	
 	
@@ -98,7 +104,7 @@ public class ShopViewcontroller {
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
 		model.addAttribute("productDiscription", product.getDiscription());
-		model.addAttribute("imgSrc",product.getPicJSON());
+		model.addAttribute("imgSrc",product.getPicjson());
 		return "/shopPage/product";		//商品頁	
 	}
 	
@@ -183,6 +189,33 @@ public class ShopViewcontroller {
 		
 		return "/shopPage/orderHistory.html";		//訂單紀錄		
 	}
+	
+
+	
+	@GetMapping("/shopPage/{shopid}")
+	public String index(HttpSession session, Model model,@PathVariable Integer shopid) {
+//		 FrontLoginClasses loginInfo = (FrontLoginClasses)session.getAttribute("authObject");
+//		    
+//		    setAllLoginInfo(loginInfo, model, shopid);
+		
+		HashMap<String, Object> styleInfo=sis.getStyle(shopid);
+		
+		HashMap<String, List> data=sis.createBigDivHTML(shopid);
+		model.addAttribute("fullView",(List<List<String>>) data.get("htmls"));
+//		model.addAttribute("auth",loginInfo);
+//		model.addAttribute("memberId",loginInfo.getMemberId());
+		System.out.println("nav");
+		System.out.println(styleInfo.get("nav"));
+		model.addAttribute("nav", styleInfo.get("nav"));
+//		model.addAttribute("fullView", styleInfo.get("fullView"));
+		model.addAllAttributes(data);
+		return"shopPage/customize.html";
+	
+}
+	
+	
+	
+	
 	
 
 	

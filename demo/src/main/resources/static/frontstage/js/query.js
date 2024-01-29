@@ -13,7 +13,7 @@ function queryProduct() {
 	var price;
 
 	var productslist;
-	fetch('/queryProduct', {
+	fetch('/frontqueryProduct', {
 		method: 'POST',
 		body: shopId
 	})
@@ -30,7 +30,7 @@ function queryProduct() {
 		for (i = 0; i < length; i++) {
 			name = productslist[i].name
 			id = productslist[i].id;
-			pimg = productslist[i].picJSON;
+			pimg = productslist[i].picjson;
 			productName = productslist[i].name;
 
 			price = productslist[i].price;
@@ -64,8 +64,8 @@ function queryProduct() {
                                     <p class="card-text text-end product-price">${price}</p>
                                     <select class="form-select qty qty-greentea"
                                         aria-label="Default select example" id="myform">
-                                        <option selected>1</option>
-                                        <option value="1">1</option>
+                                        
+                                        <option value="1" selected>1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
