@@ -184,8 +184,9 @@ public class ShopViewcontroller {
 //		model.addAttribute("memberId",loginInfo.getMemberId());
 		System.out.println("nav");
 		System.out.println(styleInfo.get("nav"));
+		 
 		model.addAttribute("nav", styleInfo.get("nav"));
-//		model.addAttribute("fullView", styleInfo.get("fullView"));
+
 		model.addAllAttributes(data);
 		return"shopPage/customize.html";
 	
