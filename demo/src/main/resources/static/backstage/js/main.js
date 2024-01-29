@@ -258,7 +258,7 @@ async function LoadLayout(divtype, divBlock) {
     bigBlockNum = divBlock.match(/\d+/)[0]; // 使用正則表示法提取數字丟置全域
     bigBlock = divBlock; //提取數字丟置全域
     subblock = divtype; //提取數字丟置全域
-    alert(sessionStorage.getItem("navUpload"));
+    
     
    
     
