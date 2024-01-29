@@ -1,6 +1,8 @@
 package com.example.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +111,35 @@ public class ActivityService {
 	public List<Products> queryProducts(String shopId) {
 		return productsResposity.findByShopIdOrderByNameAsc(shopId);	
 	}
+	
+	//依產品id查折扣
+	public Map<String, Double> queryDiscount(String productId) {
+		List<Activitydetails> activitydiscountlist = activityDetailsRepository.findByProductsId(productId);
+		Map<String, Double> discountsMap = new HashMap<>();
+	
+		for (Activitydetails activitydiscount : activitydiscountlist) {
+            double discount = activitydiscount.getDiscount();
+            String productName = activitydiscount.getProducts().getName();
+            
+            discountsMap.compute(productName, (key, existingDiscount) -> {
+                if (existingDiscount == null || discount < existingDiscount) {
+                    // 如果現有的 discount 為空或新的 discount 更小，則更新為新的 discount
+                    return discount;
+                } else {
+                    // 否則保留原有的 discount
+                    return existingDiscount;
+                }
+            });
+            
+           
+        }
+		return discountsMap;
+	}
+	
+	//查產品折扣
+	public List<Object[]> findProductsAndMinDiscountsByShopId(String shopId) {
+        return productsResposity.findProductsAndMinDiscountsByShopId(shopId);
+    }
 
 	
 }

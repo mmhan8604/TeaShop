@@ -1,8 +1,11 @@
 package com.example.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.entity.Products;
 
@@ -12,4 +15,13 @@ public interface ProductsResposity extends JpaRepository<Products, String>{
 	// 按照 id 升序排序
     List<Products> findAllByOrderByNameAsc();
     List<Products> findByShopIdOrderByNameAsc(String shopId);
+    
+    @Query("SELECT p FROM Products p LEFT JOIN FETCH p.discounts WHERE p.id = :productId")
+    Products findProductWithDiscounts(String productId);
+    
+    @Query("SELECT p, MIN(ad.discount) FROM Products p " +
+            "LEFT JOIN p.discounts ad " +
+            "WHERE p.shopId = :shopId " +
+            "GROUP BY p.id")
+     List<Object[]> findProductsAndMinDiscountsByShopId(@Param("shopId") String shopId);
 }

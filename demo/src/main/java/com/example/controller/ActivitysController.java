@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -25,6 +27,7 @@ import jakarta.servlet.http.HttpSession;
 public class ActivitysController {
 	@Autowired
 	private ActivityService activityService;
+
 
 	//查全部活動
 	@PostMapping("/queryActivitys")
@@ -84,6 +87,22 @@ public class ActivitysController {
 	public List<Products> findProducts(@RequestBody String shopId,HttpSession session) {
 		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
 		return activityService.queryProducts(shopid);
+	}
+	
+	//依產品id查折扣
+	@GetMapping("/queryDiscount/{productId}")
+	public Map<String, Double> queryActivitys(@PathVariable String productId) {
+		System.out.println("查產品" + productId);
+		return activityService.queryDiscount(productId);
+
+	}
+	
+	//查產品折扣
+	@PostMapping("/queryProductdiscount")
+	public List<Object[]> queryProductdiscount(@RequestBody String shopId) {
+		//String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+		//System.out.println("查詢全部" + shopid);
+		return activityService.findProductsAndMinDiscountsByShopId(shopId);
 	}
 
 
