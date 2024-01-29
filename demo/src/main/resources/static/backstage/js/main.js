@@ -225,11 +225,11 @@ const gridPointer_1_5=(id)=>(event)=>{
 async function getNavInfo(){
   let data={}
   data["fontStyle"]= document.getElementById("fontSelector").value
-  data["navStyle"]="1"? document.getElementById("nav1").checked:document.getElementById("nav2").checked
+  data["navStyle"]="1"? document.getElementById("nav1").checked:"2"
   data["navBackround"]= document.getElementById("colorPicker1").value
   data["navFontColor"]= document.getElementById("colorPicker2").value
   data["nacIconColor"]= document.getElementById("colorPicker3").value
-  data["footerStyle"]="1"? document.getElementById("nav3").checked:document.getElementById("nav4").checked
+  data["footerStyle"]="1"? document.getElementById("nav3").checked:"2"
   data["footerBackround"]= document.getElementById("colorPicker4").value
   data["footerFontColor"]= document.getElementById("colorPicker5").value
   sessionStorage.setItem("navInfo",JSON.stringify(data))
@@ -243,6 +243,7 @@ async function getNavInfo(){
     
     if (response === "ok") {
 		sessionStorage.setItem("navUpload","true");
+		alert("ok")
       return 0
   } else {
       return 1
@@ -257,15 +258,9 @@ async function LoadLayout(divtype, divBlock) {
     bigBlockNum = divBlock.match(/\d+/)[0]; // 使用正則表示法提取數字丟置全域
     bigBlock = divBlock; //提取數字丟置全域
     subblock = divtype; //提取數字丟置全域
-    if(sessionStorage.getItem("navUpload")!="true"){
-		let check= await getNavInfo();
-		if(check>0){
-      	
-      return
-    }
-	}
     
     
+   
     
     
     $("#view-" + bigBlockNum).load(

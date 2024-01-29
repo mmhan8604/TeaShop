@@ -38,9 +38,9 @@ function updateOrderDetailsForm(orderDetails) {
 		var row = `<tr>
                     <td>#${index + 1}</td>
                     <td>${detail.product.id}</td>
-                    <td><img src="${detail.product.picJSON}" alt="${detail.product.name}" style="width: 50px; height: 50px;"></td>
+                    <td><img src="${detail.product.picjson}" alt="${detail.product.name}" style="width: 50px; height: 50px;"></td>
                     <td>${detail.product.name}</td>
-                    <td>規格</td>
+                    
                     <td>${detail.quantity}</td>
                     <td>${detail.price}</td>
                     <td>${detail.amount}</td>
@@ -53,8 +53,8 @@ function updateOrderDetailsForm(orderDetails) {
 	// 更新tfoot的總計
 	var tfoot = $('#EditOrdersTable tfoot tr');
 	tfoot.find('td:eq(1)').text(`總品項: ${orderDetails.details.length}`);
-	tfoot.find('td:eq(3)').text(`總件數: ${totalQuantity}`);
-	tfoot.find('td:eq(5)').text(`總金額: ${totalPrice}`);
+	tfoot.find('td:eq(2)').text(`總件數: ${totalQuantity}`);
+	tfoot.find('td:eq(3)').text(`總金額: ${totalPrice}`);
 }
 
 
@@ -125,7 +125,7 @@ function queryAllOrderInfo(choosepage) {
         <td>${omount}</td>
         <td>${opayment}</td>
         <td>
-            <a href="#" class="btn btn-light edit-button" data-id="${ocode}"><img src="./icon/revise.png" style="width: 15px;"></a>
+            <a href="#" class="btn btn-light edit-button" data-id="${ocode}"><img src="/backstage/icon/revise.png" style="width: 15px;"></a>
         </td>
     </tr>
 

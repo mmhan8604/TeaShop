@@ -135,7 +135,7 @@
 					<button id="buttonMember" class="btn  mb-2 sideBtn"><img src="/backstage/icon/memberCenter.png"
 							alt="">會員中心</button>
 				</div>
-				<button class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="/backstage/icon/leave.png"
+				<button  onclick="logout()" class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="/backstage/icon/leave.png"
 						alt="">
 					<p class="ms-4">登出</p>
 				</button>
@@ -152,6 +152,11 @@
 		document.getElementById("buttonFront").addEventListener("click", () => {
 			window.open("/FrontStageSet", "_blank");
 		})
+		function logout(){
+			alert("登出")
+			window.location.href="/logout"
+			
+		}
 
 	</script>
 </body>
