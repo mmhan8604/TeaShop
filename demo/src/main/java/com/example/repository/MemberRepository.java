@@ -23,4 +23,6 @@ public interface MemberRepository extends JpaRepository<Member,String>{
 	//用email找member
 	List<Member>findByShopIdAndMail(String shopId,String mail);
 	
+	List<Member>findByShopId(String shopId);
+	
 }

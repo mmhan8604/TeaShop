@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Query;
@@ -12,4 +13,6 @@ public interface OrdersRepository extends JpaRepository<Orders, String>{
 	
 	@Query("SELECT o FROM Orders o WHERE o.member.id = :memberId ORDER BY o.orderDate DESC")
     List<Orders> findOrdersByMemberIdOrderByOrderDateDesc(String memberId);
+	
+	List<Orders> findByOrderDateBetweenAndShopId(LocalDateTime startDateTime, LocalDateTime endDateTime,String shopId);
 }
