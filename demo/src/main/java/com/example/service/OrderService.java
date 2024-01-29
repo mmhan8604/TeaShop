@@ -39,6 +39,9 @@ public class OrderService {
 	@Autowired
 	MemberRepository memberRes;
 	
+	@Autowired
+    private OrdersRepository ordersRepository;
+	
 	public String ecpayCheckout() {
 		
 		String uuId = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);
@@ -133,4 +136,8 @@ public class OrderService {
 			}
 			
 		}
+		
+		public List<Orders> findOrdersByMemberId(String memberId) {
+	        return ordersRepository.findOrdersByMemberIdOrderByOrderDateDesc(memberId);
+	    }
 }

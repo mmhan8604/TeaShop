@@ -479,9 +479,15 @@ input.qtyplus {
 		font-size: 0.9em;
 	}
 	
+
+	.amount{
+		display: none !important;
+	}
+
 	.img-fluid{
 	width: 100%;
 	height: auto;
 }
+
 
 }
