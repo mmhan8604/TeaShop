@@ -17,12 +17,16 @@
 			/*[[${nav.fontStyle}]]*/
 			'Microsoft JhengHei';
 		}
+		.nav-link{
+			color:/*[[${nav.fontStyle}]]*/
+			;
+		}
 	</style>
 
 	<title>Document</title>
 </head>
 
-<body>
+<body th:style="'font-family:'+${nav.fontStyle}">
 
 	<!-- navbar -->
 	<!--nav導覽列頭-->

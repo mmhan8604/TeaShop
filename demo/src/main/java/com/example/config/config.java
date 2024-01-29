@@ -9,7 +9,7 @@ import com.example.interf.signUpService;
 import com.example.interf.SetShopInfoSerivice;
 import com.example.interf.frontStageService;
 import com.example.service.SetShopInfoSeriviceImpl;
-import com.example.service.frontStageServiceImpl_test;
+
 
 
 import com.example.service.loginServiceImpl;
@@ -30,10 +30,7 @@ public class config {
 		return new signUpServiceImpl();
 	}
 	
-	@Bean
-	public frontStageService fss() {
-		return new frontStageServiceImpl_test();
-	}
+	
 	
 	@Bean
 	public SetShopInfoSerivice ssis() {
