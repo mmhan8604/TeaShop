@@ -25,7 +25,7 @@ public class shopIndexController {
 		model.addAttribute("fullView",(List<List<String>>) data.get("htmls"));
 		
 		
-//		model.addAttribute("nav", styleInfo.get("nav"));
+		model.addAttribute("nav", styleInfo.get("nav"));
 //		model.addAttribute("fullView", styleInfo.get("fullView"));
 		model.addAllAttributes(data);
 		return"shopPage/customize.html";
