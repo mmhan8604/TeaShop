@@ -75,7 +75,7 @@ function ProductInfoqueryAll(choosepage) {
 		            </td>
 		
 		            <td>
-		                <a href="#" class="btn btn-light editBtn" data-id="${pcode}"><img src="../icon/btn_revise.png" style="width: 15px;"></a>
+		                <a href="#" class="btn btn-light editBtn" data-id="${pcode}"><img src="/backstage/icon/revise.png" style="width: 15px;"></a>
 		            </td>
 		        </tr>
 		    `);
