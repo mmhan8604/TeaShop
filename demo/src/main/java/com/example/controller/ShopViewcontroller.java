@@ -1,6 +1,10 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
+import com.example.entity.Orders;
 import com.example.entity.Products;
 import com.example.service.FrontloginService;
 import com.example.service.MCFOservice;
+import com.example.service.OrderService;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
 
@@ -31,6 +37,9 @@ public class ShopViewcontroller {
 	FrontloginService frontloginService;
 	@Autowired
 	MCFOservice MCFOservice;
+	
+	@Autowired
+    OrderService orderService;
 	
 	
 	
@@ -158,14 +167,24 @@ public class ShopViewcontroller {
 		model.addAttribute("memberPhone", member.getPhone());
 		model.addAttribute("memberAddress", member.getAddress());
 		model.addAttribute("memberCount", member.getCount());}
+		
+		// 調用訂單查詢的Controller方法並將結果設定為模型屬性
+	    List<Orders> orders = orderService.findOrdersByMemberId(loginInfo.getMemberId());
+	    model.addAttribute("orders", orders);
+		
+		
 		return "/shopPage/member01.html";		//確認訂單等等		
 	}
 	
+	@GetMapping("/{shopId}/orderHistory")
+	public String orderHistory(HttpSession session,Model model,@PathVariable int shopId) {
+		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
+		setAllLoginInfo(loginInfo, model, shopId);		
+		
+		return "/shopPage/orderHistory.html";		//訂單紀錄		
+	}
 	
-	
-	
-	
-	
+
 	
 	//內部方法，用於給動態網頁用戶及商店資訊
 	private void setAllLoginInfo(FrontLoginClasses loginInfo, Model model,int shopId) {
@@ -189,6 +208,7 @@ public class ShopViewcontroller {
 		model.addAttribute("shopId", shopId);
 		
 	}
+	
 	
 	
 	
