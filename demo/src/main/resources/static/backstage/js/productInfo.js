@@ -79,8 +79,8 @@ function ProductInfoqueryAll(choosepage) {
 		            </td>
 		        </tr>
 		    `);
-//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
-		                
+			//只拿掉按鈕，原本的方法都沒有刪掉；<a href="#" class="btn btn-light removeBtn" data-id="${pcode}"><img src="../icon/btn_remove.png" style="width: 15px;"></a>
+
 			//修改商品GET
 			$("#bodyContext").off("click", ".editBtn");
 			$("#bodyContext").on("click", ".editBtn", function() {
@@ -102,7 +102,7 @@ function ProductInfoqueryAll(choosepage) {
 						$('#editProductPrice').val(productDatas.product.price);
 						$('#editProductCost').val(productDatas.product.cost);
 						$('#editProductIntro').val(productDatas.product.discription);
-						
+
 						// 清空圖片預覽區域
 						$("#editProductImgs").empty();
 
@@ -145,10 +145,10 @@ function ProductInfoqueryAll(choosepage) {
 					}
 
 				})
-				
-				function editPage(){
-			$("#formSpace").load( "/backstage/html/" + "productSetting" + ".html #formSpace>*")
-		}
+
+				function editPage() {
+					$("#formSpace").load("/backstage/html/" + "productSetting" + ".html #formSpace>*")
+				}
 			});
 
 			//刪除商品GET
@@ -214,6 +214,37 @@ function ProductInfoqueryAll(choosepage) {
 
 	//修改商品POST
 	function editProduct() {
+
+		//	判斷錯誤跳錯誤訊息
+		if ($("#editProductID").val() === "") {
+			alert("請填寫商品編號");
+			return;
+		}
+		if ($("#editProductName").val() === "") {
+			alert("請填寫商品名稱");
+			return;
+		}
+		var quantity = parseInt($('#editProductQuantity').val());
+		if (isNaN(quantity) || quantity < 0) {
+			alert("庫存數量應為非負整數");
+			return;
+		}
+		var shelves = parseInt($('#editProductShelves').val());
+		if (isNaN(shelves) || shelves < 0) {
+			alert("上架數量應為非負整數");
+			return;
+		}
+		var price = parseFloat($('#editProductPrice').val());
+		if (isNaN(price) || price <= 0) {
+			alert("販售價格應為有效且大於零的數字");
+			return;
+		}
+		var cost = parseFloat($('#editProductCost').val());
+		if (isNaN(cost) || cost <= 0) {
+			alert("成本價格應為有效且大於零的數字");
+			return;
+		}
+
 		var productIdPOST = $('#editProductID').val();
 		var updatedData = productUpdateData();
 		console.log("畫面上的商品ID:" + productIdPOST);
@@ -285,8 +316,8 @@ function ProductInfoqueryAll(choosepage) {
 				}
 			});
 		}
-		
-		
+
+
 
 	}
 }
