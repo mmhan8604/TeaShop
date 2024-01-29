@@ -106,15 +106,16 @@
 							<a class="nav-link " aria-current="page" href="#" id="memberInfo">會員資訊</a>
 						</li>
 					</ul>
-
-					<a id="FrontPageViews" th:href="@{'/shop/' + ${shopId} + '/shopindex'}" style=" margin-left: 350px;">
+					
+					<div  class="ms-auto" style="margin-right:35px ;"><a id="FrontPageViews" th:href="@{'/shop/' + ${shopId} + '/shopindex'}" style="margin-right: 5px;" class="ms-auto">
 						<img src="/backstage/icon/dw_web.png" alt="" style="height: 50px">
 					</a>
 
 					<button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="/backstage/icon/update.png"
 							style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
 						<p id="upTxt">儲存資訊</p>
-					</button>
+					</button></div>
+					
 
 				</div>
 
