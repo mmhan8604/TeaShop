@@ -235,6 +235,7 @@ public class Products {
 		this.discontinued = discontinued;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Products [id=" + id + ", name=" + name + ", activity=" + activity + ", price=" + price + ", cost="

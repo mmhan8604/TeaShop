@@ -91,7 +91,7 @@ public class ActivitysController {
 	
 	//依產品id查折扣
 	@GetMapping("/queryDiscount/{productId}")
-	public Map<String, Double> queryActivitys(@PathVariable String productId) {
+	public double queryActivitys(@PathVariable String productId) {
 		System.out.println("查產品" + productId);
 		return activityService.queryDiscount(productId);
 
@@ -100,10 +100,12 @@ public class ActivitysController {
 	//查產品折扣
 	@PostMapping("/queryProductdiscount")
 	public List<Object[]> queryProductdiscount(@RequestBody String shopId) {
-		//String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
-		//System.out.println("查詢全部" + shopid);
+
 		return activityService.findProductsAndMinDiscountsByShopId(shopId);
 	}
+	
+	
+	
 
 
 }

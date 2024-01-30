@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
 import com.example.entity.Products;
+import com.example.service.ActivityService;
 import com.example.service.FrontloginService;
 import com.example.service.MCFOservice;
 import com.example.service.ProductService;
@@ -31,6 +34,8 @@ public class ShopViewcontroller {
 	FrontloginService frontloginService;
 	@Autowired
 	MCFOservice MCFOservice;
+	@Autowired
+	private ActivityService activityService;
 	
 	
 	
@@ -78,20 +83,27 @@ public class ShopViewcontroller {
 		return "/shopPage/cart01.html";		//購物車		
 	}
 	
+	
 	@GetMapping("/{shopId}/productPage")
 	public String productPage(HttpSession session,@RequestParam String productId,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
-		
 		Products product = productService.queryProductById(productId);
+		double pddiscount = activityService.queryDiscount(productId);
+		
+		int pdprice = product.getPrice();
+		double pdtdiscount = pddiscount * pdprice;
+		int productdiscount = (int)pdtdiscount;
+		
 		model.addAttribute("productId", product.getId());
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
 		model.addAttribute("productDiscription", product.getDiscription());
 		model.addAttribute("imgSrc",product.getPicjson());
+		model.addAttribute("productDiscount",productdiscount);
 		return "/shopPage/product";		//商品頁	
 	}
+	
 	
 	@GetMapping("/{shopId}/orderPayment")
 	public String orderPayment(HttpSession session,Model model,@PathVariable int shopId) {

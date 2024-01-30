@@ -26,7 +26,7 @@ function queryProduct() {
 			showProduct(products.length)
 
 		})
-		.catch(error => console.error('Error fetching product data:', error))
+		.catch(error => console.error( error))
 
 	function showProduct(length) {
 		for (i = 0; i < length; i++) {
@@ -38,11 +38,12 @@ function queryProduct() {
 			price = oneproduct[0].price;
 			pddiscount = oneproduct[1];
 			if (pddiscount!= null){
-				discountprice = pddiscount*price;
+				discountp = pddiscount*price;
 			}else{
-				discountprice=price;
+				discountp=price;
 			}
 			
+			discountprice = Math.floor(discountp);
 			console.log(productslist[i]);
 	
 			var cardHTML = `<div class="col-md-3 rounded">
@@ -91,11 +92,11 @@ function queryProduct() {
                             <!-- modal-footer：加入購物車、立即購買 -->
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-secondary add-to-cart"
-                                    data-name="${name}" data-price="${price}" data-id="${id}"
+                                    data-name="${productName}" data-price="${price}" data-id="${id}"
                                     data-image="/frontstage/product/新增資料夾/greentea-3.png"
-                                    data-bs-dismiss="modal">加入購物車</button>
-                                <button type="button" class="btn btn-secondary buy-it-now" data-name="${name}" data-price="${price}" data-id="${id}"
-                                    data-image="/frontstage/product/新增資料夾/greentea-3.png">立即購買</button>
+                                    data-discountprice="${discountprice}" data-bs-dismiss="modal">加入購物車</button>
+                                <button type="button" class="btn btn-secondary buy-it-now" data-name="${productName}" data-price="${price}" data-id="${id}"
+                                    data-discountprice="${discountprice}" data-image="/frontstage/product/新增資料夾/greentea-3.png">立即購買</button>
                             </div>
                         </div>
                     </div>
@@ -225,6 +226,7 @@ function queryProduct() {
 			var name = $(this).data('name');
 			var price = $(this).data('price');
 			var image = $(this).data('image');
+			var discountprice = $(this).data('discountprice');
 
 			var quantitySelector, quantity;
 			console.log(logInorNot)
@@ -242,7 +244,7 @@ function queryProduct() {
 	
 				quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
 	
-				var product = { id: id, name: name, price: price, image: image, quantity: quantity };
+				var product = { id: id, name: name, price: price, image: image, quantity: quantity, discountprice:discountprice };
 	
 				var cart = JSON.parse(localStorage.getItem('cart')) || [];
 				var existingProductIndex = cart.findIndex(p => p.name === name);
@@ -277,6 +279,7 @@ function queryProduct() {
 			var name = $(this).data('name');
 			var price = $(this).data('price');
 			var image = $(this).data('image');
+			var discountprice =  $(this).data('discountprice');
 
 			var quantitySelector, quantity;
 
@@ -292,7 +295,7 @@ function queryProduct() {
 
 			quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
 
-			var product = {id:productId, name: name, price: price, image: image, quantity: quantity };
+			var product = {id:productId, name: name, price: price, image: image, quantity: quantity, discountprice: discountprice };
 
 			var cart = JSON.parse(localStorage.getItem('cart')) || [];
 			var existingProductIndex = cart.findIndex(p => p.name === name);
