@@ -216,6 +216,19 @@ input[type="radio"]+label>img {
   transition: 500ms all;
 }
 
+input[type="radio"]:checked+label>div {
+  border: 2px solid #fff;
+  box-shadow: 0 0 3px 3px #366cf1;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type="radio"]+label>div {
+  border: 1px solid #444;
+  width: 150px;
+  height: 150px;
+  transition: 500ms all;
+}
+
 /* 商店設定 */
 /* 滑桿 */
 .formSpace {

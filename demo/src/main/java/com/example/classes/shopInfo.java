@@ -9,6 +9,7 @@ public class shopInfo {
     private String cover;
     private String intro;
     private String name;
+    private String bankAccount;
     
 	public String getShopName() {
 		return shopName;
@@ -57,6 +58,12 @@ public class shopInfo {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getBankAccount() {
+		return bankAccount;
+	}
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
 	}
     
 	

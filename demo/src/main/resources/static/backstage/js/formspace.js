@@ -20,6 +20,7 @@ $(document).ready(function() {
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
 				else if(buttonId=="addAction"){AddAction();}
 				else if (buttonId == "addProduct" ) {addProduct();}
+				else if(buttonId=="logisticsSet"){ updateLogisticsBTN(); getLogisticsData()}
 			});
 		});
 

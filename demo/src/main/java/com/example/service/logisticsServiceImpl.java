@@ -24,9 +24,9 @@ public class logisticsServiceImpl implements logisticsService {
 		 
 		HashMap<String, String> data= new HashMap<String, String>();
 		data.put("isp_cod", siEntity.getIsp_cod()==null?"":siEntity.getIsp_cod());
-		data.put("isp_rfi", siEntity.getIsp_refri()==null?"":siEntity.getIsp_cod());
-		data.put("del_cod", siEntity.getDeli_cod()==null?"":siEntity.getIsp_cod());
-		data.put("del_rfi", siEntity.getDeli_refri()==null?"":siEntity.getIsp_cod());
+		data.put("isp_rfi", siEntity.getIsp_refri()==null?"":siEntity.getIsp_refri());
+		data.put("del_cod", siEntity.getDeli_cod()==null?"":siEntity.getDeli_cod());
+		data.put("del_rfi", siEntity.getDeli_refri()==null?"":siEntity.getDeli_refri());
 		return data;
 	}
 	

@@ -22,22 +22,24 @@ import com.example.utils.imgUtil;
 @Component
 public class SetShopInfoSeriviceImpl implements SetShopInfoSerivice {
 	
-	shopInfo si;
+	;
 	@Autowired
 	SetShopDao ssd;
 	com.example.entity.shopInfo siEntity;
 	
 	@Transactional
-	public int updateInfo() {
+	public int updateInfo(shopInfo si,String email) {
 		int state = 0;
-		System.out.println(si.getAddress());
-		siEntity= ssd.findByEmail(si.getEmail()).get(0);
+		
+		siEntity= ssd.findByEmail(email).get(0);
 		siEntity.setAddress(!si.getAddress().equals("")?si.getAddress():siEntity.getAddress());
 		siEntity.setName(!si.getName().equals("")?si.getName():siEntity.getName());
 		siEntity.setPhone(!si.getTel().equals("")?si.getTel():siEntity.getPhone());
 		siEntity.setShopName(!si.getShopName().equals("")?si.getShopName():siEntity.getShopName());
 		siEntity.setShopLogoUrl(!si.getLogo().equals("")?si.getLogo():siEntity.getShopLogoUrl());
 		siEntity.setShopIntro(!si.getIntro().equals("")?si.getIntro():siEntity.getShopIntro());
+		siEntity.setBankAccount(!si.getBankAccount().equals("")?si.getBankAccount():siEntity.getShopIntro());
+		siEntity.setEmail(!si.getEmail().equals("")?si.getEmail():siEntity.getEmail());
 		
 		if(!si.getCover().equals("")) {
 			try {
@@ -80,14 +82,7 @@ public class SetShopInfoSeriviceImpl implements SetShopInfoSerivice {
 	
 	   
 
-	public shopInfo getSi() {
-		return si;
-	}
-
-	public void setSi(shopInfo si) {
-		this.si = si;
-	}
-
+	
 
 	
 

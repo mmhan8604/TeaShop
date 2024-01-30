@@ -24,13 +24,21 @@ public class SetShopInfoController {
 		
 		
 		HttpSession session=request.getSession();
+		if(data.getEmail().equals("")){
+			data.setEmail((String) session.getAttribute("email"));
+		}
 //		data.setEmail((String) session.getAttribute("email"));
-		data.setEmail("a@mail.com");
-		ssis.setSi(data);
-		
-		int state= ssis.updateInfo();
+//		data.setEmail("a@mail.com");
+//		ssis.setSi(data);
+		String email=(String) session.getAttribute("email");
+		int state= ssis.updateInfo(data,email);
 		
 		if(state==0) {
+			if( session.getAttribute("email").equals(data.getEmail())||(data.getEmail().equals(""))) {
+				
+			}else {
+				session.setAttribute("email", data.getEmail());
+			}
 			return"ok";
 		}else if (state==1) {
 			return"!cover";

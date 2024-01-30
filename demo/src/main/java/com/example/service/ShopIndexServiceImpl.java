@@ -145,13 +145,23 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 					
 				} case"圖片":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
+					if (type!=4) {
+						ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
+								webElement.get("headerText2").toString(),
+								webElement.get("childBackroundColor").toString(),
+								webElement.get("childBackroundImg").toString(),
+								jsonUtil.objtoLinkedList(webElement.get("img")));
+						welw.add(img.getImgElement());
+					}else {
+						ImgElementHTML img=new ImgElementHTML(type,null,
+								null,
+								webElement.get("childBackroundColor").toString(),
+								webElement.get("childBackroundImg").toString(),
+								null);
+						welw.add(img.getImgElement());
+					}
 					
-					ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
-							webElement.get("headerText2").toString(),
-							webElement.get("childBackroundColor").toString(),
-							webElement.get("childBackroundImg").toString(),
-							jsonUtil.objtoLinkedList(webElement.get("img")));
-					welw.add(img.getImgElement());
+					
 					
 					break;
 				} case"商品":{

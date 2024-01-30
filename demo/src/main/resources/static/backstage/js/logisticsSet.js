@@ -12,17 +12,18 @@ let whichTd;
 
            }
 		
-		let table=document.getElementById("beweite");
+		let table=document.getElementById("beWrite");
+		
 		let tr=table.getElementsByTagName("tr");
 		for(let i=0;i<tr.length;i++){
 			if(tr[i].getElementsByTagName("td")[0].innerHTML=="賣家宅配"&&tr[i].getElementsByTagName("td")[1].innerHTML=="一般宅配"){
-				data.del_cod=tr[i].getElementsByTagName("td")[3].innerHTML
+				data.del_cod=tr[i].getElementsByTagName("td")[2].innerHTML.replace("元","")
 			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="賣家宅配"&&tr[i].getElementsByTagName("td")[1].innerHTML=="冷藏宅配"){
-				data.del_ref=tr[i].getElementsByTagName("td")[3].innerHTML
+				data.del_ref=tr[i].getElementsByTagName("td")[2].innerHTML.replace("元","")
 			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="超商店到店"&&tr[i].getElementsByTagName("td")[1].innerHTML=="一般宅配"){
-				data.isp_cod=tr[i].getElementsByTagName("td")[3].innerHTML
+				data.isp_cod=tr[i].getElementsByTagName("td")[2].innerHTML.replace("元","")
 			}else if(tr[i].getElementsByTagName("td")[0].innerHTML=="超商店到店"&&tr[i].getElementsByTagName("td")[1].innerHTML=="冷藏宅配"){
-				data.isp_ref=tr[i].getElementsByTagName("td")[3].innerHTML
+				data.isp_ref=tr[i].getElementsByTagName("td")[2].innerHTML.replace("元","")
 			}
 		}
 		
@@ -43,8 +44,10 @@ let whichTd;
 	}
 	
 	function updateLogisticsBTN(){
-		document.getElementById("upload").removeEventListener("click");
-		document.getElementById("upload").addEventListener("click",updateLogistics());
+		$("#upload").off("click");
+	//	document.getElementById("upload").addEventListener("click",updateLogistics());
+	
+		$("#upload").on("click",updateLogistics)
 	}
 	
       async function getLogisticsData(){
@@ -67,16 +70,16 @@ let whichTd;
 
           if((data.del_cod||data.del_ref)!=""){
             let delData=[1];
-            if(data.del_cod===""){
+            if(data.del_cod==""){
               delData[1]=""
             }else{
               delData[1]=parseInt(data.del_cod)
             }
 
-            if(data.del_ref===""){
+            if(data.del_ref==""){
               delData[2]=""
             }else{
-              delData[2]=parseInt(data.del_ref)
+              delData[2]=parseInt(data.del_rfi)
             }
 
             writeTable(delData)
@@ -84,20 +87,21 @@ let whichTd;
 
           if((data.isp_cod||data.isp_ref)!=""){
             let ispData=[2];
-            if(data.isp_cod===""){
+            if(data.isp_cod==""){
               ispData[1]=""
             }else{
               ispData[1]=parseInt(data.isp_cod)
             }
 
-            if(data.isp_ref===""){
+            if(data.isp_ref==""){
               ispData[2]=""
+              
             }else{
-              ispData[2]=parseInt(data.isp_ref)
+              ispData[2]=parseInt(data.isp_rfi)
             }
             console.log(ispData)
             writeTable(ispData);
-
+			d
           }
 
           
@@ -137,11 +141,11 @@ let whichTd;
         let tr_f=
         `<tr id="tr_${count+1}"><th scope="row">${count+1}</th><td>${a}</td><td>冷藏宅配</td><td>${data[2]}元</td><td><button  onclick="set(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/revise.png" alt=""></button></td><td><button onclick="deleteTD(${count+2})" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td></tr>`
 
-        if (data[2]==""){
+        if (data[2]==""||isNaN(data[2])){
           document.getElementById("beWrite").innerHTML=(
           document.getElementById("beWrite").innerHTML+tr
         )
-        }else if(data[1]==""){
+        }else if(data[1]==""||isNaN(data[1])){
           
           document.getElementById("beWrite").innerHTML=(
             document.getElementById("beWrite").innerHTML+tr_f

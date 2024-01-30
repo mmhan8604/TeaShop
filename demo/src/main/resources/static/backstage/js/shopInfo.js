@@ -32,9 +32,8 @@ function readURL(input,whichImg) {
       }
       readURL(event.target,1)
     })
-
-    document.getElementById("upload").addEventListener("click",async function(){
-		console.log("a")
+	$("#upload").on("click",async function(){
+		
       let data={
         "shopName":document.getElementById("shopNameInput").value,
         "name":document.getElementById("nameInput").value,
@@ -42,7 +41,9 @@ function readURL(input,whichImg) {
         "address":document.getElementById("addresInput").value,
         "logo":document.getElementById("logoPreview").src.includes("base64")?document.getElementById("logoPreview").src:"",
         "cover":document.getElementById("coverPreview").src.includes("base64")?document.getElementById("coverPreview").src:"",
-        "intro":document.getElementById("shopItro").value
+        "intro":document.getElementById("shopItro").value,
+        "bankAccount":document.getElementById("bankAccountInput").value,
+        "email":document.getElementById("emailInput").value,
       }
       
       try {
@@ -76,4 +77,5 @@ function readURL(input,whichImg) {
       
 
     })
+   
 	}
