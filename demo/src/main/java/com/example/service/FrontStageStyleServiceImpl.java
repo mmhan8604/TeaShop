@@ -18,7 +18,7 @@ public class FrontStageStyleServiceImpl implements FrontStageStyleService {
 	
 	public int updateStyle(String email,String nav,String fullView) {
 		shopInfo si= dao.findByEmail(email).get(0);
-		
+		System.out.println(nav)	;
 		byte[] fvArray;
 		try {
 			fvArray = fullView.getBytes("UTF-8");

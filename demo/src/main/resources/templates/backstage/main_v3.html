@@ -54,12 +54,12 @@
                     <div style="text-align: left; margin-left: 7%">
                         <label class="previeTitle" style="margin-top: 20px">樣式：</label><br />
                     </div>
-                    <input type="radio" name="emotion" id="nav1" class="inputHidden" />
+                    <input type="radio" name="nav" id="nav1" class="inputHidden" />
                     <label for="nav1">
                         <img src="backstage/img/nav-1.png" alt=""
                             style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
                     </label>
-                    <input type="radio" name="emotion" id="nav2" class="inputHidden" />
+                    <input type="radio" name="nav" id="nav2" class="inputHidden" />
                     <label for="nav2" style="margin-bottom: 20px">
                         <img src="backstage/img/nav-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
                     </label>
@@ -100,12 +100,12 @@
                     <div style="text-align: left; margin-left: 7%">
                         <label class="previeTitle" style="margin-top: 20px">樣式：</label><br />
                     </div>
-                    <input type="radio" name="emotion" id="nav3" class="inputHidden" />
+                    <input type="radio" name="footer" id="nav3" class="inputHidden" />
                     <label for="nav3">
                         <img src="backstage/img/footer-1.png" alt=""
                             style=" height: 60px; width: 400px; object-fit: contain; margin: 10px auto;" />
                     </label>
-                    <input type="radio" name="emotion" id="nav4" class="inputHidden" />
+                    <input type="radio" name="footer" id="nav4" class="inputHidden" />
                     <label for="nav4" style="margin-bottom: 20px">
                         <img src="backstage/img/footer-2.png" alt="" style="height: 60px; width: 400px; object-fit: contain" />
                     </label>
@@ -127,6 +127,8 @@
                             value="#FFFFFF" oninput="updateColorPicker('colorPicker5', this.value)"
                             style=" width: 250px; display: inline-block; background-color: #b8b8b8;" /><br />
                     </div>
+                    
+                    <button class='btn btn-primary' onclick='getNavInfo()'>發佈</button>
                 </div>
             </div>
             <script>
