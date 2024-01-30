@@ -25,15 +25,15 @@ public class ProductController {
 	ProductServiceImpl productService;
 
 	@PostMapping("/queryProduct")
-	public List<Products> queryProduct(@RequestBody String shopId,HttpSession session) {
-		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+	public List<Products> queryProduct(@RequestBody String shopId, HttpSession session) {
+		String shopid = Tools.intObjToString(session.getAttribute("backShopId"));
 		System.out.println("查詢全部" + shopid);
 		return productService.queryProduct(shopid);
 	}
-	
+
 	@PostMapping("/frontqueryProduct")
 	public List<Products> frontqueryProduct(@RequestBody String shopId) {
-		
+
 		return productService.queryProduct(shopId);
 	}
 
@@ -45,8 +45,8 @@ public class ProductController {
 
 //	新增商品
 	@PostMapping("/addProduct/{id}")
-	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products,HttpSession session) {
-		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
+	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products, HttpSession session) {
+		String shopid = Tools.intObjToString(session.getAttribute("backShopId"));
 		products.setShopId(shopid);
 		Products addProduct = productService.addProduct(id, products);
 		if (addProduct != null) {
@@ -104,6 +104,22 @@ public class ProductController {
 
 		if (updatedProduct != null) {
 			return ResponseEntity.ok(updatedProduct);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	// 熱銷商品
+	@GetMapping("/findTopSellingProducts")
+	public ResponseEntity<?> findTopSellingProducts(HttpSession session) {
+		String shopId = Tools.intObjToString(session.getAttribute("backShopId"));
+
+		// 呼叫服務進行原生 SQL 查詢
+		List<Object[]> topSellingProducts = productService.findTopSellingProductsByShopId(shopId);
+		if (topSellingProducts != null) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("topSellingProducts", topSellingProducts);
+			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
