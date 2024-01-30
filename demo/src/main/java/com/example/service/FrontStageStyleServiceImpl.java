@@ -16,7 +16,7 @@ public class FrontStageStyleServiceImpl implements FrontStageStyleService {
 	@Autowired
 	private frontStageDao dao;
 	
-	public int updateStyle(String email,String nav,String fullView) {
+	public int updateStyle(String email,String fullView) {
 		shopInfo si= dao.findByEmail(email).get(0);
 		
 		byte[] fvArray;
@@ -28,17 +28,30 @@ public class FrontStageStyleServiceImpl implements FrontStageStyleService {
 		}
 		
 		si.setFrontStage(fvArray);
-		si.setShopNav(nav);
+		
 		
 		try {
 			dao.save(si);
 		} catch (Exception e) {
 			return 1;
 		}
+		
+		
 			
 			
 			
 			
+		return 0;
+	}
+	
+	public int saveNAV(String email,String nav) {
+		shopInfo si= dao.findByEmail(email).get(0);
+		try {
+			si.setShopNav(nav);
+			dao.save(si);
+		} catch (Exception e) {
+			return 1;
+		}
 		return 0;
 	}
 	
