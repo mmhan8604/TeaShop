@@ -54,7 +54,7 @@ public class BackStageChartController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 		LocalDateTime dateTime = LocalDateTime.parse(today, formatter);
 		Map<String, Integer> revenueMap = new LinkedHashMap<>();
-		for(int i=0;i<=6;i++) {
+		for(int i=0;i<6;i++) {
 			revenueMap.put(Integer.toString(dateTime.minusMonths(i).getMonthValue())+"/"+Integer.toString(dateTime.minusMonths(i).getYear())
 			, chartService.getMonthRevenue(dateTime.minusMonths(i),shopid));
 		}
