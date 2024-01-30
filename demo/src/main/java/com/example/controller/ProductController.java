@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Products;
+import com.example.service.PicService;
 import com.example.service.ProductServiceImpl;
 import com.example.utils.Tools;
 
@@ -23,6 +24,8 @@ import jakarta.servlet.http.HttpSession;
 public class ProductController {
 	@Autowired
 	ProductServiceImpl productService;
+	@Autowired
+	PicService picServic;
 
 	@PostMapping("/queryProduct")
 	public List<Products> queryProduct(@RequestBody String shopId,HttpSession session) {
@@ -48,6 +51,9 @@ public class ProductController {
 	public ResponseEntity<?> AddProduct(@PathVariable String id, @RequestBody Products products,HttpSession session) {
 		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
 		products.setShopId(shopid);
+		if(products.getPicjson()!=null) {
+			String mianPicUrl = picServic.MainPicIO(products.getPicjson(), products.getId());
+			products.setPicjson(mianPicUrl);}
 		Products addProduct = productService.addProduct(id, products);
 		if (addProduct != null) {
 			return ResponseEntity.ok(addProduct);
@@ -86,6 +92,9 @@ public class ProductController {
 //	更新商品
 	@PostMapping("/updateProducts/{id}")
 	public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Products products) {
+		if(products.getPicjson()!=null) {
+			String mianPicUrl = picServic.MainPicIO(products.getPicjson(), products.getId());
+			products.setPicjson(mianPicUrl);}
 		Products updateProducts = productService.updateProduct(id, products);
 		if (updateProducts != null) {
 			return ResponseEntity.ok(updateProducts);

@@ -32,8 +32,8 @@
 	<script src="/backstage/js/multipleImg.js" defer></script>
 	<script src="/backstage/js/addProduct.js" defer></script>
 	<!--chart.js圖表-->
-  	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  	<script src="/backstage/js/shopChart.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+	<script src="/backstage/js/shopChart.js" defer></script>
 	<!-- formspace畫面切換的js -->
 	<script src="/backstage/js/formspace.js" defer></script>
 	<!-- backstage主要框架js (有順序之分這個要在切換畫面之後) -->
@@ -108,16 +108,18 @@
 							<a class="nav-link " aria-current="page" href="#" id="memberInfo">會員資訊</a>
 						</li>
 					</ul>
+					<div class="ms-auto" style="margin-right: 30px;">
+						<a id="FrontPageViews" th:href="@{'/shop/' + ${shopId} + '/shopindex'}"
+							style="">
+							<img src="/backstage/icon/dw_web.png" alt="" style="height: 50px">
+						</a>
 
-					<a id="FrontPageViews" th:href="@{'/shop/' + ${shopId} + '/shopindex'}" style=" margin-left: 350px;">
-						<img src="/backstage/icon/dw_web.png" alt="" style="height: 50px">
-					</a>
-
-					<button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="/backstage/icon/update.png"
-							style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
-						<p id="upTxt">儲存資訊</p>
-					</button>
-
+						<button id="upload" class="btn btn-sm btn-secondary"><img
+								src="/backstage/icon/update.png"
+								style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt="">
+							<p id="upTxt">儲存資訊</p>
+						</button>
+					</div>
 				</div>
 
 
