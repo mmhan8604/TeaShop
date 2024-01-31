@@ -70,11 +70,6 @@ public class ProductServiceImpl implements ProductService {
 		product.setPictext_2(products.getPictext_2());
 		product.setPictext_3(products.getPictext_3());
 		product.setPictext_4(products.getPictext_4());
-		product.setPictext_5(products.getPictext_5());
-		product.setPictext_6(products.getPictext_6());
-		product.setPictext_7(products.getPictext_7());
-		product.setPictext_8(products.getPictext_8());
-		product.setPictext_9(products.getPictext_9());
 
 		return save(product);
 	}

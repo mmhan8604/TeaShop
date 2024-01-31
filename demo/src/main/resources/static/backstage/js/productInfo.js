@@ -30,7 +30,7 @@ function ProductInfoqueryAll(choosepage) {
 			trlist = products;
 			var allpage = trlist.length == 0 ? 1 : trlist.length;
 
-			if (page + 1 > (allpage % 5 == 0 ? Math.floor(allpage / 5) : Math.floor(allpage / 5) + 1)) {			//判斷是否超出頁數
+			if (page + 1 > (allpage % 5 == 0 ? Math.floor(allpage / 5) : Math.floor(allpage / 5) + 1)) {
 				ProductInfoqueryAll(page - 1);
 			} else if (page + 1 < 1) {
 				ProductInfoqueryAll(page + 1);
@@ -88,6 +88,9 @@ function ProductInfoqueryAll(choosepage) {
 				let productId = $(this).data("id");
 				$('#editProductID').prop('readonly', true);
 
+				let storedDataArray = JSON.parse(sessionStorage.getItem('savedDataArray')) || [];
+				let storedData = storedDataArray.find(data => data[0] === productId.toString());
+
 				$.ajax({
 					url: `/products/${productId}`,
 					method: 'GET',
@@ -106,13 +109,22 @@ function ProductInfoqueryAll(choosepage) {
 						// 清空圖片預覽區域
 						$("#editProductImgs").empty();
 
-						// 遍歷每個圖片資料
+						// 如果在 session storage 中找到對應的資料，則顯示預覽
+						if (storedData) {
+							let [storedProductId, storedBase64Img] = storedData;
+							console.log("在session storage 中找到的ID:" + storedProductId);
+							showPreview(storedBase64Img);
+						}
+
+						// 遍歷資料庫裡每個圖片資料
 						for (let i = 0; i < 10; i++) {
 							// 構造圖片預覽的HTML
 							let pictextKey = 'pictext_' + i;
 							let imageData = productDatas.product[pictextKey];
 
+
 							if (imageData) {
+
 								// 創建預覽區域
 								let previewDiv = document.createElement('div');
 								previewDiv.className = 'previewM';
@@ -137,7 +149,10 @@ function ProductInfoqueryAll(choosepage) {
 								// 將圖片預覽加入到 editProductImgs 區域
 								$("#editProductImgs").append(previewDiv);
 							}
+
 						}
+
+
 
 					},
 					error: function(error) {
@@ -185,6 +200,33 @@ function ProductInfoqueryAll(choosepage) {
 
 
 		}
+	}
+
+	// 顯示圖片預覽
+	function showPreview(base64Img) {
+		// 創建預覽區域
+		let previewDiv = document.createElement('div');
+		previewDiv.className = 'previewM';
+
+		// 創建圖片
+		let img = new Image();
+		img.src = base64Img;
+		previewDiv.appendChild(img);
+
+		// 創建刪除按鈕
+		let deleteButton = document.createElement('button');
+		deleteButton.className = 'deleteButton';
+		deleteButton.innerHTML = 'X';
+		deleteButton.onclick = function(event) {
+			event.stopPropagation();
+			previewDiv.parentNode.removeChild(previewDiv);
+			showPlaceholderText(dropArea, originalContent);
+		};
+
+		previewDiv.appendChild(deleteButton);
+
+		// 將圖片預覽加入到 editProductImgs 區域
+		$("#editProductImgs").append(previewDiv);
 	}
 
 	//刪除商品POST
@@ -245,15 +287,26 @@ function ProductInfoqueryAll(choosepage) {
 			alert("成本價格應為有效且大於零的數字");
 			return;
 		}
-
+		let b;
 		var productIdPOST = $('#editProductID').val();
+		let storedDataArray = JSON.parse(sessionStorage.getItem('savedDataArray')) || [];
+		let storedData = storedDataArray.find(data => data[0] === productIdPOST.toString());
+		// 如果在 session storage 中找到對應的資料，則顯示預覽
+		if (storedData) {
+			let [storedProductId, storedBase64Img] = storedData;
+			console.log("在session storage 中找到的ID:" + storedProductId);
+			b =storedBase64Img;
+		}
+
+		
 		var updatedData = productUpdateData();
+		updatedData.picjson = b;
+		//		newProductData.pictext_0 = storedBase64Img;
 		console.log("畫面上的商品ID:" + productIdPOST);
 		console.log("要更新的所有畫面上的商品資訊:" + updatedData);
 		updateProduct(productIdPOST, updatedData);
 
 		//抓畫面上的資料
-
 		function productUpdateData() {
 			// 使用一個空對象來存放圖片數據
 			var imagesData = {};
@@ -270,7 +323,6 @@ function ProductInfoqueryAll(choosepage) {
 
 			// 其餘商品數據
 			var otherProductData = {
-				picjson: imagesData['pictext_0'],
 				id: $("#editProductID").val(),
 				name: $("#editProductName").val(),
 				stock: $('#editProductQuantity').val(),

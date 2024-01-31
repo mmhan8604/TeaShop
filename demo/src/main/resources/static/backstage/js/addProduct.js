@@ -12,7 +12,8 @@ function addProduct() {
 function imgArray(uploadedFilesArray) {
 	console.log("addProductUploadedFilesArray---" + uploadedFilesArray);
 	var imagesData = {};
-		imagesData['pictext_' + 0] = uploadedFilesArray[0];	
+	imagesData['pictext_0'] = uploadedFilesArray[0];
+	console.log("pictext_0--------" + imagesData['pictext_0'])
 	a = imagesData;
 }
 
@@ -22,7 +23,17 @@ function uploadData() {
 	let base64ImgArray = a;
 	console.log(newProductData);
 	newProductData.picjson = base64ImgArray['pictext_0'];
-	
+	newProductData.pictext_0 = base64ImgArray['pictext_0'];
+
+	// 從 sessionStorage 中獲取先前的數據
+	var savedDataArray = JSON.parse(sessionStorage.getItem('savedDataArray')) || [];
+
+	// 將新的商品數據附加到數據陣列中
+	savedDataArray.push([productIdPOST, base64ImgArray['pictext_0']]);
+
+	// 將更新後的數據陣列存回 sessionStorage
+	sessionStorage.setItem('savedDataArray', JSON.stringify(savedDataArray));
+
 	var productData = { ...newProductData, ...base64ImgArray };
 	addNewProduct(productIdPOST, productData);
 }
@@ -60,18 +71,18 @@ function catchProductData() {
 	}
 
 	// 使用一個空對象來存放圖片數據
-		var imagesData = {};
+	var imagesData = {};
 
 	// 獲取 addProductImgs 區域的子元素，即上傳的圖片預覽區域
-		var imagePreviews = document.getElementById("addProductImgs").children;
+	var imagePreviews = document.getElementById("addProductImgs").children;
 
 	// 遍歷每個圖片預覽區域，將其 base64 編碼的數據存入對應的 pictext 字段
-		for (var i = 1; i < imagePreviews.length; i++) {
-			var imagePreview = imagePreviews[i];
-			var base64Data = getImageBase64Data(imagePreview);
-			imagesData['pictext_' + i] = base64Data;
-			console.log("imagesData['pictext_' + i----]"+imagesData['pictext_' + i]);
-		}
+	for (var i = 1; i < imagePreviews.length; i++) {
+		var imagePreview = imagePreviews[i];
+		var base64Data = getImageBase64Data(imagePreview);
+		imagesData['pictext_' + i] = base64Data;
+		console.log("imagesData['pictext_' + i----]" + imagesData['pictext_' + i]);
+	}
 
 	// 其餘商品數據
 	var otherProductData = {
@@ -86,7 +97,7 @@ function catchProductData() {
 	};
 
 	// 將圖片數據和其他商品數據合併
-		var productData = { ...imagesData, ...otherProductData };
+	var productData = { ...imagesData, ...otherProductData };
 
 	return productData;
 }

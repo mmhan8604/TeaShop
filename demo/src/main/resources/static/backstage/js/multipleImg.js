@@ -1,9 +1,9 @@
 // 多張-上傳圖片//
 // 拖移上傳圖片
 let uploadedFilesArray = [];
-function clearArray(){
+function clearArray() {
 	uploadedFilesArray = []
-	console.log("clearArray", uploadedFilesArray);
+	console.log("CLEARARRAY");
 }
 
 function handleDragOver(event) {
@@ -25,6 +25,7 @@ function clickUpload(dropAreaId) {
 		uploadImage(input.files, dropAreaId);
 	};
 	input.click();
+	console.log(file);
 }
 
 // 在全域範圍內定義原始內容（預設文字）
@@ -44,7 +45,6 @@ function uploadImage(files, dropAreaId) {
 		console.error('Drop area not found:', dropAreaId);
 		return;
 	}
-
 	// 檢查是否超過上傳數量限制
 	if (dropArea.children.length + files.length > 5) {
 		setTimeout(function() {
@@ -69,6 +69,7 @@ function uploadImage(files, dropAreaId) {
 			// 轉換原始檔案為 BASE64 字符串
 			let base64Data = e.target.result;
 			uploadedFilesArray.push(base64Data);
+			sessionStorage.setItem("img", base64Data)
 
 			// 添加圖片和刪除按鈕
 			previewDiv.appendChild(img);
@@ -79,10 +80,8 @@ function uploadImage(files, dropAreaId) {
 			console.log("Updated uploadedFilesArray:", uploadedFilesArray);
 			imgArray(uploadedFilesArray);
 		};
-
 		reader.readAsDataURL(file);
 	}
-
 	showPlaceholderText(dropArea, ''); // 清除預設文字
 }
 
@@ -94,23 +93,18 @@ function createDeleteButton(dropArea, previewDiv, base64Data) {
 	deleteButton.innerHTML = 'X';
 	deleteButton.onclick = function(event) {
 		event.stopPropagation();
-
 		// 找到 base64Data 在陣列中的索引
 		let index = uploadedFilesArray.indexOf(base64Data);
-
 		// 如果找到，從陣列中刪除
 		if (index !== -1) {
 			uploadedFilesArray.splice(index, 1);
 		}
-
 		dropArea.removeChild(previewDiv);
 		showPlaceholderText(dropArea, originalContent);
-
 		// 在控制台上印出更新後的陣列
 		console.log("Updated uploadedFilesArray:", uploadedFilesArray);
 		imgArray(uploadedFilesArray);
 	};
-
 	return deleteButton;
 }
 
@@ -122,7 +116,6 @@ function showPlaceholderText(dropArea, text) {
 		console.error('Drop area not found');
 		return;
 	}
-
 	// 如果沒有上傳圖片，則顯示預設文字
 	if (dropArea.children.length === 0) {
 		// 檢查是否已經有預設文字元素，如果有，不再添加

@@ -407,9 +407,9 @@ select option {
 
 .previewM {
   position: relative;
-  width: 100px;
+  width: 125px;
   /* 設置每個預覽圖片的寬度 */
-  height: 100px;
+  height: 125px;
   /* 設置每個預覽圖片的高度 */
   border: 1px solid #000000;
   overflow: hidden;
