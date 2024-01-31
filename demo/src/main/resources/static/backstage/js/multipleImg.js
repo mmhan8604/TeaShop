@@ -1,6 +1,10 @@
 // 多張-上傳圖片//
 // 拖移上傳圖片
 let uploadedFilesArray = [];
+function clearArray(){
+	uploadedFilesArray = []
+	console.log("clearArray", uploadedFilesArray);
+}
 
 function handleDragOver(event) {
 	event.preventDefault();
@@ -63,7 +67,7 @@ function uploadImage(files, dropAreaId) {
 			img.src = e.target.result;
 
 			// 轉換原始檔案為 BASE64 字符串
-			let base64Data = e.target.result.split(',')[1];
+			let base64Data = e.target.result;
 			uploadedFilesArray.push(base64Data);
 
 			// 添加圖片和刪除按鈕
