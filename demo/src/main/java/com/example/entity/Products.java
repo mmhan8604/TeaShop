@@ -137,7 +137,9 @@ public class Products {
 	@Column(length = 60000 ,columnDefinition = "TEXT")
 	private String picjson;
 
-	
+	@Lob
+	@Column( columnDefinition = "LONGBLOB")
+    private byte[] mainPicBlob;
 
 	
 
@@ -227,6 +229,15 @@ public class Products {
 
 	public void setDiscontinued(boolean discontinued) {
 		this.discontinued = discontinued;
+	}
+	
+	
+	public byte[] getMainPicBlob() {
+		return mainPicBlob;
+	}
+
+	public void setMainPicBlob(byte[] mainPicBlob) {
+		this.mainPicBlob = mainPicBlob;
 	}
 
 	@Override

@@ -40,4 +40,9 @@ public class PicService {
 		
 		
 	}
+	public byte[] base64ToBlob(String base64String) {
+		byte[] byteArray = Base64.getDecoder().decode(imgUtil.extractBase64FromUri(base64String));
+		return byteArray;
+	}
+	
 }
