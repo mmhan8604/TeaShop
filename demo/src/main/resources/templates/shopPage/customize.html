@@ -19,10 +19,7 @@
 			'Microsoft JhengHei';
 			background-color: #dedede
 		}
-		.nav-link{
-			color:/*[[${nav.fontStyle}]]*/
-			;
-		}
+		
 	</style>
 
 	<title>Document</title>
@@ -48,10 +45,10 @@
 			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
 			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
 				<div class="navbar-nav mx-auto text-center  ">
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}"th:style="'color:'+${nav.navFontColor}">Home</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}"th:style="'color:'+${nav.navFontColor}">About</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}"th:style="'color:'+${nav.navFontColor}">Shopping</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"th:style="'color:'+${nav.navFontColor}">Connection</a>
 				</div>
 				<!-- 登入Login、購物車按鈕icon -->
 
