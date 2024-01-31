@@ -85,7 +85,10 @@ public class ProductController {
 		Optional<Products> Products = productService.findById(id);
 		if (Products.isPresent()) {
 			Map<String, Object> response = new HashMap<>();
-			response.put("product", Products.get());
+			Products product = Products.get();
+			product.setPictext_0(picServic.blobToBase64(product.getMainPicBlob()));
+			product.setMainPicBlob(null);
+			response.put("product", product);
 			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.notFound().build();

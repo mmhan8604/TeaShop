@@ -45,4 +45,10 @@ public class PicService {
 		return byteArray;
 	}
 	
+	public String blobToBase64(byte[] blob) {
+		String base64String = Base64.getEncoder().encodeToString(blob);
+		System.out.println("data:image/png;base64,"+base64String);
+		return "data:image/png;base64,"+base64String;
+	}
+	
 }
