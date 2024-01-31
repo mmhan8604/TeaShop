@@ -62,7 +62,7 @@ function queryProduct() {
                             <div class="modal-body cart-full-quantity">
                                 <form id="myform" method="POST" action="#">
                                     <p class="card-text text-end product-price">${price}</p>
-                                    <select class="form-select qty qty-greentea"
+                                    <select class="form-select qty qty-greentea w-100"
                                         aria-label="Default select example" id="myform">
                                         
                                         <option value="1" selected>1</option>

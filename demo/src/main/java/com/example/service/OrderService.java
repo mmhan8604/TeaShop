@@ -38,7 +38,7 @@ public class OrderService {
 	
 	@Autowired
 	MemberRepository memberRes;
-	
+		
 	@Autowired
     private OrdersRepository ordersRepository;
 	
@@ -139,5 +139,9 @@ public class OrderService {
 		
 		public List<Orders> findOrdersByMemberId(String memberId) {
 	        return ordersRepository.findOrdersByMemberIdOrderByOrderDateDesc(memberId);
+	    }
+		
+		public Orders findByOrderId(String orderId) {
+	        return ordersRepository.findById(orderId).get();
 	    }
 }

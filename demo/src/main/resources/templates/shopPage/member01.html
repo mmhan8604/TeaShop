@@ -209,7 +209,7 @@
 									<a th:if="${order.orderState!='已成立'}" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"><button
 											class="rounded cancelOrder px-2">取消</button></a>
 											
-									<a th:if="${order.orderState=='已成立'}" th:href="@{'/shop/' + ${shopId} + '/orderHistory'}">		
+									<a th:if="${order.orderState=='已成立'}" th:href="@{'/shop/' + ${shopId} + '/orderHistory/' + ${order.id}}">		
 									<button  class="rounded checkOrder px-2">查看</button></a>
 								</div>
 							</div>

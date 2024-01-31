@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
+import com.example.entity.Orderdetails;
 import com.example.entity.Orders;
 import com.example.entity.Products;
 import com.example.interf.ShopIndexService;
 import com.example.service.FrontloginService;
 import com.example.service.MCFOservice;
+import com.example.service.OrderDetailService;
 import com.example.service.OrderService;
 import com.example.service.ProductService;
 import com.example.utils.EcpayReturnConverter;
@@ -45,6 +47,11 @@ public class ShopViewcontroller {
     OrderService orderService;
 	@Autowired
 	ShopIndexService sis;
+	
+	@Autowired
+	OrderDetailService orderdetailService;
+	
+	
 
 	
 	
@@ -181,15 +188,30 @@ public class ShopViewcontroller {
 		
 		return "/shopPage/member01.html";		//確認訂單等等		
 	}
-	
-	@GetMapping("/{shopId}/orderHistory")
-	public String orderHistory(HttpSession session,Model model,@PathVariable int shopId) {
-		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
-		setAllLoginInfo(loginInfo, model, shopId);		
-		
-		return "/shopPage/orderHistory.html";		//訂單紀錄		
+	//
+	@GetMapping("/{shopId}/orderHistory/{orderId}")
+	public String orderHistory(HttpSession session, Model model, @PathVariable int shopId, @PathVariable String orderId) {
+	    FrontLoginClasses loginInfo = (FrontLoginClasses) session.getAttribute("authObject");
+	    setAllLoginInfo(loginInfo, model, shopId);
+
+	    if (loginInfo != null) {
+	        // 根據訂單ID獲取相關的訂單詳細信息和產品信息
+	        List<Orderdetails> orderDetailsList = orderdetailService.findByOrderIdWithOrdersAndProducts(orderId);
+	        Orders orders = orderService.findByOrderId(orderId);
+	        // 將查詢到的訂單詳細信息數據傳遞給前端模板
+	        model.addAttribute("orderDetailsList", orderDetailsList);
+	        model.addAttribute("orders", orders);	        
+	    }
+
+	    return "/shopPage/orderHistory.html"; // 訂單記錄
 	}
-	
+
+	/*@GetMapping("/orderdata/{orderId}")
+    public ResponseEntity<List<Orderdetails>> getOrderData(@PathVariable String orderId) {
+        List<Orderdetails> orderDetails = orderdetailService.findByOrderIdWithOrdersAndProducts(orderId);
+        return new ResponseEntity<>(orderDetails, HttpStatus.OK);
+    }*/
+	//
 
 	
 	@GetMapping("/shopPage/{shopid}")

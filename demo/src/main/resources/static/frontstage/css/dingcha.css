@@ -54,10 +54,7 @@ a.clear01 {
 	display: inline-block;
 	background: #95A58E !important;
 	color: #fff !important;
-	font: 1em 'PT Serif', serif;
-	padding: 0.3em 1em;
-	text-align: center;
-	border: none;
+	border-color: #95A58E !important ;
 }
 
 

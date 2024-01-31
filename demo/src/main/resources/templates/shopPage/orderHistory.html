@@ -13,21 +13,25 @@
 	<!--Bootstrap外部連結檔案(CSS/JavaSprite)-->
 	<link rel="stylesheet" href="/frontstage/_css/bootstrap.css">
 	<script th:inline="javascript">
-        /*<![CDATA[*/
-        var shopId = /*[[${shopId}]]*/ null;
-        var auth = /*[[${auth}]]*/null;
-        var logInuserName=/*[[${userName}]]*/null;
-        var logInorNot = logInuserName!=null;
-        var memberId = /*[[${memberId}]]*/null;
+		/*<![CDATA[*/
+		var shopId = /*[[${shopId}]]*/ null;
+		var auth = /*[[${auth}]]*/null;
+		var logInuserName =/*[[${userName}]]*/null;
+		var logInorNot = logInuserName != null;
+		var memberId = /*[[${memberId}]]*/null;
         /*]]>*/
-    </script>
-    <script src="/frontstage/js/cart.js"></script>
+	</script>
+
 	<script src="/frontstage/_js/popper.min.js"></script>
-	<script src="/frontstage/js/orderMethod.js"></script> 
-	<script src="/frontstage/js/sendOrder.js"></script> 
 	<script src="/frontstage/_js/bootstrap.js"></script>
 	<script src="/frontstage/js/logOut.js"></script>
-	
+
+	<!--<script src="/frontstage/js/orderMethod.js"></script> -->
+	<script src="/frontstage/js/sendOrder.js"></script>
+	<script src="/frontstage/js/cart.js"></script>
+
+
+
 	<!-- <script type="text/javascript" src="./jquery.store.js"></script> -->
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
@@ -37,7 +41,7 @@
 <body>
 
 	<!--nav導覽列頭-->
-		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
+	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
 		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
 			<!-- Logo、官網名，連結首頁 -->
 			<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
@@ -74,9 +78,10 @@
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">登出</a></li>
-						
+
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -87,7 +92,8 @@
 									style="height: 20px;width: auto;">登入</a></li>
 
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -99,7 +105,7 @@
 			</div>
 		</div>
 	</nav>
-		<!--nav導覽列尾------------------- -->
+	<!--nav導覽列尾------------------- -->
 	<!-- 主要畫面 --> <!--修改左右margin-->
 	<div id="site" class="siteH1">
 
@@ -114,45 +120,46 @@
 						<div class="col-2 d-flex align-items-center">數量</div>
 						<div class="col-2 d-flex align-items-center">價格</div>
 						<div class="col-2 d-flex align-items-center">折扣後</div>
-						<div class="col-2 d-flex align-items-center">狀態</div>
+						<div class="col-2 d-flex align-items-center">運費</div>
 						<div class="col-2 d-flex align-items-center">總計</div>
 					</div>
 
 
 					<div class="cart-body text-center rounded">
-						<div class="row cart-box rounded">
-							<div class="col-2 d-flex align-items-center">
-								<img src="./product/新增資料夾/blacktea-3.png" class="cart-img" alt="荔枝紅茶">
-								<span class="inline-block product-name">荔枝紅茶</span>
+						<div class="cart-body text-center rounded">
+							<!-- 這個部分是根據 orderId 查詢到的 Orderdetails 和 products 資料表的數據 -->
+							<div th:each="orderDetail : ${orderDetailsList}">
+								<div class="row cart-box rounded">
+									<div class="col-2 d-flex align-items-center">
+										<!-- 使用 orderDetail.product.picjson 來設置圖片的 src -->
+										<img th:src="${orderDetail.product.picjson}" class="cart-img" alt="產品圖片">
+										<!-- 使用 orderDetail.product.name 來設置產品名稱 -->
+										<span th:text="${orderDetail.product.name}"
+											class="inline-block product-name"></span>
+									</div>
+									<!-- 使用 orderDetail.quantity 來設置數量 -->
+									<div th:text="${orderDetail.quantity}" class="col-2 d-flex align-items-center">
+									</div>
+									<!-- 使用 orderDetail.amount 來設置金額 -->
+									<div th:text="${orderDetail.amount}" class="col-2 d-flex align-items-center"></div>
+									<div th:text="${orderDetail.amount}" class="col-2 d-flex align-items-center"></div>
+									<div class="col-2 d-flex align-items-center"></div>
+									<div class="col-2 d-flex align-items-center"></div>
+								</div>
 							</div>
-							<div class="col-2 d-flex align-items-center">1</div>
-							<div class="col-2 d-flex align-items-center">9,999</div>
-							<div class="col-2 d-flex align-items-center">9,999</div>
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 d-flex align-items-center"></div>
 						</div>
 
 
-						<div class="row cart-box">
-							<div class="col-2 d-flex align-items-center">
-								<img src="./product/新增資料夾/greentea-3.png" class="cart-img" alt="八爪綠茶">
-								<span class="inline-block product-name">八爪綠茶</span>
+						<div>
+							<div class="row cart-box">
+								<div class="col-2 d-flex align-items-center"></div>
+								<div class="col-2 d-flex align-items-center"></div>
+								<div class="col-2 d-flex align-items-center"></div>
+								<div class="col-2 d-flex align-items-center"></div>
+								<div class="col-2 ">$60</div>
+								<!-- 使用 ${orders.amount} 來設置總金額 -->
+								<div th:text="${orders.amount}" class="col-2 total-price "></div>
 							</div>
-							<div class="col-2 d-flex align-items-center">2</div>
-							<div class="col-2 d-flex align-items-center">19,998</div>
-							<div class="col-2 d-flex align-items-center">19,998</div>
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 d-flex align-items-center"></div>
-						</div>
-
-
-						<div class="row cart-box">
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 d-flex align-items-center"></div>
-							<div class="col-2 ">運費：$60</div>
-							<div class="col-2 total-price ">總金額：29,997</div>
 						</div>
 
 
@@ -187,16 +194,16 @@
 					<div class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">付款方式：</div>
 
 					<div class=" col-md-4  d-flex align-items-center">
-						<span id="payment" class="form-control spanCart03">
-							
+						<span th:text="${orders.paymentMethod}" id="payment" class="form-control spanCart03">
+
 						</span>
 					</div>
 
-					<div  class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">運送方式：</div>
+					<div class=" col-md-2 my-2 d-flex align-items-center  ms-auto shoppingMethodbody01">運送方式：</div>
 
 					<div class=" col-md-4  d-flex align-items-center">
-						<span id="shipMethod" class="form-control spanCart03">
-							
+						<span th:text="${orders.shipMethod}" id="shipMethod" class="form-control spanCart03">
+
 						</span>
 					</div>
 
@@ -208,25 +215,27 @@
 
 					<div class=" col-md-2 my-2  d-flex align-items-center ms-auto shoppingMethodbody01">訂購姓名：
 					</div>
-					<div class=" col-md-4 my-2 "><span id="orderName" class="form-control spanCart03">Brad_chao</div>
+					<div class=" col-md-4 my-2 "><span th:text="${orders.receiverName}" id="orderName" class="form-control spanCart03">Brad_chao</div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">電子郵件：
 					</div>
-					<div class=" col-md-4 my-2 "><span id="orderEmail" class="form-control spanCart03">Brad@gmail.com</div>
+					<div class=" col-md-4 my-2 "><span th:text="${orders.receiverPhone}" id="orderEmail" class="form-control spanCart03">Brad@gmail.com
+					</div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">手機號碼：
 					</div>
-					<div class=" col-md-4 my-2 "><span id="orderPhone" class="form-control spanCart03">0912-345678</div>
+					<div class=" col-md-4 my-2 "><span th:text="${orders.receiverMail}" id="orderPhone" class="form-control spanCart03">0912-345678</div>
 
 					<div class=" col-md-6 "></div>
 
 					<div class=" col-md-2 my-2 d-flex align-items-center ms-auto shoppingMethodbody01">收件地址：
 					</div>
-					<div class=" col-md-10 my-2 "><span id="orderAddress" class="form-control spanCart03">台中市南屯區公益路二段51號18樓</div>
+					<div class=" col-md-10 my-2 "><span th:text="${orders.receiverAddress}" id="orderAddress"
+							class="form-control spanCart03">台中市南屯區公益路二段51號18樓</div>
 
 				</div>
 
-				
+
 
 			</form>
 		</div>
