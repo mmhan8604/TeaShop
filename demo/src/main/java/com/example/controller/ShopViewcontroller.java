@@ -179,11 +179,11 @@ public class ShopViewcontroller {
 		model.addAttribute("memberName", member.getName());
 		model.addAttribute("memberPhone", member.getPhone());
 		model.addAttribute("memberAddress", member.getAddress());
-		model.addAttribute("memberCount", member.getCount());}
-		
+		model.addAttribute("memberCount", member.getCount());
 		// 調用訂單查詢的Controller方法並將結果設定為模型屬性
 	    List<Orders> orders = orderService.findOrdersByMemberId(loginInfo.getMemberId());
-	    model.addAttribute("orders", orders);
+	    model.addAttribute("orders", orders);}
+		
 		
 		
 		return "/shopPage/member01.html";		//確認訂單等等		
@@ -200,18 +200,17 @@ public class ShopViewcontroller {
 	        Orders orders = orderService.findByOrderId(orderId);
 	        // 將查詢到的訂單詳細信息數據傳遞給前端模板
 	        model.addAttribute("orderDetailsList", orderDetailsList);
-	        model.addAttribute("orders", orders);	        
+	        model.addAttribute("orders", orders);
+	        return "/shopPage/orderHistory.html"; // 訂單記錄	        
+	    }else {
+	    	return "/shopPage/teaShopLogin.html";
 	    }
+	    
 
-	    return "/shopPage/orderHistory.html"; // 訂單記錄
+	    
 	}
 
-	/*@GetMapping("/orderdata/{orderId}")
-    public ResponseEntity<List<Orderdetails>> getOrderData(@PathVariable String orderId) {
-        List<Orderdetails> orderDetails = orderdetailService.findByOrderIdWithOrdersAndProducts(orderId);
-        return new ResponseEntity<>(orderDetails, HttpStatus.OK);
-    }*/
-	//
+	
 
 	
 	@GetMapping("/shopPage/{shopid}")

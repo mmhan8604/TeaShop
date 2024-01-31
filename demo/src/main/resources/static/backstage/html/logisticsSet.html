@@ -17,7 +17,7 @@
     <script src="backstage.js"></script>
 
     <!-- 物流資訊JS -->
-    <script src="./logisticsSet.js" defer></script>
+    <script src="/backstage/logisticsSet.js" defer></script>
 
     <link rel="stylesheet" href="logisticsSet.css" />
   
@@ -27,7 +27,7 @@
   <div style="min-height: 864px;">
     <nav class="navbar navbar-expand-sm navbar-light "  style="margin-left: 30px;">
         <div class="container-fluid  " >
-          <div class="navbar-brand "><a href="" style="color: #0074d9; text-decoration:none;"> <img  src="./icon/pLogo.png" alt="" style="width: 45px;"> Project</a> </div>
+          <div class="navbar-brand "><a href="" style="color: #0074d9; text-decoration:none;"> <img  src="/backstage/icon/pLogo.png" alt="" style="width: 45px;"> Project</a> </div>
 
           
          
@@ -50,7 +50,7 @@
               </li>
             </ul>
 
-            <button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="./icon/update.png"  style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt=""><p id="upTxt">儲存資訊</p></button>
+            <button id="upload" class="btn btn-sm btn-secondary ms-auto"><img src="/backstage/icon/update.png"  style="width: 33.3px ;height: 25px; margin-right: 5px; margin-bottom: 5px;" alt=""><p id="upTxt">儲存資訊</p></button>
             
           </div>
 
@@ -62,14 +62,14 @@
       <div id="content" class="d-flex  ">
         <div class=" d-flex  flex-column   " style="margin-left: 30px; width: 184px; height: 400px;" >   
             <div id="btnGp"  >
-              <button class="btn  mb-2 sideBtn" ><img src="./icon/shop.png"   alt="">商店設定</button>
-              <button class="btn  mb-2 sideBtn"><img src="./icon/webDesign.png"   alt="">前台設計</button>
-              <button class="btn  mb-2 sideBtn"><img src="./icon/product.png"   alt="">商品設定</button>
-              <button class="btn  mb-2 sideBtn"><img src="./icon/product.png"   alt="">訂單設定</button>
-              <button class="btn  mb-2 sideBtn"><img src="./icon/activity.png"   alt="">活動設定</button>
-              <button class="btn  mb-2 sideBtn"><img src="./icon/memberCenter.png"   alt="">會員中心</button>
+              <button class="btn  mb-2 sideBtn" ><img src="/backstage/icon/shop.png"   alt="">商店設定</button>
+              <button class="btn  mb-2 sideBtn"><img src="/backstage/icon/webDesign.png"   alt="">前台設計</button>
+              <button class="btn  mb-2 sideBtn"><img src="/backstage/icon/product.png"   alt="">商品設定</button>
+              <button class="btn  mb-2 sideBtn"><img src="/backstage/icon/product.png"   alt="">訂單設定</button>
+              <button class="btn  mb-2 sideBtn"><img src="/backstage/icon/activity.png"   alt="">活動設定</button>
+              <button class="btn  mb-2 sideBtn"><img src="/backstage/icon/memberCenter.png"   alt="">會員中心</button>
             </div>
-            <button class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="./icon/leave.png"   alt=""><p class="ms-4" >登出</p></button>
+            <button class=" ms-3 btn  btn-light" style="margin-top: 70px;"><img src="/backstage/icon/leave.png"   alt=""><p class="ms-4" >登出</p></button>
         </div>
     
         <div id="formSpace"   style="margin-left:30px ;margin-right: 30px;">
@@ -104,8 +104,8 @@
                   <input id="setRefriger" placeholder="若無則免填" class="form-control-sm bg-light" style="margin-bottom: 24px; display: block;  border-width: 0px; width: 288px;" type="text">
                 
                   <div style="width: 288px;" class="d-flex justify-content-between">
-                    <button onclick="clean()" class="btn btn-light" style="width:120px;height: 40px;"> <img src="./icon/reset.png" style="width: 20px; height: 20px; margin-bottom: 7px;" alt=""><p class="ms-3" style=" color: #909090; font-size: 20px; display: inline;">重置</p></button>
-                    <button onclick="add()" class="btn  btn-light " style="width:120px;height: 40px;  background-color: #46aa3650 ; font-size: 20px;"><img src="./icon/add.png" style="width: 20px; height: 20px; margin-bottom: 3px;" alt=""><p class="ms-3" style=" color: #4D750B; font-size: 20px; display: inline;">新增</p></button>
+                    <button onclick="clean()" class="btn btn-light" style="width:120px;height: 40px;"> <img src="/backstage/icon/reset.png" style="width: 20px; height: 20px; margin-bottom: 7px;" alt=""><p class="ms-3" style=" color: #909090; font-size: 20px; display: inline;">重置</p></button>
+                    <button onclick="add()" class="btn  btn-light " style="width:120px;height: 40px;  background-color: #46aa3650 ; font-size: 20px;"><img src="/backstage/icon/add.png" style="width: 20px; height: 20px; margin-bottom: 3px;" alt=""><p class="ms-3" style=" color: #4D750B; font-size: 20px; display: inline;">新增</p></button>
                   </div>
                 </div>
                 
@@ -146,8 +146,8 @@
                       <td>賣家宅配</td>
                       <td>一般宅配</td>
                       <td>60元</td>
-                      <td><button onclick="set()" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon_1/revise.png" alt=""></button></td>
-                      <td><button onclick="deleteTD()" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="./icon/cancel_grey.png" alt=""></button></td>
+                      <td><button onclick="set()" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="/backstage/icon_1/revise.png" alt=""></button></td>
+                      <td><button onclick="deleteTD()" class="btn btn-light" style="padding: 0px;"><img style="height: 16px; width: 16px;" src="/backstage/icon/cancel_grey.png" alt=""></button></td>
 
                     </tr> -->
                   </tbody>
@@ -194,8 +194,8 @@
                 
                   <div style="display: inline-block; width: 288px;">
                     <div class="d-flex justify-content-between">
-                      <button onclick="cancel()" class="btn" style="width: 120px; height: 40px; background-color: rgba(	194, 0, 0, 0.2);"><img style="display: inline; width: 20px; height: 20px; margin-bottom: 7px;" src="./icon/cancel.png" alt=""><p style="margin-left: 15px; display: inline; font-size: 20px;">取消</p></button>
-                      <button id="savebtn" onclick="save()" class="btn" style="width: 120px; height: 40px; background-color: rgba(70, 170, 54, 0.2);"><img style="display: inline; width: 28px; height: 20px; margin-bottom: 7px;" src="./icon/update_green.png" alt=""><p style="margin-left: 11px; display: inline; font-size: 20px;">儲存</p></button>
+                      <button onclick="cancel()" class="btn" style="width: 120px; height: 40px; background-color: rgba(	194, 0, 0, 0.2);"><img style="display: inline; width: 20px; height: 20px; margin-bottom: 7px;" src="/backstage/icon/cancel.png" alt=""><p style="margin-left: 15px; display: inline; font-size: 20px;">取消</p></button>
+                      <button id="savebtn" onclick="save()" class="btn" style="width: 120px; height: 40px; background-color: rgba(70, 170, 54, 0.2);"><img style="display: inline; width: 28px; height: 20px; margin-bottom: 7px;" src="/backstage/icon/update_green.png" alt=""><p style="margin-left: 11px; display: inline; font-size: 20px;">儲存</p></button>
   
                     </div>
                   </div>
