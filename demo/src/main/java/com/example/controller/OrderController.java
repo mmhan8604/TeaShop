@@ -41,7 +41,7 @@ public class OrderController {
 	@PostMapping("/ecpayCheckout")									//ecpay建立訂單
 	public String ecpayCheckout(@RequestBody OrderObject OOB,HttpServletRequest request) {
 		String domain = request.getServerName();
-		if(domain=="localhost") {
+		if(domain.equals("localhost")) {
 			domain="http://localhost:8080";
 		}else {
 			domain="https://"+domain;
