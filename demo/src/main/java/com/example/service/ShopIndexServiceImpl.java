@@ -133,13 +133,25 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 				} case"表單":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(5));
 					
-					FormElementHTML form=new FormElementHTML(type,
-							webElement.get("headerText1").toString(),
-							 webElement.get("headerText2").toString(),
-							 webElement.get("childBackroundColor").toString(), 
-							 webElement.get("childBackroundImg").toString(), 
-							 webElement.get("formImg").toString());
-					welw.add(form.getFormElement());
+					if(type==1) {
+						FormElementHTML form=new FormElementHTML(type,
+								webElement.get("headerText1").toString(),
+								 webElement.get("headerText2").toString(),
+								 webElement.get("childBackroundColor").toString(), 
+								 webElement.get("childBackroundImg").toString(), 
+								 webElement.get("formImg").toString());
+						welw.add(form.getFormElement());
+					}else {
+						FormElementHTML form=new FormElementHTML(type,
+								webElement.get("headerText1").toString(),
+								null,
+								 webElement.get("childBackroundColor").toString(), 
+								 webElement.get("childBackroundImg").toString(), 
+								null);
+						welw.add(form.getFormElement());
+					}
+					
+					
 					
 					break;
 					

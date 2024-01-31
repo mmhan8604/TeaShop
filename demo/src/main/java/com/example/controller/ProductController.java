@@ -110,9 +110,9 @@ public class ProductController {
 	}
 
 	// 熱銷商品
-	@GetMapping("/findTopSellingProducts")
-	public ResponseEntity<?> findTopSellingProducts(HttpSession session) {
-		String shopId = Tools.intObjToString(session.getAttribute("backShopId"));
+	@GetMapping("/findTopSellingProducts/{shopId}")
+	public ResponseEntity<?> findTopSellingProducts(HttpSession session,@PathVariable String shopId) {
+//		String shopId = Tools.intObjToString(session.getAttribute("backShopId"));
 
 		// 呼叫服務進行原生 SQL 查詢
 		List<Object[]> topSellingProducts = productService.findTopSellingProductsByShopId(shopId);

@@ -18,9 +18,14 @@
 			font-family:
 			/*[[${nav.fontStyle}]]*/
 			'Microsoft JhengHei';
-			background-color: #dedede
+			
 		}
+
 		
+		.productImg {
+			height: 35vh;
+			object-fit: contain;
+		}
 	</style>
 
 	<title>Document</title>
@@ -46,10 +51,14 @@
 			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
 			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
 				<div class="navbar-nav mx-auto text-center  ">
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}"th:style="'color:'+${nav.navFontColor}">Home</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}"th:style="'color:'+${nav.navFontColor}">About</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}"th:style="'color:'+${nav.navFontColor}">Shopping</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"th:style="'color:'+${nav.navFontColor}">Connection</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}"
+						th:style="'color:'+${nav.navFontColor}">Home</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}"
+						th:style="'color:'+${nav.navFontColor}">About</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}"
+						th:style="'color:'+${nav.navFontColor}">Shopping</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"
+						th:style="'color:'+${nav.navFontColor}">Connection</a>
 				</div>
 				<!-- 登入Login、購物車按鈕icon -->
 
@@ -237,43 +246,61 @@
 		</div>
 	</footer>
 
-<script>
-	if(document.getElementsByClassName('product-title').length!=0){
-		$.ajax({
-			type: "GET",
-			url: "/findTopSellingProducts",
-			success: function (response) {
-				// 成功取得資料後的處理
-				console.log("成功取得熱銷商品資料:", response);
+	<script>
+		function setShopID() {
+			var currentURL = window.location.href;
 
-				// 存取 topSellingProducts 屬性
-				var topSellingProducts = response.topSellingProducts;
+			var startIndex = currentURL.indexOf("shopPage/");
 
-				// 存取陣列元素
-				for (var i = 0; i < topSellingProducts.length; i++) {
-					var product = topSellingProducts[i];
-
-					// 存取子陣列的元素
-					var productName = product[0];
-					var productPrice = product[1];
-					var productImg = product[2];
-					var productQuantity = product[3];
-
-					// 在這裡進行你的代碼處理，例如更新 HTML 元素
-					// 以下是一個示例，你需要適應你的 HTML 結構和 class
-					$('.product-title' )[i].text(productName);
-					$('.product-text')[i].text('$' + productPrice);
-					$('.productImg')[i].attr('src', productImg);
-				}
-			},
-			error: function (error) {
-				// 發生錯誤時的處理
-				console.error("取得熱銷商品資料失敗:", error);
+			// 如果找到了 shopPage/
+			if (startIndex !== -1) {
+				// 提取 shopPage/ 后面的内容
+				var contentAfterShopPage = currentURL.substring(startIndex + "shopPage/".length);
+				sessionStorage.setItem("shopID",contentAfterShopPage)
+			} else {
+				console.log("URL 中未找到 shopPage/");
 			}
-		});
-	}
-	
-</script>
+		}
+		setShopID();
+		if (document.getElementsByClassName('product-title').length != 0) {
+			let thisUrl = window.location.href
+			$.ajax({
+				type: "GET",
+				url: "/findTopSellingProducts/" +sessionStorage.getItem("shopID"),
+				success: function (response) {
+					// 成功取得資料後的處理
+					console.log("成功取得熱銷商品資料:", response);
+
+					// 存取 topSellingProducts 屬性
+					var topSellingProducts = response.topSellingProducts;
+
+					// 存取陣列元素
+					for (var i = 0; i < topSellingProducts.length; i++) {
+						var product = topSellingProducts[i];
+
+						// 存取子陣列的元素
+						var productName = product[0];
+						var productPrice = product[1];
+						var productImg = product[2];
+						var productQuantity = product[3];
+
+						// 在這裡進行你的代碼處理，例如更新 HTML 元素
+						// 以下是一個示例，你需要適應你的 HTML 結構和 class
+						let a = $('.product-title')[i]
+
+						$('.product-title')[i].innerHTML = productName;
+						$('.product-text')[i].innerHTML = '$' + productPrice;
+						$('.productImg')[i].src = productImg;
+					}
+				},
+				error: function (error) {
+					// 發生錯誤時的處理
+					console.error("取得熱銷商品資料失敗:", error);
+				}
+			});
+		}
+
+	</script>
 
 </body>
 

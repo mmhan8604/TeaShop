@@ -28,11 +28,11 @@ public class FormElementHTML {
 	}
 	
 	public String createFormElement01() {
-		formElement=String.format("<div class='child' style='background-image:%s ; background-color:%s ; display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
+		formElement=String.format("<div class='child ' style='background-image:%s ; background-color:%s ; display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
 				+ "  <h1 class='headerText1 '>%s</h1>\r\n"
 				+ "  <h4 class='headerText2' >%s</h4>\r\n"
-				+ "  <div style='padding-right: 15px; padding-left: 15px; margin-right: auto;'>\r\n"
-				+ "      <div class='row'>\r\n"
+				+ "  <div class='rounded' style='padding-right: 15px; padding-left: 15px; margin-right: auto;'>\r\n"
+				+ "      <div class='row '>\r\n"
 				+ "\r\n"
 				+ "          <!--左側圖片區-->\r\n"
 				+ "          <div class='col-md-5' id='image-area01' style='padding: 0; '>\r\n"
@@ -50,8 +50,8 @@ public class FormElementHTML {
 				+ "                  <div class='row'>\r\n"
 				+ "                      <div class='col-md-6'>\r\n"
 				+ "                          <div class='mb-3'>\r\n"
-				+ "                              <label for='username' class='form-label'>姓名</label>\r\n"
-				+ "                              <input type='text' class='form-control' id='userName' placeholder='Brad_chao'>\r\n"
+				+ "                              <label for='username' class='form-label'></label>\r\n"
+				+ "                              <input type='text' class='form-control mt-2' id='userName' placeholder='姓名'>\r\n"
 				+ "                          </div>\r\n"
 				+ "                      </div>\r\n"
 				+ "\r\n"
