@@ -238,7 +238,8 @@
 	</footer>
 
 <script>
-	$.ajax({
+	if(document.getElementsByClassName('product-title').length!=0){
+		$.ajax({
 			type: "GET",
 			url: "/findTopSellingProducts",
 			success: function (response) {
@@ -260,7 +261,7 @@
 
 					// 在這裡進行你的代碼處理，例如更新 HTML 元素
 					// 以下是一個示例，你需要適應你的 HTML 結構和 class
-					$('product-title' )[i].text(productName);
+					$('.product-title' )[i].text(productName);
 					$('.product-text')[i].text('$' + productPrice);
 					$('.productImg')[i].attr('src', productImg);
 				}
@@ -270,6 +271,8 @@
 				console.error("取得熱銷商品資料失敗:", error);
 			}
 		});
+	}
+	
 </script>
 
 </body>

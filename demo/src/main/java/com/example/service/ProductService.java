@@ -21,4 +21,7 @@ public interface ProductService {
     Products updateProduct(String productId,Products products);
     
     Products updateDiscontinued(String productId, boolean discontinued);
+    
+    //熱銷商品
+    List<Object[]> findTopSellingProductsByShopId(String shopId);
 }

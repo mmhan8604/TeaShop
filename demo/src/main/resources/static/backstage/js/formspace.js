@@ -18,9 +18,13 @@ $(document).ready(function() {
 				else if (buttonId == "memberInfo") { MemberInfoqueryAll(0); }
 				else if (buttonId == "orderInfo") { queryAllOrderInfo(0); }
 				else if (buttonId == "shopInfo") { shopInfoEvent(); }
-				else if(buttonId=="addAction"){AddAction();}
+				else if (buttonId=="addAction"){AddAction();}
 				else if (buttonId == "addProduct" ) {addProduct();}
+
 				else if(buttonId=="logisticsSet"){ updateLogisticsBTN(); getLogisticsData()}
+
+				else if (buttonId == "shopChart"){chart()}
+
 			});
 		});
 
