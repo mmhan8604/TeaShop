@@ -53,6 +53,7 @@ public class ProductController {
 		products.setShopId(shopid);
 		if(products.getPicjson()!=null) {
 			String mianPicUrl = picServic.MainPicIO(products.getPicjson(), products.getId());
+			products.setPictext_0(null);
 			products.setPicjson(mianPicUrl);}
 		Products addProduct = productService.addProduct(id, products);
 		if (addProduct != null) {

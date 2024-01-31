@@ -1,13 +1,34 @@
 // 新增商品的js
+let a;
 function addProduct() {
 	$("#upload").off("click");
 	$("#upload").on("click", function() {
-		var productIdPOST = $('#addProductID').val();
-		var newProductData = catchProductData();
-		console.log(productIdPOST);
-		console.log(newProductData);
-		addNewProduct(productIdPOST, newProductData);
+		uploadData();
 	});
+}
+
+// 上傳圖片
+function imgArray(uploadedFilesArray) {
+	console.log("addProductUploadedFilesArray---" + uploadedFilesArray);
+	var imagesData = {};
+	for (var i = 0; i < uploadedFilesArray.length && i < 5; i++) {
+		imagesData['pictext_' + i] = uploadedFilesArray[i];
+	}
+	
+	a = imagesData;
+}
+
+function uploadData() {
+	var productIdPOST = $('#addProductID').val();
+	var newProductData = catchProductData();
+	let base64ImgArray = a;
+	console.log("base64ImgArray----" + base64ImgArray);
+	console.log(productIdPOST);
+	console.log(newProductData);
+	newProductData.picjson = base64ImgArray['pictext_0'];
+	
+	var productData = { ...newProductData, ...base64ImgArray };
+	addNewProduct(productIdPOST, productData);
 }
 
 // 抓資料
@@ -43,21 +64,21 @@ function catchProductData() {
 	}
 
 	// 使用一個空對象來存放圖片數據
-	var imagesData = {};
+	//	var imagesData = {};
 
 	// 獲取 addProductImgs 區域的子元素，即上傳的圖片預覽區域
-	var imagePreviews = document.getElementById("addProductImgs").children;
+	//	var imagePreviews = document.getElementById("addProductImgs").children;
 
 	// 遍歷每個圖片預覽區域，將其 base64 編碼的數據存入對應的 pictext 字段
-	for (var i = 0; i < imagePreviews.length; i++) {
-		var imagePreview = imagePreviews[i];
-		var base64Data = getImageBase64Data(imagePreview);
-		imagesData['pictext_' + i] = base64Data;
-	}
+	//	for (var i = 0; i < imagePreviews.length; i++) {
+	//		var imagePreview = imagePreviews[i];
+	//		var base64Data = getImageBase64Data(imagePreview);
+	//		imagesData['pictext_' + i] = base64Data;
+	//	}
 
 	// 其餘商品數據
 	var otherProductData = {
-		picjson: imagesData['pictext_0'],
+		//		picjson: imagesData['pictext_0'],
 		id: $("#addProductID").val(),
 		name: $("#addProductName").val(),
 		stock: $('#addProductQuantity').val(),
@@ -67,37 +88,37 @@ function catchProductData() {
 		discription: $('#addProductIntro').val(),
 		shopId: "shop01"
 	};
-	
+
 	// 將圖片數據和其他商品數據合併
-	var productData = { ...imagesData, ...otherProductData };
-	
-	return productData;
+	//	var productData = { ...imagesData, ...otherProductData };
+
+	return otherProductData;
 }
 
 // 獲取圖片 base64 編碼的函數
-function getImageBase64Data(imagePreview) {
-	var image = imagePreview.querySelector('img');
-	if (image) {
-		var canvas = document.createElement('canvas');
-		canvas.width = image.width;
-		canvas.height = image.height;
-		var context = canvas.getContext('2d');
-		context.drawImage(image, 0, 0, image.width, image.height);
-		return canvas.toDataURL('image/png');
-	}
-	return null;
-}
+//function getImageBase64Data(imagePreview) {
+//	var image = imagePreview.querySelector('img');
+//	if (image) {
+//		var canvas = document.createElement('canvas');
+//		canvas.width = image.width;
+//		canvas.height = image.height;
+//		var context = canvas.getContext('2d');
+//		context.drawImage(image, 0, 0, image.width, image.height);
+//		return canvas.toDataURL('image/png');
+//	}
+//	return null;
+//}
 
 
 // 更新資料
 function addNewProduct(productIdPOST, newProductData) {
-	if(isNaN(newProductData.price)||isNaN(newProductData.stock)||isNaN(newProductData.shelves)||isNaN(newProductData.cost)){
+	if (isNaN(newProductData.price) || isNaN(newProductData.stock) || isNaN(newProductData.shelves) || isNaN(newProductData.cost)) {
 		alert("商品庫存、上架數量、價格及成本請填入數字")
-		return 
+		return
 	}
-	if(newProductData.stock<newProductData.shelves){
+	if (newProductData.stock < newProductData.shelves) {
 		alert("上架數量不可高於商品庫存")
-		return 
+		return
 	}
 	$.ajax({
 		url: `/addProduct/${productIdPOST}`,
