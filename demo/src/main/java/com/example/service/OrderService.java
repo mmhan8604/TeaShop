@@ -60,7 +60,7 @@ public class OrderService {
 		
 		return form;
 	}
-	public String ecpayCheckout(OrderObject OOB) {
+	public String ecpayCheckout(OrderObject OOB,String domain) {
 		
 		String uuId = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);
 		
@@ -74,7 +74,7 @@ public class OrderService {
 		obj.setItemName(OOB.getItemName());
 		obj.setReturnURL("http://localhost:8080/serverReturn");
 		obj.setNeedExtraPaidInfo("N");
-		obj.setOrderResultURL("http://localhost:8080/clientReturn");
+		obj.setOrderResultURL(domain+"/clientReturn");
 		String form = all.aioCheckOut(obj, null);
 		System.out.println("tradeTime:"+OOB.getTradeTime());
 		

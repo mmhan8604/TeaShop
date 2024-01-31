@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -38,9 +39,15 @@ public class OrderController {
 	OrderService orderService;
 
 	@PostMapping("/ecpayCheckout")									//ecpay建立訂單
-	public String ecpayCheckout(@RequestBody OrderObject OOB) {
-		
-		String aioCheckOutALLForm = orderService.ecpayCheckout(OOB);
+	public String ecpayCheckout(@RequestBody OrderObject OOB,HttpServletRequest request) {
+		String domain = request.getServerName();
+		if(domain=="localhost") {
+			domain="http://localhost:8080";
+		}else {
+			domain="https://"+domain;
+		}
+		System.out.println(domain);
+		String aioCheckOutALLForm = orderService.ecpayCheckout(OOB,domain);
 		
 		return aioCheckOutALLForm;
 	}
