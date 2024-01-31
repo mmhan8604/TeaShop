@@ -193,17 +193,16 @@ public class ShopViewcontroller {
 
 	
 	@GetMapping("/shopPage/{shopid}")
-	public String index(HttpSession session, Model model,@PathVariable Integer shopid) {
-//		 FrontLoginClasses loginInfo = (FrontLoginClasses)session.getAttribute("authObject");
-//		    
-//		    setAllLoginInfo(loginInfo, model, shopid);
+	public String index(HttpSession session, Model model,@PathVariable int shopid) {
+		 FrontLoginClasses loginInfo = (FrontLoginClasses)session.getAttribute("authObject");
+		 setAllLoginInfo(loginInfo, model, shopid);	
+
 		
 		HashMap<String, Object> styleInfo=sis.getStyle(shopid);
 		
 		HashMap<String, List> data=sis.createBigDivHTML(shopid);
 		model.addAttribute("fullView",(List<List<String>>) data.get("htmls"));
-//		model.addAttribute("auth",loginInfo);
-//		model.addAttribute("memberId",loginInfo.getMemberId());
+
 		System.out.println("nav");
 		System.out.println(styleInfo.get("nav"));
 		 
