@@ -1,6 +1,10 @@
 // 多張-上傳圖片//
 // 拖移上傳圖片
 let uploadedFilesArray = [];
+function clearArray(){
+	uploadedFilesArray = []
+	console.log("clearArray", uploadedFilesArray);
+}
 
 function handleDragOver(event) {
 	event.preventDefault();

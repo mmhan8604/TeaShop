@@ -4,6 +4,7 @@ function addProduct() {
 	$("#upload").off("click");
 	$("#upload").on("click", function() {
 		uploadData();
+		clearArray();
 	});
 }
 
@@ -11,10 +12,7 @@ function addProduct() {
 function imgArray(uploadedFilesArray) {
 	console.log("addProductUploadedFilesArray---" + uploadedFilesArray);
 	var imagesData = {};
-	for (var i = 0; i < uploadedFilesArray.length && i < 5; i++) {
-		imagesData['pictext_' + i] = uploadedFilesArray[i];
-	}
-	
+		imagesData['pictext_' + 0] = uploadedFilesArray[0];	
 	a = imagesData;
 }
 
@@ -22,8 +20,6 @@ function uploadData() {
 	var productIdPOST = $('#addProductID').val();
 	var newProductData = catchProductData();
 	let base64ImgArray = a;
-	console.log("base64ImgArray----" + base64ImgArray);
-	console.log(productIdPOST);
 	console.log(newProductData);
 	newProductData.picjson = base64ImgArray['pictext_0'];
 	
@@ -64,21 +60,21 @@ function catchProductData() {
 	}
 
 	// 使用一個空對象來存放圖片數據
-	//	var imagesData = {};
+		var imagesData = {};
 
 	// 獲取 addProductImgs 區域的子元素，即上傳的圖片預覽區域
-	//	var imagePreviews = document.getElementById("addProductImgs").children;
+		var imagePreviews = document.getElementById("addProductImgs").children;
 
 	// 遍歷每個圖片預覽區域，將其 base64 編碼的數據存入對應的 pictext 字段
-	//	for (var i = 0; i < imagePreviews.length; i++) {
-	//		var imagePreview = imagePreviews[i];
-	//		var base64Data = getImageBase64Data(imagePreview);
-	//		imagesData['pictext_' + i] = base64Data;
-	//	}
+		for (var i = 1; i < imagePreviews.length; i++) {
+			var imagePreview = imagePreviews[i];
+			var base64Data = getImageBase64Data(imagePreview);
+			imagesData['pictext_' + i] = base64Data;
+			console.log("imagesData['pictext_' + i----]"+imagesData['pictext_' + i]);
+		}
 
 	// 其餘商品數據
 	var otherProductData = {
-		//		picjson: imagesData['pictext_0'],
 		id: $("#addProductID").val(),
 		name: $("#addProductName").val(),
 		stock: $('#addProductQuantity').val(),
@@ -90,24 +86,24 @@ function catchProductData() {
 	};
 
 	// 將圖片數據和其他商品數據合併
-	//	var productData = { ...imagesData, ...otherProductData };
+		var productData = { ...imagesData, ...otherProductData };
 
-	return otherProductData;
+	return productData;
 }
 
 // 獲取圖片 base64 編碼的函數
-//function getImageBase64Data(imagePreview) {
-//	var image = imagePreview.querySelector('img');
-//	if (image) {
-//		var canvas = document.createElement('canvas');
-//		canvas.width = image.width;
-//		canvas.height = image.height;
-//		var context = canvas.getContext('2d');
-//		context.drawImage(image, 0, 0, image.width, image.height);
-//		return canvas.toDataURL('image/png');
-//	}
-//	return null;
-//}
+function getImageBase64Data(imagePreview) {
+	var image = imagePreview.querySelector('img');
+	if (image) {
+		var canvas = document.createElement('canvas');
+		canvas.width = image.width;
+		canvas.height = image.height;
+		var context = canvas.getContext('2d');
+		context.drawImage(image, 0, 0, image.width, image.height);
+		return canvas.toDataURL('image/png');
+	}
+	return null;
+}
 
 
 // 更新資料

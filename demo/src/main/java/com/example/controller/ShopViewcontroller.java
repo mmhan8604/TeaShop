@@ -112,6 +112,9 @@ public class ShopViewcontroller {
 		model.addAttribute("productPrice", product.getPrice());
 		model.addAttribute("productDiscription", product.getDiscription());
 		model.addAttribute("imgSrc",product.getPicjson());
+		model.addAttribute("imgSrc1",product.getPictext_1());
+		model.addAttribute("imgSrc2",product.getPictext_2());
+		model.addAttribute("imgSrc3",product.getPictext_3());
 		return "/shopPage/product";		//商品頁	
 	}
 	

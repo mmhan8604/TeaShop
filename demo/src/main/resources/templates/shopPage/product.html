@@ -27,6 +27,12 @@
 	<!--web icon-->
 	<!-- <link rel="shortcut icon" href="../code-4/logo/white/logo_04.png" type="image/x-icon" /> -->
 	<!--======================================================================================================================= -->
+	<style>
+		.smallimg{
+			height: 67px;}
+			
+		
+	</style>
 </head>
 
 <body>
@@ -103,16 +109,24 @@
 			<div class="card mb-3 w-100 p-3" style="background-color: #e9eee7; border: none;">
 				<div class="row g-0 ">
 					<div class="col-md-3">
-						<div class=" row col-12 h-75 w-auto  m-1"><img
-								th:src="${imgSrc}" src="/frontstage/product/blackTea/blacktea-3-v2.png" class="img-fluid px-0" alt="...">
+						<div class=" row col-12 h-75 w-auto  m-1 "><img
+								th:src="${imgSrc}" src="/frontstage/product/blackTea/blacktea-3-v2.png" class="img-fluid px-0" alt="..." >
 						</div>
 						<div class="row row-cols-3  mt-4 px-2">
-							<div class="col p-1 "><img src="/frontstage/product/blackTea/blackTea-1.png"
-									class="img-fluid " alt="..."></div>
-							<div class="col p-1"><img src="/frontstage/product/blackTea/blacktea-2-1.png"
-									class="img-fluid" alt="..."></div>
-							<div class="col p-1"><img src="/frontstage/product/blackTea/blacktea-2-1.png"
-									class="img-fluid" alt="..."></div>
+							<div class="col p-1 "th:if="${imgSrc1!=null}"><img th:src="${imgSrc1}" src="/frontstage/product/blackTea/blackTea-1.png"
+									class="img-fluid smallimg" alt="..."></div>
+							<div class="col p-1 "th:if="${imgSrc1==null}"><img  src="/frontstage/product/blackTea/blackTea-1.png"
+									class="img-fluid smallimg" alt="..."></div>
+									
+							<div class="col p-1" th:if="${imgSrc2!=null}"><img th:src="${imgSrc2}" src="/frontstage/product/blackTea/blacktea-2-1.png"
+									class="img-fluid smallimg" alt="..."></div>
+							
+							<div class="col p-1" th:if="${imgSrc2==null}"><img  src="/frontstage/product/blackTea/blacktea-2-1.png"
+									class="img-fluid smallimg" alt="..."></div>
+							<div class="col p-1" th:if="${imgSrc3!=null}"><img th:src="${imgSrc3}" src="/frontstage/product/blackTea/blacktea-2-1.png"
+									class="img-fluid smallimg" alt="..."></div>
+							<div class="col p-1" th:if="${imgSrc3==null}"><img  src="/frontstage/product/blackTea/blacktea-2-1.png"
+									class="img-fluid smallimg" alt="..."></div>
 						</div>
 					</div>
 
