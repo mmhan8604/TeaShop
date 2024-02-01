@@ -3,7 +3,7 @@ $(document).ready(function() {
 	// 統一處理點擊事件
 	$("li a")
 		.click(function() {
-
+			$("#upload").off("click");
 			var buttonId = this.id;
 			console.log(buttonId);
 			var filename = "/backstage/html/" + buttonId + ".html #formSpace>*";
