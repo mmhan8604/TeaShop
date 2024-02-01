@@ -133,25 +133,47 @@ public class ShopIndexServiceImpl implements ShopIndexService {
 				} case"表單":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(5));
 					
-					FormElementHTML form=new FormElementHTML(type,
-							webElement.get("headerText1").toString(),
-							 webElement.get("headerText2").toString(),
-							 webElement.get("childBackroundColor").toString(), 
-							 webElement.get("childBackroundImg").toString(), 
-							 webElement.get("formImg").toString());
-					welw.add(form.getFormElement());
+					if(type==1) {
+						FormElementHTML form=new FormElementHTML(type,
+								webElement.get("headerText1").toString(),
+								 webElement.get("headerText2").toString(),
+								 webElement.get("childBackroundColor").toString(), 
+								 webElement.get("childBackroundImg").toString(), 
+								 webElement.get("formImg").toString());
+						welw.add(form.getFormElement());
+					}else {
+						FormElementHTML form=new FormElementHTML(type,
+								webElement.get("headerText1").toString(),
+								null,
+								 webElement.get("childBackroundColor").toString(), 
+								 webElement.get("childBackroundImg").toString(), 
+								null);
+						welw.add(form.getFormElement());
+					}
+					
+					
 					
 					break;
 					
 				} case"圖片":{
 					int type=Integer.parseInt(webElement.get("elementType").toString().substring(3, 4));
+					if (type!=4) {
+						ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
+								webElement.get("headerText2").toString(),
+								webElement.get("childBackroundColor").toString(),
+								webElement.get("childBackroundImg").toString(),
+								jsonUtil.objtoLinkedList(webElement.get("img")));
+						welw.add(img.getImgElement());
+					}else {
+						ImgElementHTML img=new ImgElementHTML(type,null,
+								null,
+								webElement.get("childBackroundColor").toString(),
+								webElement.get("childBackroundImg").toString(),
+								null);
+						welw.add(img.getImgElement());
+					}
 					
-					ImgElementHTML img=new ImgElementHTML(type,webElement.get("headerText1").toString(),
-							webElement.get("headerText2").toString(),
-							webElement.get("childBackroundColor").toString(),
-							webElement.get("childBackroundImg").toString(),
-							jsonUtil.objtoLinkedList(webElement.get("img")));
-					welw.add(img.getImgElement());
+					
 					
 					break;
 				} case"商品":{

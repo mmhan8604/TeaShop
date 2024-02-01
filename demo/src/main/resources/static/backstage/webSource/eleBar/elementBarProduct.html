@@ -49,13 +49,13 @@
             </div>
 
             <input type="radio" name="nb_5_eleRadName" id="b_5_eleRadio_1" class="inputHidden"
-                onclick="showContent(nb_5_conDiv_1)" onclick="showContent('imgEle_1')" />
+                onclick="showContent(nb_5_conDiv_1),setCardCount(4, 'container1')"  onclick="showContent('imgEle_1')" />
             <label for="b_5_eleRadio_1" onclick="productElement(event,'view-',grid_test)">
                 <img src="backstage/icon/eleProduct-1.png" alt=""
                     style="height: 100px; width: 200px; object-fit: contain; margin: 10px auto;" />
             </label>
             <input type="radio" name="nb_5_eleRadName" id="b_5_eleRadio_2" class="inputHidden"
-                onclick="showContent(nb_5_conDiv_2)" onclick="showContent('imgEle_2')" />
+                onclick="showContent(nb_5_conDiv_2),setCardCount(3, 'container2')" onclick="showContent('imgEle_2'),setCardCount(3, 'container1')" />
             <label for="b_5_eleRadio_2" style="margin-bottom: 20px;" onclick="productElement2(event,'view-',grid_test)">
                 <img src="backstage/icon/eleProduct-2.png" alt="" style="height: 100px; width: 200px; object-fit: contain;" />
             </label>
@@ -67,7 +67,7 @@
                     style="font-size: 20px; margin-top: 20px; margin-bottom: 20px; text-align: left; margin-left: 7%;">
                     卡片內容設定｜
                 </div>
-                <div style="display: flex; align-items: center; margin-left: 7%;">
+                <div style="display: none; align-items: center; margin-left: 7%;">
                     <div style="font-size: 16px; text-align: left;">
                         卡片數量：
                     </div>
@@ -96,7 +96,7 @@
                     style="font-size: 20px; margin-top: 20px; margin-bottom: 20px; text-align: left; margin-left: 7%;">
                     卡片內容設定｜
                 </div>
-                <div style="display: flex; align-items: center;">
+                <div style="display: none; align-items: center;">
                     <div style="font-size: 16px; text-align: left; margin-left: 7%;">
                         卡片數量：
                     </div>
@@ -185,6 +185,7 @@
 
         // 顯示被選擇的內容
         document.getElementById(contentId).style.display = 'block';
+        
     }
 
     // 顏色選擇器//
@@ -346,15 +347,8 @@
 
             // 插入特定的內容，使用唯一的 id
             newDiv.innerHTML = `
-                        <div style="font-size: 16px; margin-top: 20px; text-align: left; margin-left: 7%;">
-                            商品圖片-${localCounter - 1}
-                        </div>
-                        <div class="dropArea" id="b${block}_${grid}_${ele}_eleDiv_${counter + localCounter - 2}" height: 200px;
-                            style="text-align: center;display: flex;align-items: center; justify-content: space-around; margin-left: 7%; "
-                            ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'b${block}_${grid}_${ele}_eleDiv_${counter + localCounter - 2}')"
-                            onclick="clickUpload('b${block}_${grid}_${ele}_eleDiv_${counter + localCounter - 2}','${i+1}')">
-                            拖曳或點選<br>此處上傳圖片
-                        </div> 
+                        
+                        
                         <div style="display: flex;align-content: center; justify-content: center;align-items: center; margin-top: 10px;">
                             <label for="b${block}_${grid}_${ele}_cardBGIC_${counter + localCounter - 2}" style="font-size: 16px;">卡片背景：</label>
                             <input type="color" id="b${block}_${grid}_${ele}_cardBGIC_${counter + localCounter - 2}" name="b${block}_${grid}_${ele}_cardBGIC_${counter + localCounter - 2}" value="#FFFFFF"
@@ -363,12 +357,7 @@
                                 oninput="updateColorPicker('b${block}_${grid}_${ele}_cardBGIC_${counter + localCounter - 2}', this.value)"
                                 style="width: 250px; display: inline-block; background-color: #b8b8b8;" onblur="productBgColor(this,${i + 1})"><br>
                         </div>
-                        <div style="margin: 10px auto;">
-                            <label for="b${block}_${grid}_${ele}_pdtInput_${counter + localCounter - 2}" style="font-size: 16px;">元件標題：</label>
-                            <input id="b${block}_${grid}_${ele}_pdtInput_${counter + localCounter - 2}" class="form-control form-control-sm"
-                                style="width:300px; height: 40px; display: inline; background-color: #b8b8b8;" type="text"
-                                value="我是標題" placeholder="請填寫此區標題，若無則空" onblur="productTitle(this,${i + 1})">
-                        </div>
+                        
                         <div style="display: flex;align-content: center; justify-content: center;align-items: center; margin-top: 10px;">
                             <label for="b${block}_${grid}_${ele}_cardTIIC_${counter + localCounter - 2}" style="font-size: 16px;">標題顏色：</label>
                             <input type="color" id="b${block}_${grid}_${ele}_cardTIIC_${counter + localCounter - 2}" name="b${block}_${grid}_${ele}_cardTIIC_${counter + localCounter - 2}" value="#FF0000"
@@ -377,12 +366,7 @@
                                 oninput="updateColorPicker('b${block}_${grid}_${ele}_cardTIIC_${counter + localCounter - 2}', this.value)"
                                 style="width: 250px; display: inline-block; background-color: #b8b8b8;" onblur="productTitleColor(this,${i+1})"><br>
                         </div>
-                        <div style="margin: 10px auto;">
-                            <label for="b${block}_${grid}_${ele}_priInput_${counter + localCounter - 2}" style="font-size: 16px;">卡片價格：</label>
-                            <input id="b${block}_${grid}_${ele}_priInput_${counter + localCounter - 2}" class="form-control form-control-sm"
-                                style="width:300px; height: 40px; display: inline; background-color: #b8b8b8;" type="text"
-                                value="我是標題" placeholder="請填寫此區標題，若無則空" onblur="productPrice(this,${i + 1})">
-                        </div>
+                        
                         <div style="display: flex;align-content: center; justify-content: center;align-items: center; margin-top: 10px;">
                             <label for="b${block}_${grid}_${ele}_btnBGIC_${counter + localCounter - 2}" style="font-size: 16px;">按鈕顏色：</label>
                             <input type="color" id="b${block}_${grid}_${ele}_btnBGIC_${counter + localCounter - 2}" name="b${block}_${grid}_${ele}_btnBGIC_${counter + localCounter - 2}" value="#FF0000"
@@ -407,6 +391,7 @@
                                 oninput="updateColorPicker('b${block}_${grid}_${ele}_btnTTIC_${counter + localCounter - 2}', this.value)"
                                 style="width: 250px; display: inline-block; background-color: #b8b8b8;" onblur="productBtnText(this, ${i+1})"><br>
                         </div>
+                        <hr>
                     `;
 
             // 將新建的 div 插入容器中

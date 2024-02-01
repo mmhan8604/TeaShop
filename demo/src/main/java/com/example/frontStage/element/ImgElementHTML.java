@@ -23,8 +23,10 @@ public class ImgElementHTML {
 			createImgElement01();
 		}else if (type==2) {
 			createImgElement02();
-		}else {
+		}else if(type==3) {
 			createImgElement03();
+		}else {
+			createImgElement04();
 		}
 	}
 	
@@ -152,6 +154,12 @@ public class ImgElementHTML {
 				+ "</div>",childBackroundColor,childBackroundImg, headerText1,headerText2,img.get(0),img.get(1),img.get(2));
 		return imgElement;
 }
+	public String createImgElement04() {
+			imgElement=String.format("<div class='child' style='background-color:%s ;background-repeat: no-repeat;background-size: cover;;background-image: %s; display: flex;flex-direction: column;justify-content: center;align-items: center;width:100%%;height: 50vh;padding: 3%%;'>\r\n"
+					+ "       \r\n"
+					+ "  </div>",childBackroundColor,childBackroundImg );
+		return imgElement;
+	}
 
 	public String getHeaderText1() {
 		return headerText1;

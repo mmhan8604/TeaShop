@@ -45,24 +45,33 @@ function parseCarousel(view,webEle){
 
 function pareseForm(view,webEle){
     webEle["headerText1"]=view.getElementsByClassName("headerText1")[0].innerHTML;
-    webEle["headerText2"]=view.getElementsByClassName("headerText2")[0].innerHTML;
+    if(view.getElementsByClassName("headerText2").length!=0){
+		webEle["headerText2"]=view.getElementsByClassName("headerText2")[0].innerHTML;
+	}
     webEle["childBackroundColor"]=view.getElementsByClassName("child")[0].style.backgroundColor==""?"#dedede":view.getElementsByClassName("child")[0].style.backgroundColor
     webEle["childBackroundImg"]=view.style.backgroundImage;
-    webEle["formImg"]=view.getElementsByClassName("imageArea02")[0].getElementsByTagName("img")[0].src
+    if(view.getElementsByClassName("imageArea02").length!=0){
+		webEle["formImg"]=view.getElementsByClassName("imageArea02")[0].getElementsByTagName("img")[0].src
+	}
 
     return webEle;
 }
 
-function parseImgEle(view,webEle){
-    webEle["headerText1"]=view.getElementsByClassName("headerText1")[0].innerHTML;
-    webEle["headerText2"]=view.getElementsByClassName("headerText2")[0].innerHTML;
-    webEle["childBackroundColor"]=view.getElementsByClassName("child")[0].style.backgroundColor==""?"#dedede":view.getElementsByClassName("child")[0].style.backgroundColor
-    webEle["childBackroundImg"]=view.style.backgroundImage;
-    webEle["img"]=[]
-    for(let i=0;i<view.getElementsByClassName("img").length;i++){
-        webEle["img"][i]=view.getElementsByClassName("img")[i].getElementsByTagName("img")[0].src
-    }
-    return webEle;
+function parseImgEle(view, webEle, elemrntType) {
+	if (elemrntType != "圖片04元件") {
+		webEle["headerText1"] = view.getElementsByClassName("headerText1")[0].innerHTML;
+		webEle["headerText2"] = view.getElementsByClassName("headerText2")[0].innerHTML;
+		webEle["childBackroundColor"] = view.getElementsByClassName("child")[0].style.backgroundColor == "" ? "#dedede" : view.getElementsByClassName("child")[0].style.backgroundColor
+		webEle["childBackroundImg"] = view.style.backgroundImage;
+		webEle["img"] = []
+		for (let i = 0; i < view.getElementsByClassName("img").length; i++) {
+			webEle["img"][i] = view.getElementsByClassName("img")[i].getElementsByTagName("img")[0].src
+		}
+	}else{
+		webEle["childBackroundColor"] = view.getElementsByClassName("child")[0].style.backgroundColor == "" ? "#dedede" : view.getElementsByClassName("child")[0].style.backgroundColor
+		webEle["childBackroundImg"] = view.style.backgroundImage;
+	}
+	return webEle;
 }
 
 function parseProduct(view,webEle){
@@ -125,7 +134,7 @@ function webelementToObj(view,index){
     }else if(webEle.elementType.slice(0, 2)=="表單"){
         webEle=pareseForm(view.getElementsByClassName("gridblock")[index],webEle);
     }else if(webEle.elementType.slice(0, 2)=="圖片"){
-        webEle=parseImgEle(view.getElementsByClassName("gridblock")[index],webEle);
+        webEle=parseImgEle(view.getElementsByClassName("gridblock")[index],webEle,webEle.elementType);
     }else if(webEle.elementType.slice(0, 2)=="商品"){
         webEle=parseProduct(view.getElementsByClassName("gridblock")[index],webEle);
     }else if(webEle.elementType.slice(0, 2)=="文字"){

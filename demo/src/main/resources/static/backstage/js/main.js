@@ -601,6 +601,22 @@ function imgElement3(event,id, littleBlock) {
     });
 }
 
+function imgElement4(event,id, littleBlock) {
+  let barEvent=event.currentTarget.getAttribute("onclick").split(";")[0]
+    let viewid = id + bigBlockNum; //拿取目前區塊的id從全域變數拿
+    // GridBlock = littleBlock;
+    viewid = viewid + " " + "#" +"view-"+bigBlockNum+ littleBlock;
+    $(`#${viewid} `).load("backstage/websource/eleType/ImgElement04.html",()=>{
+      
+      
+      document.getElementById(`${"view-"+bigBlockNum+ littleBlock}`).getElementsByClassName("child")[0].addEventListener("click",
+      ()=>{eval(barEvent)}
+      
+      )
+      
+    });
+}
+
 // 影片元件// ------------------------------------------------
 function videoElement(event,id, littleBlock) {
   let barEvent=event.currentTarget.getAttribute("onclick").split(";")[0]

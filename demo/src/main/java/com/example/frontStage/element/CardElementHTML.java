@@ -22,12 +22,7 @@ public class CardElementHTML {
 //	private String textBody;
 	
 	private String cardElement;
-//	private String cardElement02;
-//	private String cardElement03;
-//	private String cardElement04;
-//	private String cardElement05;
-//	private String cardElement06;
-//	private String cardElement07;
+
 	
 	public CardElementHTML(int type,String backroundColor,String backroundImg,String headerText1,String headerText2,String cardBackround,String cardTitleColor, String cardTextColor,LinkedList<String> cardTitle,LinkedList<String> cardImg,LinkedList<String> cardText) {
 		this.backroundColor=backroundColor;

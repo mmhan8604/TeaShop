@@ -79,14 +79,14 @@ public class shopInfo {
 		return shopName;
 	}
 
-
-
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+
 	}
 
 
 
+	
 	public String getName() {
 		return name;
 	}

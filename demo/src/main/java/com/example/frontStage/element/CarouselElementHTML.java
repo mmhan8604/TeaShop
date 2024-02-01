@@ -13,7 +13,7 @@ public class CarouselElementHTML {
 	
 	public String createCarouselElement(List<String>carouselImg) {
 		carouselElement=String.format(" <!-- ****這邊開始複製 --------------------->\r\n"
-				+ " <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;padding: 3%%;'>\r\n"
+				+ " <div class='child' style='display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%%;'>\r\n"
 				+ "    <div id='myCarousel' class='carousel slide' data-bs-ride='carousel' data-bs-interval='2000'>\r\n"
 				+ "        <!-- 下方指標 -->\r\n"
 				+ "        <div class='carousel-indicators'>\r\n"

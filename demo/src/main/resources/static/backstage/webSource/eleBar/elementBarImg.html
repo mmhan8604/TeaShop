@@ -63,6 +63,11 @@
             <label for="b_4_eleRadio_3" style="margin-bottom: 20px;" onclick="imgElement3(event,'view-',grid_test)">
                 <img src="backstage/icon/eleImg-3.png" alt="" style="height: 60px; width: 120px; object-fit: contain;" />
             </label>
+            <input type="radio" name="nb_4_eleRadName" id="b_4_eleRadio_4" class="inputHidden"
+                onclick="hiddenContent()" onclick="showContent('imgEle_4')" />
+            <label for="b_4_eleRadio_4" style="margin-bottom: 20px;" onclick="imgElement4(event,'view-',grid_test)">
+                 <img src="backstage/icon/eleImg-4.png" alt="" style="height: 60px; width: 120px; object-fit: contain;" />
+            </label>
 
             <!-- 樣式1 -->
             <div id="b_4_conDiv_1" class="contentEle" style="margin-top: 20px;">
@@ -197,7 +202,12 @@
     //id_元件圖片
     nb_4_eleDiv = `b${block}_${grid}_${ele}_eleDiv_${counter}`;
     // document.getElementById('b_4_eleDiv').id = nb_4_eleDiv;
-
+	function hiddenContent(){
+        let allContents = document.getElementsByClassName('contentEle');
+        for (let i = 0; i < allContents.length; i++) {
+            allContents[i].style.display = 'none';
+        }
+    }
 
     // 選擇樣式//
     function showContent(contentId) {

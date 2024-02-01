@@ -112,4 +112,10 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
+	// 熱銷商品
+	@Override
+	public List<Object[]> findTopSellingProductsByShopId(String shopId) {
+		return productsRes.findTopSelling4ProductsByShopId(shopId);
+	}
+
 }

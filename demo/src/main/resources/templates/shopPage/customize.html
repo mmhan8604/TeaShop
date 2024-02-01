@@ -7,23 +7,36 @@
 	<link rel="stylesheet" href="http://localhost:8080/backstage/css/element.css" />
 	<link rel="stylesheet" href="http://localhost:8080/backstage/css/style_v2.css" />
 	<link rel="stylesheet" href="/frontstage/css/nav.css">
+	<link rel="stylesheet" href="/frontstage/css/footer.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<style th:inline="text">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<style th:inline="css">
+		body {
+			font-family:
+			/*[[${nav.fontStyle}]]*/
+			'Microsoft JhengHei';
+			
+		}
+
 		
+		.productImg {
+			height: 35vh;
+			object-fit: contain;
+		}
 	</style>
-	
-	<title>Document</title>
+
+	<title>商店首頁</title>
 </head>
 
-<body>
-	
+<body th:style="'font-family:'+${nav.fontStyle}">
+
 	<!-- navbar -->
-		<!--nav導覽列頭-->
-		<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
-		<div class="container-fluid dingchaHead py-3" style="background-color: #95A58E;">
+	<!--nav導覽列頭-->
+	<nav class="navbar navbar-expand-lg bg-light fixed-top py-0 " id="">
+		<div class="container-fluid dingchaHead py-3" th:style="'background-color:' +${nav.navBackround}">
 			<!-- Logo、官網名，連結首頁 -->
 			<a th:href="@{'/shop/' + ${shopId} + '/shopindex'}" class="navbar-brand ms-3 py-0">
 				<img src="/frontstage/logo/white/logo_04.png" style="height: 55px; width: auto;">
@@ -38,10 +51,14 @@
 			<!-- 導覽欄About、Shopping、Connection、登入、購物車 -->
 			<div class="collapse navbar-collapse  " id="navbarNavAltMarkup">
 				<div class="navbar-nav mx-auto text-center  ">
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}">Home</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}">About</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}">Shopping</a>
-					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}">Connection</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shopindex'}"
+						th:style="'color:'+${nav.navFontColor}">Home</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/aboutUs'}"
+						th:style="'color:'+${nav.navFontColor}">About</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/shoppingPage'}"
+						th:style="'color:'+${nav.navFontColor}">Shopping</a>
+					<a class="nav-link" th:href="@{'/shop/' + ${shopId} + '/contactUs'}"
+						th:style="'color:'+${nav.navFontColor}">Connection</a>
 				</div>
 				<!-- 登入Login、購物車按鈕icon -->
 
@@ -59,9 +76,10 @@
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSignout" type="button"
 								href="#"><img src="/frontstage/icon/white/leave.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">登出</a></li>
-						
+
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href="#"><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -72,7 +90,8 @@
 									style="height: 20px;width: auto;">登入</a></li>
 
 						<li><a class="dropdown-item  mx-auto mb-1 px-0 w-75 rounded" id="navSetting" type="button"
-								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
+								th:href="@{'/shop/' + ${shopId} + '/member'}" href=""><img
+									src="/frontstage/icon/white/set.png " alt="" class="me-2 mb-1"
 									style="height: 20px;width: auto;">設定</a></li>
 					</ul>
 
@@ -84,18 +103,18 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div style="height: 87px; width: 10px;">
-		
+
 	</div>
-	
-	
+
+
 	<div class="" th:each="webelements,iter:${fullView}">
 		<div th:switch="${templateTypes[iter.index]}">
 			<div th:case="block0" th:utext="${webelements[0]}"></div>
 
 			<div th:case="block1" class="block1" style="height: 100%; width: 100%;">
-				<div class="row" style="height: 50%">
+				<div class="row" style="height: 50%;min-height: 50%;">
 					<div th:utext="${webelements[0]}" class="col-4 gridblock"
 						style="padding-left: 0; padding-right: 0; height: 100%;"></div>
 
@@ -181,27 +200,33 @@
 
 
 			<div th:case="block5" class=" block5" style="height: 100%">
-				<div class="row" style="height: 50%">
-					<div  th:utext="${webelements[0]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0;height: 100%;">
+				<div class="row" style="height: 50%; min-height: 50%;">
+					<div th:utext="${webelements[0]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0;height: 100%;">
 
 					</div>
-					<div  th:utext="${webelements[1]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0;height: 100%;">
+					<div th:utext="${webelements[1]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0;height: 100%;">
 
 					</div>
-					<div  th:utext="${webelements[2]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0;height: 100%;">
+					<div th:utext="${webelements[2]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0;height: 100%;">
 
 					</div>
 				</div>
 
 
-				<div class="row" style="height: 50%;">
-					<div  th:utext="${webelements[3]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0; height: 100%;">
+				<div class="row" style="height: 50%; min-height: 50%;">
+					<div th:utext="${webelements[3]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0; height: 100%;">
 
 					</div>
-					<div  th:utext="${webelements[4]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0; height: 100%;">
+					<div th:utext="${webelements[4]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0; height: 100%;">
 
 					</div>
-					<div  th:utext="${webelements[5]}" class="col-4 gridblock" style=" padding-left: 0; padding-right: 0; height: 100%;">
+					<div th:utext="${webelements[5]}" class="col-4 gridblock"
+						style=" padding-left: 0; padding-right: 0; height: 100%;">
 
 					</div>
 				</div>
@@ -212,7 +237,70 @@
 
 	</div>
 	</div>
+	<footer class="text-center py-2 sticky-top" th:style="'background-color:' +${nav.footerBackround}">
+		<div class="container">
 
+			<img src="/frontstage/logo/white/logo_01.png" alt="版權商標" class="footer-icon-img">
+
+			<p th:style="'color:'+${nav.footerFontColor}" class="mb-0">版權所有 &copy; 頂茶TopTea.</p>
+		</div>
+	</footer>
+
+	<script>
+		function setShopID() {
+			var currentURL = window.location.href;
+
+			var startIndex = currentURL.indexOf("shopPage/");
+
+			// 如果找到了 shopPage/
+			if (startIndex !== -1) {
+				// 提取 shopPage/ 后面的内容
+				var contentAfterShopPage = currentURL.substring(startIndex + "shopPage/".length);
+				sessionStorage.setItem("shopID",contentAfterShopPage)
+			} else {
+				console.log("URL 中未找到 shopPage/");
+			}
+		}
+		setShopID();
+		if (document.getElementsByClassName('product-title').length != 0) {
+			let thisUrl = window.location.href
+			$.ajax({
+				type: "GET",
+				url: "/findTopSellingProducts/" +sessionStorage.getItem("shopID"),
+				success: function (response) {
+					// 成功取得資料後的處理
+					console.log("成功取得熱銷商品資料:", response);
+
+					// 存取 topSellingProducts 屬性
+					var topSellingProducts = response.topSellingProducts;
+
+					// 存取陣列元素
+					for (var i = 0; i < topSellingProducts.length; i++) {
+						var product = topSellingProducts[i];
+
+						// 存取子陣列的元素
+						var productName = product[0];
+						var productPrice = product[1];
+						var productImg = product[2];
+						var productQuantity = product[3];
+
+						// 在這裡進行你的代碼處理，例如更新 HTML 元素
+						// 以下是一個示例，你需要適應你的 HTML 結構和 class
+						let a = $('.product-title')[i]
+
+						$('.product-title')[i].innerHTML = productName;
+						$('.product-text')[i].innerHTML = '$' + productPrice;
+						$('.productImg')[i].src = productImg;
+					}
+				},
+				error: function (error) {
+					// 發生錯誤時的處理
+					console.error("取得熱銷商品資料失敗:", error);
+				}
+			});
+		}
+
+	</script>
 
 </body>
 
