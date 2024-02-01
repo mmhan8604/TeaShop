@@ -48,7 +48,7 @@ $(document).ready(function () {
 	        var name = $(this).data('name');
 	        var price = $(this).data('price');
 	        var image = $(this).data('image');
-	
+			var discountprice = $(this).data('discountprice');
 	        var quantitySelector, quantity;
 	
 	        // 检查是否在模态窗口中
@@ -63,7 +63,7 @@ $(document).ready(function () {
 	
 	        quantity = parseInt(quantitySelector.val()) || 1; // 如果获取的数量无效，则默认为 1
 	
-	        var product = {id:id, name: name, price: price, image: image, quantity: quantity };
+	        var product = {id:id, name: name, price: price, image: image, quantity: quantity, discountprice:discountprice };
 	
 	        var cart = JSON.parse(localStorage.getItem('cart')) || [];
 	        var existingProductIndex = cart.findIndex(p => p.name === name);
@@ -98,16 +98,16 @@ $(document).ready(function () {
                 row.append($('<div class="col-2 d-flex align-items-center"></div>').text(item.quantity));
                 var totalPrice = item.price * item.quantity;
                 row.append($('<div class="col-2 d-flex align-items-center"></div>').text(item.price));
-                var discountPrice = item.price * item.quantity;
-                row.append($('<div class="col-2 d-flex align-items-center"></div>').text(item.price)); // 如果有折扣，應該這裡計算折扣後的價格
+                var totaldiscountPrice = item.discountprice * item.quantity;
+                row.append($('<div class="col-2 d-flex align-items-center"></div>').text(item.discountprice)); // 如果有折扣，應該這裡計算折扣後的價格
                 row.append($('<div class="col-2 d-flex align-items-center"></div>').append($('<button class="delete-box" type="button"></button>').append($('<img>').attr('src', '/frontstage/icon/white/delete.png').addClass('delete-img'))));
-                row.append($('<div class="col-2 d-flex align-items-center"></div>').text(totalPrice)); // 這裡應該計算總計
+                row.append($('<div class="col-2 d-flex align-items-center"></div>').text(totaldiscountPrice)); // 這裡應該計算總計
                 $('.shopping-cart').append(row);
             });
 
              // 計算並添加總計行到 cart-body
             var totalSum = cart.reduce(function (sum, item) {
-                return sum + (item.price * item.quantity);
+                return sum + (item.discountprice * item.quantity);
             }, 0);
 
             // 創建總計行
@@ -150,7 +150,7 @@ $(document).ready(function () {
         
         // 更新總計
         var totalSum = newCart.reduce(function (sum, item) {
-        return sum + (item.price * item.quantity);
+        return sum + (item.discountprice * item.quantity);
         }, 0);
          $('.total-price').empty(); // 假設您有一個顯示總計的元素
          for (var i = 0; i < 5; i++) {

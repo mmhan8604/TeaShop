@@ -141,10 +141,10 @@
 									<div th:text="${orderDetail.quantity}" class="col-2 d-flex align-items-center">
 									</div>
 									<!-- 使用 orderDetail.amount 來設置金額 -->
-									<div th:text="${orderDetail.amount}" class="col-2 d-flex align-items-center"></div>
-									<div th:text="${orderDetail.amount}" class="col-2 d-flex align-items-center"></div>
+									<div th:text="${orderDetail.price}" class="col-2 d-flex align-items-center"></div>
+									<div th:text="${orderDetail.amount/orderDetail.quantity}" class="col-2 d-flex align-items-center"></div>
 									<div class="col-2 d-flex align-items-center"></div>
-									<div class="col-2 d-flex align-items-center"></div>
+									<div th:text="${orderDetail.amount}" class="col-2 d-flex align-items-center"></div>
 								</div>
 							</div>
 						</div>

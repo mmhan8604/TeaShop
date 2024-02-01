@@ -134,7 +134,7 @@
 						<div class="card-body cart-full-quantity px-1 px-md-5 py-5 shopping02Cardbody">
 							<p class="card-title aboutCardtitle" th:text="${productName}"></p>
 
-							<p class="card-text product-price text-end me-2 my-3 fs-4" th:text="'$'+${productPrice}">
+							<p class="card-text product-price text-end me-2 my-3 fs-4" th:text="'$'+${productDiscount}">
 								$500</p>
 
 							<p class="card-text  fs-6 fs-4 my-3 " th:text="${productDiscription}">
@@ -174,7 +174,7 @@
 									<div class="w-100 nullSpace">　</div>
 									<li class="checkout-btn col-xs-6 shoppingAddcart">
 										<a href="#" type="submit" class="btn mt-4 add-to-cart" th:data-id="${productId}"
-											th:data-name="${productName}" th:data-price="${productPrice}"
+											th:data-name="${productName}" th:data-price="${productPrice}" th:data-discountprice="${productDiscount}"
 											data-image="/frontstage/product/blackTea/blacktea-3-v2.png">加入購物車</a>
 									</li>
 									

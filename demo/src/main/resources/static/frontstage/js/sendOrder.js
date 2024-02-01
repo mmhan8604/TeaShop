@@ -36,11 +36,11 @@ function sendOrder() {
 				productId: item.id,
 				quantity: item.quantity,
 				price: item.price,
-				amount: item.price * item.quantity,
+				amount: item.discountprice * item.quantity,
 				orderId: orderid
 
 			}
-			bigtaltalAmount += item.price * item.quantity;
+			bigtaltalAmount += item.discountprice * item.quantity;
 			console.log(detail[`${i}`])
 			i += 1;
 		});

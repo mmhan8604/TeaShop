@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Products {
@@ -30,6 +33,9 @@ public class Products {
 	private int stock;
 
 	private boolean discontinued;
+	
+	@OneToMany(mappedBy = "products")
+    private List<Activitydetails> discounts;
 
 	private String shopId;
 
@@ -240,6 +246,7 @@ public class Products {
 		this.mainPicBlob = mainPicBlob;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Products [id=" + id + ", name=" + name + ", activity=" + activity + ", price=" + price + ", cost="

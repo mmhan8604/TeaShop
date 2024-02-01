@@ -1,8 +1,10 @@
 package com.example.repository;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import com.example.entity.Products;
 
 public interface ProductsResposity extends JpaRepository<Products, String>{
@@ -12,6 +14,7 @@ public interface ProductsResposity extends JpaRepository<Products, String>{
     List<Products> findAllByOrderByNameAsc();
     List<Products> findByShopIdOrderByNameAsc(String shopId);
     
+
     
     @Query(value = "SELECT p.name AS productName, COALESCE(SUM(od.quantity), 0) AS totalQuantitySold " +
             "FROM Products p " +
@@ -21,4 +24,14 @@ public interface ProductsResposity extends JpaRepository<Products, String>{
             "ORDER BY totalQuantitySold DESC",nativeQuery= true)
     List<Object[]> findBestSellingProductsByShopId(@Param("shopId") String shopId);
     	
+
+    @Query("SELECT p FROM Products p LEFT JOIN FETCH p.discounts WHERE p.id = :productId")
+    Products findProductWithDiscounts(String productId);
+    
+    @Query("SELECT p, MIN(ad.discount) FROM Products p " +
+            "LEFT JOIN p.discounts ad " +
+            "WHERE p.shopId = :shopId " +
+            "GROUP BY p.id")
+     List<Object[]> findProductsAndMinDiscountsByShopId(@Param("shopId") String shopId);
+
 }

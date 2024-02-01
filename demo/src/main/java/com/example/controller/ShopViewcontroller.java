@@ -1,35 +1,35 @@
 package com.example.controller;
 
 
+
 import java.util.HashMap;
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.classes.FrontLoginClasses;
 import com.example.entity.Member;
 import com.example.entity.Orderdetails;
 import com.example.entity.Orders;
 import com.example.entity.Products;
+
 import com.example.interf.ShopIndexService;
+
+import com.example.service.ActivityService;
 import com.example.service.FrontloginService;
 import com.example.service.MCFOservice;
 import com.example.service.OrderDetailService;
 import com.example.service.OrderService;
 import com.example.service.ProductService;
-import com.example.utils.EcpayReturnConverter;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -42,6 +42,8 @@ public class ShopViewcontroller {
 	FrontloginService frontloginService;
 	@Autowired
 	MCFOservice MCFOservice;
+	@Autowired
+	private ActivityService activityService;
 	
 	@Autowired
     OrderService orderService;
@@ -100,23 +102,33 @@ public class ShopViewcontroller {
 		return "/shopPage/cart01.html";		//購物車		
 	}
 	
+	
 	@GetMapping("/{shopId}/productPage")
 	public String productPage(HttpSession session,@RequestParam String productId,Model model,@PathVariable int shopId) {
 		FrontLoginClasses loginInfo= (FrontLoginClasses)session.getAttribute("authObject");
 		setAllLoginInfo(loginInfo, model, shopId);		
-		
-		
 		Products product = productService.queryProductById(productId);
+		double pddiscount = activityService.queryDiscount(productId);
+		
+		int pdprice = product.getPrice();
+		double pdtdiscount = pddiscount * pdprice;
+		int productdiscount = (int)pdtdiscount;
+		
 		model.addAttribute("productId", product.getId());
 		model.addAttribute("productName", product.getName());
 		model.addAttribute("productPrice", product.getPrice());
 		model.addAttribute("productDiscription", product.getDiscription());
 		model.addAttribute("imgSrc",product.getPicjson());
+
 		model.addAttribute("imgSrc1",product.getPictext_1());
 		model.addAttribute("imgSrc2",product.getPictext_2());
 		model.addAttribute("imgSrc3",product.getPictext_3());
+
+		model.addAttribute("productDiscount",productdiscount);
+
 		return "/shopPage/product";		//商品頁	
 	}
+	
 	
 	@GetMapping("/{shopId}/orderPayment")
 	public String orderPayment(HttpSession session,Model model,@PathVariable int shopId) {

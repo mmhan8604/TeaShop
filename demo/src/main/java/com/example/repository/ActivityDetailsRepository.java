@@ -15,5 +15,5 @@ public interface ActivityDetailsRepository extends JpaRepository<Activitydetails
 
 	List<Activitydetails> findByActivitysId(String activityId);
 	
-	
+	List<Activitydetails> findByProductsId(String productId);
 }

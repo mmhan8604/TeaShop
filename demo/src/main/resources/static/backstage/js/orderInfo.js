@@ -43,7 +43,7 @@ function updateOrderDetailsForm(orderDetails) {
                     
                     <td>${detail.quantity}</td>
                     <td>${detail.price}</td>
-                    <td>${detail.amount}</td>
+                    <td>${detail.amount/detail.quantity}</td>
                 </tr>`;
 		detailsTableBody.append(row);
 		totalQuantity += detail.quantity;
