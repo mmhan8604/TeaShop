@@ -1,10 +1,7 @@
 //	每次進到介面的時候就查詢所有資料出來
 function ProductInfoqueryAll(choosepage) {
 	$("#productSetting").off("click");
-	$("#upload").off("click");
-	$("#upload").on("click", function() {
-		editProduct();
-	})
+
 
 	var trlist;
 	var page = choosepage;
@@ -87,7 +84,10 @@ function ProductInfoqueryAll(choosepage) {
 				editPage();
 				let productId = $(this).data("id");
 				$('#editProductID').prop('readonly', true);
-
+				$("#upload").off("click");
+				$("#upload").on("click", function() {
+					editProduct();
+				})
 				$.ajax({
 					url: `/products/${productId}`,
 					method: 'GET',
