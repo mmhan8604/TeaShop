@@ -25,7 +25,7 @@ public class FrontStageStyle {
 	public String setStyle(HttpSession session,@RequestBody  String fulview) {
 		
 //		int check= fss.updateStyle((String)session.getAttribute("email"),(String)session.getAttribute("nav"), li);
-		int check= fss.updateStyle("test", fulview);
+		int check= fss.updateStyle((String)session.getAttribute("email"), fulview);
 		  ObjectMapper objectMapper = new ObjectMapper();
           String jsonMessage = null;
 		try {
@@ -43,7 +43,7 @@ public class FrontStageStyle {
 	public String setNav(HttpSession session, @RequestBody String nav) {
 		System.out.println(nav);
 		
-		if(fss.saveNAV("test", nav)==0) {
+		if(fss.saveNAV((String)session.getAttribute("email"), nav)==0) {
 			return"ok";
 		}else {
 			return"error";
