@@ -227,21 +227,21 @@ function editActivity() {
 	var activityFreeShipping = document.getElementById('activityFreeShipping').value;
 	var acdiscount = document.getElementById('activityDiscount').value;
 	var activityDiscount = acdiscount / 100;
-	if (acdiscount > 100 || acdiscount < 1) {
-		alert("折扣數請在1到99之間");
-		return;
-	}
+	//if (acdiscount > 100 || acdiscount < 1) {
+	//	alert("折扣數請在1到99之間");
+	//	return;
+	//}
 
 	//抓折扣產品id的陣列
 	var elementsWithDataPdid = document.querySelectorAll('#targetTable [data-pdid]');
 	var pdidArray = Array.from(elementsWithDataPdid).map(function(element) {
 		return element.getAttribute('data-pdid');
 	});
-	
-	if (pdidArray.length === 0){
-		alert("請選擇需折扣商品");
-		return;
-	}
+
+	//if (pdidArray.length === 0){
+	//	alert("請選擇需折扣商品");
+	//	return;
+	//}
 
 	//判斷優惠主軸
 	var fsradio = document.getElementById('freeshippingRadio');
@@ -269,6 +269,12 @@ function editActivity() {
 			return;
 		} else if (fscontent.value !== "") {
 			alert('請勿輸入免運門檻!');
+			return;
+		} else if (pdidArray.length === 0) {
+			alert("請選擇需折扣商品");
+			return;
+		} else if (acdiscount > 100 || acdiscount < 1) {
+			alert("折扣數請在1到99之間");
 			return;
 		}
 	}

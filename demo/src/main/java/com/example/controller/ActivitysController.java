@@ -75,8 +75,10 @@ public class ActivitysController {
 
 	//編輯活動
 	@PostMapping("/updateActivity/{id}")
-	public String updateActivityWithDetails(@PathVariable String id, @RequestBody ActivitysDTO activitysDTO) {
+	public String updateActivityWithDetails(@PathVariable String id, @RequestBody ActivitysDTO activitysDTO,HttpSession session) {
+		String shopid =Tools.intObjToString( session.getAttribute("backShopId"));
 		Activitys activitys = activitysDTO.getActivitys();
+		activitys.setShopId(shopid);
 		List<Activitydetails> activitydetailsList = activitysDTO.getActivitydetailsList();
 
 		return activityService.updateActivityWithDetails(activitys, activitydetailsList);
