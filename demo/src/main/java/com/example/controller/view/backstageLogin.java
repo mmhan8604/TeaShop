@@ -12,7 +12,7 @@ public class backstageLogin {
 	@GetMapping("/login")
 	public String login(Model model) {
 		
-		return"backstage/mainLogin";
+		return"backstage/mainLogin.html";
 	}
 	
 	@GetMapping("/signup")
@@ -24,7 +24,7 @@ public class backstageLogin {
 	public String logout(Model model,HttpSession session) {
 		session.removeAttribute("email");
 		session.removeAttribute("backShopId");
-		return"backstage/mainLogin";
+		return"backstage/mainLogin.html";
 	}
 
 }

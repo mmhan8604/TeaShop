@@ -67,6 +67,9 @@ let whichTd;
           //   "del_ref":"150"
 
           // }
+          if(Object.values(data).every(value => value === '')){
+			  return
+		  }
 
           if((data.del_cod||data.del_ref)!=""){
             let delData=[1];
@@ -101,7 +104,7 @@ let whichTd;
             }
             console.log(ispData)
             writeTable(ispData);
-			d
+			
           }
 
           
