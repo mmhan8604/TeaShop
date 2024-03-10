@@ -23,7 +23,7 @@ public class shopIndexController {
 		System.out.println("1");
 		HashMap<String, List> data=sis.createBigDivHTML(shopid);
 		model.addAttribute("fullView",(List<List<String>>) data.get("htmls"));
-		
+		model.addAttribute("shopId",shopid);
 		
 		model.addAttribute("nav", styleInfo.get("nav"));
 //		model.addAttribute("fullView", styleInfo.get("fullView"));

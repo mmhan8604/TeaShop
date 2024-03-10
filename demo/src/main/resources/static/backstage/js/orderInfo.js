@@ -108,7 +108,7 @@ function queryAllOrderInfo(choosepage) {
 
 			var ocode = trlist[i].id;
 			var odate = moment(trlist[i].orderDate).add(8, 'hours').format('YYYY-MM-DD HH:mm');			//利用moment.js Date
-			var osituation = trlist[i].orderState;
+			var osituation = trlist[i].orderState!=null?trlist[i].orderState:"failed";
 			var oname = trlist[i].member.name;
 			var omail = trlist[i].member.mail;
 			var omount = trlist[i].amount;

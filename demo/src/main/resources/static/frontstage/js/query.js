@@ -31,7 +31,7 @@ function queryProduct() {
 	function showProduct(length) {
 		for (i = 0; i < length; i++) {
 			oneproduct = productslist[i];
-	
+			discontinued=oneproduct[0].discontinued
 			id = oneproduct[0].id;
 			pimg = oneproduct[0].picjson;
 			productName = oneproduct[0].name;
@@ -113,8 +113,8 @@ function queryProduct() {
 </a>
 </div>
 `
-
-			$("#cardSpace").append(cardHTML);
+		if(discontinued){
+			$("#cardSpace").append(cardHTML);}
 
 
 
